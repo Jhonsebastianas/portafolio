@@ -2,6 +2,7 @@ import styles from '@styles/Home.module.css'
 import Layout from '@components/layouts/Layout'
 import { Container, Grid, Header, Segment } from 'semantic-ui-react'
 import Proyectos from '@components/hooks/Proyectos'
+import CollaboratedWith from '@components/hooks/CollaboratedWith'
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
           </Container>
         </Segment>
         <Proyectos />
+        <CollaboratedWith />
       </Layout>
     </div>
   )
