@@ -9,7 +9,7 @@ import { APP_NAME } from '@constants/Constants'
  * Método que genera metricas importantes del proyecto
  * @param {*} metric 
  */
-export function reportWebVitals (metric) {
+export function reportWebVitals(metric) {
   console.log(metric);
 }
 
@@ -21,8 +21,11 @@ function MyApp({ Component, pageProps }) {
       <meta name="theme-color" content="#000000" />
       <meta
         name="description"
-        content="Una forma moderna e interactiva de administrar tu consumo en servicios públicos del agua y energía."
+        content="Desarrollador de software y mentor, Jhon Agudelo"
       />
+      <meta name="keywords" content="Jhon Sebastian,
+        Agudelo Sierra, Jhon Agudelo, Desarrollador, 
+        Desarrollador web, fullstack, Desarrollador de software, Desarrollador backend, Desarrollador frontend, mentor"/>
       <title>{APP_NAME}</title>
     </Head>
     <Component {...pageProps} />
