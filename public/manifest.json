@@ -1,0 +1,10 @@
+{
+    "short_name": "Jhon Sebastian AS",
+    "name": "Jhon Sebastian AS - portafolio",
+    "icons": [
+    ],
+    "start_url": "/home",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+  }

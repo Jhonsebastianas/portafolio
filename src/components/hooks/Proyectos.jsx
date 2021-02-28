@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ImageNext from 'next/image'
 import Link from 'next/link'
-import { Card, Container, Header } from 'semantic-ui-react'
+import { Card, Container, Header, Transition } from 'semantic-ui-react'
 import listaProyectos from '@constants/Proyects'
 const src = '/images/white-image.png'
 
