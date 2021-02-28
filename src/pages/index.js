@@ -17,7 +17,7 @@ export default function Home() {
           <h1 className={styles.title}>
             Jhon Agudelo
           </h1>
-          <h2>Analista desarrollador</h2>
+          <h2>{"<"}Analista desarrollador {"/>"}</h2>
         </main>
         <Segment id="about">
           <Container textAlign='center'>
