@@ -26,6 +26,8 @@ function MyApp({ Component, pageProps }) {
       <meta name="keywords" content="Jhon Sebastian,
         Agudelo Sierra, Jhon Agudelo, Desarrollador, 
         Desarrollador web, fullstack, Desarrollador de software, Desarrollador backend, Desarrollador frontend, mentor"/>
+      <meta name="author" content="Jhon Sebastian Agudelo Sierra" />
+      <meta name="copyright" content="Jhon Sebastian Agudelo Sierra" />
       <title>{APP_NAME}</title>
     </Head>
     <Component {...pageProps} />
