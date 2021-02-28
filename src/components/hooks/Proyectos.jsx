@@ -1,5 +1,6 @@
 import React from 'react'
 import ImageNext from 'next/image'
+import Link from 'next/link'
 import { Card, Container, Header } from 'semantic-ui-react'
 import listaProyectos from '@constants/Proyects'
 const src = '/images/white-image.png'
@@ -15,10 +16,13 @@ const Proyectos = () => {
             <Card.Group itemsPerRow={3} stackable>
                 {listaProyectos.map(proyecto => {
                     return (
-                        <Card color={colors[(proyecto.id - 1)]} 
-                            image={<ImageNext src={`/images/projects/${proyecto.imagen}`} alt={proyecto.imagen} width="auto" height="auto" />} 
-                            className="card-proyect"
-                        />
+                        <Link href={`proyecto/${proyecto.id}`}>
+                            <Card color={colors[(proyecto.id - 1)]}
+                                image={<ImageNext src={`/images/projects/${proyecto.imagen}`}
+                                    alt={proyecto.imagen} width="auto" height="auto" />}
+                                className="card-proyect"
+                            />
+                        </Link>
                     )
                 })}
             </Card.Group>
