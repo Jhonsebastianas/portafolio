@@ -22,7 +22,7 @@ export default function Home() {
             <hr></hr>
             <Grid columns="equal" stackable>
               <Grid.Column>
-                <h4>¿Quien soy como porfesional?</h4>
+                <h4>¿Quien soy como profesional?</h4>
                 <p class="lead">Un apasionado desarrollador de software, con conocimientos en la cultura devops, automatización de pruebas  y procesos , apasionado por la tecnología, a contribuir a mejorar la calidad de vida de las personas, y con valores que velan por el crecimiento personal y profesional de quienes me rodean y propio.</p>
               </Grid.Column>
               <Grid.Column>
