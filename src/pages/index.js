@@ -3,6 +3,7 @@ import Layout from '@components/layouts/Layout'
 import { Container, Grid, Header, Segment } from 'semantic-ui-react'
 import Proyectos from '@components/hooks/Proyectos'
 import CollaboratedWith from '@components/hooks/CollaboratedWith'
+import About from '@components/sections/About'
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
           </h1>
           <h2>{"<"}Analista desarrollador {"/>"}</h2>
         </main>
-        <Segment id="about">
+        {/* <Segment id="about">
           <Container textAlign='center'>
             <Header as='h2' icon textAlign='center'>
               <Header.Content>👋 Acerca de mi</Header.Content>
@@ -31,7 +32,8 @@ export default function Home() {
               </Grid.Column>
             </Grid>
           </Container>
-        </Segment>
+        </Segment> */}
+        <About />
         <Proyectos />
         <CollaboratedWith />
       </Layout>
