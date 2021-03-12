@@ -132,7 +132,7 @@ const About = () => {
               <p>
                 Me uní como analista desarrollador en <a href="https://www.quipux.com/" target="_blank">Quipux S.A.S</a> donde trabajo en una amplia
                 variedad de proyectos internacionales y significativos a diario,
-                donde en el proyecto en <a href="https://eservices.cgi.ci/avit/#/public" target="_blank">Costa de Maríl</a> desempeño el rol de Lead developer.
+                donde en el proyecto de <a href="https://eservices.cgi.ci/avit/#/public" target="_blank">CGI DIGITAL Côte d’Ivoire</a> desempeño el rol de Lead developer.
             </p>
 
               <p>Algunas tecnologías con las que he estado trabajando recientemente:</p>

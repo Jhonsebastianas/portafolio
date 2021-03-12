@@ -10,7 +10,7 @@ const Hero = () => {
             </h1>
             <h2 className="cargo">Analista desarrollador</h2>
             <h3 className="funciones">Desarrollador backend y Desarrollador frontend</h3>
-            <a className='ui primary basic button contactar' href={`mailto:${Persona.emailContacto}`}>
+            <a className='ui green basic button contactar' href={`mailto:${Persona.emailContacto}`}>
                 Ponerse en contacto
             </a>
         </main>
