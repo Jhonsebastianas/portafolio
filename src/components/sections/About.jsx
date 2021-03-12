@@ -106,7 +106,7 @@ const About = () => {
     // UTILS.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'Java 8^', 'HTML & (S)CSS', 'React', 'Angular', 'Node.js', 'IOT', 'Devops'];
+  const skills = ['JavaScript (ES6+)', 'Java 8^', 'HTML & (S)CSS', 'React.js', 'Angular.js', 'Node.js', 'SQL (Oracle, MySql)', 'Devops'];
 
   return (
     <>
