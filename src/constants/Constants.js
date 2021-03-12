@@ -1,13 +1,8 @@
 const devConf = Object.freeze({
     // Información principal
     APP_NAME: 'Jhon Sebastian AS - portafolio',
+    PERSONAL_FULLNAME: 'Jhon Sebastian Agudelo Sierra',
+    PERSONAL_NAMES: 'Jhon Sebastian',
 })
 
-const prodConf = Object.freeze({
-    // Información principal
-    APP_NAME: 'Jhon Sebastian AS - portafolio',
-    PERSONAL_FULLNAME: 'Jhon Sebastian Agudelo Sierra'
-});
-
-
-module.exports = (process.env.NODE_ENV === 'development')? devConf: prodConf
+module.exports =  devConf

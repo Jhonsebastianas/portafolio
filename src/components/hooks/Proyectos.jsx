@@ -10,9 +10,11 @@ const colors = ["red", "orange", "blue"]
 const Proyectos = () => {
     return (
         <Container>
+            <br></br>
             <Header as='h2' icon textAlign='center'>
                 <Header.Content>Proyectos</Header.Content>
             </Header>
+            <br/>
             <Card.Group itemsPerRow={3} stackable>
                 {listaProyectos.map(proyecto => {
                     return (
