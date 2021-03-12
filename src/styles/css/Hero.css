@@ -13,4 +13,5 @@ main#Hero h3.funciones {
 
 main#Hero a.contactar {
     margin-top: 15px;
+    border-color: var(--green);
 }
