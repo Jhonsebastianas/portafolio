@@ -4,6 +4,7 @@ import Proyectos from '@components/hooks/Proyectos'
 import CollaboratedWith from '@components/hooks/CollaboratedWith'
 import About from '@components/sections/About'
 import Hero from '@components/sections/Hero'
+import Featured from '@components/sections/Features'
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
       <Layout>
         <Hero />
         <About />
-        <Proyectos />
+        {/* <Proyectos /> */}
+        <Featured />
         <CollaboratedWith />
       </Layout>
     </div>
