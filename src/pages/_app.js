@@ -3,6 +3,7 @@ import Head from 'next/head'
 import '@styles/globals.css'
 import '@styles/styles.css'
 import '@styles/css/Hero.css'
+import '@styles/css/ColoresGlobales.css'
 import 'semantic-ui-css/semantic.min.css'
 import { APP_NAME } from '@constants/Constants'
 

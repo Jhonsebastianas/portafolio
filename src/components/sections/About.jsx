@@ -111,12 +111,12 @@ const About = () => {
   return (
     <>
       <StyledAboutSection id="about" ref={revealContainer}>
-        <h2 className="numbered-heading">Acerca de mi</h2>
+        <h2 className="numbered-heading text-white">Acerca de mi</h2>
 
         <div className="inner">
           <StyledText>
             <div>
-              <p>Hola! Soy Jhon Sebastian. {'<'}Analista desarrollador{'>'}</p>
+              <p className="text-light-slate">Hola! Soy Jhon Sebastian. {'<'}Analista desarrollador{'>'}</p>
 
               <p>
                 Una vez dijo Nikola Tesla: “No hay emoción más intensa para un inventor que ver una
@@ -127,12 +127,12 @@ const About = () => {
 
               <p>
                 Actualmente soy Técnico profesional en Desarrollo de Software, continuo mis estudios para ser tecnólogo en Sistematización de datos, y posteriormente Ingeniero en Sistemas en el{' '}
-                <a href="https://www.politecnicojic.edu.co/" target="_blank">Politécnico colombiano Jaime Isaza Cadavid</a>.
+                <a className="text-green" href="https://www.politecnicojic.edu.co/" target="_blank">Politécnico colombiano Jaime Isaza Cadavid</a>.
             </p>
               <p>
-                Me uní como analista desarrollador en <a href="https://www.quipux.com/" target="_blank">Quipux S.A.S</a> donde trabajo en una amplia
+                Me uní como analista desarrollador en <a className="text-green" href="https://www.quipux.com/" target="_blank">Quipux S.A.S</a> donde trabajo en una amplia
                 variedad de proyectos internacionales y significativos a diario,
-                donde en el proyecto de <a href="https://eservices.cgi.ci/avit/#/public" target="_blank">CGI DIGITAL Côte d’Ivoire</a> desempeño el rol de Lead developer.
+                donde en el proyecto de <a className="text-green" href="https://eservices.cgi.ci/avit/#/public" target="_blank">CGI DIGITAL Côte d’Ivoire</a> desempeño el rol de Lead developer.
             </p>
 
               <p>Algunas tecnologías con las que he estado trabajando recientemente:</p>

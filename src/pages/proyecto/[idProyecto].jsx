@@ -84,13 +84,13 @@ const Proyecto = ({ proyecto }) => {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <Grid.Column width={16} verticalAlign="bottom">
+                        {/* <Grid.Column width={16} verticalAlign="bottom">
                             <Button.Group fluid>
                                 <Link href={`/proyecto/${getAnteriorProyecto()}`}><a className="ui button">Anterior</a></Link>
                                 <Button.Or text="ver" />
                                 <Link href={`/proyecto/${getSiguienteProyecto()}`}><a className="ui button">Siguiente</a></Link>
                             </Button.Group>
-                        </Grid.Column>
+                        </Grid.Column> */}
                     </Grid.Column>
                     <Grid.Column width={7} className="imagen-proyecto">
                         <Link href={urlSitio}>

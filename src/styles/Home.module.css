@@ -5,6 +5,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--navy);
+  color: var(--slate);
 }
 
 .main {
@@ -19,7 +21,7 @@
 .footer {
   width: 100%;
   height: 100px;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--green);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +52,7 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  color: var(--white);
 }
 
 .title,

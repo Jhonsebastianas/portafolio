@@ -14,24 +14,24 @@ const CollaboratedWith = () => {
     return (<>
         <Divider />
         <Segment vertical ref={ref}>
-            <Header as='h2' icon textAlign='center'>
+            <Header as='h2' icon textAlign='center' className="text-white">
                 <Header.Content>Donde he trabajado</Header.Content>
             </Header>
             <Container>
                 <Grid columns='16'>
                     <Grid.Column textAlign="left" width={16}>
-                        <Menu pointing secondary >
-                            <Menu.Item
+                        <Menu pointing secondary color='teal' >
+                            <Menu.Item className="text-green"
                                 name='Quipux'
                                 active={activeItem === 'Quipux'}
                                 onClick={handleItemClick}
                             />
-                            <Menu.Item
+                            <Menu.Item className="text-green"
                                 name='PCJIC'
                                 active={activeItem === 'PCJIC'}
                                 onClick={handleItemClick}
                             />
-                            <Menu.Item
+                            <Menu.Item className="text-green"
                                 name='Controlsep'
                                 active={activeItem === 'Controlsep'}
                                 onClick={handleItemClick}
@@ -44,15 +44,15 @@ const CollaboratedWith = () => {
                                     return (
                                         <Grid className="fade-in">
                                             <Grid.Column width={16}>
-                                                <h3>{work.rol} <a href={work.companyURL} target="_blank">@{work.companyName}</a></h3>
-                                                <p>{work.time.start} - {work.time.end}</p>
+                                                <h3 className="text-white">{work.rol} <a className="text-green" href={work.companyURL} target="_blank">@{work.companyName}</a></h3>
+                                                <p className="text-light-slate">{work.time.start} - {work.time.end}</p>
                                             </Grid.Column>
                                             <Grid.Column width={16}>
                                                 <List>
                                                     {work.tasks.map(task => {
                                                         return (
                                                             <List.Item>
-                                                                <Icon name="angle right" />
+                                                                <Icon className="text-green" name="angle right" />
                                                                 {task}
                                                             </List.Item>
                                                         )
