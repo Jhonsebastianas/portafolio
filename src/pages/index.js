@@ -1,6 +1,5 @@
 import styles from '@styles/Home.module.css'
 import Layout from '@components/layouts/Layout'
-import Proyectos from '@components/hooks/Proyectos'
 import CollaboratedWith from '@components/hooks/CollaboratedWith'
 import About from '@components/sections/About'
 import Hero from '@components/sections/Hero'
@@ -12,7 +11,6 @@ export default function Home() {
       <Layout>
         <Hero />
         <About />
-        {/* <Proyectos /> */}
         <Featured />
         <CollaboratedWith />
       </Layout>
