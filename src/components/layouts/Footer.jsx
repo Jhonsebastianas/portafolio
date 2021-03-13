@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <>
             <footer className={styles.footer}>
-                <a
+                <a className="text-light-slate"
                     href="https://www.linkedin.com/in/jhonsabastianas/"
                     target="_blank"
                     rel="noopener noreferrer"

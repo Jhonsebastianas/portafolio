@@ -8,11 +8,11 @@ const Hero = () => {
             <h1 className={styles.title}>
                 Jhon Agudelo
             </h1>
-            <h2 className="cargo">Analista desarrollador</h2>
-            <h3 className="funciones">Desarrollador backend y Desarrollador frontend</h3>
-            <a className='ui green basic button contactar' href={`mailto:${Persona.emailContacto}`}>
+            <h2 className="cargo text-green">Analista desarrollador</h2>
+            <h3 className="funciones text-light-slate">Desarrollador backend y Desarrollador frontend</h3>
+            {/* <a className='ui green basic button contactar' href={`mailto:${Persona.emailContacto}`}>
                 Ponerse en contacto
-            </a>
+            </a> */}
         </main>
     )
 }
