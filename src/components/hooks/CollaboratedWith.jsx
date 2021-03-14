@@ -44,7 +44,7 @@ const CollaboratedWith = () => {
                                     return (
                                         <Grid className="fade-in">
                                             <Grid.Column width={16}>
-                                                <h3 className="text-white">{work.rol} <a className="text-green" href={work.companyURL} target="_blank">@{work.companyName}</a></h3>
+                                                <h3 className="text-white">{work.rol} <a className="text-green" rel="noreferrer" href={work.companyURL} target="_blank">@{work.companyName}</a></h3>
                                                 <p className="text-light-slate">{work.time.start} - {work.time.end}</p>
                                             </Grid.Column>
                                             <Grid.Column width={16}>
