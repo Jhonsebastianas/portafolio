@@ -251,7 +251,7 @@ const StyledProject = styled.li`
       filter: grayscale(100%) contrast(1) brightness(90%);
       @media (max-width: 768px) {
         object-fit: cover;
-        width: auto;
+        width: 100%;
         height: 100%;
         filter: grayscale(100%) contrast(1) brightness(80%);
       }
@@ -316,12 +316,9 @@ const Featured = () => {
 
                                 <div className="project-image">
                                     <a href={external ? external : github ? github : '#'}>
-                                        <Image
-                                            src={`/images/projects/${cover}`}
-                                            width="auto"
-                                            height="auto"
-                                            layout="responsive"
+                                        <img
                                             className="img"
+                                            src={`/images/projects/${cover}`}
                                             alt={title}
                                         />
                                     </a>
