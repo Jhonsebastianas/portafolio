@@ -35,6 +35,10 @@ const StyleContactoButton = StylesComponent.a`
         background-color: rgba(255,255,255,0.1);
         color: var(--green)
     }
+
+    @media (max-width: 768px) {
+        margin-bottom: 100px;
+    }
 `;
 
 const Contact = () => {
@@ -47,7 +51,7 @@ const Contact = () => {
                 Aunque actualmente no estoy buscando nuevas oportunidades laborales,
                 mi bandeja de entrada siempre está abierta.
                 Ya sea que tengas una pregunta, requieras una mentoria o simplemente quieras saludar,
-                ¡haré todo lo posible para responderle!
+                ¡haré todo lo posible para responderte!
             </StyleContactoResumen>
             <StyleContactoButton rel="noopener noreferrer" href="mailto:jhonsebastianas@gmail.com">Contactar</StyleContactoButton>
         </StyleContactoContainer>
