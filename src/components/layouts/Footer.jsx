@@ -7,7 +7,7 @@ const Footer = () => {
         <>
             <footer className={styles.footer}>
                 <a className="text-light-slate"
-                    href="https://www.linkedin.com/in/jhonsabastianas/"
+                    href="https://github.com/Segaretsu/portafolio/"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -15,9 +15,9 @@ const Footer = () => {
             </a>
             </footer>
             <div>
-                <Button circular color='facebook' target="_blank" href="https://www.facebook.com/johnsebastian.agudelosierra.3/" icon='facebook' />
-                <Button circular color='twitter' target="_blank" href="https://twitter.com/JhonSebastianAS" icon='twitter' />
-                <Button circular color='linkedin' target="_blank" href="https://www.linkedin.com/in/jhonsabastianas/" icon='linkedin' />
+                <Button circular color='facebook' rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/johnsebastian.agudelosierra.3/" icon='facebook' />
+                <Button circular color='twitter' rel="noopener noreferrer" target="_blank" href="https://twitter.com/JhonSebastianAS" icon='twitter' />
+                <Button circular color='linkedin' rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/jhonsabastianas/" icon='linkedin' />
             </div>
             <br></br>
         </>

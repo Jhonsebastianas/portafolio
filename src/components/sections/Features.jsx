@@ -8,20 +8,11 @@ import Proyectos from '@constants/Proyects'
 
 // ${({ theme }) => theme.mixins.resetList};
 const StyledProjectsGrid = styled.ul`
-  
   a {
     position: relative;
     z-index: 1;
   }
-  max-width: 1050px;
-  .inner {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 50px;
-    @media (max-width: 768px) {
-      display: block;
-    }
-  }
+  max-width: 1200px;
 `;
 
 // const StyledAboutSection = styled.section`
