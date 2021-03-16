@@ -21,7 +21,7 @@ const projects = [
                 "cover": "Tagmascota.png",
             },
             "html": `Tagmascota es un proyecto que brindar un punto de reporte de mascotas perdidas y encontradas.
-            Aprovechamos varias tecnologías para la identificación previa y posteriormente la recuperación de las mascotas`
+            Aprovechamos varias tecnologías para la identificación y posteriormente la recuperación de las mascotas`
         }
     },
 ]
