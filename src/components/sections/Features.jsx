@@ -271,7 +271,7 @@ const Featured = () => {
                             <StyledProject key={i}>
                                 <div className="project-content">
                                     <div>
-                                        <p className="project-overline">Proyecto destacado</p>
+                                        <p className="project-overline">Proyecto destacado (en desarrollo)</p>
 
                                         <h3 className="project-title">
                                             <a className="text-light-slate" href={external}>{title}</a>
