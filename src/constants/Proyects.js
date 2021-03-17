@@ -4,7 +4,7 @@ const projects = [
             "frontmatter": {
                 "title": "Controlsep",
                 "tech": ["React.js", "Next.js", "Node.js", "MongoDB", "IoT"],
-                "external": "https://controlsep-segaretsu.vercel.app/",
+                "external": "https://controlsep.com/",
                 "github": "",
                 "cover": "Controlsep.png",
             },

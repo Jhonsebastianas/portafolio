@@ -132,7 +132,8 @@ const StyledProject = styled.li`
     }
   }
   .project-description {
-
+    box-shadow: 0 10px 30px -15px var(--navy-shadow);
+    transition: var(--transition);
     position: relative;
     z-index: 2;
     padding: 25px;
@@ -199,7 +200,8 @@ const StyledProject = styled.li`
     }
   }
   .project-image {
-
+    box-shadow: 0 10px 30px -15px var(--navy-shadow);
+    transition: var(--transition);
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
