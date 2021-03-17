@@ -18,6 +18,10 @@ module.exports = {
             name: 'linkedin',
             url: 'https://www.linkedin.com/in/jhonsabastianas/',
         },
+        {
+            name: 'medium',
+            url: 'https://jhonsebastianas.medium.com/',
+        },
         // {
         //     name: 'Codepen',
         //     url: 'https://codepen.io/bchiang7',

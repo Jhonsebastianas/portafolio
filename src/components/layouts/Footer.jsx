@@ -19,6 +19,7 @@ const Footer = () => {
                 <Button circular color='twitter' rel="noopener noreferrer" target="_blank" href="https://twitter.com/JhonSebastianAS" icon='twitter' />
                 <Button circular color='linkedin' rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/jhonsabastianas/" icon='linkedin' />
                 <Button circular color='github' rel="noopener noreferrer" target="_blank" href="https://github.com/Segaretsu/" icon='github' />
+                <Button circular color='github' rel="noopener noreferrer" target="_blank" href="https://jhonsebastianas.medium.com/" icon='medium' />
             </div>
             <br></br>
         </>
