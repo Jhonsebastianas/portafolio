@@ -12,6 +12,13 @@ const StyledSocialList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+
+  // Barra social horizontal.
+  @media (max-width: 768px) {
+    // display: none;
+    display: -webkit-inline-box;
+  }
+
   &:after {
     content: '';
     display: block;
@@ -19,10 +26,20 @@ const StyledSocialList = styled.ul`
     height: 90px;
     margin: 0 auto;
     background-color: var(--light-slate);
+    // Barra social horizontal.
+    @media (max-width: 768px) {
+      // display: none;
+      width: 100%;
+      height: 1px;
+    }
   }
   li {
     &:last-of-type {
       margin-bottom: 20px;
+      // Barra social horizontal.
+      @media (max-width: 768px) {
+        margin-bottom: 0px;
+      }
     }
     a {
       padding: 10px;
@@ -54,7 +71,7 @@ const StyledSideElement = styled.div`
     right: 'auto';
   }
   @media (max-width: 768px) {
-    display: none;
+    // display: none;
   }
 `;
 
