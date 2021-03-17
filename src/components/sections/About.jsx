@@ -116,7 +116,7 @@ const About = () => {
         <div className="inner">
           <StyledText>
             <div>
-              <p className="text-light-slate">Hola! Soy Jhon Sebastian. {'<'}Analista desarrollador{'>'}</p>
+              <p className="text-light-slate">Hola! Soy Jhon Sebastian. {'</'}Analista desarrollador{'>'}</p>
 
               <p>
                 Una vez dijo Nikola Tesla: “No hay emoción más intensa para un inventor que ver una
@@ -139,7 +139,7 @@ const About = () => {
             </div>
 
             <ul className="skills-list">
-              {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+              {skills && skills.map((skill, i) => <li className="text-light-slate" key={i}>{skill}</li>)}
             </ul>
           </StyledText>
 

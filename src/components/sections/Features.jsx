@@ -13,6 +13,9 @@ const StyledProjectsGrid = styled.ul`
     z-index: 1;
   }
   max-width: 1200px;
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 `;
 
 // const StyledAboutSection = styled.section`
