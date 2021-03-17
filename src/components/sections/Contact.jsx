@@ -48,8 +48,7 @@ const Contact = () => {
                 <Header.Content>Contacto</Header.Content>
             </Header>
             <StyleContactoResumen className="funciones text-light-slate">
-                Aunque actualmente no estoy buscando nuevas oportunidades laborales,
-                mi bandeja de entrada siempre está abierta.
+                Mi bandeja de entrada siempre está abierta.
                 Ya sea que tengas una pregunta, requieras una mentoria o simplemente quieras saludar,
                 ¡haré todo lo posible para responderte!
             </StyleContactoResumen>
