@@ -1,23 +1,23 @@
 module.exports = {
-    email: 'sebastamriel@gmail.com',
+    email: 'jhonsebastianas@gmail.com',
 
     socialMedia: [
-        // {
-        //     name: 'GitHub',
-        //     url: 'https://github.com/bchiang7',
-        // },
-        // {
-        //     name: 'Instagram',
-        //     url: 'https://www.instagram.com/bchiang7',
-        // },
-        // {
-        //     name: 'Twitter',
-        //     url: 'https://twitter.com/bchiang7',
-        // },
-        // {
-        //     name: 'Linkedin',
-        //     url: 'https://www.linkedin.com/in/bchiang7',
-        // },
+        {
+            name: 'github',
+            url: 'https://github.com/segaretsu',
+        },
+        {
+            name: 'instagram',
+            url: 'https://www.instagram.com/jhonsebastianas',
+        },
+        {
+            name: 'twitter',
+            url: 'https://twitter.com/JhonSebastianAS',
+        },
+        {
+            name: 'linkedin',
+            url: 'https://www.linkedin.com/in/jhonsabastianas/',
+        },
         // {
         //     name: 'Codepen',
         //     url: 'https://codepen.io/bchiang7',
