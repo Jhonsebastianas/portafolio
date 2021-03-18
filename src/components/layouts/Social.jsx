@@ -14,7 +14,7 @@ const StyledSocialList = styled.ul`
   list-style: none;
 
   // Barra social horizontal.
-  @media (max-width: 768px) {
+  @media (max-width: 880px) {
     // display: none;
     display: -webkit-inline-box;
   }
@@ -27,7 +27,7 @@ const StyledSocialList = styled.ul`
     margin: 0 auto;
     background-color: var(--light-slate);
     // Barra social horizontal.
-    @media (max-width: 768px) {
+    @media (max-width: 880px) {
       // display: none;
       width: 100%;
       height: 1px;
@@ -37,7 +37,7 @@ const StyledSocialList = styled.ul`
     &:last-of-type {
       margin-bottom: 20px;
       // Barra social horizontal.
-      @media (max-width: 768px) {
+      @media (max-width: 880px) {
         margin-bottom: 0px;
       }
     }
