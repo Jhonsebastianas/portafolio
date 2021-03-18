@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import ImageNext from 'next/image'
 import styled from 'styled-components';
+import { Container } from 'semantic-ui-react';
 // import { srConfig } from '@config'
 // import UTILS from '@utils/sreveal'
 
 const StyledAboutSection = styled.section`
-  max-width: 900px;
+  //max-width: 1600px;
   .inner {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -109,7 +110,7 @@ const About = () => {
   const skills = ['JavaScript (ES6+)', 'Java 8^', 'HTML & (S)CSS', 'React.js', 'Angular.js', 'Node.js', 'SQL (Oracle, MySql)', 'Devops'];
 
   return (
-    <>
+    <Container>
       <StyledAboutSection id="about" ref={revealContainer}>
         <h2 className="numbered-heading text-white">Acerca de mi</h2>
 
@@ -155,7 +156,7 @@ const About = () => {
           </StyledPic>
         </div>
       </StyledAboutSection>
-    </>
+    </Container>
   );
 };
 
