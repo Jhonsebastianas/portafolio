@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import Proyectos from '@constants/Proyects'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import sr from '@utils/sr';
 // import { srConfig } from '@config';
 
@@ -313,16 +312,10 @@ const Featured = () => {
 
                                 <div className="project-image">
                                     <a href={external ? external : github ? github : '#'}>
-                                        {/* <img
+                                        <img
                                             className="img"
                                             src={`/images/projects/${cover}`}
                                             alt={title}
-                                        /> */}
-                                        <LazyLoadImage
-                                          className="img"
-                                          effect="blur"
-                                          alt={title}
-                                          src={`/images/projects/${cover}`} // use normal <img> attributes as props
                                         />
                                     </a>
                                 </div>
