@@ -1,18 +1,32 @@
 import React from 'react'
 import styles from '@styles/Home.module.css'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 
 const Footer = () => {
     return (
         <>
             <footer className={styles.footer}>
-                <a className="text-light-slate"
-                    href="https://github.com/Segaretsu/portafolio/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Realizado por Jhon Sebastian Agudelo Sierra
-            </a>
+                <Grid>
+                    <Grid.Column width={16}>
+                        <a className="text-light-slate"
+                            href="https://github.com/Segaretsu/portafolio/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Realizado por Jhon Sebastian Agudelo Sierra
+                        </a>
+                    </Grid.Column>
+                    <Grid.Column width={16}>
+                        <a className="text-light-slate"
+                            href="https://github.com/bchiang7/v4"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Inspirado en Brittany Chiang
+                        </a>
+                    </Grid.Column>
+                </Grid>
+
+
             </footer>
             {/* <div>
                 <Button circular color='facebook' rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/johnsebastian.agudelosierra.3/" icon='facebook' />
