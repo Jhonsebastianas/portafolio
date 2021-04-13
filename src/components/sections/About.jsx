@@ -146,8 +146,8 @@ const About = () => {
 
           <StyledPic>
             <div className="wrapper">
-              <ImageNext
-                src="/images/FotoPersonal.webp"
+              <ImageNext className="img"
+                src="/images/FotoPersonal.jpg"
                 width="300px"
                 height="300px"
                 alt="Avatar"
