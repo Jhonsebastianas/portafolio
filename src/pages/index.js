@@ -2,6 +2,7 @@
 // import Layout from '@components/layouts/Layout'
 import Header from '@components/sections/Header'
 import Home2 from '@components/sections/Home'
+import About from '@components/sections/AboutNew'
 // import CollaboratedWith from '@components/hooks/CollaboratedWith'
 // import About from '@components/sections/About'
 // import Hero from '@components/sections/Hero'
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <Header />
       <Home2 />
+      <About />
     </>
     // <div className={styles.container}>
     //   <Layout>

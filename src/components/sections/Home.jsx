@@ -3,10 +3,6 @@ import StyledComponents from 'styled-components'
 import ScrollButton from '@components/commons/button-scroll'
 import Button from '@components/commons/button'
 
-const StyledHome = StyledComponents.section`
-
-`
-
 const StyledHomeContainer = StyledComponents.div`
     gap: 1rem;
 
@@ -62,7 +58,7 @@ const StyledHomeContainer = StyledComponents.div`
 
 const Home = () => {
     return (
-        <StyledHome className="home section" id="home">
+        <section className="home section" id="home">
             <StyledHomeContainer className="home__container container grid">
                 <div className="home__content grid">
                     <div className="home__social">
@@ -118,7 +114,7 @@ const Home = () => {
                     <ScrollButton />
                 </div>
             </StyledHomeContainer>
-        </StyledHome>
+        </section>
     )
 }
 
