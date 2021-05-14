@@ -1,5 +1,5 @@
 import React from 'react'
-import StyledComponents from 'styled-components'
+import StyledComponents, { css } from 'styled-components'
 
 const StyledSkillContainer = StyledComponents.div`
 
@@ -28,6 +28,25 @@ const StyledSkillContainer = StyledComponents.div`
         }
     }
 
+    .skills__close .skills__list{
+        height: 0;
+        overflow: hidden;
+    }
+
+    .skills__open .skills__list{
+        height: max-content;
+        margin-bottom: var(--mb-2-5);
+    }
+
+    .skills__open .skills__arrow{
+        transform: rotate(-180deg);
+    }
+
+    .skills__list {
+        row-gap: 1.5rem;
+        padding-left: 2.7rem;
+    }
+
     .skills__titles {
         display: flex;
         justify-content: space-between;
@@ -43,6 +62,39 @@ const StyledSkillContainer = StyledComponents.div`
         font-size: var(--normal-font-size);
         font-weight: var(--font-medium);
     }
+
+    .skills__bar, skills__percentage {
+        height: 5px;
+        border-radius: .25rem;
+    }
+
+    .skills__bar {
+        background-color: var(--first-color-lighter);
+    }
+
+    .skills__percentage {
+        display: block;
+        background-color: var(--first-color);
+    }
+`
+
+const StyledSkillBar = StyledComponents.div`
+    .skills__bar, .skills__percentage {
+        height: 5px;
+        border-radius: .25rem;
+    }
+
+    .skills__bar {
+        background-color: var(--first-color-lighter);
+    }
+
+    .skills__percentage {
+        display: block;
+        background-color: var(--first-color);
+        ${props => props.percentage && css`
+            width: ${props.percentage};
+        `}
+    }
 `
 
 const SkillContainer = (props) => {
@@ -52,7 +104,7 @@ const SkillContainer = (props) => {
     return (
         <StyledSkillContainer key={index}>
             {/*==================== SKILLS 1====================*/}
-            <div className="skills__content">
+            <div className={`skills__content skills__close`}>
                 <div className="skills__header">
                     <i class={`uil ${icon} skills__icon`}></i>
 
@@ -66,16 +118,16 @@ const SkillContainer = (props) => {
 
                 <div className="skills__list grid">
                     {skills.map((skill, index) => {
-                        const { name, percentage, class: claseCss } = skill
+                        const { name, percentage } = skill
                         return (
                             <div className="skills__data" key={index}>
                                 <div className="skills__titles">
                                     <h3 className="skills__name">{name}</h3>
                                     <span className="skills__number">{percentage}</span>
                                 </div>
-                                <div className="skills__bar">
-                                    <span className={`skills__percentage  ${claseCss}`}></span>
-                                </div>
+                                <StyledSkillBar className="skills__bar" percentage={percentage} >
+                                    <span className="skills__percentage"></span>
+                                </StyledSkillBar>
                             </div>
                         )
                     })}
