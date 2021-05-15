@@ -13,7 +13,7 @@ const StyledSkillContainer = StyledComponents.div`
             font-size: var(--h3-font-size);
         }
 
-        .skills__icon, skills__arrow {
+        .skills__icon, .skills__arrow {
             font-size: 2rem;
             color: var(--first-color);
         }

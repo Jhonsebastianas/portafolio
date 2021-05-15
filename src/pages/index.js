@@ -4,6 +4,7 @@ import Header from '@components/sections/Header'
 import Home2 from '@components/sections/Home'
 import About from '@components/sections/AboutNew'
 import Skills from '@components/sections/Skills'
+import Qualification from '@components/sections/Qualification'
 // import CollaboratedWith from '@components/hooks/CollaboratedWith'
 // import About from '@components/sections/About'
 // import Hero from '@components/sections/Hero'
@@ -17,6 +18,7 @@ export default function Home() {
       <Home2 />
       <About />
       <Skills />
+      <Qualification />
     </>
     // <div className={styles.container}>
     //   <Layout>
