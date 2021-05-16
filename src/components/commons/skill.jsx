@@ -106,14 +106,14 @@ const SkillContainer = (props) => {
             {/*==================== SKILLS 1====================*/}
             <div className={`skills__content skills__close`}>
                 <div className="skills__header">
-                    <i class={`uil ${icon} skills__icon`}></i>
+                    <i className={`uil ${icon} skills__icon`}></i>
 
                     <div>
                         <h1 className="skills__title">{title}</h1>
                         <span className="skills__subtitle">{subtitle}</span>
                     </div>
 
-                    <i class="uil uil-angle-down skills__arrow"></i>
+                    <i className="uil uil-angle-down skills__arrow"></i>
                 </div>
 
                 <div className="skills__list grid">

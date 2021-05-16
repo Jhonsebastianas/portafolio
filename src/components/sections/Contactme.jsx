@@ -87,21 +87,21 @@ const Contacme = () => {
                 <form action="" className="contact__form grid">
                     <div className="contact__inputs grid">
                         <div className="contact__content">
-                            <label htmlFor="" className="contact__label">Name</label>
-                            <input type="text" className="contact__input" />
+                            <label htmlFor="names" className="contact__label">Names</label>
+                            <input type="text" id="names" className="contact__input" />
                         </div>
                         <div className="contact__content">
-                            <label htmlFor="" className="contact__label">Email</label>
-                            <input type="email" className="contact__input" />
+                            <label htmlFor="email" className="contact__label">Email</label>
+                            <input type="email" id="email" className="contact__input" />
                         </div>
                     </div>
                     <div className="contact__content">
-                        <label htmlFor="" className="contact__label">Project</label>
-                        <input type="text" className="contact__input" />
+                        <label htmlFor="workProject" className="contact__label">Project</label>
+                        <input type="text" id="workProject" className="contact__input" />
                     </div>
                     <div className="contact__content">
-                        <label htmlFor="" className="contact__label">Message</label>
-                        <textarea name="" id="" cols="0" rows="7" className="contact__input"></textarea>
+                        <label htmlFor="descriptionContact" className="contact__label">Message</label>
+                        <textarea name="descriptionContact" id="descriptionContact" cols="0" rows="7" className="contact__input"></textarea>
                     </div>
 
                     <div>

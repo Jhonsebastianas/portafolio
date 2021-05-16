@@ -64,17 +64,17 @@ const Home = () => {
                     <div className="home__social">
                         <a className="home__social-icon" href="https://www.linkedin.com/in/jhonsabastianas/"
                             rel="noopener noreferrer" target="_blank">
-                            <i class="uil uil-linkedin-alt"></i>
+                            <i className="uil uil-linkedin-alt"></i>
                         </a>
 
                         <a className="home__social-icon" href="https://jhonsebastianas.medium.com/"
                             rel="noopener noreferrer" target="_blank">
-                            <i class="uil uil-medium-m"></i>
+                            <i className="uil uil-medium-m"></i>
                         </a>
 
                         <a className="home__social-icon" href="https://github.com/segaretsu/"
                             rel="noopener noreferrer" target="_blank">
-                            <i class="uil uil-github-alt"></i>
+                            <i className="uil uil-github-alt"></i>
                         </a>
                     </div>
 
@@ -106,8 +106,8 @@ const Home = () => {
                             Frontend and backend web design, and development knowledge in IoT,
                             producing quality work.
                         </p>
-                        <Button>
-                            Contact Me <i class="uil uil-message button__icon"></i>
+                        <Button href="#contact">
+                            Contact Me <i className="uil uil-message button__icon"></i>
                         </Button>
                     </div>
 

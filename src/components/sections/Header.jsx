@@ -255,36 +255,36 @@ const Header = () => {
                     <ul className="nav__list grid">
                         <li className="nav__item">
                             <a href="#home" className="nav__link active-link">
-                                <i class="uil uil-estate nav__icon"></i> Home
+                                <i className="uil uil-estate nav__icon"></i> Home
                             </a>
                         </li>
                         <li className="nav__item">
                             <a href="#about" className="nav__link">
-                                <i class="uil uil-user nav__icon"></i> About
+                                <i className="uil uil-user nav__icon"></i> About
                             </a>
                         </li>
                         <li className="nav__item">
                             <a href="#skills" className="nav__link">
-                                <i class="uil uil-user nav__icon"></i> Skills
+                                <i className="uil uil-user nav__icon"></i> Skills
                             </a>
                         </li>
                         <li className="nav__item">
                             <a href="#services" className="nav__link">
-                                <i class="uil uil-briefcase-alt nav__icon"></i> Services
+                                <i className="uil uil-briefcase-alt nav__icon"></i> Services
                             </a>
                         </li>
                         <li className="nav__item">
                             <a href="#portfolio" className="nav__link">
-                                <i class="uil uil-scenery nav__icon"></i> Portafolio
+                                <i className="uil uil-scenery nav__icon"></i> Portafolio
                             </a>
                         </li>
                         <li className="nav__item">
                             <a href="#contact" className="nav__link">
-                                <i class="uil uil-message nav__icon"></i> Contactme
+                                <i className="uil uil-message nav__icon"></i> Contactme
                             </a>
                         </li>
                     </ul>
-                    <i class="uil uil-times nav__close" id="nav-close"></i>
+                    <i className="uil uil-times nav__close" id="nav-close"></i>
                 </StyledNavMenu>
 
                 <div className="nav__btns">
@@ -292,7 +292,7 @@ const Header = () => {
                     <i className="uil uil-moon change-theme" id="theme-button"></i>
 
                     <div className="nav__toggle" id="nav-toogle">
-                        <i class="uil uil-apps"></i>
+                        <i className="uil uil-apps"></i>
                     </div>
                 </div>
             </StyledNav>

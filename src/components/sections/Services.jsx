@@ -2,44 +2,7 @@ import React, { useState } from 'react'
 import Service from '@components/commons/service'
 import Modal from '@components/commons/modal-service'
 import StyledComponent from 'styled-components'
-
-const servicesIOffer = [
-    {
-        title:
-            `Frontend
-        Development`,
-        icon: 'uil-brackets-curly',
-        services: [
-            "I develop the logic of the user interface.",
-            "Web page development.",
-            "I create ux element interactions.",
-            "I position your company brand."
-        ]
-    },
-    {
-        title:
-            `Backend
-        Development`,
-        icon: 'uil-server-network',
-        services: [
-            "I develop the logic of the user interface.",
-            "Web page development.",
-            "I create ux element interactions.",
-            "I position your company brand."
-        ]
-    },
-    {
-        title:
-            `Students mentor`,
-        icon: 'uil-book-reader',
-        services: [
-            "I develop the logic of the user interface.",
-            "Web page development.",
-            "I create ux element interactions.",
-            "I position your company brand."
-        ]
-    },
-]
+import servicesIOffer from '@constants/services-i-offer'
 
 const StyledServicesContainer = StyledComponent.div`
     gap: 1.5rem;

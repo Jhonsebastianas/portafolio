@@ -76,7 +76,7 @@ const About = () => {
 
                     <div className="about__buttons">
                         <Button target="_blank" href="pdf/CV-SebastianAgudelo-English.pdf">
-                            Download CV <i class="uil uil-download-alt button__icon"></i>
+                            Download CV <i className="uil uil-download-alt button__icon"></i>
                         </Button>
                     </div>
                 </div>

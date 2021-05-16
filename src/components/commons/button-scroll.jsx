@@ -34,9 +34,9 @@ const ScrollButton = () => {
     return (
         <StyleButton className="home__scroll">
             <a href="#about" className="home__scroll-button button--flex">
-                <i class="uil uil-mouse-alt home__scroll-mouse"></i>
+                <i className="uil uil-mouse-alt home__scroll-mouse"></i>
                 <span className="home__scroll-name">Scroll down</span>
-                <i class="uil uil-arrow-down home__scroll-arrow"></i>
+                <i className="uil uil-arrow-down home__scroll-arrow"></i>
             </a>
         </StyleButton>
     )
