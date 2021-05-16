@@ -18,7 +18,8 @@ class MyDocument extends Document {
                 <body className="my-body-class">
                     <Main />
                     <NextScript />
-                    {/* <!-- Materialize --> */}
+                    {/* <!-- swiper --> */}
+                    <script src="/js/swiper-bundle.min.js"></script>
                 </body>
             </Html>
         )

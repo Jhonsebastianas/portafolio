@@ -10,8 +10,6 @@ import Head from 'next/head'
 import '@styles/css/styles.css'
 import '@styles/css/swiper-bundle.min.css'
 
-import '@utils/swiper-bundle.min.js'
-
 
 import { APP_NAME } from '@constants/Constants'
 

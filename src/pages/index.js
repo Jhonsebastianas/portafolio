@@ -5,6 +5,7 @@ import About from '@components/sections/AboutNew'
 import Skills from '@components/sections/Skills'
 import Qualification from '@components/sections/Qualification'
 import Services from '@components/sections/Services'
+import PortFolio from '@components/sections/Portfolio'
 
 // import Footer from '@components/layouts/Footer'
 // import CollaboratedWith from '@components/hooks/CollaboratedWith'
@@ -21,6 +22,7 @@ export default function Home() {
       <Skills />
       <Qualification />
       <Services />
+      <PortFolio />
     </Layout>
     // <div className={styles.container}>
     //   <Layout>
