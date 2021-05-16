@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from '@components/layouts/Footer'
 // import Social from '@components/layouts/Social'
 import Header from '@components/sections/Header'
+import ScrollUp from '@components/commons/button-scroll-up'
 
 const Layout = ({ children }) => {
     return (
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
             {children}
             {/* <Social isHome={true} /> */}
             <Footer />
+            <ScrollUp />
         </>
     )
 }
