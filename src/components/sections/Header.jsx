@@ -21,6 +21,24 @@ const StyledHeader = StyledComponents.header`
     .scroll-header {
         box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
     }
+
+    /*========== Button Dark/Light ==========*/
+
+    .nav__btns {
+        display: flex;
+        align-items: center;
+    }
+
+    .change-theme {
+        font-size: 1.25rem;
+        color: var(--title-color);
+        margin-right: var(--mb-1);
+        cursor: pointer;
+    }
+
+    .change-theme:hover {
+        color: var(--first-color);
+    }
 `
 
 const StyledNav = StyledComponents.nav`
@@ -36,17 +54,19 @@ const StyledNav = StyledComponents.nav`
         font-weight: var(--font-medium);
     }
 
-    .nav__logo:hover {
-        color: var(--first-color);
+    .nav__logo {
+        &:hover {
+            color: var(--first-color);
+        }
     }
 
     .nav__toggle {
         font-size: 1.1rem;
         cursor: pointer;
-    }
 
-    .nav__toggle:hover {
-        color: var(--first-color);
+        &:hover {
+            color: var(--first-color);
+        }
     }
 
     // Responsive
@@ -92,6 +112,11 @@ const StyledNavMenu = StyledComponents.div`
         }
     }
 
+    /** For small devices */
+    // @media screen and (max-width: 350px) {
+    //     padding: 2rem .25rem 4rem !important;
+    // }
+
     // Responsive
     @media screen and (max-width: 767px) {
         position: fixed;
@@ -130,7 +155,7 @@ const scrollSections = () => {
 
 /** Change background header */
 const scrollHeaderChange = () => {
-    function scrollHeader () {
+    function scrollHeader() {
         const nav = document.getElementById('header')
 
         if (this.scrollY >= 80) {
@@ -174,6 +199,40 @@ const removeMobileMenu = () => {
     navLink.forEach(links => links.addEventListener('click', hiddenMenu))
 }
 
+/** Night theme */
+const addNightTheme = () => {
+    const themeButton = document.getElementById('theme-button')
+    const darkTheme = 'dark-theme'
+    const iconTheme = 'uil-sun'
+
+    // Previously selected topic
+    const selectedTheme = localStorage.getItem('selected-theme')
+    const selectedIcon = localStorage.getItem('selected-icon')
+
+    // We obtain the current theme that the interface has by validating the dark-theme class
+    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+    const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+
+    // We validate if the user previously chose a topic
+    if (selectedTheme) {
+        // if the validation is fulfilled, we ask what the issue was to know if we activated or deactivate the dark theme
+        document.body.classList[(selectedTheme === 'dark') ? 'add': 'remove'](darkTheme)
+        themeButton.classList[(selectedIcon === 'uil-moon') ? 'add': 'remove'](iconTheme)
+    }
+
+    // Active / deactivate the theme manually with the button
+
+    themeButton.addEventListener('click', () => {
+        // Add or remove the dark / icon theme
+        document.body.classList.toggle(darkTheme)
+        themeButton.classList.toggle(iconTheme)
+        // We save the theme and the current icon that the user chose
+        localStorage.setItem('selected-theme', getCurrentTheme)
+        localStorage.setItem('selected-icon', getCurrentIcon)
+    })
+
+}
+
 const Header = () => {
 
     useEffect(() => {
@@ -183,13 +242,14 @@ const Header = () => {
             removeMobileMenu()
             scrollSections()
             scrollHeaderChange()
+            addNightTheme()
         }
         return () => mounted = false;
     }, [])
 
     return (
-        <StyledHeader id="header">
-            <StyledNav className="container">
+        <StyledHeader className="header" id="header">
+            <StyledNav className="nav container">
                 <a href="#" className="nav__logo">Sebastian</a>
                 <StyledNavMenu className="nav__menu" id="nav-menu">
                     <ul className="nav__list grid">
@@ -228,6 +288,9 @@ const Header = () => {
                 </StyledNavMenu>
 
                 <div className="nav__btns">
+                    {/* Theme change button */}
+                    <i className="uil uil-moon change-theme" id="theme-button"></i>
+
                     <div className="nav__toggle" id="nav-toogle">
                         <i class="uil uil-apps"></i>
                     </div>

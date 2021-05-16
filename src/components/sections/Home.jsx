@@ -111,8 +111,9 @@ const Home = () => {
                         </Button>
                     </div>
 
-                    <ScrollButton />
+                    
                 </div>
+                <ScrollButton />
             </StyledHomeContainer>
         </section>
     )

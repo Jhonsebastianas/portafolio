@@ -7,21 +7,15 @@ const portfolioProjects = [
         title: 'Controlsep',
         img: 'controlsep.png',
         description: `
-            Controlsep es un proyecto creado,
-            para incentivar y permitir a las personas,
-            medir el consumo del agua y energía en sus hogares,
-            de forma automática por medio de sensores, o manual,
-            digitando los registros del contador público.
+            Controlsep es un proyecto creado...
         `
     },
     {
         title: 'Tagmascota',
         img: 'tagmascota.png',
         description: `
-            Tagmascota es un proyecto que brindar un punto de reporte 
-            de mascotas perdidas y encontradas. Aprovechamos 
-            varias tecnologías para la identificación y posteriormente 
-            la recuperación de las mascotas.
+            Es un proyecto que brindar un punto de reporte 
+            de mascotas perdidas y encontradas.
         `
     },
 ]

@@ -8,7 +8,9 @@ const Layout = ({ children }) => {
     return (
         <>
             <Header />
-            {children}
+            <div className="main">
+                {children}
+            </div>
             {/* <Social isHome={true} /> */}
             <Footer />
             <ScrollUp />

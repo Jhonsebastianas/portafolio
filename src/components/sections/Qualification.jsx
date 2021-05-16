@@ -94,11 +94,11 @@ const Qualification = () => {
 
             <div className="qualification__container container">
                 <div className="qualification__tabs">
-                    <ButtonQualification className="button--flex qualification__active" data-target="#education">
+                    <ButtonQualification className="qualification__button button--flex qualification__active" data-target="#education">
                         <i class="uil uil-graduation-cap qualification__icon"></i>
                         Education
                     </ButtonQualification>
-                    <ButtonQualification className="button--flex" data-target="#work">
+                    <ButtonQualification className="qualification__button button--flex" data-target="#work">
                         <i class="uil uil-briefcase-alt qualification__icon"></i>
                         Work
                     </ButtonQualification>
