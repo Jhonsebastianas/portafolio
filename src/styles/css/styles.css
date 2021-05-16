@@ -143,9 +143,14 @@ img {
 /* show menu */
 
 /* Active link */
+.active-link {
+    color: var(--first-color) !important;
+}
 
 /* Change background header */
-
+.scroll-header {
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
+}
 /*==================== HOME ====================*/
 
 /*==================== BUTTONS ====================*/

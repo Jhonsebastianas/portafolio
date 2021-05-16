@@ -12,6 +12,15 @@ const StyledHeader = StyledComponents.header`
     .show-menu {
         bottom: 0;
     }
+
+    .active-link {
+        color: var(--first-color);
+    }
+
+    // Change background header
+    .scroll-header {
+        box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
+    }
 `
 
 const StyledNav = StyledComponents.nav`
@@ -98,12 +107,49 @@ const StyledNavMenu = StyledComponents.div`
     }
 `
 
-function showMenu () {
+/** SCROLL SECTIONS ACTIVE LINK */
+const scrollSections = () => {
+    const sections = document.querySelectorAll('section[id]')
+
+    function scrollActive() {
+        const scrollY = window.pageYOffset
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight
+            const sectionTop = current.offsetTop - 50
+            const sectionId = current.getAttribute('id')
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
+            } else {
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+            }
+        })
+    }
+
+    window.addEventListener('scroll', scrollActive)
+}
+
+/** Change background header */
+const scrollHeaderChange = () => {
+    function scrollHeader () {
+        const nav = document.getElementById('header')
+
+        if (this.scrollY >= 80) {
+            nav.classList.add('scroll-header')
+        } else {
+            nav.classList.remove('scroll-header')
+        }
+    }
+    window.addEventListener('scroll', scrollHeader)
+}
+
+
+/** Menú para celular */
+function showMenu() {
     const navMenu = document.getElementById('nav-menu')
     navMenu.classList.add('show-menu')
 }
 
-function hiddenMenu () {
+function hiddenMenu() {
     const navMenu = document.getElementById('nav-menu')
     navMenu.classList.remove('show-menu')
 }
@@ -119,12 +165,12 @@ const menuToggle = () => {
     if (navClose) {
         navClose.addEventListener('click', hiddenMenu)
     }
-    
+
 }
 
 const removeMobileMenu = () => {
     const navLink = document.querySelectorAll('.nav__link')
-    
+
     navLink.forEach(links => links.addEventListener('click', hiddenMenu))
 }
 
@@ -135,6 +181,8 @@ const Header = () => {
         if (mounted) {
             menuToggle()
             removeMobileMenu()
+            scrollSections()
+            scrollHeaderChange()
         }
         return () => mounted = false;
     }, [])
@@ -146,7 +194,7 @@ const Header = () => {
                 <StyledNavMenu className="nav__menu" id="nav-menu">
                     <ul className="nav__list grid">
                         <li className="nav__item">
-                            <a href="#home" className="nav__link">
+                            <a href="#home" className="nav__link active-link">
                                 <i class="uil uil-estate nav__icon"></i> Home
                             </a>
                         </li>
@@ -166,7 +214,7 @@ const Header = () => {
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#portafolio" className="nav__link">
+                            <a href="#portfolio" className="nav__link">
                                 <i class="uil uil-scenery nav__icon"></i> Portafolio
                             </a>
                         </li>
