@@ -39,6 +39,44 @@ const StyledHeader = StyledComponents.header`
     .change-theme:hover {
         color: var(--first-color);
     }
+
+    /* For small devices */
+    @media screen and (max-width: 350px) {
+        /** MENÚ */
+        .nav__menu {
+            padding: 2rem .25rem 4rem !important;
+        }
+        .nav__list {
+            column-gap: 0 !important;
+        }
+    }
+
+    /* For medium devices */
+    @media screen and (min-width: 768px) {
+        top: 0 !important;
+        bottom: initial !important;
+        padding: 0 1rem;
+        
+        .nav__icon, .nav__close, .nav__toggle {
+            display: none;
+        }
+
+        .nav__list {
+            display: flex;
+            column-gap: 2rem;
+        }
+        .nav__menu {
+            margin-left: auto;
+        }
+        .change-theme {
+            margin: 0px !important;
+        }
+    }
+
+    /* For large devices */
+    @media screen and (min-width: 1024px) {
+        padding: 0;
+    }
 `
 
 const StyledNav = StyledComponents.nav`
@@ -69,9 +107,10 @@ const StyledNav = StyledComponents.nav`
         }
     }
 
-    // Responsive
-    @media screen and (max-width: 767px) {
-        
+    /* For medium devices */
+    @media screen and (min-width: 768px) {
+        height: calc(var(--header-height) + 1.5rem) !important;
+        column-gap: 1rem !important;
     }
 `
 
@@ -216,8 +255,8 @@ const addNightTheme = () => {
     // We validate if the user previously chose a topic
     if (selectedTheme) {
         // if the validation is fulfilled, we ask what the issue was to know if we activated or deactivate the dark theme
-        document.body.classList[(selectedTheme === 'dark') ? 'add': 'remove'](darkTheme)
-        themeButton.classList[(selectedIcon === 'uil-moon') ? 'add': 'remove'](iconTheme)
+        document.body.classList[(selectedTheme === 'dark') ? 'add' : 'remove'](darkTheme)
+        themeButton.classList[(selectedIcon === 'uil-moon') ? 'add' : 'remove'](iconTheme)
     }
 
     // Active / deactivate the theme manually with the button
