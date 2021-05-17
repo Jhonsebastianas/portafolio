@@ -61,7 +61,7 @@ const Portfolio = () => {
     useEffect(() => {
         let mounted = true
         if (mounted) {
-            setTimeout(swiperFunction(), 500)
+            swiperFunction()
         }
         return () => mounted = false
     }, [])
