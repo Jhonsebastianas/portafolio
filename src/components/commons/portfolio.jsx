@@ -29,10 +29,12 @@ const StyledPortfolioContent = StyledComponent.div`
 
 const PortfolioProject = (props) => {
     const { project: { title, description, img, url } } = props
+
+    const rutaImagen = `images/projects/${img}`
+    
     return (
         <StyledPortfolioContent className="portfolio__content grid swiper-slide">
-            <img src={`/images/projects/${img}`} alt={title} className="portfolio__img" />
-
+            <img src={rutaImagen} alt={title} className="portfolio__img" />
             <div className="portfolio__data">
                 <h3 className="portfolio__title">{title}</h3>
                 <p className="portfolio__description">{description}</p>
