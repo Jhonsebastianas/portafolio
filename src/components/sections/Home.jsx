@@ -103,7 +103,7 @@ const Home = () => {
                         <h1 className="home__title">Hi, I'am Sebastian</h1>
                         <h3 className="home__subtitle">Analyst developer</h3>
                         <p className="home__description">
-                            Frontend and backend web design, and development knowledge in IoT,
+                            Backend and frontend software developer, and development knowledge in IoT,
                             producing quality work.
                         </p>
                         <Button href="#contact">
