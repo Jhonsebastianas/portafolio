@@ -16,10 +16,11 @@ class MyDocument extends Document {
                     {/** scripts */}
                 </Head>
                 <body className="my-body-class">
-                    <Main />
-                    <NextScript />
                     {/* <!-- swiper --> */}
                     <script src="/js/swiper-bundle.min.js"></script>
+                    {/* APP */}
+                    <Main />
+                    <NextScript />
                 </body>
             </Html>
         )
