@@ -1,14 +1,19 @@
 import React from 'react'
 import Footer from '@components/layouts/Footer'
-import Social from '@components/layouts/Social'
+// import Social from '@components/layouts/Social'
+import Header from '@components/sections/Header'
+import ScrollUp from '@components/commons/button-scroll-up'
 
 const Layout = ({ children }) => {
     return (
         <>
-            {/* <Menu /> */}
-            {children}
-            <Social isHome={true} />
+            <Header />
+            <div className="main">
+                {children}
+            </div>
+            {/* <Social isHome={true} /> */}
             <Footer />
+            <ScrollUp />
         </>
     )
 }
