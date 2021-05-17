@@ -52,6 +52,7 @@ const swiperFunction = () => {
             el: '.swiper-pagination',
             clickable: true,
         },
+        preloadImages: false,
     })
 }
 
