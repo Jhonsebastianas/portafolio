@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import StyledComponent from 'styled-components'
 
 const StyledContactContainer = StyledComponent.div`
@@ -49,6 +49,34 @@ const StyledContactContainer = StyledComponent.div`
 `
 
 const Contacme = () => {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [subject, setSubject] = useState('')
+    const [message, setMessage] = useState('')
+
+    const [urlComplete, setUrlComplete] = useState('mailto:jhonsebastianas@gmail.com')
+
+    const handledSendMail = () => {
+        let url = 'mailto:jhonsebastianas@gmail.com'
+        if (email) url += `?cc=${email}`
+        if (name || subject) url += `&subject=${[name, subject].join(' - ').replace(' ', '%20')}`
+        if (message) url += `&body=${message.replace(' ', '%20')}`
+
+        setUrlComplete(url)
+    }
+
+    const handledEmail = (event) => {
+        const { target } = event
+        const { value, name } = target
+        if (name == 'names') setName(value)
+        if (name == 'email') setEmail(value)
+        if (name == 'subject') setSubject(value)
+        if (name == 'message') setMessage(value)
+
+        handledSendMail()
+    }
+
     return (
         <section className="contact section" id="contact">
             <h2 className="section__title">Contact Me</h2>
@@ -88,24 +116,24 @@ const Contacme = () => {
                     <div className="contact__inputs grid">
                         <div className="contact__content">
                             <label htmlFor="names" className="contact__label">Names</label>
-                            <input type="text" id="names" className="contact__input" />
+                            <input type="text" name="names" id="names" className="contact__input" onChange={handledEmail} />
                         </div>
                         <div className="contact__content">
                             <label htmlFor="email" className="contact__label">Email</label>
-                            <input type="email" id="email" className="contact__input" />
+                            <input type="email" name="email" id="email" className="contact__input" onChange={handledEmail} />
                         </div>
                     </div>
                     <div className="contact__content">
-                        <label htmlFor="workProject" className="contact__label">Project</label>
-                        <input type="text" id="workProject" className="contact__input" />
+                        <label htmlFor="subject" className="contact__label">Project</label>
+                        <input type="text" name="subject" id="subject" className="contact__input" onChange={handledEmail} />
                     </div>
                     <div className="contact__content">
-                        <label htmlFor="descriptionContact" className="contact__label">Message</label>
-                        <textarea name="descriptionContact" id="descriptionContact" cols="0" rows="7" className="contact__input"></textarea>
+                        <label htmlFor="message" className="contact__label">Message</label>
+                        <textarea name="message" id="message" cols="0" rows="7" className="contact__input" onChange={handledEmail} ></textarea>
                     </div>
 
                     <div>
-                        <a href="#" className="button button--flex">
+                        <a href={urlComplete} className="button button--flex" onClick={handledEmail}>
                             Send Message
                         <i className="uil uil-message button__icon"></i>
                         </a>
