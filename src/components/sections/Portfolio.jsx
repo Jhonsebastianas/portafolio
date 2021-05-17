@@ -1,24 +1,7 @@
 import React, { useEffect } from 'react'
 import Project from '@components/commons/portfolio'
 import StyledComponent from 'styled-components'
-
-const portfolioProjects = [
-    {
-        title: 'Controlsep',
-        img: 'controlsep.png',
-        description: `
-            Controlsep es un proyecto creado...
-        `
-    },
-    {
-        title: 'Tagmascota',
-        img: 'tagmascota.png',
-        description: `
-            Es un proyecto que brindar un punto de reporte 
-            de mascotas perdidas y encontradas.
-        `
-    },
-]
+import portfolioProjects from '@constants/portfolio'
 
 const StyledPortfolioContainer = StyledComponent.div`
     overflow: initial;
