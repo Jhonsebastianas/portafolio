@@ -1,86 +1,11 @@
 import React, { useEffect } from 'react'
 import StyledComponents from 'styled-components'
 import Skill from '@components/commons/skill'
+import abilities from '@constants/skills-i-have'
 
 const StyledSkillsContainer = StyledComponents.div`
     row-gap: 0;
 `
-
-const abilities = [
-    {
-        title: 'Backend developer',
-        subtitle: 'More than 3 years',
-        icon: 'uil-server-network-alt',
-        skills: [
-            {
-                name: 'Java',
-                percentage: '80%',
-            },
-            {
-                name: 'Node.js',
-                percentage: '70%',
-            },
-            {
-                name: 'Express.js',
-                percentage: '70%',
-            },
-            {
-                name: 'Oracle',
-                percentage: '50%',
-            },
-            {
-                name: 'Mongodb',
-                percentage: '60%',
-            },
-        ],
-    },
-    {
-        title: 'Frontend developer',
-        subtitle: 'More than 3 years',
-        icon: 'uil-brackets-curly',
-        skills: [
-            {
-                name: 'JavaScript',
-                percentage: '85%',
-            },
-            {
-                name: 'React.js',
-                percentage: '75%',
-            },
-            {
-                name: 'Angular.js',
-                percentage: '60%',
-            },
-            {
-                name: 'CSS',
-                percentage: '50%',
-            },
-        ],
-    },
-    {
-        title: 'Internet of things developer',
-        subtitle: 'More than 1 years',
-        icon: 'uil-intercom-alt',
-        skills: [
-            {
-                name: 'Python',
-                percentage: '60%',
-            },
-            {
-                name: 'Raspberry pi',
-                percentage: '50%',
-            },
-            {
-                name: 'C++',
-                percentage: '30%',
-            },
-            {
-                name: 'Arduino',
-                percentage: '30%',
-            },
-        ],
-    },
-]
 
 const accordionSkills = () => {
     const skillsContent = document.getElementsByClassName('skills__content'),
