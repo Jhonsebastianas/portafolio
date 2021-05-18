@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
       <meta name="theme-color" content="#000000" />
       <meta
         name="description"
-        content="Desarrollador de software y mentor, Jhon Agudelo"
+        content="Software development and mentor, Jhon Agudelo"
       />
       <meta name="keywords" content="Jhon Sebastian,
         Agudelo Sierra, Jhon Agudelo, Desarrollador, 
@@ -37,6 +37,13 @@ function MyApp({ Component, pageProps }) {
       <meta name="author" content="Jhon Sebastian Agudelo Sierra" />
       <meta name="copyright" content="Jhon Sebastian Agudelo Sierra" />
       <title>{APP_NAME}</title>
+
+      {/* Meta tags for social media */}
+      <meta property="og:title" content="Jhon Agudelo: Software development and mentor." />
+      <meta property="og:description" content="Backend and frontend software developer, and development knowledge in IoT, producing quality work." />
+      <meta property="og:image" content="https://www.jhonsebastianas.com/images/portfolio_presentation.png" />
+      <meta property="og:url" content="https://www.jhonsebastianas.com/" />
+      <meta name="twitter:card" content="summary_large_image"></meta>
     </Head>
     <Component {...pageProps} />
   </>
