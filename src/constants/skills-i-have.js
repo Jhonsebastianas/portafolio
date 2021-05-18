@@ -66,10 +66,6 @@ const abilities = [
                 name: 'Selenium',
                 percentage: '50%'
             },
-            {
-                name: 'infrastructure as code',
-                percentage: '20%'
-            },
         ]
     },
     {
