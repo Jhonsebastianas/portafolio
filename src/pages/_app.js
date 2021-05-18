@@ -38,12 +38,16 @@ function MyApp({ Component, pageProps }) {
       <meta name="copyright" content="Jhon Sebastian Agudelo Sierra" />
       <title>{APP_NAME}</title>
 
-      {/* Meta tags for social media */}
+      {/*** Meta tags for social media ***/}
+      {/* Essential META Tags */}
       <meta property="og:title" content="Jhon Agudelo: Software development and mentor." />
-      <meta property="og:description" content="Backend and frontend software developer, and development knowledge in IoT, producing quality work." />
+      <meta property="og:description" content="Backend and frontend software developer, with development knowledge in IoT, producing quality work." />
       <meta property="og:image" content="https://www.jhonsebastianas.com/images/portfolio_presentation.png" />
       <meta property="og:url" content="https://www.jhonsebastianas.com/" />
       <meta name="twitter:card" content="summary_large_image"></meta>
+      {/* Non-Essential, But Recommended */}
+      <meta property="og:site_name" content="Jhon Agudelo, Portfolio."></meta>
+      <meta name="twitter:image:alt" content="Preview website image"></meta>
     </Head>
     <Component {...pageProps} />
   </>
