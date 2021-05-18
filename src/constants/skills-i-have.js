@@ -50,9 +50,9 @@ const abilities = [
         ],
     },
     {
-        title: 'DevOps developer',
+        title: 'Automation developer',
         subtitle: 'More than 2 years',
-        icon: 'uil-cloud-database-tree',
+        icon: 'uil-robot',
         skills: [
             {
                 name: 'Automation testing',
