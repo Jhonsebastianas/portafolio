@@ -50,6 +50,10 @@ const Qualification = (props) => {
 
     const { index, qualification: { title, subtitle, calendar }, size, typeQualification } = props
 
+    const isPair = index % 2 == 0
+    const isFinalQualification = index === size - 1
+    const isSizePair = size % 2 == 0
+
     const getOddQualification = () => {
         return (<>
             <div></div>
@@ -77,11 +81,22 @@ const Qualification = (props) => {
         </>)
     }
 
+    const getFinalPairQualification = () => {
+        return (<>
+            <div></div>
+            <div>
+                <span className="qualification__rounder"></span>
+            </div>
+        </>)
+    }
+
     return (
         <StyleQualification key={index}>
             <div className="qualification__data">
 
-                {!(index % 2 == 0) && (index != size - 1) ? getOddQualification() : ''}
+                {!(isPair) && !(isFinalQualification) ? getOddQualification() : ''}
+
+                {(isFinalQualification) && (isSizePair) ? getFinalPairQualification() : ''}
 
                 <div>
                     <h3 className="qualification__title">{title}</h3>
@@ -92,8 +107,9 @@ const Qualification = (props) => {
                     </div>
                 </div>
 
-                {(index === size - 1) ? getFinalQualification() : ''}
-                {(index % 2 == 0) && (index != size - 1) ? getPairQualification() : ''}
+                {(isPair) && !(isFinalQualification) ? getPairQualification() : ''}
+
+                {(isFinalQualification) && !(isSizePair) ? getFinalQualification() : ''}
 
             </div>
         </StyleQualification>

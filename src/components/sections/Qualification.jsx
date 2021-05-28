@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import ButtonQualification from '@components/commons/button-qualification'
 import QualificationContent from '@components/commons/qualification'
+import Works from '@constants/qualification-work'
+import Education from '@constants/qualification-education'
+import Awards from '@constants/qualification-awards'
+
 import StyledComponents from 'styled-components'
 
 const StyledQualification = StyledComponents.section`
@@ -8,6 +12,12 @@ const StyledQualification = StyledComponents.section`
         display: flex;
         justify-content: space-evenly;
         margin-bottom: var(--mb-2);
+    }
+
+    @media screen and (max-width: 280px) {
+        .qualification__tabs {
+            flex-direction: column;
+        }
     }
 
     [data-content] {
@@ -18,42 +28,6 @@ const StyledQualification = StyledComponents.section`
         display: block;
     }
 `
-
-const listQualifications = [
-    {
-        title: 'Technology in Data Systematization',
-        subtitle: 'Colombia - PCJIC',
-        calendar: '2020 - 2022'
-    },
-    {
-        title: 'Professional technical in software development',
-        subtitle: 'Colombia - PCJIC',
-        calendar: '2018 - 2019'
-    },
-    {
-        title: 'Technical Bachelor in Software Programming',
-        subtitle: 'Colombia - Concejo de Medellín',
-        calendar: '2017 - 2018'
-    },
-]
-
-const listWorks = [
-    {
-        title: 'Analyst development',
-        subtitle: 'Quipux S.A.S - Colombia',
-        calendar: '2019 - Present'
-    },
-    {
-        title: 'Automated software testing',
-        subtitle: 'Quipux S.A.S - Colombia',
-        calendar: '2019 - Present (occasionally)'
-    },
-    {
-        title: 'Students mentor',
-        subtitle: 'PCJIC - Colombia',
-        calendar: '2019 - 2020'
-    },
-]
 
 /** Qualification tabs */
 const qualificationTabs = () => {
@@ -102,16 +76,25 @@ const Qualification = () => {
                         <i className="uil uil-briefcase-alt qualification__icon"></i>
                         Work
                     </ButtonQualification>
+                    <ButtonQualification className="qualification__button button--flex" data-target="#awards">
+                        <i className="uil uil-award qualification__icon"></i>
+                        Awards
+                    </ButtonQualification>
                 </div>
                 <div className="qualification__sections">
                     <div className="qualification__content qualification__active" data-content id="education">
-                        {listQualifications.map((qualification, index) => {
-                            return <QualificationContent qualification={qualification} index={index} size={listQualifications.length} />
+                        {Education.map((qualification, index) => {
+                            return <QualificationContent qualification={qualification} index={index} size={Education.length} />
                         })}
                     </div>
                     <div className="qualification__content" data-content id="work">
-                        {listWorks.map((work, index) => {
-                            return <QualificationContent qualification={work} index={index} size={listQualifications.length} />
+                        {Works.map((work, index) => {
+                            return <QualificationContent qualification={work} index={index} size={Works.length} />
+                        })}
+                    </div>
+                    <div className="qualification__content" data-content id="awards">
+                        {Awards.map((award, index) => {
+                            return <QualificationContent qualification={award} index={index} size={Awards.length} />
                         })}
                     </div>
                 </div>
