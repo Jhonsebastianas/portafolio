@@ -31,14 +31,15 @@ const PortfolioProject = (props) => {
     const { project: { title, description, img, url } } = props
 
     const rutaImagen = `images/projects/${img}`
-    
+
     return (
         <StyledPortfolioContent className="portfolio__content grid swiper-slide">
             <img src={rutaImagen} alt={title} className="portfolio__img" />
             <div className="portfolio__data">
                 <h3 className="portfolio__title">{title}</h3>
                 <p className="portfolio__description">{description}</p>
-                <a className="button button--flex button--small portfolio__button" href={url} target="_blank" >
+                <a className="button button--flex button--small portfolio__button" href={url} target="_blank"
+                    rel="noopener noreferrer">
                     Demo <i className="uil uil-arrow-right button__icon"></i>
                 </a>
             </div>
