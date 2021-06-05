@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 import StyledComponent from 'styled-components'
 
@@ -30,11 +31,18 @@ const StyledPortfolioContent = StyledComponent.div`
 const PortfolioProject = (props) => {
     const { project: { title, description, img, url } } = props
 
-    const rutaImagen = `images/projects/${img}`
+    const rutaImagen = `/images/projects/${img}`
 
     return (
         <StyledPortfolioContent className="portfolio__content grid swiper-slide">
-            <img src={rutaImagen} alt={title} className="portfolio__img" />
+            <Image 
+                className="portfolio__img"
+                src={rutaImagen}
+                alr={title}
+                width="auto"
+                height="auto"
+            />
+            {/* <img src={rutaImagen} alt={title} className="portfolio__img" /> */}
             <div className="portfolio__data">
                 <h3 className="portfolio__title">{title}</h3>
                 <p className="portfolio__description">{description}</p>
