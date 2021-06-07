@@ -1,0 +1,68 @@
+/*==================== Classes modified to reduce size and print on A4 sheet ====================*/
+
+*.body__resume,::before,::after {
+    box-sizing: border-box;
+}
+
+body.body__resume {
+    /* Variables */
+    --h3-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+    /* Margin */
+    --mb-1: .5rem;
+    --mb-2: 1rem;
+    --mb-3: 1.5rem;
+
+    /* Styles */
+    margin: 0 0 var(--header-height) 0;
+    padding: 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+.body__resume h1, h1, h3, ul, p {
+    margin: 0;
+}
+
+.body__resume h1, h2, h3 {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+
+.body__resume ul {
+    padding: 0;
+    list-style: none;
+}
+
+/*====================  CLASS CSS ====================*/
+
+.body__resume .section {
+    padding: 1.5rem 0;
+}
+
+.body__resume .section-title {
+    font-size: var(--h2-font-size);
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    text-transform: uppercase;
+    letter-spacing: .35rem;
+    text-align: center;
+    margin-bottom: var(--mb-3);
+}
+
+/*====================  Layout ====================*/
+
+.body__resume .bd-container {
+    max-width: 968px;
+    width: calc(100% - 3rem);
+    margin-left: var(--mb-3);
+    margin-right: var(--mb-3);
+}
+
+.body__resume .bd-grid {
+    display: grid;
+    gap: 1.5rem;
+}
