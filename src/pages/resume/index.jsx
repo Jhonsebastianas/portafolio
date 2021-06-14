@@ -6,7 +6,9 @@ import Social from '@components/sections/resume/Social'
 import Profile from '@components/sections/resume/Profile'
 import Education from '@components/sections/resume/Education'
 import Skills from '@components/sections/resume/Skills'
-
+/** RESUME RIGHT */
+import Experience from '@components/sections/resume/Experience'
+import Certificates from '@components/sections/resume/Certificates'
 
 const Resume = () => {
     return (
@@ -21,7 +23,8 @@ const Resume = () => {
                     <Skills />
                 </div>
                 <div className="resume__right">
-                    {/* <!--========== EXPERIENCE ==========--> */}
+                    <Experience />
+                    <Certificates />
                 </div>
             </div>
         </Layout>
