@@ -8,6 +8,10 @@ const StyledHome = StyledComponents.section`
 
 const StyledHomeContainer = StyledComponents.div`
     gap: 3rem !important;
+
+    @media screen and (min-width: 968px) {
+        gap: 1.5rem;
+    }
 `
 
 const StyledHomeData = StyledComponents.div`
@@ -44,6 +48,12 @@ const StyledHomeData = StyledComponents.div`
         &:hover {
             background-color: var(--text-color);
             color: var(--container-color);
+        }
+    }
+
+    @media screen and (min-width: 968px) {
+        .home__button-movil {
+            display: none;
         }
     }
 `

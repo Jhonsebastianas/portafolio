@@ -1,6 +1,6 @@
 /*==================== Classes modified to reduce size and print on A4 sheet ====================*/
 
-*.body__resume,::before,::after {
+*.body__resume, ::before, ::after {
     box-sizing: border-box;
 }
 
@@ -13,7 +13,6 @@ body.body__resume {
     --mb-1: .5rem;
     --mb-2: 1rem;
     --mb-3: 1.5rem;
-
     /* Styles */
     margin: 0 0 var(--header-height) 0;
     padding: 0;
@@ -65,4 +64,41 @@ body.body__resume {
 .body__resume .bd-grid {
     display: grid;
     gap: 1.5rem;
+}
+
+/*====================  MEDIA QUERIES ====================*/
+
+/* Classes modified for large screen size */
+
+@media screen and (min-width: 968px) {
+    body.body__resume {
+        margin: 3rem 0;
+    }
+    .body__resume .bd-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .body__resume .l-header, .body__resume .show-scroll {
+        display: none;
+    }
+
+    .body__resume .resume {
+        display: grid;
+        grid-template-columns: .5fr 1fr;
+        background-color: var(--container-color);
+        box-shadow: 0 0 8px rgba(13,12,12, .15);
+    }
+
+    .body__resume .resume__left {
+        background-color: var(--container-color-alt);
+    }
+
+    .body__resume .resume__left, .body__resume .resume__right {
+        padding: 0 1.5rem;
+    }
+
+    .body__resume .section-title,
+    .body__resume .profile__description {
+        text-align: initial;
+    }
 }

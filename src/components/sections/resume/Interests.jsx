@@ -4,6 +4,11 @@ import StyledComponents from 'styled-components'
 const StyledInterestsContainer = StyledComponents.div`
     grid-template-columns: repeat(3, 1fr);
     margin-top: var(--mb-2);
+
+    @media screen and (min-width: 968px) {
+        grid-template-columns: repeat(5, max-content);
+        column-gap: 3.5rem !important;
+    }
 `
 
 const StyledInterestsConent = StyledComponents.div`

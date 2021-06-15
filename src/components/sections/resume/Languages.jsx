@@ -19,6 +19,11 @@ const StyledLanguageContent = StyledComponents.ul`
         border-radius: 50%;
         margin-right: .75rem;
     }
+
+    @media screen and (min-width: 968px) {
+        grid-template-columns: repeat(3, max-content);
+        column-gap: 3.5rem !important;
+    }
 `
 
 const Languages = () => {

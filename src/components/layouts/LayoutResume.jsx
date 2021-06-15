@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-// import Footer from '@components/layouts/Footer'
-// import Social from '@components/layouts/Social'
 // import Header from '@components/sections/Header'
-// import ScrollUp from '@components/commons/button-scroll-up'
+import ScrollUp from '@components/commons/button-scroll-up'
 
 const LayoutResume = ({ children }) => {
 
@@ -22,8 +20,7 @@ const LayoutResume = ({ children }) => {
             <div className="l-main bd-container">
                 {children}
             </div>
-            {/* <Footer />
-            <ScrollUp /> */}
+            <ScrollUp />
         </>
     )
 }
