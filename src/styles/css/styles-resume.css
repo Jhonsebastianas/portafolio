@@ -66,6 +66,26 @@ body.body__resume {
     gap: 1.5rem;
 }
 
+/*====================  Variables Dark theme ====================*/
+body.body__resume.dark-theme {
+    --container-color-alt: #181616;
+}
+
+/*====================  Button Dark/Light ====================*/
+.body__resume .change-theme {
+    position: absolute;
+    right: 0;
+    top: 2.2rem;
+    display: flex;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.body__resume .change-theme:hover {
+    color: var(--title-color);
+}
+
 /*====================  MEDIA QUERIES ====================*/
 
 /* Classes modified for large screen size */

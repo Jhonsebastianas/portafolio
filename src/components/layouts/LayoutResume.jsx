@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-// import Header from '@components/sections/Header'
 import ScrollUp from '@components/commons/button-scroll-up'
 
 const LayoutResume = ({ children }) => {
@@ -16,7 +15,6 @@ const LayoutResume = ({ children }) => {
 
     return (
         <>
-            {/* <Header /> */}
             <div className="l-main bd-container">
                 {children}
             </div>

@@ -55,6 +55,10 @@ const StyledHomeData = StyledComponents.div`
         .home__button-movil {
             display: none;
         }
+
+        .home__img {
+            display: none;
+        }
     }
 `
 
@@ -104,6 +108,10 @@ const Home = () => {
                     </span>
                 </StyledHomeAddress>
             </StyledHomeContainer>
+
+            {/* Theme change button */}
+            <i class="uil uil-moon change-theme" title="Theme"></i>
+
         </StyledHome>
     )
 }
