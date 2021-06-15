@@ -1,13 +1,9 @@
 import dynamic from "next/dynamic";
 import Head from 'next/head'
-// import '@styles/globals.css'
-// import '@styles/styles.css'
-// import '@styles/css/Hero.css'
-// import '@styles/css/ColoresGlobales.css'
-// import 'semantic-ui-css/semantic.min.css'
 
 /** New portafolio */
 import '@styles/css/styles.css'
+import '@styles/css/styles-resume.css'
 import '@styles/css/swiper-bundle.min.css'
 
 
@@ -31,9 +27,9 @@ function MyApp({ Component, pageProps }) {
         name="description"
         content="Software development and mentor, Jhon Agudelo"
       />
-      <meta name="keywords" content="Jhon Sebastian,
-        Agudelo Sierra, Jhon Agudelo, Desarrollador, 
-        Desarrollador web, fullstack, Desarrollador de software, Desarrollador backend, Desarrollador frontend, mentor"/>
+      <meta name="keywords" content="Jhon Sebastian,Agudelo Sierra,Jhon Agudelo,Desarrollador,
+        jhon sebastian agudelo sierra,Desarrollador web,fullstack,
+        Desarrollador de software,Desarrollador backend,Desarrollador frontend,mentor"/>
       <meta name="author" content="Jhon Sebastian Agudelo Sierra" />
       <meta name="copyright" content="Jhon Sebastian Agudelo Sierra" />
       <title>{APP_NAME}</title>
