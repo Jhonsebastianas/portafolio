@@ -10,6 +10,7 @@ import Skills from '@components/sections/resume/Skills'
 import Experience from '@components/sections/resume/Experience'
 import Certificates from '@components/sections/resume/Certificates'
 import References from '@components/sections/resume/References'
+import Languages from '@components/sections/resume/languages'
 
 const Resume = () => {
     return (
@@ -27,6 +28,7 @@ const Resume = () => {
                     <Experience />
                     <Certificates />
                     <References />
+                    <Languages />
                 </div>
             </div>
         </Layout>
