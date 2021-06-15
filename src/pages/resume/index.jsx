@@ -9,6 +9,7 @@ import Skills from '@components/sections/resume/Skills'
 /** RESUME RIGHT */
 import Experience from '@components/sections/resume/Experience'
 import Certificates from '@components/sections/resume/Certificates'
+import References from '@components/sections/resume/References'
 
 const Resume = () => {
     return (
@@ -25,6 +26,7 @@ const Resume = () => {
                 <div className="resume__right">
                     <Experience />
                     <Certificates />
+                    <References />
                 </div>
             </div>
         </Layout>
