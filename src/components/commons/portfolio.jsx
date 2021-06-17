@@ -38,7 +38,7 @@ const PortfolioProject = (props) => {
             <Image 
                 className="portfolio__img"
                 src={rutaImagen}
-                alr={title}
+                alt={title}
                 width="auto"
                 height="auto"
             />

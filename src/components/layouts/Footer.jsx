@@ -82,15 +82,15 @@ const Footer = () => {
 
                     <div className="footer__socials">
                         <a target="_blank" className="footer__social" href="https://www.facebook.com/jhonsebastianas"
-                            rel="noopener noreferrer">
+                            rel="noopener noreferrer" aria-label="Facebook jhonsabastianas">
                             <i className="uil uil-facebook-f"></i>
                         </a>
                         <a target="_blank" className="footer__social" href="https://www.instagram.com/jhonsebastianas/"
-                            rel="noopener noreferrer">
+                            rel="noopener noreferrer" aria-label="Instagram jhonsabastianas">
                             <i className="uil uil-instagram"></i>
                         </a>
                         <a target="_blank" className="footer__social" href="https://twitter.com/JhonSebastianAS"
-                            rel="noopener noreferrer">
+                            rel="noopener noreferrer" aria-label="Twitter jhonsabastianas">
                             <i className="uil uil-twitter-alt"></i>
                         </a>
                     </div>

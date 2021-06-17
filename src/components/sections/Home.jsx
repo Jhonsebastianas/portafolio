@@ -63,17 +63,17 @@ const Home = () => {
                 <div className="home__content grid">
                     <div className="home__social">
                         <a className="home__social-icon" href="https://www.linkedin.com/in/jhonsabastianas/"
-                            rel="noopener noreferrer" target="_blank">
+                            rel="noopener noreferrer" target="_blank" aria-label="Linkedin jhonsabastianas">
                             <i className="uil uil-linkedin-alt"></i>
                         </a>
 
                         <a className="home__social-icon" href="https://jhonsebastianas.medium.com/"
-                            rel="noopener noreferrer" target="_blank">
+                            rel="noopener noreferrer" target="_blank" aria-label="Medium jhonsabastianas">
                             <i className="uil uil-medium-m"></i>
                         </a>
 
                         <a className="home__social-icon" href="https://github.com/segaretsu/"
-                            rel="noopener noreferrer" target="_blank">
+                            rel="noopener noreferrer" target="_blank" aria-label="Github jhonsabastianas">
                             <i className="uil uil-github-alt"></i>
                         </a>
                     </div>
@@ -101,7 +101,7 @@ const Home = () => {
 
                     <div className="home__data">
                         <h1 className="home__title">Hi, I'am Sebastian</h1>
-                        <h3 className="home__subtitle">Analyst developer</h3>
+                        <h2 className="home__subtitle">Analyst developer</h2>
                         <p className="home__description">
                             Backend and frontend software developer, with development knowledge in IoT,
                             producing quality work.
