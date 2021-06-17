@@ -44,7 +44,7 @@ const ScrollButton = () => {
         return () => mounted = false
     }, [])
     return (
-        <StyleButton href="#" className="scrollup" id="scroll-up">
+        <StyleButton href="#" className="scrollup" id="scroll-up" aria-label="Ir al principio">
             <i className="uil uil-arrow-up scrollup__icon"></i>
         </StyleButton>
     )
