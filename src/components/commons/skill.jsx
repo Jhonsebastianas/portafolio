@@ -122,7 +122,7 @@ const SkillContainer = (props) => {
                         return (
                             <div className="skills__data" key={index}>
                                 <div className="skills__titles">
-                                    <h3 className="skills__name">{name}</h3>
+                                    <h2 className="skills__name">{name}</h2>
                                     <span className="skills__number">{percentage}</span>
                                 </div>
                                 <StyledSkillBar className="skills__bar" percentage={percentage} >
