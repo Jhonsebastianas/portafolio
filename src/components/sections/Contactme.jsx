@@ -85,11 +85,11 @@ const Contacme = () => {
             <StyledContactContainer className="contact__container container grid">
                 <div>
                     <div className="contact__information">
-                        <i className="uil uil-phone contact__icon"></i>
+                        <i className="uil uil-whatsapp contact__icon"></i>
 
                         <div>
-                            <h3 className="contact__title">Call Me</h3>
-                            <span className="contact__subtitle">311-326-4747</span>
+                            <h3 className="contact__title">Write me</h3>
+                            <span className="contact__subtitle"><a href="https://api.whatsapp.com/send?phone=3113264747">Send me a message</a></span>
                         </div>
                     </div>
 
