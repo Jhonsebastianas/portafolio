@@ -89,7 +89,7 @@ const Contacme = () => {
 
                         <div>
                             <h3 className="contact__title">Write me</h3>
-                            <span className="contact__subtitle"><a href="https://api.whatsapp.com/send?phone=3113264747">Send me a message</a></span>
+                            <span className="contact__subtitle"><a href="https://api.whatsapp.com/send?phone=+573113264747">Send me a message</a></span>
                         </div>
                     </div>
 
