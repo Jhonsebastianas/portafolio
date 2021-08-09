@@ -35,12 +35,10 @@ const PortfolioProject = (props) => {
 
     return (
         <StyledPortfolioContent className="portfolio__content grid swiper-slide">
-            <Image 
+            <img
                 className="portfolio__img"
                 src={rutaImagen}
                 alt={title}
-                width="auto"
-                height="auto"
             />
             {/* <img src={rutaImagen} alt={title} className="portfolio__img" /> */}
             <div className="portfolio__data">
