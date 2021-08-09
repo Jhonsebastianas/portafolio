@@ -84,17 +84,17 @@ const Qualification = () => {
                 <div className="qualification__sections">
                     <div className="qualification__content qualification__active" data-content id="education">
                         {Education.map((qualification, index) => {
-                            return <QualificationContent qualification={qualification} index={index} size={Education.length} />
+                            return <QualificationContent key={index} qualification={qualification} index={index} size={Education.length} />
                         })}
                     </div>
                     <div className="qualification__content" data-content id="work">
                         {Works.map((work, index) => {
-                            return <QualificationContent qualification={work} index={index} size={Works.length} />
+                            return <QualificationContent key={index} qualification={work} index={index} size={Works.length} />
                         })}
                     </div>
                     <div className="qualification__content" data-content id="awards">
                         {Awards.map((award, index) => {
-                            return <QualificationContent qualification={award} index={index} size={Awards.length} />
+                            return <QualificationContent key={index} qualification={award} index={index} size={Awards.length} />
                         })}
                     </div>
                 </div>

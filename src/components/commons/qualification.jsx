@@ -91,7 +91,7 @@ const Qualification = (props) => {
     }
 
     return (
-        <StyleQualification key={index}>
+        <StyleQualification>
             <div className="qualification__data">
 
                 {!(isPair) && !(isFinalQualification) ? getOddQualification() : ''}

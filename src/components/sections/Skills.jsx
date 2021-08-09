@@ -41,7 +41,7 @@ const Skills = () => {
             <h2 className="section__title">Skills</h2>
             <span className="section__subtitle">My technical level</span>
             <StyledSkillsContainer className="skills__container container grid">
-                {abilities.map((skill, index) => <Skill skill={skill} index={index} />)}
+                {abilities.map((skill, index) => <Skill key={index} skill={skill} />)}
             </StyledSkillsContainer>
         </section>
     )

@@ -75,7 +75,7 @@ const Portfolio = () => {
                 <div className="swiper-wrapper">
                     {/** Portfolio 1 */}
                     {portfolioProjects.map((project, index) => {
-                        return <Project project={project} index={index} />
+                        return <Project key={index} project={project}/>
                     })}
                 </div>
                 {/** Add Arrows */}
