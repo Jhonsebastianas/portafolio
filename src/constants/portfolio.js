@@ -1,7 +1,7 @@
 const portfolioProjects = [
     {
         title: 'Controlsep',
-        img: 'Controlsep.png',
+        img: 'Controlsep.webp',
         description: `
             Controlsep is a project created to encourage 
             and allow people to measure the consumption of water and energy in their homes.
@@ -10,7 +10,7 @@ const portfolioProjects = [
     },
     {
         title: 'Tagmascota',
-        img: 'Tagmascota.png',
+        img: 'Tagmascota.webp',
         description: `
             Tagmascota is a project that will provide a reporting point for lost and found pets.
         `,

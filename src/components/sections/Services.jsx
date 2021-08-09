@@ -31,7 +31,7 @@ const Services = () => {
             <StyledServicesContainer className="services__container container grid">
                 {/** Servicio 1 */}
                 {servicesIOffer.map((service, index) => {
-                    return <Service service={service} index={index} handledServiceModal={handledServiceModal} />
+                    return <Service key={index} service={service} index={index} handledServiceModal={handledServiceModal} />
                 })}
             </StyledServicesContainer>
 

@@ -99,10 +99,10 @@ const StyledSkillBar = StyledComponents.div`
 
 const SkillContainer = (props) => {
 
-    const { skill: { title, subtitle, icon, skills }, index } = props
+    const { skill: { title, subtitle, icon, skills } } = props
 
     return (
-        <StyledSkillContainer key={index}>
+        <StyledSkillContainer>
             {/*==================== SKILLS 1====================*/}
             <div className={`skills__content skills__close`}>
                 <div className="skills__header">

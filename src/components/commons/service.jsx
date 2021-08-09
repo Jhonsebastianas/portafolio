@@ -39,7 +39,7 @@ const StyledServices = StyledComponent.div`
 const Service = (props) => {
     const { index, handledServiceModal, service: { title, icon } } = props
     return (
-        <StyledServices className="services__content" key={index}>
+        <StyledServices className="services__content">
             <div>
                 <i className={`uil ${icon} services__icon`}></i>
                 <h3 className="services__title">{title}</h3>
