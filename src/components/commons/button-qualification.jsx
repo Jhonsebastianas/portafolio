@@ -23,7 +23,7 @@ const StyleButton = StyledComponents.a`
 const ButtonQualification = (props) => {
     const { children, ...otherProps } = props
     return (
-        <StyleButton className="qualification__button button--flex" {...otherProps}>
+        <StyleButton role="button" className="qualification__button button--flex" {...otherProps}>
             {children}
         </StyleButton>
     )

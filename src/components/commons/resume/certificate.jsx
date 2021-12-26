@@ -17,7 +17,7 @@ const Certificate = (props) => {
             <h3 className="certificate__title">{title}</h3>
             {/* <p className="certificate__description">{description}</p> */}
             <a href={source} rel="noopener noreferrer" target="_blank">
-                <i class="uil uil-folder certificate__see-icon"></i> credential
+                <i className="uil uil-folder certificate__see-icon"></i> credential
             </a>
         </StyledCertificacionContent>
     )
