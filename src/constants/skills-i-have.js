@@ -1,7 +1,7 @@
 const abilities = [
     {
         title: 'Backend developer',
-        subtitle: 'More than 3 years',
+        subtitle: 'More than 4 years',
         icon: 'uil-server-network-alt',
         skills: [
             {
@@ -28,7 +28,7 @@ const abilities = [
     },
     {
         title: 'Frontend developer',
-        subtitle: 'More than 3 years',
+        subtitle: 'More than 4 years',
         icon: 'uil-brackets-curly',
         skills: [
             {
@@ -93,7 +93,7 @@ const abilities = [
     },
     {
         title: 'Soft skills',
-        subtitle: 'More than 6 years',
+        subtitle: 'More than 7 years',
         icon: 'uil-heart-medical',
         skills: [
             {
