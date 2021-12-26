@@ -59,7 +59,7 @@ const About = () => {
 
                     <div className="about__info">
                         <div>
-                            <span className="about__info-title">02+</span>
+                            <span className="about__info-title">03+</span>
                             <span className="about__info-name">Years <br></br> experience</span>
                         </div>
 
