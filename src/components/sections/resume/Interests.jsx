@@ -30,27 +30,27 @@ const Interests = () => {
 
             <StyledInterestsContainer className="interests__container bd-grid">
                 <StyledInterestsConent className="interests__content">
-                    <i class="uil uil-headphones-alt interests__icon"></i>
+                    <i className="uil uil-headphones-alt interests__icon"></i>
                     <span className="interests__name">Music</span>
                 </StyledInterestsConent>
 
                 <StyledInterestsConent className="interests__content">
-                    <i class="uil uil-plane-departure interests__icon"></i>
+                    <i className="uil uil-plane-departure interests__icon"></i>
                     <span className="interests__name">Travel</span>
                 </StyledInterestsConent>
 
                 <StyledInterestsConent className="interests__content">
-                    <i class="uil uil-book-open interests__icon"></i>
+                    <i className="uil uil-book-open interests__icon"></i>
                     <span className="interests__name">Learn</span>
                 </StyledInterestsConent>
 
                 <StyledInterestsConent className="interests__content">
-                    <i class="uil uil-book-reader interests__icon"></i>
+                    <i className="uil uil-book-reader interests__icon"></i>
                     <span className="interests__name">Teach</span>
                 </StyledInterestsConent>
 
                 <StyledInterestsConent className="interests__content">
-                    <i class="uil uil-user-nurse interests__icon"></i>
+                    <i className="uil uil-user-nurse interests__icon"></i>
                     <span className="interests__name">Hapkido</span>
                 </StyledInterestsConent>
             </StyledInterestsContainer>

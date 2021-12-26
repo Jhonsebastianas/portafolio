@@ -39,8 +39,8 @@ const Reference = (props) => {
             <span className="references__subtitle">{role}</span>
             <h3 className="references__title">{name}</h3>
             <ul className="references__contact">
-                <li>Email: <a class="references__link" href={urlEmail} rel="noopener noreferrer" target="_blank">{email}</a></li>
-                <li>Phone: {extension} <a class="references__link" href={urlPhone} rel="noopener noreferrer" target="_blank">{number}</a></li>
+                <li>Email: <a className="references__link" href={urlEmail} rel="noopener noreferrer" target="_blank">{email}</a></li>
+                <li>Phone: {extension} <a className="references__link" href={urlPhone} rel="noopener noreferrer" target="_blank">{number}</a></li>
             </ul>
         </StyledReferencesContent>
     )

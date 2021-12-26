@@ -98,19 +98,19 @@ const Home = () => {
 
                 <StyledHomeAddress className="home__address bg-grid">
                     <span className="home__information">
-                        <i class="uil uil-map-marker home__icon"></i> Medellín - Colombia
+                        <i className="uil uil-map-marker home__icon"></i> Medellín - Colombia
                     </span>
                     <span className="home__information">
-                        <i class="uil uil-envelope-alt home__icon"></i> jhonsebastianas@gmail.com
+                        <i className="uil uil-envelope-alt home__icon"></i> jhonsebastianas@gmail.com
                     </span>
                     <span className="home__information">
-                        <i class="uil uil-phone-alt home__icon"></i> +57 311 326 4747
+                        <i className="uil uil-phone-alt home__icon"></i> +57 311 326 4747
                     </span>
                 </StyledHomeAddress>
             </StyledHomeContainer>
 
             {/* Theme change button */}
-            <i class="uil uil-moon change-theme" title="Theme"></i>
+            <i className="uil uil-moon change-theme" title="Theme"></i>
 
         </StyledHome>
     )
