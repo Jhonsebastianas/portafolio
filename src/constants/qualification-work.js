@@ -1,5 +1,14 @@
 const listWorks = [
     {
+        title: 'Senior Analyst development',
+        subtitle: 'Quipux S.A.S - Colombia',
+        calendar: '2022 - Present',
+        // Experience
+        company: 'Quipux S.A.S',
+        description: `Software development with Scrum methodology, innovating, creating and implementing
+        technological solutions for the mobility sector in Medellín and Ivory Coast`,
+    },
+    {
         title: 'Analyst development',
         subtitle: 'Quipux S.A.S - Colombia',
         calendar: '2019 - Present',

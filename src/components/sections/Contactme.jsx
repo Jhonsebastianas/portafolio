@@ -58,10 +58,20 @@ const Contacme = () => {
     const [urlComplete, setUrlComplete] = useState('mailto:jhonsebastianas@gmail.com')
 
     const handledSendMail = () => {
+        const concatCharacter = ['?', '&'];
+        const index = 0;
         let url = 'mailto:jhonsebastianas@gmail.com'
-        if (email) url += `?cc=${email}`
-        if (name || subject) url += `&subject=${[name, subject].join(' - ').replace(' ', '%20')}`
-        if (message) url += `&body=${message.replace(' ', '%20')}`
+        if (email) {
+            url += `${concatCharacter[index]}cc=${email}`;
+            index = 1;
+        }
+        if (name || subject) {
+            url += `${concatCharacter[index]}subject=${[name, subject].join(' - ').replace(' ', '%20')}`;
+            index = 1;
+        }
+        if (message) {
+            url += `${concatCharacter[index]}body=${message.replace(' ', '%20')}`
+        }
 
         setUrlComplete(url)
     }
@@ -84,15 +94,6 @@ const Contacme = () => {
 
             <StyledContactContainer className="contact__container container grid">
                 <div>
-                    <div className="contact__information">
-                        <i className="uil uil-whatsapp contact__icon"></i>
-
-                        <div>
-                            <h3 className="contact__title">Write me</h3>
-                            <span className="contact__subtitle"><a href="https://api.whatsapp.com/send?phone=+573113264747">Send me a message</a></span>
-                        </div>
-                    </div>
-
                     <div className="contact__information">
                         <i className="uil uil-envelope contact__icon"></i>
 

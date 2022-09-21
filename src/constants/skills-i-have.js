@@ -1,7 +1,15 @@
+import moment from "moment";
+
+const yearsWorkAsBackendDeveloper = moment().diff(new Date(2017, 7, 20), 'years');
+const yearsWorkAsFrontendDeveloper = moment().diff(new Date(2017, 12, 20), 'years');
+
+const yearsDevelopingSoftSkills = moment().diff(new Date(2015, 1, 1), 'years');
+
+
 const abilities = [
     {
         title: 'Backend developer',
-        subtitle: 'More than 4 years',
+        subtitle: `More than ${yearsWorkAsBackendDeveloper} years`,
         icon: 'uil-server-network-alt',
         skills: [
             {
@@ -28,7 +36,7 @@ const abilities = [
     },
     {
         title: 'Frontend developer',
-        subtitle: 'More than 4 years',
+        subtitle: `More than ${yearsWorkAsFrontendDeveloper} years`,
         icon: 'uil-brackets-curly',
         skills: [
             {
@@ -93,7 +101,7 @@ const abilities = [
     },
     {
         title: 'Soft skills',
-        subtitle: 'More than 7 years',
+        subtitle: `More than ${yearsDevelopingSoftSkills} years`,
         icon: 'uil-heart-medical',
         skills: [
             {

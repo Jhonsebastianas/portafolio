@@ -101,7 +101,7 @@ const Home = () => {
 
                     <div className="home__data">
                         <h1 className="home__title">Hi, I'am Sebastian</h1>
-                        <h2 className="home__subtitle">Analyst developer</h2>
+                        <h2 className="home__subtitle">Senior Analyst Developer</h2>
                         <p className="home__description">
                             Backend and frontend software developer, with development knowledge in IoT,
                             producing quality work.

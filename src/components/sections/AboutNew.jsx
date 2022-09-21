@@ -1,6 +1,7 @@
-import React from 'react'
-import StyledComponents from 'styled-components'
-import Button from '@components/commons/button'
+import React from 'react';
+import StyledComponents from 'styled-components';
+import Button from '@components/commons/button';
+import moment from 'moment/moment';
 
 const StyledAboutContainer = StyledComponents.div`
     .about__img {
@@ -41,9 +42,13 @@ const StyledAboutContainer = StyledComponents.div`
         display: flex;
         justify-content: center;
     }
-`
+`;
 
 const About = () => {
+
+    const workStartDate = new Date(2019, 2, 14);
+    const yearsWorked = moment().diff(workStartDate, "years");
+
     return (
         <section className="about section" id="about">
             <h2 className="section__title">About Me</h2>
@@ -59,7 +64,7 @@ const About = () => {
 
                     <div className="about__info">
                         <div>
-                            <span className="about__info-title">03+</span>
+                            <span className="about__info-title">{yearsWorked}+</span>
                             <span className="about__info-name">Years <br></br> experience</span>
                         </div>
 
