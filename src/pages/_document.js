@@ -19,6 +19,7 @@ class MyDocument extends Document {
                 <body className="my-body-class">
                     {/* <!-- swiper --> */}
                     <script src="/js/swiper-bundle.min.js"></script>
+                    <script src="/js/mixitup.min.js"></script>
                     {/* APP */}
                     <Main />
                     <NextScript />
