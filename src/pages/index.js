@@ -8,6 +8,7 @@ import PortFolio from '@components/sections/Portfolio';
 // import PortfolioNew from '@modules/portfolio/Portfolio'
 
 import Contact from '@components/sections/Contactme'
+import { Projects } from '@components/sections/projects/projects'
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <Skills />
       <Qualification />
       <Services />
-      <PortFolio />
+      <Projects />
+      {/* <PortFolio /> */}
       {/* <PortfolioNew /> */}
       <Contact />
     </Layout>

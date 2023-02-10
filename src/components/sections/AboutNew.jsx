@@ -46,7 +46,7 @@ const StyledAboutContainer = StyledComponents.div`
 
 const About = () => {
 
-    const workStartDate = new Date(2019, 2, 14);
+    const workStartDate = new Date(2019, 1, 1);
     const yearsWorked = moment().diff(workStartDate, "years");
 
     return (
