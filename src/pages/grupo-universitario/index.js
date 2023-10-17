@@ -34,12 +34,14 @@ export default function GrupoUniversitarioPage(props) {
                 <p>
                     Dios te ha llamado a ser luz en el mundo.
                     Únete a nuestro grupo universitario de la parroquia y descubre cómo la educación y la fe pueden trabajar juntas para fortalecer tu camino.
-                    Aquí, encontrarás apoyo espiritual, amistad y un propósito que trasciende lo académico<br />
+                    Aquí, encontrarás apoyo espiritual, amistad y un propósito que trasciende lo académico.
+                    <br />
+                    <br />
                     <strong>Horario:</strong> Sábados 7:00 p.m. <br /> <strong>Lugar:</strong> Parroquia La Sagrada Familia Villa Hermosa
                 </p>
                 <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MDdvcGNzYjU4Y2ZnYmppNmMwcmJpNmEzNWogamhvbnNlYmFzdGlhbmFzQG0&amp;tmsrc=jhonsebastianas%40gmail.com">Agendarme</a>
             </div>
-            <img alt="logo del grupo juvenil" src="/images/grupo-universitario/logo.jpeg" className="bulb" />
+            <img alt="logo del grupo juvenil" src="/images/grupo-universitario/logo.png" className="bulb" />
             <ul className="sci">
                 <li><a href="#"><i className="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i className="fa fa-twitter"></i></a></li>

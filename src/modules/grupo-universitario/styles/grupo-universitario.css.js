@@ -29,7 +29,7 @@ export const MainCSS = styled.div`
     }
     .open .layer:nth-child(2)
     {
-        background: #03a9f4;
+        background: #2C4899;
         animation-delay: 1s;
         z-index: 1;
     }
@@ -44,12 +44,10 @@ export const MainCSS = styled.div`
             transform: scaleY(0);
         }
     }
-    section
-    {
+    section {
         position: absolute;
         width: 100%;
         height: 100%;
-        background: #fff;
         display: grid;
         justify-content: center;
         align-items: center;
@@ -64,9 +62,7 @@ export const MainCSS = styled.div`
         max-width: 700px;
         z-index: 1001;
     }
-    .bannerText h2,
-    .bannerText h3
-    {
+    .bannerText h2, .bannerText h3 {
         position: relative;
         margin: 0;
         padding: 0;
@@ -75,6 +71,7 @@ export const MainCSS = styled.div`
         text-transform: uppercase;
         transform: scaleX(0);
         animation: revealTextReverse 1s ease-in-out forwards;
+        color: #EAC40A;
     }
     .bannerText h2
     {
@@ -126,8 +123,7 @@ export const MainCSS = styled.div`
             transform: scaleX(1);
         }
     }
-    .bannerText p
-    {
+    .bannerText p {
         opacity: 0;
         font-weight: 400;
         font-size: 1.2em;
@@ -151,7 +147,7 @@ export const MainCSS = styled.div`
         display: inline-block;
         margin: 20px 0 0;
         padding: 10px 20px;
-        background: #000;
+        background: #2C4899;
         color: #fff;
         font-weight: 700;
         text-decoration: none;
@@ -174,7 +170,6 @@ export const MainCSS = styled.div`
         }
     }
     .bulb {
-        max-height: 700px;
         position: absolute;
         right: 10%;
         top: 50%;
@@ -249,6 +244,7 @@ export const MainCSS = styled.div`
     }
     .header .logo
     {
+        color: #2C4899;
         opacity: 0;
         margin: 0;
         padding: 0;
@@ -286,7 +282,7 @@ export const MainCSS = styled.div`
     .header ul li a.active,
     .header ul li a:hover
     {
-        background: #000;
+        background: #2C4899;
         color: #fff;
     }
     @keyframes fadeInRight
@@ -310,7 +306,7 @@ export const MainCSS = styled.div`
         right: 40%;
         width: 250px;
         height: 250px;
-        border: 40px solid #000;
+        border: 40px solid #2C4899;
         animation: rotate 40s linear infinite, fadeIn 1s linear forwards;
         animation-delay: 7s;
     }
@@ -322,7 +318,7 @@ export const MainCSS = styled.div`
         top: 40%;
         width: 50px;
         height: 50px;
-        border: 2px solid #000;
+        border: 2px solid #2C4899;
         animation: rotate 30s linear infinite, fadeIn 1s linear forwards;
         animation-delay: 7s;
     }
