@@ -15,6 +15,6 @@
     "scrollreveal": "^4.0.9",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.3.11"
   }
 }
