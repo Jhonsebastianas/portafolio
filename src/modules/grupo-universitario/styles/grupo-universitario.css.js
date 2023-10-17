@@ -50,13 +50,15 @@ export const MainCSS = styled.div`
         display: grid;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        // overflow: hidden;
+        margin-bottom: 20px;
     }
     .bannerText
     {
         position: absolute;
         top: 50%;
         left: 10%;
+        margin-top: 6rem;
         transform: translateY(-50%);
         max-width: 700px;
         z-index: 1001;
@@ -169,6 +171,9 @@ export const MainCSS = styled.div`
         }
     }
     .bulb {
+        max-width: 500px;
+        justify-self: center;
+        margin-top: 20px;
         position: absolute;
         right: 10%;
         top: 50%;
@@ -302,7 +307,7 @@ export const MainCSS = styled.div`
         opacity: 0;
         position: absolute;
         bottom: -150px;
-        right: 40%;
+        right: 30%;
         width: 250px;
         height: 250px;
         border: 40px solid #2C4899;
