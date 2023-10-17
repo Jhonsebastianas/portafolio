@@ -1,6 +1,14 @@
+import Link from "next/link";
 import React from "react";
+import PropTypes from 'prop-types';
 
-export default function Menu(props) {
+const Menu = (props) => {
+    const { activeMenu } = props;
+
+    const isActive = (option) => {
+        return option == activeMenu && 'active' || '';
+    }
+
     const menuToggle = () => {
         const element = document.getElementById('navigation');
         element.classList.toggle("show");
@@ -11,10 +19,14 @@ export default function Menu(props) {
             <i className="uil uil-apps icon-menu-bars x2" onClick={() => menuToggle()}></i>
             <ul id="navigation">
                 <li>
-                    <a href="#" className="active">Inicio</a>
+                    <Link href={"/grupo-universitario-san-juan-pablo-ii"}>
+                        <a className={`${isActive("inicio")}`}>Inicio</a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#acerca">Acerca de</a>
+                    <Link href={"/grupo-universitario-san-juan-pablo-ii/acerca-de"}>
+                        <a className={`${isActive("acerca")}`}>Acerca de</a>
+                    </Link>
                 </li>
                 <li>
                     <a href="#contacto">Contacto</a>
@@ -24,3 +36,9 @@ export default function Menu(props) {
         </div>
     );
 }
+
+Menu.propTypes = {
+    activeMenu: PropTypes.string,
+}
+
+export default Menu;

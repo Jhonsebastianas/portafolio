@@ -9,7 +9,7 @@ export default function GrupoUniversitarioPage(props) {
     return (<MainCSS>
         <LayerAnimation />
         <section>
-            <Menu />
+            <Menu activeMenu={"inicio"} />
             <div className="bannerText">
                 <h2>Grupo universitario</h2>
                 <br />
@@ -22,7 +22,7 @@ export default function GrupoUniversitarioPage(props) {
                     <br />
                     <strong>Horario:</strong> Sábados 7:00 p.m. <br /> <strong>Lugar:</strong> Parroquia La Sagrada Familia Villa Hermosa
                 </p>
-                <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MDdvcGNzYjU4Y2ZnYmppNmMwcmJpNmEzNWogamhvbnNlYmFzdGlhbmFzQG0&amp;tmsrc=jhonsebastianas%40gmail.com">Agendarme</a>
+                <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=M3UwM3QwbTE5cmtwY2Y2ZzJzZXNha3Jza3UgYWMxZGQ4ZDliM2M2YjliMTgwMTM0MGE4OGM3YTQxNjU3YjljMDllYWUyMDFmMTc0ODc2MTZiMDZkZjVjM2MxMUBn&amp;tmsrc=ac1dd8d9b3c6b9b1801340a88c7a41657b9c09eae201f17487616b06df5c3c11%40group.calendar.google.com">Agendarme</a>
             </div>
             <img alt="logo del grupo juvenil" src="/images/grupo-universitario/logo.png" className="bulb" />
             <SocialNetworks />
