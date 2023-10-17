@@ -43,8 +43,8 @@ export default function GrupoUniversitarioPage(props) {
             </div>
             <img alt="logo del grupo juvenil" src="/images/grupo-universitario/logo.png" className="bulb" />
             <ul className="sci">
-                <li><a href="#facebook"><i className="uil uil-facebook"></i></a></li>
-                <li><a href="#whatsapp"><i className="uil uil-whatsapp-alt"></i></a></li>
+                <li><a href="#facebook"><i className="uil uil-facebook-f"></i></a></li>
+                <li><a href="#whatsapp"><i className="uil uil-whatsapp"></i></a></li>
             </ul>
             <div className="element1"></div>
             <div className="element2"></div>
