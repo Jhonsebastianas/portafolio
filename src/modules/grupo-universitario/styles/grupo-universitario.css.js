@@ -225,8 +225,8 @@ export const MainCSS = styled.div`
     }
     .sci li a
     {
-        font-size: 1.2em;
-        color: #000;
+        font-size: 1.6em;
+        color: #2C4899;
     }
     .header {
         position: absolute;
