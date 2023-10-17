@@ -22,8 +22,7 @@ export const MainCSS = styled.div`
         transform-origin: top;
         animation: open 1s ease-in-out forwards;
     }
-    .open .layer:nth-child(1)
-    {
+    .open .layer:nth-child(1) {
         background: #000;
         z-index: 2;
     }
@@ -90,7 +89,7 @@ export const MainCSS = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        background: #000;
+        background: #2C4899;
         width: 100%;
         height: 100%;
         transform-origin: right;
