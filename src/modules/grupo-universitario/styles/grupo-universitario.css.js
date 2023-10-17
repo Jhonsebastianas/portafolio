@@ -430,6 +430,7 @@ export const MainCSS = styled.div`
         }
 
         .bulb {
+            max-width: 220px;
             max-height: 700px;
             position: relative;
             right: 10%;
