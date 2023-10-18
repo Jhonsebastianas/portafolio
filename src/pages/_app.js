@@ -37,6 +37,11 @@ const setMetaTagsBasedOnSubdomain = (subdomain) => {
         title: 'Grupo universitario San Juan Pablo II',
         description: 'Únete a nuestro grupo universitario de la parroquia y descubre cómo la educación y la fe pueden trabajar juntas para fortalecer tu camino. Aquí, encontrarás apoyo espiritual, amistad y un propósito que trasciende lo académico.',
       };
+    case '/grupo-universitario-san-juan-pablo-ii/contacto':
+      return {
+        title: 'Grupo universitario San Juan Pablo II',
+        description: 'Únete a nuestro grupo universitario de la parroquia y descubre cómo la educación y la fe pueden trabajar juntas para fortalecer tu camino. Aquí, encontrarás apoyo espiritual, amistad y un propósito que trasciende lo académico.',
+      };
     default:
       return {
         title: APP_NAME,

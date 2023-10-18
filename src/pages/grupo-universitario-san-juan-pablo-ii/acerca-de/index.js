@@ -21,14 +21,18 @@ export default function AcercaDe(props) {
                     <br />
                     <ul>
                         <li><strong>- Natalia:</strong> Futura Ingeniera en Diseño industrial</li>
+                        <li><strong>- Miguel:</strong> Estudiante de Derecho</li>
                         <li><strong>- Felix:</strong> Aspirante a Diseñador gráfico</li>
-                        <li><strong>- Andrea:</strong> Aspirante a Profesora de Historia</li>
+                        <li><strong>- Omar:</strong> Aspirante a Ingeniero industrial</li>
+                        <li><strong>- Sara:</strong> Futura de Odontóloga</li>
                         <li><strong>- Leonardo:</strong> Futuro Ingeniero en Mecatrónica</li>
-                        <li><strong>- Luisa:</strong> Estudiante de Psicología</li>
-                        <li><strong>- Sofia:</strong> Estudiante de Derecho</li>
+                        <li><strong>- Carol:</strong> Estudiante de Auxiliar contable</li>
+                        <li><strong>- Andrés:</strong> Estudiante de Mercadeo</li>
+                        <li><strong>- Alejandro B:</strong> Futuro Ingeniero en Mecatrónica</li>
+                        <li><strong>- Alejandro G:</strong> Ingeniería en sistemas</li>
+                        <li><strong>- Mateo:</strong> Estudiante de Psicología</li>
                         <li><strong>- Sebastian:</strong> Futuro Ingeniero en Informática</li>
                     </ul>
-                    <br />
                     <br />
                     Independientemente de la carrera que elijas, en nuestro grupo, encontrarás apoyo, orientación y una comunidad que comparte tus valores y tu fe. No importa dónde te encuentres en tu viaje educativo, ¡eres bienvenido a unirte y crecer con nosotros!
                 </p>

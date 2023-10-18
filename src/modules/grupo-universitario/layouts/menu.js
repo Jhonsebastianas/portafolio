@@ -29,7 +29,9 @@ const Menu = (props) => {
                     </Link>
                 </li>
                 <li>
-                    <a href="#contacto">Contacto</a>
+                    <Link href={"/grupo-universitario-san-juan-pablo-ii/contacto"}>
+                        <a className={`${isActive("contacto")}`}>Contacto</a>
+                    </Link>
                 </li>
                 <i className="uil uil-times icon-menu-times x2" onClick={() => menuToggle()}></i>
             </ul>
