@@ -82,7 +82,7 @@ function MyApp({ Component, pageProps }) {
       <meta property="og:description" content="Únete a nuestro grupo universitario de la parroquia y descubre cómo la educación y la fe pueden trabajar juntas para fortalecer tu camino. Aquí, encontrarás apoyo espiritual, amistad y un propósito que trasciende lo académico." />
       <meta property="og:image" content="https://www.jhonsebastianas.com/images/grupo-universitario/portfolio_presentation.png" />
       <meta property="og:url" content="https://www.jhonsebastianas.com/grupo-universitario" />
-      <meta name="twitter:card" content="summary_large_image"></meta>
+      <meta name="twitter:card" content="summary_large_image"></meta> 
       {/* Non-Essential, But Recommended */}
       <meta property="og:site_name" content="Grupo universitario San Juan Pablo II."></meta>
       <meta name="twitter:image:alt" content="Preview website image"></meta>
