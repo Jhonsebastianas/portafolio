@@ -20,18 +20,18 @@ export default function AcercaDe(props) {
                     <br />
                     <br />
                     <ul>
-                        <li><strong>- Natalia:</strong> Futura Ingeniera en Diseño industrial</li>
+                        <li><strong>- Natalia:</strong> Estudiante de Ingeniería en Diseño industrial</li>
                         <li><strong>- Miguel:</strong> Estudiante de Derecho</li>
-                        <li><strong>- Felix:</strong> Aspirante a Diseñador gráfico</li>
-                        <li><strong>- Omar:</strong> Aspirante a Ingeniero industrial</li>
-                        <li><strong>- Sara:</strong> Futura de Odontóloga</li>
-                        <li><strong>- Leonardo:</strong> Futuro Ingeniero en Mecatrónica</li>
+                        <li><strong>- Felix:</strong> Estudiante de Diseño gráfico</li>
+                        <li><strong>- Omar:</strong> Ingeniero industrial</li>
+                        <li><strong>- Sara:</strong> Estudiante de Odontóloga</li>
+                        <li><strong>- Leonardo:</strong> Estudiante de Ingeniería en Mecatrónica</li>
                         <li><strong>- Carol:</strong> Estudiante de Auxiliar contable</li>
                         <li><strong>- Andrés:</strong> Estudiante de Mercadeo</li>
-                        <li><strong>- Alejandro B:</strong> Futuro Ingeniero en Mecatrónica</li>
-                        <li><strong>- Alejandro G:</strong> Ingeniería en sistemas</li>
+                        <li><strong>- Alejandro B:</strong> Estudiante de Ingeniería en Mecatrónica</li>
+                        <li><strong>- Alejandro G:</strong> Estudiante de Ingeniería en Sistemas</li>
                         <li><strong>- Mateo:</strong> Estudiante de Psicología</li>
-                        <li><strong>- Sebastian:</strong> Futuro Ingeniero en Informática</li>
+                        <li><strong>- Sebastian:</strong> Estudiante de Ingeniería en Informática</li>
                     </ul>
                     <br />
                     Independientemente de la carrera que elijas, en nuestro grupo, encontrarás apoyo, orientación y una comunidad que comparte tus valores y tu fe. No importa dónde te encuentres en tu viaje educativo, ¡eres bienvenido a unirte y crecer con nosotros!

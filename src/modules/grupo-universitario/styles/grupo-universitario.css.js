@@ -430,10 +430,11 @@ export const MainCSS = styled.div`
         }
 
         .bulb {
-            max-width: 220px;
-            max-height: 700px;
+            max-width: 100%; /* Ajusta el ancho máximo al ancho de su contenedor */
+            max-height: 700px; /* Mantén la altura máxima en 700px o ajusta según tus necesidades */
+            height: auto; /* Permite que la altura se ajuste automáticamente según el ancho */
             position: relative;
-            right: 10%;
+            right: 0%;
             top: 50%;
             transform: translateY(-50%);
             animation: fadeIn 1s linear forwards;
@@ -441,4 +442,18 @@ export const MainCSS = styled.div`
             z-index: 100;
         }
     }
+
+    @media (min-width: 992px) and (max-width: 1490px) {
+        .bulb {
+          max-width: 500px;
+          max-height: 700px;
+          position: relative;
+          right: 0%;
+          top: 100%;
+          transform: translateY(-50%);
+          animation: fadeIn 1s linear forwards;
+          animation-delay: 6s;
+          z-index: 100;
+        }
+      }
 `
