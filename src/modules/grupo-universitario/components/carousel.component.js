@@ -1,26 +1,10 @@
 import React from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Gallery from 'react-image-gallery';
+import PropTypes from 'prop-types';
 
-export default function CarouselComponent(props) {
-  const images = [
-    {
-      original: "/images/grupo-universitario/actual.png",
-      description: "Celebramos la victoria de quien tanto nos ha amado y valorado nuestra juventud 🤍",
-    },
-    {
-      original: "/images/grupo-universitario/pascua.png",
-      description: "❤️‍🔥Así se vió nuestra pascua juvenil❤️‍🔥",
-    },
-    {
-      original: "/images/grupo-universitario/domingoRamos.png",
-      description: "🌿DOMINGO DE RAMOS🌿",
-    },
-    {
-      original: "/images/grupo-universitario/2019.png",
-      description: "Para quienes la pedían...Foto oficial 2019 📷",
-    },
-  ];
+const CarouselComponent = (props) => {
+  const { images } = props;
 
   return (
     <div className="bulb">
@@ -28,3 +12,9 @@ export default function CarouselComponent(props) {
     </div>
   );
 }
+
+CarouselComponent.propTypes = {
+  images: PropTypes.array,
+}
+
+export default CarouselComponent;

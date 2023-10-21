@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MainCSS = styled.div`
+    @import "~react-image-gallery/styles/css/image-gallery.css";
     @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&display=swap');
     .open
     {

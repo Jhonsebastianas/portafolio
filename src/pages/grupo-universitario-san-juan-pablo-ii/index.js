@@ -11,9 +11,9 @@ export default function GrupoUniversitarioPage(props) {
         <section>
             <Menu activeMenu={"inicio"} />
             <div className="bannerText">
-                <h2>Grupo universitario</h2>
+                <h2>San Juan Pablo II.</h2>
                 <br />
-                <h3>San Juan Pablo II.<br /> La universidad desde una perspectiva de fe</h3>
+                <h3>Grupo universitario. <br /> La vida académica desde una perspectiva de fe</h3>
                 <p>
                     Dios te ha llamado a ser luz en el mundo.
                     Únete a nuestro grupo universitario de la parroquia y descubre cómo la educación y la fe pueden trabajar juntas para fortalecer tu camino.
