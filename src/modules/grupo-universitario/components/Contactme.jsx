@@ -116,7 +116,7 @@ const Contacme = () => {
                         </div>
                     </div>
                 </div>
-                <form action="" className="contact__form grid">
+                {/* <form action="" className="contact__form grid">
                     <div className="contact__inputs grid">
                         <div className="contact__content">
                             <label htmlFor="names" className="contact__label">Nombres</label>
@@ -142,7 +142,7 @@ const Contacme = () => {
                             <i className="uil uil-message button__icon"></i>
                         </a>
                     </div>
-                </form>
+                </form> */}
             </StyledContactContainer>
         </StyledContainer>
     )
