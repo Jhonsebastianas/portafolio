@@ -1,5 +1,21 @@
+import CodeBlock from "@modules/blog/components/menu/code-block/code-block.component";
 import ArticleLayout from "@modules/blog/layouts/article-layout";
 import BlogLayout from "@modules/blog/layouts/blog.layout";
+
+const code = `"Filtrar por nombre y edad": {
+    "prefix": "filtroNombreEdad",
+    "description": "Se filtra una lista de personas por nombre y edad",
+    "body": [
+    "const nombreFiltrar = '$1'.toLowerCase();",
+    "const edadFiltrar = $2;",
+    "const nuevaLista = personas",
+    "  .filter(persona ={">"} persona.nombre.toLowerCase() == '$1'",
+    "          && persona.edad == $2);",
+    "",
+    "console.log(nuevaLista);",
+    ],
+}
+`;
 
 const ArticleSnippets = () => {
     return (
@@ -92,23 +108,8 @@ const ArticleSnippets = () => {
                         </p>
                     </div>
                     <p>El snippet nos quedaría algo así:</p>
-                    <div>
-                        <p>"""
-                            "Filtrar por nombre y edad": {"{"}
-                            "prefix": "filtroNombreEdad",
-                            "description": "Se filtra una lista de personas por nombre y edad",
-                            "body": [
-                            "const nombreFiltrar = '$1'.toLowerCase();",
-                            "const edadFiltrar = $2;",
-                            "const nuevaLista = personas",
-                            "  .filter(persona ={">"} persona.nombre.toLowerCase() == '$1'",
-                            "          && persona.edad == $2);",
-                            "",
-                            "console.log(nuevaLista);",
-                            ],
-                            {"}"}
-                            """
-                        </p>
+                    <div className="code__container">
+                        <CodeBlock code={code} language="jsx" fileName="javascript.json" />
                         <span>Código: snippet filtro nombre y edad</span>
                     </div>
                     <p>El código podría estar más optimizado pero en este caso, se utilizo de esta forma para que se vea como las variables por ejemplo, la $1, al escribirla una vez, se repite en el resto del código que es llamada.</p>

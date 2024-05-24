@@ -56,6 +56,16 @@ const StyleContainer = styled.section`
         border-left: .25rem solid var(--first-color);
         padding-left: .5rem;
     }
+
+    .code__container {
+        margin-bottom: 1rem;
+        display: grid;
+
+        span {
+            text-align: center;
+            font-size: var(--small-font-size);
+        }
+    }
 `
 
 const ArticleLayout = ({ children }) => {
