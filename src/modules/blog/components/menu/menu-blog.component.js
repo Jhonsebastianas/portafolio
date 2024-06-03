@@ -296,7 +296,7 @@ const Header = () => {
                         <li className="nav__item">
                             <Link href="/blog" className="nav__link active-link">
                             <a>
-                                <i className="uil uil-estate nav__icon"></i> Home
+                                <i className="uil uil-estate nav__icon"></i> Inicio
                             </a>
                             </Link>
                             

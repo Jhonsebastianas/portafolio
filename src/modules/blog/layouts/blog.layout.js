@@ -1,5 +1,5 @@
-import Footer from "@components/layouts/Footer";
 import Header from "../components/menu/menu-blog.component"
+import Footer from "./footer-layout";
 import SuscribeLayout from "./suscribe-layout";
 
 const BlogLayout = ({ children }) => {
@@ -7,7 +7,7 @@ const BlogLayout = ({ children }) => {
         <>
             <Header />
             {children}
-            {/* <Footer /> */}
+            <Footer />
         </>
     )
 }

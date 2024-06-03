@@ -4,8 +4,13 @@ import SuscribeLayout from "./suscribe-layout";
 const StyleContainer = styled.section`
 
     .portada {
-        h1 {
+        .portada__title {
             margin-bottom: 1.5rem;
+            
+            .portada__time {
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         img {

@@ -22,7 +22,13 @@ const ArticleSnippets = () => {
         <BlogLayout>
             <ArticleLayout>
                 <div className="portada">
-                    <h1>Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.</h1>
+                    <div className="portada__title">
+                        <h1>Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.</h1>
+                        <div className="portada__time">
+                            <span>4 min de lectura</span>
+                            <span>Julio de 2024</span>
+                        </div>
+                    </div>
                     <img src="/images/articles/snippets/snippets_0_portada.webp" alt="portada snippets" />
                 </div>
                 <div className="content__info">
