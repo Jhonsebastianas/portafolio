@@ -50,6 +50,10 @@ const Container = styled.section`
                 // margin: .75rem 1rem .25rem;
             }
         }
+
+        @media screen and (max-width: 700px) {
+            flex-direction: column;
+        }
     }
 
     .contact__content {
