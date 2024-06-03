@@ -31,12 +31,10 @@ const Container = styled.section`
     .content__textos {
         text-align: center;
         margin-bottom: 1rem;
-        margin-left: 1rem;
-        margin-right: 1rem;
     }
 
     .content__form {
-        margin: 1rem;
+        margin-top: 1rem;
         display: flex;
         justify-content: center;
 

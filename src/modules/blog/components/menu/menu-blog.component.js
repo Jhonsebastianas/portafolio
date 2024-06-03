@@ -293,9 +293,11 @@ const Header = () => {
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <a href="#services" className="nav__link">
-                                <i className="uil uil-briefcase-alt nav__icon"></i> Cursos
-                            </a>
+                            <Link href="/blog/coming-soon">
+                                <a className='nav__link'>
+                                    <i className="uil uil-user nav__icon"></i> Cursos
+                                </a>
+                            </Link>
                         </li>
                         <li className="nav__item">
                             <a href='/' className='nav__link'>
@@ -303,9 +305,11 @@ const Header = () => {
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#contact" className="nav__link">
-                                <i className="uil uil-message nav__icon"></i> Contactme
-                            </a>
+                            <Link href="/blog/contactme">
+                                <a className='nav__link'>
+                                    <i className="uil uil-message nav__icon"></i> Contactme
+                                </a>
+                            </Link>
                         </li>
                     </ul>
                     <i className="uil uil-times nav__close" id="nav-close"></i>

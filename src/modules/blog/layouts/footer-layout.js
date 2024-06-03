@@ -1,3 +1,4 @@
+import Link from "next/link"
 import styled from "styled-components"
 
 const StyledFooter = styled.footer`
@@ -69,13 +70,21 @@ const Footer = () => {
 
                     <ul className="footer__links">
                         <li>
-                            <a href="#services" className="footer__link">Artículos</a>
+                            <Link href="/blog">
+                                <a className='footer__link'>
+                                    Artículos
+                                </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#portfolio" className="footer__link">Cursos</a>
                         </li>
                         <li>
-                            <a href="#contact" className="footer__link">Contactarme</a>
+                            <Link href="/blog/contactme">
+                                <a className='footer__link'>
+                                    Contactarme
+                                </a>
+                            </Link>
                         </li>
                     </ul>
 
