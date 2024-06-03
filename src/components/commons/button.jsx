@@ -24,7 +24,7 @@ const StyleButton = StyledComponents.a`
 const Button = (props) => {
     const { children, ...otherProps } = props
     return (
-        <StyleButton {...otherProps} className="button--flex">
+        <StyleButton {...otherProps} className={props.className + " button--flex"}>
             {children}
         </StyleButton>
     )

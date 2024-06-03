@@ -1,4 +1,3 @@
-import Button from "@components/commons/button"
 import BlogLayout from "@modules/blog/layouts/blog.layout"
 import styled from "styled-components"
 import moment from 'moment/moment';
@@ -134,13 +133,13 @@ const About = () => {
                     <h1>Sebastian Agudelo</h1>
 
                     <p className="about__description">
-                        Backend and frontend software developer, with development knowledge in IoT, producing quality work.
+                        Desarrollador de software backend y frontend, con conocimientos de desarrollo en IoT, produciendo trabajos de calidad.
                         <br></br>
                         <br></br>
-                        "There is no more intense emotion for an inventor than to see one of his creations work..." - Nikola Tesla
+                        «No hay emoción más intensa para un inventor que ver funcionar una de sus creaciones...». - Nikola Tesla
                         <br></br>
                         <br></br>
-                        Being able to impact people's lives in a positive way with technology is one of the things that I enjoy the most about my work, and the ones that excite me the most.
+                        Poder influir positivamente en la vida de las personas gracias a la tecnología es una de las cosas que más me gustan de mi trabajo y que más me entusiasman.
                     </p>
 
 

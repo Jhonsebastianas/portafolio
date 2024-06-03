@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SuscribeLayout from "./suscribe-layout";
 
 const StyleContainer = styled.section`
 
@@ -75,6 +76,7 @@ const ArticleLayout = ({ children }) => {
             <br />
             <br />
             <hr />
+            <SuscribeLayout />
         </div>
     </StyleContainer>)
 }
