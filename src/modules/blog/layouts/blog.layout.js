@@ -1,12 +1,18 @@
+import styled from "styled-components";
 import Header from "../components/menu/menu-blog.component"
 import Footer from "./footer-layout";
-import SuscribeLayout from "./suscribe-layout";
+
+const MainContainer = styled.main`
+    min-height: 65vh;
+`;
 
 const BlogLayout = ({ children }) => {
     return (
         <>
             <Header />
-            {children}
+            <MainContainer>
+                {children}
+            </MainContainer>
             <Footer />
         </>
     )

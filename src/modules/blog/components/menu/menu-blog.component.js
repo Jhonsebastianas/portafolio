@@ -172,27 +172,6 @@ const StyledNavMenu = StyledComponents.div`
     }
 `
 
-/** SCROLL SECTIONS ACTIVE LINK */
-const scrollSections = () => {
-    const sections = document.querySelectorAll('section[id]')
-
-    function scrollActive() {
-        const scrollY = window.pageYOffset
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight
-            const sectionTop = current.offsetTop - 50
-            const sectionId = current.getAttribute('id')
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
-            } else {
-                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
-            }
-        })
-    }
-
-    window.addEventListener('scroll', scrollActive)
-}
-
 /** Change background header */
 const scrollHeaderChange = () => {
     function scrollHeader() {
@@ -280,7 +259,6 @@ const Header = () => {
         if (mounted) {
             menuToggle()
             removeMobileMenu()
-            scrollSections()
             scrollHeaderChange()
             addNightTheme()
         }
@@ -294,25 +272,25 @@ const Header = () => {
                 <StyledNavMenu className="nav__menu" id="nav-menu">
                     <ul className="nav__list grid">
                         <li className="nav__item">
-                            <Link href="/blog" className="nav__link active-link">
-                            <a>
-                                <i className="uil uil-estate nav__icon"></i> Inicio
-                            </a>
+                            <Link href="/blog">
+                                <a className='nav__link'>
+                                    <i className="uil uil-estate nav__icon"></i> Inicio
+                                </a>
                             </Link>
-                            
                         </li>
                         <li className="nav__item">
-                            <Link href="/blog/about" className="nav__link">
-                            <a>
-                                <i className="uil uil-user nav__icon"></i> Acerca de
-                            </a>
+                            <Link href="/blog/about">
+                                <a className='nav__link'>
+                                    <i className="uil uil-user nav__icon"></i> Acerca de
+                                </a>
                             </Link>
-                            
                         </li>
                         <li className="nav__item">
-                            <a href="#skills" className="nav__link">
-                                <i className="uil uil-user nav__icon"></i> Artículos
-                            </a>
+                            <Link href="/blog">
+                                <a className='nav__link'>
+                                    <i className="uil uil-user nav__icon"></i> Artículos
+                                </a>
+                            </Link>
                         </li>
                         <li className="nav__item">
                             <a href="#services" className="nav__link">
@@ -320,8 +298,8 @@ const Header = () => {
                             </a>
                         </li>
                         <li className="nav__item">
-                            <a href="#portfolio" className="nav__link">
-                                <i className="uil uil-scenery nav__icon"></i> Portafolio
+                            <a href='/' className='nav__link'>
+                                <i className="uil uil-user nav__icon"></i> Portafolio
                             </a>
                         </li>
                         <li className="nav__item">
