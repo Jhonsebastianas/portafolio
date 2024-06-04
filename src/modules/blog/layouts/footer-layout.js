@@ -64,7 +64,7 @@ const Footer = () => {
             <div className="footer__bg">
                 <div className="footer__container container grid">
                     <div>
-                        <h1 className="footer__title">Sebastian Agudelo</h1>
+                        <h1 className="footer__title">Blog SA</h1>
                         <span className="footer__subtitle">Desarrollador de software senior</span>
                     </div>
 
@@ -77,7 +77,11 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <a href="#portfolio" className="footer__link">Cursos</a>
+                            <Link href="/blog/coming-soon">
+                                <a className='footer__link'>
+                                    Cursos
+                                </a>
+                            </Link>
                         </li>
                         <li>
                             <Link href="/blog/contactme">
