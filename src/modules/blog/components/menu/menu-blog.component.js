@@ -268,7 +268,11 @@ const Header = () => {
     return (
         <StyledHeader className="header" id="header">
             <StyledNav className="nav container">
-                <a href="#" className="nav__logo">Sebastian</a>
+                <Link href="/blog">
+                    <a className='nav__logo'>
+                        Blog SA
+                    </a>
+                </Link>
                 <StyledNavMenu className="nav__menu" id="nav-menu">
                     <ul className="nav__list grid">
                         <li className="nav__item">
