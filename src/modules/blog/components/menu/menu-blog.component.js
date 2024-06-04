@@ -290,7 +290,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li className="nav__item">
-                            <Link href="/blog">
+                            <Link href="/blog/articles">
                                 <a className='nav__link'>
                                     <i className="uil uil-user nav__icon"></i> Artículos
                                 </a>

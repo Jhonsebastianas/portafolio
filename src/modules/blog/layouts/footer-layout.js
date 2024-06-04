@@ -70,7 +70,7 @@ const Footer = () => {
 
                     <ul className="footer__links">
                         <li>
-                            <Link href="/blog">
+                            <Link href="/blog/articles">
                                 <a className='footer__link'>
                                     Artículos
                                 </a>
