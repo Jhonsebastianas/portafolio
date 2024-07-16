@@ -155,7 +155,7 @@ const About = () => {
                         </StyledSocialContainer>
                     </div>
                 </div>
-                <img src="../images/about.webp" alt="sebastian_img" className="about__img" />
+                <img src="../images/about_2.webp" alt="sebastian_img" className="about__img" />
             </StyledAboutContainer>
             <StylePost className="container">
                 <h2>Post populares</h2>
