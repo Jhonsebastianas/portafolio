@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { WorkCardStyle, WorkCategorieStyle, WorkContainer, WorkFiltersStyle, WorkItemStyle } from './projects-styles';
 import portfolioProjects from '@constants/portfolio';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 const mixitupFunction = () => {
@@ -56,8 +57,12 @@ export const Projects = () => {
                     const allCategories = categories.join(" ");
                     return (
                         <WorkCardStyle key={title + index} className={`work__card mix ${allCategories}`}>
-                            <img src={rutaImagen} alt='' className='work__img' />
-
+                            <LazyLoadImage
+                                className="work__img"
+                                effect="blur"
+                                alt={title}
+                                src={rutaImagen}
+                            />
                             <h3 className='work__title'>{title}</h3>
                             {categories.map((categorie, index) => {
                                 return (<WorkCategorieStyle key={categorie + index}>{categorie}</WorkCategorieStyle>);

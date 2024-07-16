@@ -12,6 +12,7 @@
     "next": "^12.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-lazy-load-image-component": "^1.6.2",
     "react-responsive-carousel": "^3.2.23",
     "scrollreveal": "^4.0.9",
     "semantic-ui-css": "^2.4.1",
