@@ -2,7 +2,6 @@ import React from 'react';
 import StyledComponents from 'styled-components';
 import Button from '@components/commons/button';
 import moment from 'moment/moment';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const StyledAboutContainer = StyledComponents.div`
     .about__img {
@@ -55,12 +54,7 @@ const About = () => {
             <h2 className="section__title">About Me</h2>
             <span className="section__subtitle">My introduction</span>
             <StyledAboutContainer className="about__container container grid">
-                <LazyLoadImage
-                    className="about__img"
-                    effect="blur"
-                    alt={"sebastian_img"}
-                    src={"images/about_2.webp"}
-                />
+                <img src="images/about_2.webp" alt="sebastian_img" className="about__img" />
                 <div className="about__data">
                     <p className="about__description">
                         "There is no more intense emotion for an inventor than to see one of his creations work..." - Nikola Tesla
