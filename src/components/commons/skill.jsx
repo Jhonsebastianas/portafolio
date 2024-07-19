@@ -118,20 +118,15 @@ const SkillContainer = (props) => {
 
                 <div className="skills__list grid">
                     {skills.map((skill, index) => {
-                        const { name, percentage } = skill
+                        const { name } = skill
                         return (
                             <div className="skills__data" key={index}>
                                 <div className="skills__titles">
                                     <h2 className="skills__name">{name}</h2>
-                                    <span className="skills__number">{percentage}</span>
                                 </div>
-                                <StyledSkillBar className="skills__bar" percentage={percentage} >
-                                    <span className="skills__percentage"></span>
-                                </StyledSkillBar>
                             </div>
                         )
                     })}
-
                 </div>
             </div>
         </StyledSkillContainer>

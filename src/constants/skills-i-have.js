@@ -4,6 +4,7 @@ const yearsWorkAsBackendDeveloper = moment().diff(new Date(2017, 7, 20), 'years'
 const yearsWorkAsFrontendDeveloper = moment().diff(new Date(2017, 12, 20), 'years');
 
 const yearsDevelopingSoftSkills = moment().diff(new Date(2015, 1, 1), 'years');
+const yearsDevelopingVideoDesignSkills = moment().diff(new Date(2022, 1, 1), 'years');
 
 
 const abilities = [
@@ -14,23 +15,24 @@ const abilities = [
         skills: [
             {
                 name: 'Java',
-                percentage: '80%',
+            },
+            {
+                name: 'Nest.js',
             },
             {
                 name: 'Node.js',
-                percentage: '70%',
             },
             {
                 name: 'Express.js',
-                percentage: '70%',
             },
             {
                 name: 'Oracle',
-                percentage: '50%',
             },
             {
                 name: 'Mongodb',
-                percentage: '60%',
+            },
+            {
+                name: 'RabbitMQ',
             },
         ],
     },
@@ -41,19 +43,18 @@ const abilities = [
         skills: [
             {
                 name: 'JavaScript',
-                percentage: '85%',
             },
             {
                 name: 'React.js',
-                percentage: '75%',
             },
             {
-                name: 'Angular.js',
-                percentage: '60%',
+                name: 'Angular',
             },
             {
                 name: 'CSS',
-                percentage: '50%',
+            },
+            {
+                name: 'Styled component',
             },
         ],
     },
@@ -64,15 +65,15 @@ const abilities = [
         skills: [
             {
                 name: 'Automation testing',
-                percentage: '80%',
             },
             {
                 name: 'Katalon Studio',
-                percentage: '70%'
+            },
+            {
+                name: 'Puppeteer',
             },
             {
                 name: 'Selenium',
-                percentage: '50%'
             },
         ]
     },
@@ -83,19 +84,15 @@ const abilities = [
         skills: [
             {
                 name: 'Python',
-                percentage: '60%',
             },
             {
                 name: 'Raspberry pi',
-                percentage: '50%',
             },
             {
                 name: 'C++',
-                percentage: '30%',
             },
             {
                 name: 'Arduino',
-                percentage: '30%',
             },
         ],
     },
@@ -106,19 +103,34 @@ const abilities = [
         skills: [
             {
                 name: 'Teamwork',
-                percentage: '90%'
             },
             {
                 name: 'Leadership',
-                percentage: '80%',
             },
             {
                 name: 'Teach',
-                percentage: '80%'
             },
             {
                 name: 'Conflict resolution',
-                percentage: '80%'
+            },
+            {
+                name: 'Assertive communication',
+            },
+        ],
+    },
+    {
+        title: 'Video and design',
+        subtitle: `More than ${yearsDevelopingVideoDesignSkills} years`,
+        icon: 'uil-th-slash',
+        skills: [
+            {
+                name: 'Canva',
+            },
+            {
+                name: 'Adobe Illustrator',
+            },
+            {
+                name: 'DaVinci Resolve',
             },
         ],
     },
