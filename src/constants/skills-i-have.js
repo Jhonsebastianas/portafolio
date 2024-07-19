@@ -118,21 +118,5 @@ const abilities = [
             },
         ],
     },
-    {
-        title: 'Video and design',
-        subtitle: `More than ${yearsDevelopingVideoDesignSkills} years`,
-        icon: 'uil-th-slash',
-        skills: [
-            {
-                name: 'Canva',
-            },
-            {
-                name: 'Adobe Illustrator',
-            },
-            {
-                name: 'DaVinci Resolve',
-            },
-        ],
-    },
 ]
 export default abilities
