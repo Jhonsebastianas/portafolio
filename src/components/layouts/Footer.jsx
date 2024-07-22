@@ -65,7 +65,7 @@ const Footer = () => {
                 <div className="footer__container container grid">
                     <div>
                         <h1 className="footer__title">Sebastian</h1>
-                        <span className="footer__subtitle">Analyst developer</span>
+                        <span className="footer__subtitle">Senior Analyst developer</span>
                     </div>
 
                     <ul className="footer__links">

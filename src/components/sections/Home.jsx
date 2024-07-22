@@ -72,7 +72,7 @@ const Home = () => {
                             <i className="uil uil-medium-m"></i>
                         </a>
 
-                        <a className="home__social-icon" href="https://github.com/segaretsu/"
+                        <a className="home__social-icon" href="https://github.com/jhonsebastianas/"
                             rel="noopener noreferrer" target="_blank" aria-label="Github jhonsabastianas">
                             <i className="uil uil-github-alt"></i>
                         </a>

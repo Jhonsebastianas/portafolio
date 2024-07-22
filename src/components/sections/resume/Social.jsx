@@ -34,7 +34,7 @@ const Social = () => {
                 <a className="social__link" href="https://jhonsebastianas.medium.com/" rel="noopener noreferrer" target="_blank">
                     <i className="uil uil-medium-m social__icon"></i> @jhonsebastianas
                 </a>
-                <a className="social__link" href="https://github.com/segaretsu" rel="noopener noreferrer" target="_blank">
+                <a className="social__link" href="https://github.com/jhonsebastianas" rel="noopener noreferrer" target="_blank">
                 <i className="uil uil-github-alt social__icon"></i> @segaretsu
                 </a>
             </StyledSocialContainer>

@@ -149,7 +149,7 @@ const About = () => {
                             <StyledSocialIcon className="social__link" href="https://www.linkedin.com/in/jhonsabastianas/" rel="noopener noreferrer" target="_blank">
                                 <i className="uil uil-linkedin-alt social__icon"></i>
                             </StyledSocialIcon>
-                            <StyledSocialIcon className="social__link" href="https://github.com/segaretsu" rel="noopener noreferrer" target="_blank">
+                            <StyledSocialIcon className="social__link" href="https://github.com/jhonsebastianas" rel="noopener noreferrer" target="_blank">
                                 <i className="uil uil-github-alt social__icon"></i>
                             </StyledSocialIcon>
                         </StyledSocialContainer>
