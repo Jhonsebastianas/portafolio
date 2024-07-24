@@ -201,9 +201,9 @@ export default function HomeTest() {
                   <CardText>
                     Los snippets son códigos o textos que guardamos y queremos reutilizar de forma ágil en ...
                   </CardText>
-                  <CardLink href="#">
+                  <CardLink href="https://www.jhonsebastianas.com/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode">
                     <a>
-                        Read More
+                        Leer más
                         <ArrowRightIcon className="h-4 w-4" />
                     </a>
                   </CardLink>

@@ -2,6 +2,7 @@ import BlogLayout from "@modules/blog/layouts/blog.layout"
 import styled from "styled-components"
 import moment from 'moment/moment';
 import Link from "next/link";
+import { SOCIAL_MEDIA } from "src/util/constants";
 
 const StyledSocialContainer = styled.div`
     grid-template-columns: max-content;
@@ -146,11 +147,14 @@ const About = () => {
 
                     <div className="about__buttons">
                         <StyledSocialContainer>
-                            <StyledSocialIcon className="social__link" href="https://www.linkedin.com/in/jhonsabastianas/" rel="noopener noreferrer" target="_blank">
-                                <i className="uil uil-linkedin-alt social__icon"></i>
+                            <StyledSocialIcon className="social__link" href={SOCIAL_MEDIA.LINKEDIN.URL} rel="noopener noreferrer" target="_blank">
+                                <i className={`${SOCIAL_MEDIA.LINKEDIN.ICON} social__icon`}></i>
                             </StyledSocialIcon>
-                            <StyledSocialIcon className="social__link" href="https://github.com/jhonsebastianas" rel="noopener noreferrer" target="_blank">
-                                <i className="uil uil-github-alt social__icon"></i>
+                            <StyledSocialIcon className="social__link" href={SOCIAL_MEDIA.GITHUB.URL} rel="noopener noreferrer" target="_blank">
+                                <i className={`${SOCIAL_MEDIA.GITHUB.ICON} social__icon`}></i>
+                            </StyledSocialIcon>
+                            <StyledSocialIcon className="social__link" href={SOCIAL_MEDIA.YOUTUBE.URL} rel="noopener noreferrer" target="_blank">
+                                <i className={`${SOCIAL_MEDIA.YOUTUBE.ICON} social__icon`}></i>
                             </StyledSocialIcon>
                         </StyledSocialContainer>
                     </div>

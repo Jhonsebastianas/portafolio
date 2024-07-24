@@ -43,7 +43,7 @@ const portfolioProjects = [
         description: `
             Tagmascota is a project that will provide a reporting point for lost and found pets.
         `,
-        url: 'https://medium.com/@jhonsebastianas/snippets-en-javascript-optimiza-tus-tareas-repetitivas-en-vscode-bb25738dd965',
+        url: 'https://www.jhonsebastianas.com/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode',
     },
     {
         title: 'Un vistazo al futuro: el internet de las cosas (IOT) en el 2021 para “consumidores inteligentes”',

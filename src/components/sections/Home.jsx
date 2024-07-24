@@ -2,6 +2,7 @@ import React from 'react'
 import StyledComponents from 'styled-components'
 import ScrollButton from '@components/commons/button-scroll'
 import Button from '@components/commons/button'
+import { SOCIAL_MEDIA } from 'src/util/constants'
 
 const StyledHomeContainer = StyledComponents.div`
     gap: 1rem;
@@ -62,19 +63,19 @@ const Home = () => {
             <StyledHomeContainer className="home__container container grid">
                 <div className="home__content grid">
                     <div className="home__social">
-                        <a className="home__social-icon" href="https://www.linkedin.com/in/jhonsabastianas/"
+                        <a className="home__social-icon" href={SOCIAL_MEDIA.LINKEDIN.URL}
                             rel="noopener noreferrer" target="_blank" aria-label="Linkedin jhonsabastianas">
-                            <i className="uil uil-linkedin-alt"></i>
+                            <i className={`${SOCIAL_MEDIA.LINKEDIN.ICON}`}></i>
                         </a>
 
-                        <a className="home__social-icon" href="https://jhonsebastianas.medium.com/"
+                        <a className="home__social-icon" href={SOCIAL_MEDIA.YOUTUBE.URL}
                             rel="noopener noreferrer" target="_blank" aria-label="Medium jhonsabastianas">
-                            <i className="uil uil-medium-m"></i>
+                            <i className={`${SOCIAL_MEDIA.YOUTUBE.ICON}`}></i>
                         </a>
 
-                        <a className="home__social-icon" href="https://github.com/jhonsebastianas/"
+                        <a className="home__social-icon" href={SOCIAL_MEDIA.GITHUB.URL}
                             rel="noopener noreferrer" target="_blank" aria-label="Github jhonsabastianas">
-                            <i className="uil uil-github-alt"></i>
+                            <i className={`${SOCIAL_MEDIA.GITHUB.ICON}`}></i>
                         </a>
                     </div>
 
