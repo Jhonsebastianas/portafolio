@@ -33,6 +33,10 @@ const Container = styled.section`
     .color__primary {
         color: var(--first-color);
     }
+
+    span.color__red {
+        color: red;
+    }
 }
 
 .content__container {
@@ -81,6 +85,12 @@ const SuscribeLayout = ({ campaign }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setMessage('Ingrese una dirección de correo valida');
+            return;
+        }
 
         const res = await fetch('/api/register', {
             method: 'POST',
@@ -137,6 +147,7 @@ const SuscribeLayout = ({ campaign }) => {
                                 </Button>
                             </div>
                         </form>
+                        {message && <div className="email__send"><span className="color__red">{message}</span></div>}
                     </div>
                     ||
                     <div className="email__send">
