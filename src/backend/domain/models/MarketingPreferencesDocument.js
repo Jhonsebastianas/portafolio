@@ -24,6 +24,6 @@ const MarketingPreferencesSchema = new mongoose.Schema({
         type: [String], // Array de campañas a las que el usuario está suscrito
         required: true,
     },
-});
+}, { timestamps: true });
 
 export default mongoose.models.MarketingPreferences || mongoose.model('MarketingPreferences', MarketingPreferencesSchema);

@@ -14,6 +14,6 @@ const CampaignSchema = new mongoose.Schema({
   endDate: {
     type: Date,
   },
-});
+}, { timestamps: true });
 
 export default mongoose.models.Campaign || mongoose.model('Campaign', CampaignSchema);
