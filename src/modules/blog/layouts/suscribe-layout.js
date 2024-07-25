@@ -91,6 +91,7 @@ const SuscribeLayout = ({ campaign }) => {
             setMessage('Ingrese una dirección de correo valida');
             return;
         }
+        setMessage("");
 
         const res = await fetch('/api/register', {
             method: 'POST',
