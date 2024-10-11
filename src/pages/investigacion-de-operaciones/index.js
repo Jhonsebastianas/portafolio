@@ -101,12 +101,12 @@ export default function Home() {
                         <StyledInput onChange={handleChange} id="demandaAnual" name="demandaAnual" type="number" value={cantidadEconomicaPedido.demandaAnual} />
                     </div>
                     <div>
-                        <StyledLabel>Costo de ordenar (Co): </StyledLabel>
+                        <StyledLabel>Costo de ordenar (C2 / Co): </StyledLabel>
                         <StyledInput onChange={handleChange} id="costoOrdenar" name="costoOrdenar" type="number" value={cantidadEconomicaPedido.costoOrdenar} />
                     </div>
                     <div>
                         <StyledLabel>Tasa sobre el costo de retención
-                        anual del inventario % (Ch):  </StyledLabel>
+                        anual del inventario % (C3 / Ch):  </StyledLabel>
                         <StyledInput onChange={handleChange} id="tasaCostoRetencionAnualInventario" name="tasaCostoRetencionAnualInventario" type="number" value={cantidadEconomicaPedido.tasaCostoRetencionAnualInventario} />
                     </div>
                     <div>
