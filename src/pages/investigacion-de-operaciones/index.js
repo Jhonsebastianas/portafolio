@@ -19,6 +19,7 @@ class InventarioCompraOptimo {
     costeRetencionAnualInventario = 0;
     costeAnualOrdenar = 0;
     costeAnualTotal = 0;
+    costoTotalAnualInventario = 0;
     nivelInventarioMaximo = 0;
     nivelInventarioPromedio = 0;
     puntoReorden = 0;
@@ -28,6 +29,11 @@ class InventarioCompraOptimo {
     // Nuevos para el modelo con déficit
     nivelDeficit = 0;
     costeFaltanteAnual = 0;
+
+    // Punto de reorden
+    porTiempo = 0;
+    porInventarioConsumido = 0;
+    porInventarioPorConsumir = 0;
 }
 
 // Styled components
@@ -149,6 +155,14 @@ export default function Home() {
         calculos.numeroPedidosAno = D / calculos.cantidadEconomicaPedido;
         calculos.tiempoCiclo = cantidadEconomicaPedido.diasHabilAno / calculos.numeroPedidosAno;
 
+        const C = (C1 * D) + calculos.costeAnualTotal;
+        calculos.costoTotalAnualInventario = C;
+
+        // Tiempos de reorden.
+        calculos.porTiempo = (calculos.tiempoCiclo - cantidadEconomicaPedido.tiempoEspera);
+        calculos.porInventarioConsumido = (Q / calculos.tiempoCiclo) * calculos.porTiempo;
+        calculos.porInventarioPorConsumir = Q - calculos.porInventarioConsumido;
+
         for (const [key, value] of Object.entries(calculos)) {
             calculos[key] = value.toFixed(FIXED);
         }
@@ -183,6 +197,15 @@ export default function Home() {
         calculos.puntoReorden = (D / diasHabilAno) * cantidadEconomicaPedido.tiempoEspera;
         calculos.numeroPedidosAno = D / Q;
         calculos.tiempoCiclo = diasHabilAno / calculos.numeroPedidosAno;
+
+        const C = (C1 * D) + calculos.costeAnualTotal;
+        calculos.costoTotalAnualInventario = C;
+
+        // Tiempos de reorden.
+        calculos.porTiempo = (calculos.tiempoCiclo - cantidadEconomicaPedido.tiempoEspera);
+        calculos.porInventarioConsumido = (Q / calculos.tiempoCiclo) * calculos.porTiempo;
+        calculos.porInventarioPorConsumir = Q - calculos.porInventarioConsumido;
+
     
         for (const [key, value] of Object.entries(calculos)) {
             calculos[key] = value.toFixed(FIXED);
@@ -226,6 +249,14 @@ export default function Home() {
         // Cálculo del costo anual de déficit
         calculos.nivelDeficit = S;
         calculos.costeFaltanteAnual = (D / Q) * p * S;
+
+        const C = (C1 * D) + calculos.costeAnualTotal;
+        calculos.costoTotalAnualInventario = C;
+
+        // Tiempos de reorden.
+        calculos.porTiempo = (calculos.tiempoCiclo - cantidadEconomicaPedido.tiempoEspera);
+        calculos.porInventarioConsumido = (Q / calculos.tiempoCiclo) * calculos.porTiempo;
+        calculos.porInventarioPorConsumir = Q - calculos.porInventarioConsumido;
     
         // Redondear los resultados a 3 decimales
         for (const [key, value] of Object.entries(calculos)) {
@@ -311,15 +342,17 @@ export default function Home() {
                 {isCalculated && 
                 <ResultsSection>
                     <h2>Política de Inventario Óptimo</h2>
-                    <ResultItem><strong>Cantidad económica del pedido:</strong> {inventarioCompraOptimo.cantidadEconomicaPedido}</ResultItem>
+                    <ResultItem><strong>Q <span>(Cantidad económica del pedido)</span>:</strong> {inventarioCompraOptimo.cantidadEconomicaPedido} (unidades / año)</ResultItem>
+                    <ResultItem><strong>C <span>(Costo almacenamiento)</span>:</strong> {inventarioCompraOptimo.costoTotalAnualInventario} (/ año)</ResultItem>
+                    <ResultItem><strong>N <span>(Número de pedidos por año)</span>:</strong> {inventarioCompraOptimo.numeroPedidosAno} (pedidos / año)</ResultItem>
+                    <ResultItem><strong>t <span>(Tiempo de ciclo (días))</span>:</strong> {inventarioCompraOptimo.tiempoCiclo} (días / pedido)</ResultItem>
+                    <ResultItem><strong>C' <span>(Costo anual total)</span>:</strong> $ {inventarioCompraOptimo.costeAnualTotal} (/ pedidos)</ResultItem>
                     <ResultItem><strong>Costo de retención anual del inventario:</strong> $ {inventarioCompraOptimo.costeRetencionAnualInventario}</ResultItem>
                     <ResultItem><strong>Costo anual de ordenar:</strong> $ {inventarioCompraOptimo.costeAnualOrdenar}</ResultItem>
-                    <ResultItem><strong>Costo anual total:</strong> $ {inventarioCompraOptimo.costeAnualTotal}</ResultItem>
                     <ResultItem><strong>Nivel de inventario máximo:</strong> {inventarioCompraOptimo.nivelInventarioMaximo}</ResultItem>
                     <ResultItem><strong>Nivel de inventario promedio:</strong> {inventarioCompraOptimo.nivelInventarioPromedio}</ResultItem>
                     <ResultItem><strong>Punto de reorden:</strong> {inventarioCompraOptimo.puntoReorden}</ResultItem>
-                    <ResultItem><strong>Número de pedidos por año:</strong> {inventarioCompraOptimo.numeroPedidosAno}</ResultItem>
-                    <ResultItem><strong>Tiempo de ciclo (días):</strong> {inventarioCompraOptimo.tiempoCiclo}</ResultItem>
+                    
                     {/* Información adicional para el modelo de producción sin déficit */}
                     {modeloSeleccionado === "produccionSinDeficit" && (
                         <>
@@ -333,6 +366,11 @@ export default function Home() {
                             <ResultItem><strong>Costo anual de déficit:</strong> $ {inventarioCompraOptimo.costeFaltanteAnual}</ResultItem>
                         </>
                     )}
+                    <br></br>
+                    <h2>Pr = Punto de reorden</h2>
+                    <ResultItem><strong>Por tiempo:</strong> $ {inventarioCompraOptimo.porTiempo}</ResultItem>
+                    <ResultItem><strong>Por inventario consumido:</strong> {inventarioCompraOptimo.porInventarioConsumido}</ResultItem>
+                    <ResultItem><strong>Por inventario por consumir:</strong> {inventarioCompraOptimo.porInventarioPorConsumir}</ResultItem>
                 </ResultsSection>
                 || ''}
             </div>
