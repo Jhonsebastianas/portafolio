@@ -368,9 +368,9 @@ export default function Home() {
                     )}
                     <br></br>
                     <h2>Pr = Punto de reorden</h2>
-                    <ResultItem><strong>Por tiempo:</strong> $ {inventarioCompraOptimo.porTiempo}</ResultItem>
-                    <ResultItem><strong>Por inventario consumido:</strong> {inventarioCompraOptimo.porInventarioConsumido}</ResultItem>
-                    <ResultItem><strong>Por inventario por consumir:</strong> {inventarioCompraOptimo.porInventarioPorConsumir}</ResultItem>
+                    <ResultItem><strong>Por tiempo:</strong> {inventarioCompraOptimo.porTiempo} (días)</ResultItem>
+                    <ResultItem><strong>Por inventario consumido:</strong> {inventarioCompraOptimo.porInventarioConsumido} (unidades)</ResultItem>
+                    <ResultItem><strong>Por inventario por consumir:</strong> {inventarioCompraOptimo.porInventarioPorConsumir} (unidades)</ResultItem>
                 </ResultsSection>
                 || ''}
             </div>
