@@ -1,16 +1,16 @@
 import Button from "@components/commons/button";
-import Layout from "@components/layouts/Layout";
+import Layout from "@modules/investigacion-operaciones/layouts/layout";
 import { useState } from "react";
 import styled from "styled-components";
 
 class CantidadEconomicaPedido {
-    demandaAnual = 104000;
-    costoOrdenar = 32;
-    tasaCostoRetencionAnualInventario = 25; // porcentaje
-    costoUnitario = 8;
-    diasHabilAno = 250;
-    tiempoEspera = 2;
-    tasaProduccionDiaria = 0; // nuevo campo para el modelo de producción
+    demandaAnual = 36000;
+    costoOrdenar = 1000;
+    tasaCostoRetencionAnualInventario = 90; // porcentaje
+    costoUnitario = 4;
+    diasHabilAno = 360;
+    tiempoEspera = 10;
+    tasaProduccionAnual = 72000; // nuevo campo para el modelo de producción
     costoFaltante = 0; // nuevo campo para el modelo con déficit
 }
 
@@ -177,7 +177,7 @@ export default function Home() {
         const Co = cantidadEconomicaPedido.costoOrdenar;
         const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario / 100;
         const C1 = cantidadEconomicaPedido.costoUnitario;
-        const P = cantidadEconomicaPedido.tasaProduccionDiaria; // tasa de producción diaria
+        const P = cantidadEconomicaPedido.tasaProduccionAnual / cantidadEconomicaPedido.diasHabilAno; // tasa de producción diaria
         const diasHabilAno = cantidadEconomicaPedido.diasHabilAno;
     
         if (P <= 0 || P <= (D / diasHabilAno)) {
@@ -317,8 +317,8 @@ export default function Home() {
                     </FormGroup>
                     {modeloSeleccionado === "produccionSinDeficit" && (
                         <FormGroup>
-                            <StyledLabel>Tasa de producción diaria (P / R): </StyledLabel>
-                            <StyledInput onChange={handleChange} id="tasaProduccionDiaria" name="tasaProduccionDiaria" type="number" value={cantidadEconomicaPedido.tasaProduccionDiaria} />
+                            <StyledLabel>Tasa de producción anual (P / R): </StyledLabel>
+                            <StyledInput onChange={handleChange} id="tasaProduccionAnual" name="tasaProduccionAnual" type="number" value={cantidadEconomicaPedido.tasaProduccionAnual} />
                         </FormGroup>
                     )}
 
