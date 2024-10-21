@@ -236,7 +236,8 @@ export default function Home() {
         //const Q = Math.sqrt((2 * D * C2) / (h * (1 + (h / p))));
         
         // Cálculo del déficit permitido (S)
-        const S = (Q * h) / (h + p);
+        const S = Math.sqrt((2 * C2 * D) / C4) * Math.sqrt((C3) / (C3 + C4));
+        
     
         console.log({ D, C2, C3, C1, Q, S });
     
