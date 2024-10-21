@@ -218,27 +218,32 @@ export default function Home() {
         e.preventDefault();
         const calculos = new InventarioCompraOptimo();
         const D = cantidadEconomicaPedido.demandaAnual;
-        const Co = cantidadEconomicaPedido.costoOrdenar;
-        const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario;
-        const ChPorcentual = Ch / 100;
         const C1 = cantidadEconomicaPedido.costoUnitario;
+        const C2 = cantidadEconomicaPedido.costoOrdenar;
+        const I = (cantidadEconomicaPedido.tasaCostoRetencionAnualInventario / 100);
+        const C3 = I * C1;
+        console.log({C3, I, C1})
+        const C4 = cantidadEconomicaPedido.costoFaltante;
+        const L = cantidadEconomicaPedido.tiempoEspera;
+        
         
         // Costo del déficit (falta)
-        const p = cantidadEconomicaPedido.costoDeficit || 10; // Ejemplo de costo por unidad en déficit
-        const h = ChPorcentual * C1; // Costo de mantener inventario
+        const p = C4 || 10; // Ejemplo de costo por unidad en déficit
+        const h = C3; // Costo de mantener inventario
         
         // Cálculo de la cantidad económica del pedido (Q)
-        const Q = Math.sqrt((2 * D * Co) / (h * (1 + (h / p))));
+        const Q = Math.sqrt((2*C2*D) / C3) * Math.sqrt((C3 + C4) / C4);
+        //const Q = Math.sqrt((2 * D * C2) / (h * (1 + (h / p))));
         
         // Cálculo del déficit permitido (S)
         const S = (Q * h) / (h + p);
     
-        console.log({ D, Co, Ch, C1, Q, S });
+        console.log({ D, C2, C3, C1, Q, S });
     
         // Cálculos comunes del modelo básico de inventario
         calculos.cantidadEconomicaPedido = Q;
         calculos.costeRetencionAnualInventario = (1 / 2) * (Q - S) * h;
-        calculos.costeAnualOrdenar = (D / Q) * Co;
+        calculos.costeAnualOrdenar = (D / Q) * C2;
         calculos.costeAnualTotal = calculos.costeRetencionAnualInventario + calculos.costeAnualOrdenar;
         calculos.nivelInventarioMaximo = Q - S;
         calculos.nivelInventarioPromedio = (Q - S) / 2;
