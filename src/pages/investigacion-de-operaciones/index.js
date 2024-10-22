@@ -133,6 +133,14 @@ export default function Home() {
         setModeloSeleccionado(e.target.value);
     };
 
+    // Método para redondear a 3 decimales y agregar separadores de miles
+    const formatearNumero = (numero, decimales = 3) => {
+        return Number(numero.toFixed(decimales)).toLocaleString('en-US', {
+            minimumFractionDigits: decimales,
+            maximumFractionDigits: decimales
+        });
+    };
+
     const calcularInventarioCompraOptimo = (e) => {
         e.preventDefault();
         const calculos = new InventarioCompraOptimo();
@@ -164,7 +172,7 @@ export default function Home() {
         calculos.porInventarioPorConsumir = Q - calculos.porInventarioConsumido;
 
         for (const [key, value] of Object.entries(calculos)) {
-            calculos[key] = value.toFixed(FIXED);
+            calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
         }
         setInventarioCompraOptimo({ ...calculos });
         setIsCalculated(true);
@@ -225,7 +233,7 @@ export default function Home() {
     
         // Redondear los resultados a 3 decimales
         for (const [key, value] of Object.entries(calculos)) {
-            calculos[key] = value.toFixed(3);
+            calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
         }
     
         setInventarioCompraOptimo({ ...calculos });
@@ -280,7 +288,7 @@ export default function Home() {
     
         // Redondear los resultados a 3 decimales
         for (const [key, value] of Object.entries(calculos)) {
-            calculos[key] = value.toFixed(FIXED);
+            calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
         }
     
         setInventarioCompraOptimo({ ...calculos });
