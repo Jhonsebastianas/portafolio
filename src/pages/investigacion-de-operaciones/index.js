@@ -205,6 +205,11 @@ export default function Home() {
         calculos.nivelInventarioPromedio = calculos.nivelInventarioMaximo / 2;
         calculos.puntoReorden = (D / diasHabilAno) * cantidadEconomicaPedido.tiempoEspera;
         calculos.numeroPedidosAno = D / Q;
+
+        const t1 = Q / R;
+        const t2 = (calculos.nivelInventarioMaximo) / D;
+        const t = t1 + t2;
+
         calculos.tiempoCiclo = diasHabilAno / calculos.numeroPedidosAno;
     
         // Cálculo del costo total anual (C)
@@ -235,16 +240,12 @@ export default function Home() {
         const C2 = cantidadEconomicaPedido.costoOrdenar;
         const I = (cantidadEconomicaPedido.tasaCostoRetencionAnualInventario / 100);
         const C3 = I * C1;
+        // Costo del déficit (falta)
         const C4 = cantidadEconomicaPedido.costoFaltante;
         const L = cantidadEconomicaPedido.tiempoEspera;
         
-        
-        // Costo del déficit (falta)
-        const p = C4 || 10; // Ejemplo de costo por unidad en déficit
-        const h = C3; // Costo de mantener inventario
-        
         // Cálculo de la cantidad económica del pedido (Q)
-        const Q = Math.sqrt((2*C2*D) / C3) * Math.sqrt((C3 + C4) / C4);
+        const Q = Math.sqrt((2 * C2 * D) / C3) * Math.sqrt((C3 + C4) / C4);
         //const Q = Math.sqrt((2 * D * C2) / (h * (1 + (h / p))));
         
         // Cálculo del déficit permitido (S)
@@ -255,7 +256,7 @@ export default function Home() {
     
         // Cálculos comunes del modelo básico de inventario
         calculos.cantidadEconomicaPedido = Q;
-        calculos.costeRetencionAnualInventario = (1 / 2) * (Q - S) * h;
+        calculos.costeRetencionAnualInventario = (1 / 2) * (Q - S) * C3;
         calculos.costeAnualOrdenar = (D / Q) * C2;
         calculos.costeAnualTotalPorPeriodo = calculos.costeRetencionAnualInventario + calculos.costeAnualOrdenar;
         
@@ -267,7 +268,7 @@ export default function Home() {
     
         // Cálculo del costo anual de déficit
         calculos.nivelDeficit = S;
-        calculos.costeFaltanteAnual = (D / Q) * p * S;
+        calculos.costeFaltanteAnual = (D / Q) * C4 * S;
 
         const C = (C1 * D) + calculos.costeAnualTotalPorPeriodo;
         calculos.costoTotalAnualInventario = C;
