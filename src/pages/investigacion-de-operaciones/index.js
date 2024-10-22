@@ -141,6 +141,10 @@ export default function Home() {
         });
     };
 
+    const redondearGlobal = (numero, decimales = 3) => {
+        return Number(numero.toFixed(decimales));
+    };
+
     const calcularInventarioCompraOptimo = (e) => {
         e.preventDefault();
         const calculos = new InventarioCompraOptimo();
@@ -287,9 +291,9 @@ export default function Home() {
         calculos.costoTotalAnualInventario = C;
 
         // Tiempos de reorden.
-        calculos.porTiempo = (calculos.tiempoCiclo - cantidadEconomicaPedido.tiempoEspera);
-        calculos.porInventarioConsumido = (Q / calculos.tiempoCiclo) * calculos.porTiempo;
-        calculos.porInventarioPorConsumir = Q - calculos.porInventarioConsumido;
+        calculos.porTiempo = redondearGlobal(calculos.tiempoCiclo - cantidadEconomicaPedido.tiempoEspera);
+        calculos.porInventarioConsumido = redondearGlobal((Q / calculos.tiempoCiclo) * calculos.porTiempo);
+        calculos.porInventarioPorConsumir = redondearGlobal(Q - calculos.porInventarioConsumido);
     
         // Redondear los resultados a 3 decimales
         for (const [key, value] of Object.entries(calculos)) {
