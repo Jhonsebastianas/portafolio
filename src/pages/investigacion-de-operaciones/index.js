@@ -254,19 +254,19 @@ export default function Home() {
         
         // Cálculo de la cantidad económica del pedido (Q)
         const Q = Math.sqrt((2 * C2 * D) / C3) * Math.sqrt((C3 + C4) / C4);
-        //const Q = Math.sqrt((2 * D * C2) / (h * (1 + (h / p))));
-        
+
         // Cálculo del déficit permitido (S)
         const S = Math.sqrt((2 * C2 * D) / C4) * Math.sqrt((C3) / (C3 + C4));
         
-    
-        console.log({ D, C2, C3, C1, Q, S });
+        // Cálculo de C' (costo total por periodo)
+        const C_prima = C1 * Q + C2 + (C3 * Math.pow(Q - S, 2) / (2 * D)) + (C4 * Math.pow(S, 2) / (2 * D));
+        console.log({ C_prima });
     
         // Cálculos comunes del modelo básico de inventario
         calculos.cantidadEconomicaPedido = Q;
         calculos.costeRetencionAnualInventario = (1 / 2) * (Q - S) * C3;
         calculos.costeAnualOrdenar = (D / Q) * C2;
-        calculos.costeAnualTotalPorPeriodo = calculos.costeRetencionAnualInventario + calculos.costeAnualOrdenar;
+        calculos.costeAnualTotalPorPeriodo = C_prima;
         
         calculos.nivelInventarioMaximo = Q - S;
         calculos.nivelInventarioPromedio = (Q - S) / 2;
@@ -278,7 +278,12 @@ export default function Home() {
         calculos.nivelDeficit = S;
         calculos.costeFaltanteAnual = (D / Q) * C4 * S;
 
-        const C = (C1 * D) + calculos.costeAnualTotalPorPeriodo;
+        // Cálculo del costo total anual del inventario (C)
+        // Aquí sumamos solo el costo total relacionado con la demanda anual
+        // evitando sumar los costos que ya están incluidos en C_prima.
+        const C = (C1 * D) + ((D / Q) * C2) + (C3 * Math.pow(Q - S, 2) / (2 * Q)) + (C4 * Math.pow(S, 2) / (2 * Q));
+        console.log({ C });
+
         calculos.costoTotalAnualInventario = C;
 
         // Tiempos de reorden.
