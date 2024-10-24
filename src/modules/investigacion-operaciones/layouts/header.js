@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useEffect } from 'react'
 import StyledComponents from 'styled-components'
 
@@ -221,6 +222,23 @@ const Header = () => {
             <StyledNav className="nav container">
                 <a href="#" className="nav__logo">investigación de operaciones</a>
                 <StyledNavMenu className="nav__menu" id="nav-menu">
+                    <ul className="nav__list grid">
+                        <li className="nav__item">
+                            <Link href={"/investigacion-de-operaciones"} className="nav__link active-link">
+                                <a >
+                                    <i className="uil uil-estate nav__icon"></i> M deterministas
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav__item">
+                            <Link href={"/investigacion-de-operaciones/gestion-de-inventario/modelos-probabilisticos"} className="nav__link">
+                                <a>
+                                    <i className="uil uil-estate nav__icon"></i> M probabilísticos
+                                </a>
+                            </Link>
+                        </li>
+                        
+                    </ul>
                     <i className="uil uil-times nav__close" id="nav-close"></i>
                 </StyledNavMenu>
 
