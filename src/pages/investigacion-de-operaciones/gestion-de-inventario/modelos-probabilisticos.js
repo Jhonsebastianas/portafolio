@@ -2,6 +2,7 @@ import Button from "@components/commons/button";
 import Layout from "@modules/investigacion-operaciones/layouts/layout";
 import { useState } from "react";
 import styled from "styled-components";
+import jStat from "jstat";
 
 // Styled components
 
@@ -94,6 +95,13 @@ class DistribucionUniforme {
     costoUnidad = 0;
     costoExceso = 0;
     costoRuptura = 0;
+
+    // Distribución normal
+    desviacionTipica = 0; // σ
+    muestra = 0; // μ
+    Ce;
+    Cr;
+
     utilidad = 0; // Porcentaje
     salvamento = 0 // Porcentaje
 }
@@ -104,7 +112,7 @@ class InventarioCompraOptimo {
     Cr = 0;
     a = 0;
     b = 0;
-    fcr = 0;
+    fcr = 0; // Factor critico de riestgo
     Io = 0;
     DnoSatisfecha = 0; // probabilidad
 }
@@ -115,7 +123,7 @@ export default function Home() {
     const [cantidadEconomicaPedido, setCantidadEconomicaPedido] = useState(new DistribucionUniforme());
     const [isCalculated, setIsCalculated] = useState(false);
 
-    const [modeloSeleccionado, setModeloSeleccionado] = useState("compra"); // por defecto, modelo de compra
+    const [modeloSeleccionado, setModeloSeleccionado] = useState("distribucionUniforme"); // por defecto, modelo de compra
 
     const handleModeloChange = (e) => {
         setModeloSeleccionado(e.target.value);
@@ -142,9 +150,13 @@ export default function Home() {
         const Ce = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * (cantidadEconomicaPedido.salvamento / 100));
         const Cr = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * ((100 - cantidadEconomicaPedido.utilidad) / 100));
 
-        const fcr = (a) / (Cr + Ce);
+        //
+        const fcr = (Cr) / (Cr + Ce);
+        //const fcr = (a) / (Cr + Ce);
 
-        const Io = Cr + (fcr * (b - a));
+        const Io = a + (fcr * (b - a));
+
+        //const Io = Cr + (fcr * (b - a));
 
         const DnoSatisfecha = 1 - fcr;
 
@@ -165,8 +177,46 @@ export default function Home() {
         setIsCalculated(true);
     };
 
-    const calcularDistribucionNormal = () => {
+    const calcularDistribucionNormal = (e) => {
+      e.preventDefault();
+      const calculos = new InventarioCompraOptimo();
 
+        const μ = cantidadEconomicaPedido.muestra;
+        const σ = cantidadEconomicaPedido.desviacionTipica;
+
+        let Ce = cantidadEconomicaPedido.Ce;
+        if (!cantidadEconomicaPedido.Ce) {
+          Ce = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * (cantidadEconomicaPedido.salvamento / 100));
+        }
+        
+        let Cr = cantidadEconomicaPedido.Cr;
+        if (!cantidadEconomicaPedido.Cr) {
+          Cr = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * ((100 - cantidadEconomicaPedido.utilidad) / 100));
+        }
+
+        const fcr = (Cr) / (Cr + Ce);
+
+        const z = jStat.normal.inv(fcr, 0, 1); // Calcula z para la distribución normal estándar
+
+        //const Io = μ + (σ * (z * (b - a)));
+        const Io = μ + (σ * z);
+
+        calculos.Ce = Ce;
+        calculos.Cr = Cr;
+        calculos.fcr = fcr;
+        calculos.Io = Io;
+        calculos.DnoSatisfecha = 1 - fcr;
+
+        for (const [key, value] of Object.entries(calculos)) {
+          calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
+      }
+
+
+        // for (const [key, value] of Object.entries(calculos)) {
+        //   calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
+        // }
+        setInventarioCompraOptimo({ ...calculos });
+        setIsCalculated(true);
     }
 
     const calcularDistribucionEmpirica = () => {
@@ -187,8 +237,8 @@ export default function Home() {
                 <FormGroup>
                     <StyledLabel>Seleccionar modelo de inventario: </StyledLabel>
                     <StyledSelect onChange={handleModeloChange} value={modeloSeleccionado}>
-                        <option value="compra">Distribución uniforme</option>
-                        <option value="produccionSinDeficit">Distribución Normal</option>
+                        <option value="distribucionUniforme">Distribución uniforme</option>
+                        <option value="distribucionNormal">Distribución Normal</option>
                         <option value="compraConDeficit">Distribución Empírica – Demanda Aleatoria Discreta</option>
                     </StyledSelect>
                 </FormGroup>
@@ -200,14 +250,39 @@ export default function Home() {
                         <StyledLabel>Costo unidad (C1):</StyledLabel>
                         <StyledInput onChange={handleChange} id="costoUnidad" name="costoUnidad" type="number" value={cantidadEconomicaPedido.costoUnidad} />
                     </FormGroup>
-                    <FormGroup>
-                        <StyledLabel>Limite Inferior (a):</StyledLabel>
-                        <StyledInput onChange={handleChange} id="limiteInferior" name="limiteInferior" type="number" value={cantidadEconomicaPedido.limiteInferior} />
-                    </FormGroup>
-                    <FormGroup>
-                        <StyledLabel>Limite superior (b):</StyledLabel>
-                        <StyledInput onChange={handleChange} id="limiteSuperior" name="limiteSuperior" type="number" value={cantidadEconomicaPedido.limiteSuperior} />
-                    </FormGroup>
+                    { modeloSeleccionado === 'distribucionUniforme' &&
+                      <>
+                        <FormGroup>
+                          <StyledLabel>Limite Inferior (a):</StyledLabel>
+                          <StyledInput onChange={handleChange} id="limiteInferior" name="limiteInferior" type="number" value={cantidadEconomicaPedido.limiteInferior} />
+                        </FormGroup>
+                        <FormGroup>
+                            <StyledLabel>Limite superior (b):</StyledLabel>
+                            <StyledInput onChange={handleChange} id="limiteSuperior" name="limiteSuperior" type="number" value={cantidadEconomicaPedido.limiteSuperior} />
+                        </FormGroup>
+                      </>
+                    }
+                    
+                    { modeloSeleccionado === 'distribucionNormal' &&
+                      <>
+                        <FormGroup>
+                          <StyledLabel>Muestra (μ):</StyledLabel>
+                          <StyledInput onChange={handleChange} id="muestra" name="muestra" type="number" value={cantidadEconomicaPedido.muestra} />
+                        </FormGroup>
+                        <FormGroup>
+                          <StyledLabel>Desviacion tipica (σ):</StyledLabel>
+                          <StyledInput onChange={handleChange} id="desviacionTipica" name="desviacionTipica" type="number" value={cantidadEconomicaPedido.desviacionTipica} />
+                        </FormGroup>
+                        <FormGroup>
+                          <StyledLabel>Costo por unidad de exceso (Ce):</StyledLabel>
+                          <StyledInput onChange={handleChange} id="Ce" name="Ce" type="number" value={cantidadEconomicaPedido.Ce} />
+                        </FormGroup>
+                        <FormGroup>
+                          <StyledLabel>Costo por unidad deja de percibir (Cr):</StyledLabel>
+                          <StyledInput onChange={handleChange} id="Cr" name="Cr" type="number" value={cantidadEconomicaPedido.Cr} />
+                        </FormGroup>
+                      </>
+                    }
                     <FormGroup>
                         <StyledLabel>Porcentaje utilidad %():</StyledLabel>
                         <StyledInput onChange={handleChange} id="utilidad" name="utilidad" type="number" value={cantidadEconomicaPedido.utilidad} />
@@ -217,9 +292,9 @@ export default function Home() {
                         <StyledInput onChange={handleChange} id="salvamento" name="salvamento" type="number" value={cantidadEconomicaPedido.salvamento} />
                     </FormGroup>
                     <StyledButton type="submit" onClick={
-                        modeloSeleccionado === "compra" 
+                        modeloSeleccionado === "distribucionUniforme" 
                         ? calcularDistribucionUniforme
-                        : modeloSeleccionado === "produccionSinDeficit"
+                        : modeloSeleccionado === "distribucionNormal"
                         ? calcularDistribucionNormal
                         : calcularDistribucionEmpirica
                     }>
