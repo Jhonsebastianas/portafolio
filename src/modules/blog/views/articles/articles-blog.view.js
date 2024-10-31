@@ -11,6 +11,9 @@ const ArticlesBlogView = () => {
                 <ArticleLink href={"/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode"}>
                     Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.
                 </ArticleLink>
+                <ArticleLink href={"/blog/articles/principios-solid"}>
+                    ⭐ Los Principios SOLID explicados
+                </ArticleLink>
             </section>
         </BlogLayout>
     )

@@ -197,11 +197,32 @@ export default function HomeTest() {
                     <Badge variant="secondary">JavaScript</Badge>
                     <span className="text-gray-500 text-sm">May 15, 2023</span>
                   </div>
-                  <CardTitle>Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.</CardTitle>
+                  <CardTitle>Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode</CardTitle>
                   <CardText>
                     Los snippets son códigos o textos que guardamos y queremos reutilizar de forma ágil en ...
                   </CardText>
-                  <CardLink href="https://www.jhonsebastianas.com/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode">
+                  <CardLink href="/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode">
+                    <a>
+                        Leer más
+                        <ArrowRightIcon className="h-4 w-4" />
+                    </a>
+                  </CardLink>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardImage src="/images/articles/solid/solid_0_portada.webp" alt="portada snippets" />
+                <CardContent>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">Principios</Badge>
+                    <span className="text-gray-500 text-sm">Oct 31, 2024</span>
+                  </div>
+                  <CardTitle>Los Principios SOLID explicados</CardTitle>
+                  <CardText>
+                  Si quieres destacar como programador o desarrollador, debes aprender
+                  los principios SOLID, te llevaran un paso más adelante para elevar
+                  tu nivel, y elevar tu seniority...
+                  </CardText>
+                  <CardLink href="/blog/articles/principios-solid">
                     <a>
                         Leer más
                         <ArrowRightIcon className="h-4 w-4" />

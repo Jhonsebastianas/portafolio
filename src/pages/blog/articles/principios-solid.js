@@ -367,7 +367,7 @@ const ArticleSOLID = () => {
           key={"Head_SOLID"}
           title={"Los Principios SOLID explicados"}
           readingTime={14}
-          date={"Noviembre de 2024"}
+          date={"Octubre de 2024"}
           imagePath={"/images/articles/solid/solid_0_portada.webp"}
           youtubeLink={"https://www.youtube.com/watch?v=UdLUprTJEtI"}
         />
