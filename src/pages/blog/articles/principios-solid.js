@@ -1,3 +1,4 @@
+import UlDot from "@components/commons/ul-dot";
 import Headline from "@modules/blog/components/Headline";
 import CodeBlock from "@modules/blog/components/menu/code-block/code-block.component";
 import ArticleLayout from "@modules/blog/layouts/article-layout";
@@ -402,7 +403,7 @@ const ArticleSOLID = () => {
           <p>
             Cada letra del acrónimo SOLID significa un principio, y estos son:
           </p>
-          <ul>
+          <UlDot>
             <li>
               La S es para Single responsability, principio de responsabilidad
               única, ya los definiremos cada uno al detalle más adelante
@@ -419,7 +420,7 @@ const ArticleSOLID = () => {
               Y por último la D que es Dependency inversion, o el principio de
               inversión de dependencias.
             </li>
-          </ul>
+          </UlDot>
 
           <p>
             Donde La intención de estos principios es establecer practicas que
@@ -451,12 +452,12 @@ const ArticleSOLID = () => {
           <p>
             <strong>Puntos clave: </strong>
           </p>
-          <ul>
+          <UlDot>
             <li>Modularizar más el código</li>
             <li>Hacer el código más reusable</li>
             <li>Separación de intereses</li>
             <li>Evitar las clases de Dios</li>
-          </ul>
+          </UlDot>
           <p>
             <strong>Diagrama UML:</strong>
           </p>
@@ -497,12 +498,12 @@ const ArticleSOLID = () => {
         <p>
           <strong>Puntos clave: </strong>
         </p>
-        <ul>
+        <UlDot>
           <li>Código extensible</li>
           <li>Evite modificar el código para casos específicos</li>
           <li>Evite cambiar el comportamiento original del código</li>
           <li>Polimorfismo</li>
-        </ul>
+        </UlDot>
         <p>
           <strong>Diagrama UML:</strong>
         </p>
@@ -537,11 +538,11 @@ const ArticleSOLID = () => {
         <p>
           <strong>Puntos clave: </strong>
         </p>
-        <ul>
+        <UlDot>
           <li>Abstracción</li>
           <li>Contratos o interfaces</li>
           <li>Identificar comportamientos comunes</li>
-        </ul>
+        </UlDot>
         <p>
           <strong>Diagrama UML:</strong>
         </p>
@@ -578,11 +579,11 @@ const ArticleSOLID = () => {
         <p>
           <strong>Puntos clave: </strong>
         </p>
-        <ul>
+        <UlDot>
           <li>Definir interfaces pequeñas</li>
           <li>Implementar solo las interfaces solicitadas</li>
           <li>Identificar grupos con métodos comunes</li>
-        </ul>
+        </UlDot>
         <p>
           <strong>Diagrama UML:</strong>
         </p>
@@ -619,11 +620,11 @@ const ArticleSOLID = () => {
         <p>
           <strong>Puntos clave: </strong>
         </p>
-        <ul>
+        <UlDot>
           <li>Desacoplamiento</li>
           <li>Interfaces y clases abstractas</li>
           <li>Inyección de dependencia o ubicación de servicio</li>
-        </ul>
+        </UlDot>
         <p>
           <strong>Diagrama UML:</strong>
         </p>
@@ -654,13 +655,13 @@ const ArticleSOLID = () => {
           y te asegura que tu software pueda crecer y evolucionar sin colapsar.
         </p>
         <p>Además te facilita los siguientes puntos:</p>
-        <ol>
+        <UlDot>
           <li>Mantenibilidad</li>
           <li>Legibilidad del código</li>
           <li>IFacil de probar</li>
           <li>Reusable</li>
           <li>Escalable</li>
-        </ol>
+        </UlDot>
 
         <p>
           En definitiva, los principios SOLID son como un conjunto de reglas que
