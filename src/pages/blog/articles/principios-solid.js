@@ -2,6 +2,7 @@ import Headline from "@modules/blog/components/Headline";
 import CodeBlock from "@modules/blog/components/menu/code-block/code-block.component";
 import ArticleLayout from "@modules/blog/layouts/article-layout";
 import BlogLayout from "@modules/blog/layouts/blog.layout";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const code = `"Filtrar por nombre y edad": {
     "prefix": "filtroNombreEdad",
@@ -460,9 +461,10 @@ const ArticleSOLID = () => {
             <strong>Diagrama UML:</strong>
           </p>
           <div className="img__container">
-            <img
-              src="/images/articles/solid/solid_1_s.png"
-              alt="Figura 1: Reservation Service. Single responsability"
+            <LazyLoadImage
+                effect="blur"
+                src="/images/articles/solid/solid_1_s.png"
+                alt="Figura 1: Reservation Service. Single responsability"
             />
             <span>Figura 1: Reservation Service. Single responsability</span>
           </div>
@@ -505,10 +507,11 @@ const ArticleSOLID = () => {
           <strong>Diagrama UML:</strong>
         </p>
         <div className="img__container">
-          <img
-            src="/images/articles/solid/solid_2_o.png"
-            alt="Figura 2: Videogame. Open-Close"
-          />
+            <LazyLoadImage
+                effect="blur"
+                src="/images/articles/solid/solid_2_o.png"
+                alt="Figura 2: Videogame. Open-Close"
+            />
           <span>Figura 2: Videogame. Open-Close</span>
         </div>
         <p>
@@ -543,10 +546,11 @@ const ArticleSOLID = () => {
           <strong>Diagrama UML:</strong>
         </p>
         <div className="img__container">
-          <img
-            src="/images/articles/solid/solid_3_l.png"
-            alt="Figura 3: Vehicles. Liskov substitution"
-          />
+            <LazyLoadImage
+                effect="blur"
+                src="/images/articles/solid/solid_3_l.png"
+                alt="Figura 3: Vehicles. Liskov substitution"
+            />
           <span>Figura 3: Vehicles. Liskov substitution</span>
         </div>
         <p>
@@ -583,10 +587,11 @@ const ArticleSOLID = () => {
           <strong>Diagrama UML:</strong>
         </p>
         <div className="img__container">
-          <img
-            src="/images/articles/solid/solid_4_i.png"
-            alt="Figura 4: Robots. Interface segregation"
-          />
+            <LazyLoadImage
+                effect="blur"
+                src="/images/articles/solid/solid_4_i.png"
+                alt="Figura 4: Robots. Interface segregation"
+            />
           <span>Figura 4: Robots. Interface segregation</span>
         </div>
         <p>
@@ -623,10 +628,11 @@ const ArticleSOLID = () => {
           <strong>Diagrama UML:</strong>
         </p>
         <div className="img__container">
-          <img
-            src="/images/articles/solid/solid_5_d.png"
-            alt="Figura 4: Robots. Interface segregation"
-          />
+            <LazyLoadImage
+                effect="blur"
+                src="/images/articles/solid/solid_5_d.png"
+                alt="Figura 5: CheckoutService. Dependency inversion"
+            />
           <span>Figura 5: CheckoutService. Dependency inversion</span>
         </div>
         <p>
