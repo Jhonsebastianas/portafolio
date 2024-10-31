@@ -1,19 +1,24 @@
 import ArticleLink from "@modules/blog/components/article-list/article-link";
+import { articles } from "@modules/blog/data/articles";
 import BlogLayout from "@modules/blog/layouts/blog.layout";
 
 const ArticlesBlogView = () => {
+    articles
     return (
         <BlogLayout>
             <section className="section container">
                 <h1>Articulos</h1>
                 <p>Ensayos y tutoriales, principalmente sobre software, ingeniería y liderazgo.</p>
-
-                <ArticleLink href={"/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode"}>
-                    Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.
-                </ArticleLink>
-                <ArticleLink href={"/blog/articles/principios-solid"}>
-                    ⭐ Los Principios SOLID explicados
-                </ArticleLink>
+                {
+                    articles.map((article) => {
+                        const { title, highlight, path } = article;
+                        return (
+                            <ArticleLink href={path}>
+                                {highlight && "⭐ "}{ title }
+                            </ArticleLink>
+                        )
+                    })
+                }
             </section>
         </BlogLayout>
     )

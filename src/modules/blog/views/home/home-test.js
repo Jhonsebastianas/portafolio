@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import ComingSoon from '../coming-soon/coming-soon.view';
+import ArticleCard from '@modules/blog/components/article-card/article-card.component';
+import { articles } from '@modules/blog/data/articles';
 
 // Estilos con styled-components
 const Container = styled.div`
@@ -72,47 +73,6 @@ const CardContainer = styled.div`
   }
 `;
 
-const Card = styled.div`
-  background: var(--container-color);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: auto;
-`;
-
-const CardContent = styled.div`
-  padding: 1rem;
-`;
-
-const CardTitle = styled.h3`
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-`;
-
-const CardText = styled.p`
-  color: #718096;
-`;
-
-const CardLink = styled(Link)`
-  color: #5a67d8;
-  display: inline-flex;
-  align-items: center;
-  margin-top: 1rem;
-  font-weight: 500;
-`;
-
-const Badge = styled.span`
-  background: ${({ variant }) => (variant === 'primary' ? '#5a67d8' : '#edf2f7')};
-  color: ${({ variant }) => (variant === 'primary' ? 'white' : '#4a5568')};
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-`;
-
 const Button = styled.button`
   background: ${({ variant }) => (variant === 'secondary' ? '#e2e8f0' : '#5a67d8')};
   color: ${({ variant }) => (variant === 'secondary' ? '#4a5568' : 'white')};
@@ -129,36 +89,6 @@ const Button = styled.button`
     background: ${({ variant }) => (variant === 'secondary' ? '#cbd5e0' : '#434190')};
   }
 `;
-
-const Footer = styled.footer`
-  background: #1a202c;
-  color: white;
-  padding: 2rem 1.5rem;
-  text-align: center;
-
-  a {
-    color: #a0aec0;
-    transition: color 0.3s;
-
-    &:hover {
-      color: white;
-    }
-  }
-`;
-
-const CodeIcon = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="16 18 22 12 16 6" />
-    <polyline points="8 6 2 12 8 18" />
-  </svg>
-);
-
-const ArrowRightIcon = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14" />
-    <path d="m12 5 7 7-7 7" />
-  </svg>
-);
 
 export default function HomeTest() {
   return (
@@ -190,46 +120,9 @@ export default function HomeTest() {
             <SectionTitle>Últimas entradas del blog</SectionTitle>
             <SectionSubtitle>Consulte nuestros últimos artículos y opiniones</SectionSubtitle>
             <CardContainer>
-              <Card>
-                <CardImage src="/images/articles/snippets/snippets_0_portada.webp" alt="portada snippets" />
-                <CardContent>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">JavaScript</Badge>
-                    <span className="text-gray-500 text-sm">May 15, 2023</span>
-                  </div>
-                  <CardTitle>Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode</CardTitle>
-                  <CardText>
-                    Los snippets son códigos o textos que guardamos y queremos reutilizar de forma ágil en ...
-                  </CardText>
-                  <CardLink href="/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode">
-                    <a>
-                        Leer más
-                        <ArrowRightIcon className="h-4 w-4" />
-                    </a>
-                  </CardLink>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardImage src="/images/articles/solid/solid_0_portada.webp" alt="portada snippets" />
-                <CardContent>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">Principios</Badge>
-                    <span className="text-gray-500 text-sm">Oct 31, 2024</span>
-                  </div>
-                  <CardTitle>Los Principios SOLID explicados</CardTitle>
-                  <CardText>
-                  Si quieres destacar como programador o desarrollador, debes aprender
-                  los principios SOLID, te llevaran un paso más adelante para elevar
-                  tu nivel, y elevar tu seniority...
-                  </CardText>
-                  <CardLink href="/blog/articles/principios-solid">
-                    <a>
-                        Leer más
-                        <ArrowRightIcon className="h-4 w-4" />
-                    </a>
-                  </CardLink>
-                </CardContent>
-              </Card>
+              { articles.map((article, index) => {
+                return <ArticleCard key={article.title + index} article={article} />
+              }) }
             </CardContainer>
           </div>
         </Section>
