@@ -90,6 +90,7 @@ export const ResultItem = styled.p`
 `;
 
 class DistribucionUniforme {
+    demanda = 0;
     limiteInferior = 0;
     limiteSuperior = 0;
     costoUnidad = 0;
@@ -108,6 +109,7 @@ class DistribucionUniforme {
 
 
 class InventarioCompraOptimo {
+    D = 0;
     Ce = 0;
     Cr = 0;
     a = 0;
@@ -115,6 +117,8 @@ class InventarioCompraOptimo {
     fcr = 0; // Factor critico de riestgo
     Io = 0;
     DnoSatisfecha = 0; // probabilidad
+
+    CeTotal = 0;
 }
 
 export default function Home() {
@@ -141,6 +145,10 @@ export default function Home() {
         return Number(numero.toFixed(decimales));
     };
 
+    const calcularCeTotal = (Ce, Io, D) => {
+      return Ce * (Io - D);
+    }
+
     const calcularDistribucionUniforme = (e) => {
         e.preventDefault();
         const calculos = new InventarioCompraOptimo();
@@ -149,6 +157,7 @@ export default function Home() {
         const b = cantidadEconomicaPedido.limiteSuperior;
         const Ce = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * (cantidadEconomicaPedido.salvamento / 100));
         const Cr = cantidadEconomicaPedido.costoUnidad - (cantidadEconomicaPedido.costoUnidad * ((100 - cantidadEconomicaPedido.utilidad) / 100));
+        const D = calculos.D;
 
         //
         const fcr = (Cr) / (Cr + Ce);
@@ -167,6 +176,7 @@ export default function Home() {
         calculos.fcr = fcr;
         calculos.Io = Io;
         calculos.DnoSatisfecha = DnoSatisfecha;
+        calculos.CeTotal = calcularCeTotal(Ce, Io, D);
 
         console.log({a, b, Ce, Cr});
 
@@ -183,6 +193,7 @@ export default function Home() {
 
         const μ = cantidadEconomicaPedido.muestra;
         const σ = cantidadEconomicaPedido.desviacionTipica;
+        const D = calculos.D;
 
         let Ce = cantidadEconomicaPedido.Ce;
         if (!cantidadEconomicaPedido.Ce) {
@@ -206,6 +217,7 @@ export default function Home() {
         calculos.fcr = fcr;
         calculos.Io = Io;
         calculos.DnoSatisfecha = 1 - fcr;
+        calculos.CeTotal = calcularCeTotal(Ce, Io, D);
 
         for (const [key, value] of Object.entries(calculos)) {
           calculos[key] = formatearNumero(value, 3); // Redondeo a 3 decimales con separadores de miles
@@ -246,6 +258,10 @@ export default function Home() {
                 <StyledForm onSubmit={calcularDistribucionUniforme}>
                     <h2>Cantidad Económica del Pedido</h2>
                     <br></br>
+                    <FormGroup>
+                        <StyledLabel>Demanda (D):</StyledLabel>
+                        <StyledInput onChange={handleChange} id="demanda" name="demanda" type="number" value={cantidadEconomicaPedido.demanda} />
+                    </FormGroup>
                     <FormGroup>
                         <StyledLabel>Costo unidad (C1):</StyledLabel>
                         <StyledInput onChange={handleChange} id="costoUnidad" name="costoUnidad" type="number" value={cantidadEconomicaPedido.costoUnidad} />
@@ -306,6 +322,7 @@ export default function Home() {
                 <ResultsSection>
                     <h2>Política de Inventario Óptimo</h2>
                     <ResultItem><strong>Ce <span>()</span>:</strong> $ {inventarioCompraOptimo.Ce} </ResultItem>
+                    <ResultItem><strong>Ce Total <span>()</span>:</strong> $ {inventarioCompraOptimo.CeTotal} </ResultItem>
                     <ResultItem><strong>Cr <span>()</span>:</strong> $ {inventarioCompraOptimo.Cr} </ResultItem>
                     <ResultItem><strong>FCR <span>()</span>:</strong> {inventarioCompraOptimo.fcr} </ResultItem>
                     <ResultItem><strong>Io <span>()</span>:</strong> {inventarioCompraOptimo.Io} unidades </ResultItem>

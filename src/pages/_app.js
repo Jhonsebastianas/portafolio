@@ -5,6 +5,7 @@ import Head from 'next/head'
 import '@styles/css/styles.css'
 import '@styles/css/styles-resume.css'
 import '@styles/css/swiper-bundle.min.css'
+import 'highlight.js/styles/github.css'; // Cambia 'github' por cualquier otro tema predeterminado
 
 
 import { APP_NAME } from '@constants/Constants'

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import highlight from './highlight';
+//import highlight from './highlight';
+import hljs from 'highlight.js';
+import customTheme from '@styles/customTheme';
+
 
 // Styled component for the main container
 const EditorContainer = styled.div`
-  background: #282a36;
+  background: #17181F;
   border-radius: 5px;
   overflow: hidden;
   font-family: 'Courier New', Courier, monospace;
@@ -48,21 +51,36 @@ const FileName = styled.div`
   font-weight: bold;
 `;
 
-// Styled component for the code container
 const CodeContainer = styled.div`
   padding: 20px;
   overflow-x: auto;
-  color: #f8f8f2;
+  background-color: ${customTheme.background};
+  color: ${customTheme.text};
+  font-family: 'Courier New', Courier, monospace;
   white-space: pre-wrap;
 
-  .keywords { color: #ff79c6; }
-  .numbers { color: #bd93f9; }
-  .strings { color: #f1fa8c; }
-  .comments { color: #6272a4; }
-  .variables { color: #50fa7b; }
-  .keys { color: #8be9fd; }
-  .values { color: #50fa7b; }
-  .punctuation { color: #f8f8f2; }
+  .hljs-keyword {
+    color: ${customTheme.keywords};
+  }
+  .hljs-string {
+    color: ${customTheme.strings};
+  }
+  .hljs-number {
+    color: ${customTheme.numbers};
+  }
+  .hljs-comment {
+    color: ${customTheme.comments};
+    font-style: italic;
+  }
+  .hljs-function {
+    color: ${customTheme.functions};
+  }
+  .hljs-variable {
+    color: ${customTheme.variables};
+  }
+  .hljs-punctuation {
+    color: ${customTheme.punctuation};
+  }
 `;
 
 // Styled component for the copy button
@@ -91,7 +109,13 @@ const Icon = styled.i`
 `;
 
 const CodeBlock = ({ code, language, fileName }) => {
+  const highlight = (code, language) => {
+    const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+    return hljs.highlight(validLanguage, code).value;
+  };
+
   const [copied, setCopied] = useState(false);
+  const highlightedCode = highlight(code, language);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code)
@@ -103,8 +127,6 @@ const CodeBlock = ({ code, language, fileName }) => {
         console.error('Error al copiar el código: ', err);
       });
   };
-
-  const highlightedCode = highlight(code, language);
 
   return (
     <EditorContainer>

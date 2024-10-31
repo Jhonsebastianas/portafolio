@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "highlight.js": "^11.10.0",
     "jstat": "^1.9.6",
     "moment": "^2.29.4",
     "mongoose": "^8.5.1",
