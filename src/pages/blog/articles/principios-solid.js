@@ -1,4 +1,5 @@
 import UlDot from "@components/commons/ul-dot";
+import ArticleImage from "@modules/blog/components/article-image/article-image.component";
 import Headline from "@modules/blog/components/Headline";
 import CodeBlock from "@modules/blog/components/menu/code-block/code-block.component";
 import ArticleLayout from "@modules/blog/layouts/article-layout";
@@ -462,12 +463,15 @@ const ArticleSOLID = () => {
             <strong>Diagrama UML:</strong>
           </p>
           <div className="img__container">
-            <LazyLoadImage
+            <ArticleImage src="/images/articles/solid/solid_1_s.png" 
+              alt="Figura 1: Reservation Service. Single responsability"
+            />
+            {/* <LazyLoadImage
                 effect="blur"
                 src="/images/articles/solid/solid_1_s.png"
                 alt="Figura 1: Reservation Service. Single responsability"
             />
-            <span>Figura 1: Reservation Service. Single responsability</span>
+            <span>Figura 1: Reservation Service. Single responsability</span> */}
           </div>
           <p>
             <strong>Código de implementación correcta:</strong>

@@ -33,12 +33,14 @@ const StyleContainer = styled.section`
     .img__container {
         text-align: center;
         margin-bottom: 1rem;
+        //aspect-ratio: 16 / 9; /* Mantiene el espacio reservado */
 
         img {
             width: 100%;
             padding-top: 2rem;
             padding-left: 2rem;
             padding-right: 2rem;
+            //aspect-ratio: 16 / 9; /* Esto reserva el espacio de la imagen */
         }
 
         span {
