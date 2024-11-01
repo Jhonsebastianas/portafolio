@@ -159,7 +159,7 @@ const SuscribeLayout = ({ campaign }) => {
                             <h1 className="color__primary">Suscrito al newsletter exitosamente</h1>
                         </div>
                         <p className="text-lg text-gray-500 dark:text-gray-400">
-                            Te mandaremos actualizado y brindaremos consejos para que sigas avanzando en tu carrera como desarrollador de software y profesional.
+                            Te mantendremos actualizado y brindaremos consejos para que sigas avanzando en tu carrera como desarrollador de software y profesional.
                         </p>
                     </div>
                 }
