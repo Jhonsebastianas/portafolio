@@ -462,17 +462,10 @@ const ArticleSOLID = () => {
           <p>
             <strong>Diagrama UML:</strong>
           </p>
-          <div className="img__container">
-            <ArticleImage src="/images/articles/solid/solid_1_s.png" 
-              alt="Figura 1: Reservation Service. Single responsability"
-            />
-            {/* <LazyLoadImage
-                effect="blur"
-                src="/images/articles/solid/solid_1_s.png"
-                alt="Figura 1: Reservation Service. Single responsability"
-            />
-            <span>Figura 1: Reservation Service. Single responsability</span> */}
-          </div>
+          <ArticleImage src="/images/articles/solid/solid_1_s.png" 
+            alt="Figura 1: Reservation Service. Single responsability"
+            ratio={"1/0.5"}
+          />
           <p>
             <strong>Código de implementación correcta:</strong>
           </p>
@@ -511,14 +504,10 @@ const ArticleSOLID = () => {
         <p>
           <strong>Diagrama UML:</strong>
         </p>
-        <div className="img__container">
-            <LazyLoadImage
-                effect="blur"
-                src="/images/articles/solid/solid_2_o.png"
-                alt="Figura 2: Videogame. Open-Close"
-            />
-          <span>Figura 2: Videogame. Open-Close</span>
-        </div>
+        <ArticleImage src="/images/articles/solid/solid_2_o.png" 
+            alt="Figura 2: Videogame. Open-Close"
+            ratio={"1/0.4"}
+        />
         <p>
           <strong>Código de implementación correcta:</strong>
         </p>
@@ -550,14 +539,10 @@ const ArticleSOLID = () => {
         <p>
           <strong>Diagrama UML:</strong>
         </p>
-        <div className="img__container">
-            <LazyLoadImage
-                effect="blur"
-                src="/images/articles/solid/solid_3_l.png"
-                alt="Figura 3: Vehicles. Liskov substitution"
-            />
-          <span>Figura 3: Vehicles. Liskov substitution</span>
-        </div>
+        <ArticleImage src="/images/articles/solid/solid_3_l.png" 
+            alt="Figura 3: Vehicles. Liskov substitution"
+            ratio={"1/0.4"}
+        />
         <p>
           <strong>Código de implementación correcta:</strong>
         </p>
@@ -591,14 +576,10 @@ const ArticleSOLID = () => {
         <p>
           <strong>Diagrama UML:</strong>
         </p>
-        <div className="img__container">
-            <LazyLoadImage
-                effect="blur"
-                src="/images/articles/solid/solid_4_i.png"
-                alt="Figura 4: Robots. Interface segregation"
-            />
-          <span>Figura 4: Robots. Interface segregation</span>
-        </div>
+        <ArticleImage src="/images/articles/solid/solid_4_i.png" 
+            alt="Figura 4: Robots. Interface segregation"
+            ratio={"1/0.4"}
+        />
         <p>
           <strong>Código de implementación correcta:</strong>
         </p>
@@ -632,14 +613,10 @@ const ArticleSOLID = () => {
         <p>
           <strong>Diagrama UML:</strong>
         </p>
-        <div className="img__container">
-            <LazyLoadImage
-                effect="blur"
-                src="/images/articles/solid/solid_5_d.png"
-                alt="Figura 5: CheckoutService. Dependency inversion"
-            />
-          <span>Figura 5: CheckoutService. Dependency inversion</span>
-        </div>
+        <ArticleImage src="/images/articles/solid/solid_5_d.png" 
+            alt="Figura 5: CheckoutService. Dependency inversion"
+            ratio={"1/0.4"}
+        />
         <p>
           <strong>Código de implementación correcta:</strong>
         </p>
