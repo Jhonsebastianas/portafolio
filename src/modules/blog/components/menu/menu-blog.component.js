@@ -226,7 +226,8 @@ const addNightTheme = () => {
 
     // Previously selected topic
     const selectedTheme = localStorage.getItem('selected-theme')
-    const selectedIcon = localStorage.getItem('selected-icon')
+    const isDark = localStorage.getItem('isDark');
+    const isMoon = localStorage.getItem('isMoon');
 
     // We obtain the current theme that the interface has by validating the dark-theme class
     const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
@@ -235,8 +236,8 @@ const addNightTheme = () => {
     // We validate if the user previously chose a topic
     if (selectedTheme) {
         // if the validation is fulfilled, we ask what the issue was to know if we activated or deactivate the dark theme
-        document.body.classList[(selectedTheme === 'dark') ? 'add' : 'remove'](darkTheme)
-        themeButton.classList[(selectedIcon === 'uil-moon') ? 'add' : 'remove'](iconTheme)
+        document.body.classList[(isDark === 'dark') ? 'add' : 'remove'](darkTheme)
+        themeButton.classList[(isMoon === 'uil-moon') ? 'add' : 'remove'](iconTheme)
     }
 
     // Active / deactivate the theme manually with the button
@@ -247,7 +248,8 @@ const addNightTheme = () => {
         themeButton.classList.toggle(iconTheme)
         // We save the theme and the current icon that the user chose
         localStorage.setItem('selected-theme', getCurrentTheme)
-        localStorage.setItem('selected-icon', getCurrentIcon)
+        localStorage.setItem('isDark', getCurrentTheme());
+        localStorage.setItem('isMoon', getCurrentIcon());
     })
 
 }
@@ -292,20 +294,20 @@ const Header = () => {
                         <li className="nav__item">
                             <Link href="/blog/articles">
                                 <a className='nav__link'>
-                                    <i className="uil uil-user nav__icon"></i> Artículos
+                                    <i className="uil uil-document-layout-left nav__icon"></i> Artículos
                                 </a>
                             </Link>
                         </li>
                         <li className="nav__item">
                             <Link href="/blog/coming-soon">
                                 <a className='nav__link'>
-                                    <i className="uil uil-user nav__icon"></i> Cursos
+                                    <i className="uil uil-graduation-cap nav__icon"></i> Cursos
                                 </a>
                             </Link>
                         </li>
                         <li className="nav__item">
                             <a href='/' className='nav__link'>
-                                <i className="uil uil-user nav__icon"></i> Portafolio
+                                <i className="uil uil-bag nav__icon"></i> Portafolio
                             </a>
                         </li>
                         <li className="nav__item">
