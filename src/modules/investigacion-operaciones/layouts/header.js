@@ -237,6 +237,13 @@ const Header = () => {
                                 </a>
                             </Link>
                         </li>
+                        <li className="nav__item">
+                            <Link href={"/investigacion-de-operaciones/toma-decisiones-con-probabilidad"} className="nav__link">
+                                <a>
+                                    <i className="uil uil-estate nav__icon"></i> Decisiones
+                                </a>
+                            </Link>
+                        </li>
                         
                     </ul>
                     <i className="uil uil-times nav__close" id="nav-close"></i>
