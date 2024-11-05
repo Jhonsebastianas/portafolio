@@ -17,6 +17,7 @@ class CantidadEconomicaPedido {
 class InventarioCompraOptimo {
     cantidadEconomicaPedido = 0;
     costeRetencionAnualInventario = 0;
+    costoGestion = 0; // Costo de administrativo
     costeAnualOrdenar = 0;
     costeAnualTotalPorPeriodo = 0;
     costoTotalAnualInventario = 0;
@@ -25,6 +26,8 @@ class InventarioCompraOptimo {
     puntoReorden = 0;
     numeroPedidosAno = 0;
     tiempoCiclo = 0;
+    t1 = 0;
+    t2 = 0;
 
     // Nuevos para el modelo con déficit
     nivelDeficit = 0;
@@ -202,6 +205,7 @@ export default function Home() {
         const Co = cantidadEconomicaPedido.costoOrdenar;
         const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario;
         const C1 = cantidadEconomicaPedido.costoUnitario;
+        const C2 = Co;
         const P = cantidadEconomicaPedido.tasaProduccionAnual / cantidadEconomicaPedido.diasHabilAno; // tasa de producción diaria
         const diasHabilAno = cantidadEconomicaPedido.diasHabilAno;
 
@@ -237,10 +241,15 @@ export default function Home() {
         calculos.nivelInventarioPromedio = calculos.nivelInventarioMaximo / 2;
         calculos.puntoReorden = (D / diasHabilAno) * cantidadEconomicaPedido.tiempoEspera;
         calculos.numeroPedidosAno = D / Q;
+        calculos.costoGestion = (C2 * (D/Q)) + ((C3 * (Q / 2)) * (1 - (D / R)));
+        calculos.t1 = Q / R;
 
         const t1 = Q / R;
         const t2 = (calculos.nivelInventarioMaximo) / D;
         const t = t1 + t2;
+
+        calculos.t1 = t1 * diasHabilAno;
+        calculos.t2 = t2 * diasHabilAno;
 
         calculos.tiempoCiclo = diasHabilAno / calculos.numeroPedidosAno;
     
@@ -413,7 +422,7 @@ export default function Home() {
                     <h2>Política de Inventario Óptimo</h2>
                     <ResultItem><strong>Q <span>(Cantidad económica del pedido)</span>:</strong> {inventarioCompraOptimo.cantidadEconomicaPedido} (unidades / año)</ResultItem>
                     <ResultItem><strong>C <span>(Costo almacenamiento)</span>:</strong> {inventarioCompraOptimo.costoTotalAnualInventario} (/ año)</ResultItem>
-                    <ResultItem><strong>N <span>(Número de pedidos por año)</span>:</strong> {inventarioCompraOptimo.numeroPedidosAno} (pedidos / año)</ResultItem>
+                    <ResultItem><strong>N <span>(Número de pedidos por año ={">"} D / Q)</span>:</strong> {inventarioCompraOptimo.numeroPedidosAno} (pedidos / año)</ResultItem>
                     <ResultItem><strong>t <span>(Tiempo de ciclo (días))</span>:</strong> {inventarioCompraOptimo.tiempoCiclo} (días / pedido)</ResultItem>
                     <ResultItem><strong>C' <span>(Costo anual total por pedido)</span>:</strong> $ {inventarioCompraOptimo.costeAnualTotalPorPeriodo} (/ pedidos)</ResultItem>
                     {modeloSeleccionado === "compraConDeficit" && (
@@ -429,8 +438,13 @@ export default function Home() {
                     <ResultItem><strong>Punto de reorden:</strong> {inventarioCompraOptimo.puntoReorden}</ResultItem>
                     
                     {/* Información adicional para el modelo de producción sin déficit */}
+                    <br></br>
+                    <h2>Datos Modelo Producción sin deficit</h2>
                     {modeloSeleccionado === "produccionSinDeficit" && (
                         <>
+                            <ResultItem><strong>t1 <span>(Tiempo de producción ={">"} Q / R)</span>:</strong> {inventarioCompraOptimo.t1} ( días)</ResultItem>
+                            <ResultItem><strong>t2 <span></span>:</strong> {inventarioCompraOptimo.t2} ( días)</ResultItem>
+                            <ResultItem><strong>Cg <span>(Costo de gestión / Costo administrativo mínimo)</span>:</strong> {inventarioCompraOptimo.costoGestion} (/ año)</ResultItem>
                             <ResultItem><strong>Inventario máximo con tasa de producción:</strong> {inventarioCompraOptimo.nivelInventarioMaximo}</ResultItem>
                         </>
                     )}
