@@ -258,10 +258,10 @@ export default function Home() {
                 <StyledForm onSubmit={calcularDistribucionUniforme}>
                     <h2>Cantidad Económica del Pedido</h2>
                     <br></br>
-                    <FormGroup>
+                    {/* <FormGroup>
                         <StyledLabel>Demanda (D):</StyledLabel>
                         <StyledInput onChange={handleChange} id="demanda" name="demanda" type="number" value={cantidadEconomicaPedido.demanda} />
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                         <StyledLabel>Costo unidad (C1):</StyledLabel>
                         <StyledInput onChange={handleChange} id="costoUnidad" name="costoUnidad" type="number" value={cantidadEconomicaPedido.costoUnidad} />
