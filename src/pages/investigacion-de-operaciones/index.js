@@ -125,6 +125,7 @@ export default function Home() {
     const FIXED = 3;
     const [inventarioCompraOptimo, setInventarioCompraOptimo] = useState(new InventarioCompraOptimo());
     const [cantidadEconomicaPedido, setCantidadEconomicaPedido] = useState(new CantidadEconomicaPedido());
+    const [chType, setChType] = useState("porcentaje");
     const [isCalculated, setIsCalculated] = useState(false);
 
     const [modeloSeleccionado, setModeloSeleccionado] = useState("compra"); // por defecto, modelo de compra
@@ -132,6 +133,10 @@ export default function Home() {
     const handleModeloChange = (e) => {
         setModeloSeleccionado(e.target.value);
     };
+
+    const handleChTypeChange = (e) => {
+        setChType(e.target.value);
+    }
 
     // Método para redondear a 3 decimales y agregar separadores de miles
     const formatearNumero = (numero, decimales = 3) => {
@@ -151,14 +156,22 @@ export default function Home() {
         const D = cantidadEconomicaPedido.demandaAnual;
         const Co = cantidadEconomicaPedido.costoOrdenar;
         const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario;
-        const ChPorcentual = Ch / 100;
         const C1 = cantidadEconomicaPedido.costoUnitario;
-        const Q = Math.sqrt((2 * D * Co)/(ChPorcentual * C1));
+        
 
         console.log({D, Co, Ch, C1, Q})
 
+        let C3;
+        if (chType === 'porcentaje') {
+            C3 = (Ch / 100) * C1;
+        } else {
+            C3 = Ch;
+        }
+
+        const Q = Math.sqrt((2 * D * Co)/C3);
+
         calculos.cantidadEconomicaPedido = Q;
-        calculos.costeRetencionAnualInventario = (1/2) * calculos.cantidadEconomicaPedido * (ChPorcentual * C1);
+        calculos.costeRetencionAnualInventario = (1/2) * calculos.cantidadEconomicaPedido * C3;
         calculos.costeAnualOrdenar = ((D/Q) * Co);
         calculos.costeAnualTotalPorPeriodo = (calculos.costeRetencionAnualInventario + calculos.costeAnualOrdenar);
         calculos.nivelInventarioMaximo = calculos.cantidadEconomicaPedido;
@@ -187,11 +200,18 @@ export default function Home() {
         const calculos = new InventarioCompraOptimo();
         const D = cantidadEconomicaPedido.demandaAnual;
         const Co = cantidadEconomicaPedido.costoOrdenar;
-        const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario / 100;
+        const Ch = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario;
         const C1 = cantidadEconomicaPedido.costoUnitario;
         const P = cantidadEconomicaPedido.tasaProduccionAnual / cantidadEconomicaPedido.diasHabilAno; // tasa de producción diaria
         const diasHabilAno = cantidadEconomicaPedido.diasHabilAno;
-        const C3 = Ch * C1;
+
+        let C3;
+        if (chType === 'porcentaje') {
+            C3 = Ch / 100 * C1;
+        } else {
+            C3 = Ch;
+        }
+
         const R = P * diasHabilAno;
     
         if (P <= 0 || P <= (D / diasHabilAno)) {
@@ -250,8 +270,15 @@ export default function Home() {
         const D = cantidadEconomicaPedido.demandaAnual;
         const C1 = cantidadEconomicaPedido.costoUnitario;
         const C2 = cantidadEconomicaPedido.costoOrdenar;
-        const I = (cantidadEconomicaPedido.tasaCostoRetencionAnualInventario / 100);
-        const C3 = I * C1;
+        const I = cantidadEconomicaPedido.tasaCostoRetencionAnualInventario;
+
+        let C3;
+        if (chType === 'porcentaje') {
+            C3 = (I / 100) * C1;
+        } else {
+            C3 = I;
+        }
+
         // Costo del déficit (falta)
         const C4 = cantidadEconomicaPedido.costoFaltante;
         const L = cantidadEconomicaPedido.tiempoEspera;
@@ -329,29 +356,40 @@ export default function Home() {
                     <h2>Cantidad Económica del Pedido</h2>
                     <br></br>
                     <FormGroup>
-                        <StyledLabel>Demanda anual (D):</StyledLabel>
+                        <StyledLabel>(D) Demanda anual:</StyledLabel>
                         <StyledInput onChange={handleChange} id="demandaAnual" name="demandaAnual" type="number" value={cantidadEconomicaPedido.demandaAnual} />
                     </FormGroup>
                     <FormGroup>
-                        <StyledLabel>Costo de ordenar (Co):</StyledLabel>
+                        <StyledLabel>(C1) Costo unitario :</StyledLabel>
+                        <StyledInput onChange={handleChange} id="costoUnitario" name="costoUnitario" type="number" value={cantidadEconomicaPedido.costoUnitario} />
+                    </FormGroup>
+                    <FormGroup>
+                        <StyledLabel>(C2 / Co) Costo de ordenar :</StyledLabel>
                         <StyledInput onChange={handleChange} id="costoOrdenar" name="costoOrdenar" type="number" value={cantidadEconomicaPedido.costoOrdenar} />
                     </FormGroup>
                     <FormGroup>
-                        <StyledLabel>Tasa sobre el costo de retención anual % (Ch):</StyledLabel>
+                        <StyledLabel>(C3 / Ch) Tasa sobre el costo de retención anual:</StyledLabel>
+                        <StyledSelect onChange={handleChTypeChange} value={chType} id="tipoTasa" name="tipoTasa">
+                            <option value="porcentaje">Porcentaje</option>
+                            <option value="valor">Valor</option>
+                        </StyledSelect>
                         <StyledInput onChange={handleChange} id="tasaCostoRetencionAnualInventario" name="tasaCostoRetencionAnualInventario" type="number" value={cantidadEconomicaPedido.tasaCostoRetencionAnualInventario} />
                     </FormGroup>
+                    {modeloSeleccionado === "compraConDeficit" && (
+                        <FormGroup>
+                            <StyledLabel>(C4 / Cs) Costo por unidad de déficit: </StyledLabel>
+                            <StyledInput onChange={handleChange} id="costoFaltante" name="costoFaltante" type="number" value={cantidadEconomicaPedido.costoFaltante} />
+                        </FormGroup>
+                    )}
                     <FormGroup>
-                        <StyledLabel>Costo unitario (C1):</StyledLabel>
-                        <StyledInput onChange={handleChange} id="costoUnitario" name="costoUnitario" type="number" value={cantidadEconomicaPedido.costoUnitario} />
+                        <StyledLabel>(L) Tiempo de espera (días):</StyledLabel>
+                        <StyledInput onChange={handleChange} id="tiempoEspera" name="tiempoEspera" type="number" value={cantidadEconomicaPedido.tiempoEspera} />
                     </FormGroup>
                     <FormGroup>
                         <StyledLabel>Días hábiles por año:</StyledLabel>
                         <StyledInput onChange={handleChange} id="diasHabilAno" name="diasHabilAno" type="number" value={cantidadEconomicaPedido.diasHabilAno} />
                     </FormGroup>
-                    <FormGroup>
-                        <StyledLabel>Tiempo de espera (días):</StyledLabel>
-                        <StyledInput onChange={handleChange} id="tiempoEspera" name="tiempoEspera" type="number" value={cantidadEconomicaPedido.tiempoEspera} />
-                    </FormGroup>
+                    
                     {modeloSeleccionado === "produccionSinDeficit" && (
                         <FormGroup>
                             <StyledLabel>Tasa de producción anual (P / R): </StyledLabel>
@@ -359,12 +397,6 @@ export default function Home() {
                         </FormGroup>
                     )}
 
-                    {modeloSeleccionado === "compraConDeficit" && (
-                        <FormGroup>
-                            <StyledLabel>Costo por unidad de déficit (Cs): </StyledLabel>
-                            <StyledInput onChange={handleChange} id="costoFaltante" name="costoFaltante" type="number" value={cantidadEconomicaPedido.costoFaltante} />
-                        </FormGroup>
-                    )}
                     <StyledButton type="submit" onClick={
                         modeloSeleccionado === "compra" 
                         ? calcularInventarioCompraOptimo
