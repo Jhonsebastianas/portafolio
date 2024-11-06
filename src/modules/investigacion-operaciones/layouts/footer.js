@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
+import { SOCIAL_MEDIA } from 'src/util/constants'
 import StyledComponent from 'styled-components'
 
 const StyledFooter = StyledComponent.footer`
@@ -62,6 +64,33 @@ const Footer = () => {
     return (
         <StyledFooter className="footer">
             <div className="footer__bg">
+                <div className="footer__container container grid">
+                    <div>
+                        <h1 className="footer__title">Sebastian Agudelo</h1>
+                        <span className="footer__subtitle">Software Architect | Senior Fullstack developer </span>
+                    </div>
+
+                    <div className="footer__socials">
+                        <a target="_blank" className="footer__social"href={SOCIAL_MEDIA.YOUTUBE.URL}
+                            rel="noopener noreferrer" aria-label="Youtube jhonsabastianas">
+                            <i className={`${SOCIAL_MEDIA.YOUTUBE.ICON}`}></i>
+                        </a>
+                        
+                        <a target="_blank" className="footer__social"href={SOCIAL_MEDIA.LINKEDIN.URL}
+                            rel="noopener noreferrer" aria-label="Youtube jhonsabastianas">
+                            <i className={`${SOCIAL_MEDIA.LINKEDIN.ICON}`}></i>
+                        </a>
+                        <a target="_blank" className="footer__social"href={SOCIAL_MEDIA.INSTAGRAM.URL}
+                            rel="noopener noreferrer" aria-label="Youtube jhonsabastianas">
+                            <i className={`${SOCIAL_MEDIA.INSTAGRAM.ICON}`}></i>
+                        </a>
+                        <a target="_blank" className="footer__social"href={SOCIAL_MEDIA.PERSONAL_BLOG.URL}
+                            rel="noopener noreferrer" aria-label="Youtube jhonsabastianas">
+                            <i className={`${SOCIAL_MEDIA.PERSONAL_BLOG.ICON}`}></i> Blog 
+                        </a>
+                    </div>
+                </div>
+
                 <p className="footer__copy">Hecho con ❤️ por Sebastian Agudelo</p>
             </div>
         </StyledFooter>
