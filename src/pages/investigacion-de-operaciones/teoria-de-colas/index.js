@@ -65,17 +65,17 @@ const factorial = (n) => (n === 0 ? 1 : n * factorial(n - 1));
 // Función de cálculo modificada
 const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
   const results = {};
-  if (mu <= lambda) {
-    results.error =
-      "La tasa de servicio (μ) debe ser mayor que la tasa de llegada (λ).";
-    return results;
-  }
 
   const rho = lambda / (mu * k); // Utilización
   results.utilization = rho;
-  results.desocupado = 1 - rho;
 
   if (k === 1) {
+    results.desocupado = 1 - rho;
+    if (mu <= lambda) {
+      results.error =
+        "La tasa de servicio (μ) debe ser mayor que la tasa de llegada (λ).";
+      return results;
+    }
     // Modelo M/M/1
     results.model = "M/M/1";
     results.lq = (lambda * lambda) / (mu * (mu - lambda)); // Lq
@@ -112,6 +112,7 @@ const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
       (_, n) => Math.pow(lambda / mu, n) / factorial(n)
     ).reduce((acc, val) => acc + val, 0);
     results.p0 = 1 / (sum + factor); // P0
+    results.desocupado = results.p0;
     results.lq =
       (results.p0 * Math.pow(lambda / mu, k) * rho) /
       (factorial(k) * Math.pow(1 - rho, 2));
@@ -197,13 +198,14 @@ const QueueCalculator = () => {
             />
           </label>
           <label>
-            Tasa de servicio (μ):
+            Tasa de servicio (μ ):
             <Input
               type="number"
               value={mu}
               onChange={(e) => setMu(e.target.value)}
               required
             />
+            <span> β = 1 / μ</span>
           </label>
           <label>
             Número de servidores (k):
@@ -262,13 +264,15 @@ const QueueCalculator = () => {
                 </ResultItem>
                 <ResultItem>
                   <strong>Utilización (ρ):</strong>{" "}
-                  {results.utilization.toFixed(3)} {" --> "} {(results.utilization * 100).toFixed(3)} %
+                  {results.utilization.toFixed(3)} {" --> "}{" "}
+                  {(results.utilization * 100).toFixed(3)} %
                 </ResultItem>
                 <ResultItem>
                   <strong>
-                    Desocupado (ρ<sub>0</sub>):
+                    Desocupado (P<sub>0</sub>):
                   </strong>{" "}
-                  {results.desocupado.toFixed(3)} {" --> "} {(results.desocupado * 100).toFixed(3)} %
+                  {results.desocupado.toFixed(3)} {" --> "}{" "}
+                  {(results.desocupado * 100).toFixed(3)} %
                 </ResultItem>
                 <ResultItem>
                   <strong>Lq (Promedio de clientes en cola):</strong>{" "}
@@ -280,11 +284,13 @@ const QueueCalculator = () => {
                 </ResultItem>
                 <ResultItem>
                   <strong>Wq (Tiempo promedio en cola):</strong>{" "}
-                  {results.wq.toFixed(3)} / hora {" --> "} {(results.wq * MINUTOS_EN_HORA).toFixed(3)} / minutos
+                  {results.wq.toFixed(3)} / hora {" --> "}{" "}
+                  {(results.wq * MINUTOS_EN_HORA).toFixed(3)} / minutos
                 </ResultItem>
                 <ResultItem>
                   <strong>Ws (Tiempo promedio en el sistema):</strong>{" "}
-                  {results.ws.toFixed(3)} / hora {" --> "} {(results.ws * MINUTOS_EN_HORA).toFixed(3)} / minutos
+                  {results.ws.toFixed(3)} / hora {" --> "}{" "}
+                  {(results.ws * MINUTOS_EN_HORA).toFixed(3)} / minutos
                 </ResultItem>
                 {results.lineaEspera && (
                   <ResultItem>
@@ -335,9 +341,7 @@ const QueueCalculator = () => {
                     </ResultItem>
                     <ResultItem>
                       <strong>Costo total:</strong> ${" "}
-                      {HORAS_DIA_LABORAL *
-                        results.costoTotal.toFixed(3)}{" "}
-                      / día
+                      {HORAS_DIA_LABORAL * results.costoTotal.toFixed(3)} / día
                     </ResultItem>
                   </>
                 )}
