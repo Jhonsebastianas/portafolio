@@ -142,6 +142,7 @@ const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
 };
 
 const HORAS_DIA_LABORAL = 8;
+const MINUTOS_EN_HORA = 60;
 
 // Componente principal
 const QueueCalculator = () => {
@@ -261,29 +262,29 @@ const QueueCalculator = () => {
                 </ResultItem>
                 <ResultItem>
                   <strong>Utilización (ρ):</strong>{" "}
-                  {results.utilization.toFixed(3)}
+                  {results.utilization.toFixed(3)} {" --> "} {(results.utilization * 100).toFixed(3)} %
                 </ResultItem>
                 <ResultItem>
                   <strong>
                     Desocupado (ρ<sub>0</sub>):
                   </strong>{" "}
-                  {results.desocupado.toFixed(3)}
+                  {results.desocupado.toFixed(3)} {" --> "} {(results.desocupado * 100).toFixed(3)} %
                 </ResultItem>
                 <ResultItem>
                   <strong>Lq (Promedio de clientes en cola):</strong>{" "}
-                  {results.lq.toFixed(3)}
+                  {results.lq.toFixed(3)} / hora
                 </ResultItem>
                 <ResultItem>
                   <strong>Ls (Promedio de clientes en el sistema):</strong>{" "}
-                  {results.ls.toFixed(3)}
+                  {results.ls.toFixed(3)} / hora
                 </ResultItem>
                 <ResultItem>
                   <strong>Wq (Tiempo promedio en cola):</strong>{" "}
-                  {results.wq.toFixed(3)} horas
+                  {results.wq.toFixed(3)} / hora {" --> "} {(results.wq * MINUTOS_EN_HORA).toFixed(3)} / minutos
                 </ResultItem>
                 <ResultItem>
                   <strong>Ws (Tiempo promedio en el sistema):</strong>{" "}
-                  {results.ws.toFixed(3)} horas
+                  {results.ws.toFixed(3)} / hora {" --> "} {(results.ws * MINUTOS_EN_HORA).toFixed(3)} / minutos
                 </ResultItem>
                 {results.lineaEspera && (
                   <ResultItem>
