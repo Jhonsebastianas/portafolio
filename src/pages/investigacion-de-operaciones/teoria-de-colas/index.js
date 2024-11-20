@@ -16,7 +16,7 @@ const Title = styled.h1`
 `;
 
 const Form = styled.form`
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -73,6 +73,7 @@ const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
 
   const rho = lambda / (mu * k); // Utilización
   results.utilization = rho;
+  results.desocupado = 1 - rho;
 
   if (k === 1) {
     // Modelo M/M/1
@@ -139,6 +140,8 @@ const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
 
   return results;
 };
+
+const HORAS_DIA_LABORAL = 8;
 
 // Componente principal
 const QueueCalculator = () => {
@@ -258,59 +261,84 @@ const QueueCalculator = () => {
                 </ResultItem>
                 <ResultItem>
                   <strong>Utilización (ρ):</strong>{" "}
-                  {results.utilization.toFixed(2)}
+                  {results.utilization.toFixed(3)}
+                </ResultItem>
+                <ResultItem>
+                  <strong>
+                    Desocupado (ρ<sub>0</sub>):
+                  </strong>{" "}
+                  {results.desocupado.toFixed(3)}
                 </ResultItem>
                 <ResultItem>
                   <strong>Lq (Promedio de clientes en cola):</strong>{" "}
-                  {results.lq.toFixed(2)}
+                  {results.lq.toFixed(3)}
                 </ResultItem>
                 <ResultItem>
                   <strong>Ls (Promedio de clientes en el sistema):</strong>{" "}
-                  {results.ls.toFixed(2)}
+                  {results.ls.toFixed(3)}
                 </ResultItem>
                 <ResultItem>
                   <strong>Wq (Tiempo promedio en cola):</strong>{" "}
-                  {results.wq.toFixed(2)} horas
+                  {results.wq.toFixed(3)} horas
                 </ResultItem>
                 <ResultItem>
                   <strong>Ws (Tiempo promedio en el sistema):</strong>{" "}
-                  {results.ws.toFixed(2)} horas
+                  {results.ws.toFixed(3)} horas
                 </ResultItem>
                 {results.lineaEspera && (
                   <ResultItem>
                     <strong>Línea de espera en t({t}):</strong>{" "}
-                    {results.lineaEspera.toFixed(2)} / trabajadores
+                    {results.lineaEspera.toFixed(3)} / trabajadores
                   </ResultItem>
                 )}
                 {results.costePromedio && (
                   <>
+                    <br></br>
                     <ResultItem>
                       <strong>Costo promedio por trabajo/hora:</strong> ${" "}
-                      {results.costePromedio.toFixed(2)} / trabajo
+                      {results.costePromedio.toFixed(3)} / trabajo
                     </ResultItem>
                     <ResultItem>
                       <strong>Costo promedio por/día:</strong> ${" "}
-                      {8 * 5 * results.costePromedio.toFixed(2)} / día
+                      {HORAS_DIA_LABORAL *
+                        lambda *
+                        results.costePromedio.toFixed(3)}{" "}
+                      / día
                     </ResultItem>
                   </>
                 )}
                 {results.costoEspera && (
-                  <ResultItem>
-                    <strong>Costo de espera:</strong> ${" "}
-                    {results.costoEspera.toFixed(2)}{" "}
-                  </ResultItem>
+                  <>
+                    <br></br>
+                    <ResultItem>
+                      <strong>Costo de espera:</strong> ${" "}
+                      {results.costoEspera.toFixed(3)}{" "}
+                    </ResultItem>
+                  </>
                 )}
                 {results.costoProduccion && (
-                  <ResultItem>
-                    <strong>Costo de producción:</strong> ${" "}
-                    {results.costoProduccion.toFixed(2)}{" "}
-                  </ResultItem>
+                  <>
+                    <br></br>
+                    <ResultItem>
+                      <strong>Costo de producción:</strong> ${" "}
+                      {results.costoProduccion.toFixed(3)}{" "}
+                    </ResultItem>
+                  </>
                 )}
                 {results.costoTotal && (
-                  <ResultItem>
-                    <strong>Costo total:</strong> ${" "}
-                    {results.costoTotal.toFixed(2)}{" "}
-                  </ResultItem>
+                  <>
+                    <br></br>
+                    <ResultItem>
+                      <strong>Costo total:</strong> ${" "}
+                      {results.costoTotal.toFixed(3)} / hora
+                    </ResultItem>
+                    <ResultItem>
+                      <strong>Costo total:</strong> ${" "}
+                      {HORAS_DIA_LABORAL *
+                        results.costoTotal.toFixed(3)}{" "}
+                      / día
+                    </ResultItem>
+                  </>
                 )}
                 {results.nuevoServidor && (
                   <ResultItem>
