@@ -2,7 +2,7 @@ import Layout from "@modules/investigacion-operaciones/layouts/layout";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-// Estilos principales
+// Estilos principales (se mantienen igual)
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -12,10 +12,11 @@ const Container = styled.div`
 
 const Title = styled.h1`
   text-align: center;
-  color: #4caf50;
+  color: var(--title-color);
 `;
 
 const Form = styled.form`
+    margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -31,7 +32,7 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 10px;
   font-size: 16px;
-  background-color: #4caf50;
+  background-color: var(--first-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,8 +59,11 @@ const Error = styled.p`
   font-weight: bold;
 `;
 
-// Funciones de cálculo
-const calculateQueue = (lambda, mu, k) => {
+// Funciones auxiliares
+const factorial = (n) => (n === 0 ? 1 : n * factorial(n - 1));
+
+// Función de cálculo modificada
+const calculateQueue = (lambda, mu, k, cs, t, ce, cp) => {
   const results = {};
   if (mu <= lambda) {
     results.error =
@@ -77,6 +81,27 @@ const calculateQueue = (lambda, mu, k) => {
     results.ls = results.lq + lambda / mu; // Ls
     results.wq = results.lq / lambda; // Wq
     results.ws = results.wq + 1 / mu; // Ws
+    results.cost =
+      k * cs + lambda * results.wq * ce + (lambda * results.ws * cp || 0);
+
+    if (cs || ce || cp) {
+      if (cs) {
+        results.costePromedio = results.ws * cs;
+      }
+      const costoOperacion = k * (cs || 0);
+      const costoEspera = lambda * results.wq * (ce || 0);
+      const costoProduccion = lambda * results.ws * (cp || 0);
+      results.costoTotal = costoOperacion + costoEspera + costoProduccion;
+      if (ce) {
+        results.costoEspera = costoEspera;
+      }
+      if (cp) {
+        results.costoProduccion = lambda * results.ws * (cp || 0);
+      }
+    }
+    if (t) {
+      results.lineaEspera = results.lq * (t || 4); // Línea de espera después de `t` horas
+    }
   } else {
     // Modelo M/M/k
     results.model = "M/M/k";
@@ -92,18 +117,38 @@ const calculateQueue = (lambda, mu, k) => {
     results.ls = results.lq + lambda / mu;
     results.wq = results.lq / lambda;
     results.ws = results.wq + 1 / mu;
+    if (cs || ce || cp) {
+      if (cs) {
+        results.costePromedio = results.ws * cs;
+      }
+      const costoOperacion = k * (cs || 0);
+      const costoEspera = lambda * results.wq * (ce || 0);
+      const costoProduccion = lambda * results.ws * (cp || 0);
+      results.costoTotal = costoOperacion + costoEspera + costoProduccion;
+      if (ce) {
+        results.costoEspera = costoEspera;
+      }
+      if (cp) {
+        results.costoProduccion = lambda * results.ws * (cp || 0);
+      }
+    }
+    if (t) {
+      results.lineaEspera = results.lq * (t || 4); // Línea de espera después de `t` horas
+    }
   }
 
   return results;
 };
-
-const factorial = (n) => (n === 0 ? 1 : n * factorial(n - 1));
 
 // Componente principal
 const QueueCalculator = () => {
   const [lambda, setLambda] = useState("");
   const [mu, setMu] = useState("");
   const [k, setK] = useState("");
+  const [cs, setCs] = useState(""); // Nuevo estado para Cs
+  const [cp, setCp] = useState("");
+  const [ce, setCe] = useState("");
+  const [t, setT] = useState("");
   const [results, setResults] = useState(null);
 
   const handleSubmit = (e) => {
@@ -111,21 +156,30 @@ const QueueCalculator = () => {
     const lambdaNum = parseFloat(lambda);
     const muNum = parseFloat(mu);
     const kNum = parseInt(k, 10);
+    const csNum = cs ? parseFloat(cs) : null; // Cs opcional
 
     if (isNaN(lambdaNum) || isNaN(muNum) || isNaN(kNum)) {
       setResults({ error: "Por favor, ingresa valores numéricos válidos." });
       return;
     }
 
-    const calculatedResults = calculateQueue(lambdaNum, muNum, kNum);
+    const calculatedResults = calculateQueue(
+      lambdaNum,
+      muNum,
+      kNum,
+      csNum,
+      t,
+      ce,
+      cp
+    );
     setResults(calculatedResults);
   };
 
   return (
     <Layout>
-        <br></br>
-        <br></br>
-        <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Container className="container">
         <Title>Calculadora de Teoría de Colas</Title>
         <Form onSubmit={handleSubmit}>
@@ -156,6 +210,40 @@ const QueueCalculator = () => {
               required
             />
           </label>
+          <h2>Datos opcionales</h2>
+          <label>
+            Costo del servicio (Cs) [opcional]:
+            <Input
+              type="number"
+              value={cs}
+              onChange={(e) => setCs(e.target.value)}
+            />
+          </label>
+          <label>
+            Costo de producción por trabajador (Cp) [opcional]:
+            <Input
+              type="number"
+              value={cp}
+              onChange={(e) => setCp(e.target.value)}
+            />
+          </label>
+          <label>
+            Tiempo total del sistema (t) [opcional]:
+            <Input
+              type="number"
+              value={t}
+              onChange={(e) => setT(e.target.value)}
+            />
+          </label>
+          <label>
+            Costo de espera por trabajador (Ce) [opcional]:
+            <Input
+              type="number"
+              value={ce}
+              onChange={(e) => setCe(e.target.value)}
+            />
+          </label>
+
           <Button type="submit">Calcular</Button>
         </Form>
 
@@ -182,12 +270,56 @@ const QueueCalculator = () => {
                 </ResultItem>
                 <ResultItem>
                   <strong>Wq (Tiempo promedio en cola):</strong>{" "}
-                  {results.wq.toFixed(2)} minutos
+                  {results.wq.toFixed(2)} horas
                 </ResultItem>
                 <ResultItem>
                   <strong>Ws (Tiempo promedio en el sistema):</strong>{" "}
-                  {results.ws.toFixed(2)} minutos
+                  {results.ws.toFixed(2)} horas
                 </ResultItem>
+                {results.lineaEspera && (
+                  <ResultItem>
+                    <strong>Línea de espera en t({t}):</strong>{" "}
+                    {results.lineaEspera.toFixed(2)} / trabajadores
+                  </ResultItem>
+                )}
+                {results.costePromedio && (
+                  <>
+                    <ResultItem>
+                      <strong>Costo promedio por trabajo/hora:</strong> ${" "}
+                      {results.costePromedio.toFixed(2)} / trabajo
+                    </ResultItem>
+                    <ResultItem>
+                      <strong>Costo promedio por/día:</strong> ${" "}
+                      {8 * 5 * results.costePromedio.toFixed(2)} / día
+                    </ResultItem>
+                  </>
+                )}
+                {results.costoEspera && (
+                  <ResultItem>
+                    <strong>Costo de espera:</strong> ${" "}
+                    {results.costoEspera.toFixed(2)}{" "}
+                  </ResultItem>
+                )}
+                {results.costoProduccion && (
+                  <ResultItem>
+                    <strong>Costo de producción:</strong> ${" "}
+                    {results.costoProduccion.toFixed(2)}{" "}
+                  </ResultItem>
+                )}
+                {results.costoTotal && (
+                  <ResultItem>
+                    <strong>Costo total:</strong> ${" "}
+                    {results.costoTotal.toFixed(2)}{" "}
+                  </ResultItem>
+                )}
+                {results.nuevoServidor && (
+                  <ResultItem>
+                    <strong>
+                      ¿Es conveniente contratar un nuevo servidor?:
+                    </strong>{" "}
+                    {results.nuevoServidor}
+                  </ResultItem>
+                )}
               </>
             )}
           </ResultContainer>

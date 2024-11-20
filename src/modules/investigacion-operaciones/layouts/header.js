@@ -240,14 +240,14 @@ const Header = () => {
                         <li className="nav__item">
                             <Link href={"/investigacion-de-operaciones/toma-decisiones-con-probabilidad"} className="nav__link">
                                 <a>
-                                    <i className="uil uil-estate nav__icon"></i> Decisiones
+                                    <i className="uil uil-chart-line nav__icon"></i> Decisiones
                                 </a>
                             </Link>
                         </li>
                         <li className="nav__item">
                             <Link href={"/investigacion-de-operaciones/teoria-de-colas"} className="nav__link">
                                 <a>
-                                    <i className="uil uil-estate nav__icon"></i> Teoría de colas
+                                    <i className="uil uil-clock nav__icon"></i> Teoría de colas
                                 </a>
                             </Link>
                         </li>
