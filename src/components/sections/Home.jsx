@@ -102,10 +102,9 @@ const Home = () => {
 
                     <div className="home__data">
                         <h1 className="home__title">Hi, I'am Sebastian</h1>
-                        <h2 className="home__subtitle">Senior Analyst Developer</h2>
+                        <h2 className="home__subtitle">Software architect</h2>
                         <p className="home__description">
-                            Backend and frontend software developer, with development knowledge in IoT,
-                            producing quality work.
+                            Software architect and full stack software developer, with extensive knowledge in web and mobile applications, as well as trainer and content creator, producing quality work.
                         </p>
                         <Button href="#contact">
                             Contact Me <i className="uil uil-message button__icon"></i>
