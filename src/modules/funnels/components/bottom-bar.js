@@ -27,8 +27,12 @@ const Bar = styled.div`
   width: 100%;
   background-color: var(--first-color);
   color: white;
-  padding: 0.75rem 1rem;
+  padding: 0.36rem 1rem;
   z-index: 999;
+
+  @media (max-width: 768px) {
+    padding: 0rem 1rem;
+  }
 `;
 
 const Contenido = styled.div`
@@ -44,6 +48,7 @@ const Contenido = styled.div`
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -60,6 +65,7 @@ const TextosDerecha = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 0.5rem;
   }
 `;
 
@@ -96,5 +102,12 @@ const Boton = styled.button`
   &:hover {
     background-color: white;
     color: black;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    white-space: normal;
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 0.5rem;
   }
 `;
