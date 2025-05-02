@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import HeroWS from "../components/hero-ws";
-import ClavesSection from "../components/claves-section";
+import HeroWS from "./sections/hero-ws";
+import ClavesSection from "./sections/claves-section";
+import TargetAudienceSection from "./sections/target-audience";
+import GiftRegistrationSection from "./sections/gift-registration-section";
+import BottomBar from "@modules/funnels/components/bottom-bar";
 
 // Estilos base
 const Container = styled.div`
@@ -68,10 +71,23 @@ const FooterCTA = styled(Section)`
 `;
 
 const WorkAndStudyView = () => {
+
+  const register = () => {
+    console.log("melo")
+  }
+
   return (
     <Container>
       <HeroWS />
       <ClavesSection />
+      <TargetAudienceSection />
+      <GiftRegistrationSection />
+      <BottomBar
+        textoIzquierda="ENCIENDE TU FUTURO - UN ESTUDIANTE BRILLANTE"
+        textoCentro="EBOOK GRATUITO"
+        textoBoton="LO QUIERO YA"
+        onClick={register}
+      />
       {/* <Section>
         <Title>¿Qué vas a conseguir?</Title>
         <BenefitList>
