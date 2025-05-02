@@ -41,7 +41,11 @@ const Wrapper = styled.section`
   background: linear-gradient(to bottom right, #000, #0a0a0a);
   display: flex;
   justify-content: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 4rem;
+  }
 `;
 
 const Card = styled.div`
