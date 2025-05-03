@@ -68,8 +68,13 @@ const Form = styled.form`
 `;
 
 const InputRow = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Input = styled.input`
@@ -122,7 +127,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const HeroWS = () => {
+const Hero = () => {
   return (
     <HeroContainer>
       <Overlay />
@@ -183,4 +188,4 @@ const HeroWS = () => {
   );
 };
 
-export default HeroWS;
+export default Hero;
