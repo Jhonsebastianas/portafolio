@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
+import Input from "@modules/funnels/components/input";
+import { useState } from "react";
+import InputPhone from "@modules/funnels/components/input-phone";
 
 const HeroContainer = styled.section`
   display: flex;
@@ -78,14 +81,6 @@ const InputRow = styled.div`
   }
 `;
 
-const Input = styled.input`
-  padding: 0.8rem;
-  font-size: 1rem;
-  flex: 1;
-  border: none;
-  border-radius: 4px;
-`;
-
 const CheckboxRow = styled.label`
   display: flex;
   align-items: center;
@@ -129,6 +124,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Hero = () => {
+  const [phone, setPhone] = useState("");
   return (
     <HeroContainer>
       <Overlay />
@@ -139,37 +135,19 @@ const Hero = () => {
         <Subtitle>ebook gratuito</Subtitle>
         <Title>
           <span>Estudia y trabaja</span> <br />
-          Aprende a ser un estudiante exitoso que trabaja, con 7 hábitos poderosos.
+          Aprende a ser un estudiante exitoso que trabaja, con 7 hábitos
+          poderosos.
         </Title>
         {/* <Date>Del martes 8 al lunes 14 de abril 🔥</Date> */}
 
         <Form>
           <InputRow>
             <Input placeholder="Nombre" />
-            <PhoneInput
-            placeholder="311 325 4040"
+            <InputPhone
+              placeholder="311 325 4040"
               country={"co"}
-              inputStyle={{
-                width: "100%",
-                height: "48px",
-                fontSize: "1rem",
-                color: "black",
-                border: "none",
-                borderRadius: "4px",
-              }}
-              buttonStyle={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                border: "none",
-              }}
-              dropdownStyle={{
-                backgroundColor: "#333",
-                color: "white",
-              }}
-              containerStyle={{ flex: 1 }}
-              inputProps={{
-                name: "phone",
-                required: true,
-              }}
+              value={phone}
+              onChange={(phone) => setPhone(phone)}
             />
           </InputRow>
 

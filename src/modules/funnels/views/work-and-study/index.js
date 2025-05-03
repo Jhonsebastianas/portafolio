@@ -4,6 +4,8 @@ import ClavesSection from "./sections/claves-section";
 import TargetAudienceSection from "./sections/target-audience";
 import GiftRegistrationSection from "./sections/gift-registration-section";
 import BottomBar from "@modules/funnels/components/bottom-bar";
+import ModalSection from "./sections/modal-section";
+import { ModalProvider } from "@modules/funnels/context/ModalContext";
 
 // Estilos base
 const Container = styled.div`
@@ -14,23 +16,21 @@ const Container = styled.div`
 
 const WorkAndStudyView = () => {
 
-  const register = () => {
-    console.log("melo")
-  }
-
   return (
-    <Container>
-      <Hero />
-      <ClavesSection />
-      <TargetAudienceSection />
-      <GiftRegistrationSection />
-      <BottomBar
-        textoIzquierda="ENCIENDE TU FUTURO - UN ESTUDIANTE BRILLANTE"
-        textoCentro="EBOOK GRATUITO"
-        textoBoton="LO QUIERO YA"
-        onClick={register}
-      />
-    </Container>
+    <ModalProvider>
+      <Container>
+        <Hero />
+        <ClavesSection />
+        <TargetAudienceSection />
+        <GiftRegistrationSection />
+        <BottomBar
+          textoIzquierda="ENCIENDE TU FUTURO - UN ESTUDIANTE BRILLANTE"
+          textoCentro="EBOOK GRATUITO"
+          textoBoton="LO QUIERO YA"
+        />
+        <ModalSection />
+      </Container>
+    </ModalProvider>
   );
 };
 

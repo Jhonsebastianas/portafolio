@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useModal } from "@modules/funnels/context/ModalContext";
 
 const GiftRegistrationSection = () => {
+  const { openModal } = useModal();
   return (
     <Wrapper>
       <Card>
@@ -18,7 +20,7 @@ const GiftRegistrationSection = () => {
               para planificar la semana ideal, equilibrando estudio, trabajo y
               vida personal sin estrés.
             </Paragraph>
-            <Button>QUIERO LA GUÍA</Button>
+            <Button onClick={openModal}>QUIERO LA GUÍA</Button>
           </TextContent>
           <ImageContent>
             <img

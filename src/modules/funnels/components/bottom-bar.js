@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useModal } from "../context/ModalContext";
 
-const BottomBar = ({ textoIzquierda, textoCentro, textoBoton, onClick }) => {
+const BottomBar = ({ textoIzquierda, textoCentro, textoBoton }) => {
+  const { openModal } = useModal();
   return (
     <Bar>
       <Contenido>
@@ -10,7 +12,7 @@ const BottomBar = ({ textoIzquierda, textoCentro, textoBoton, onClick }) => {
         </TextosIzquierda>
         <TextosDerecha>
           <TextoCentro>{textoCentro}</TextoCentro>
-          <Boton onClick={onClick}>{textoBoton}</Boton>
+          <Boton onClick={openModal}>{textoBoton}</Boton>
         </TextosDerecha>
       </Contenido>
     </Bar>
