@@ -74,6 +74,7 @@ const InputRow = styled.div`
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 `;
 
