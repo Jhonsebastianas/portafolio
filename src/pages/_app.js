@@ -7,7 +7,7 @@ import "@styles/css/swiper-bundle.min.css";
 import "highlight.js/styles/github.css"; // Cambia 'github' por cualquier otro tema predeterminado
 
 import { useRouter } from "next/router";
-import { metaByRoute } from "src/util/metaConfig";
+import { defaultMeta, metaByRoute } from "src/util/metaConfig";
 
 /**
  * Método que genera metricas importantes del proyecto
