@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
 import Input from "@modules/funnels/components/input";
 import { useState } from "react";
 import InputPhone from "@modules/funnels/components/input-phone";
+import Link from "next/link";
 
 const HeroContainer = styled.section`
   display: flex;
@@ -154,7 +154,7 @@ const Hero = () => {
           <Input placeholder="Email" />
           <CheckboxRow>
             <input type="checkbox" required />
-            He leído y <a href="#">acepto la política de privacidad</a>
+            He leído y <Link href={"/politica-de-privacidad"}><a target="_blank">acepto la política de privacidad</a></Link>
           </CheckboxRow>
           <SubmitButton>QUIERO MI EBOOK</SubmitButton>
         </Form>

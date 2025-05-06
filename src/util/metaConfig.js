@@ -13,6 +13,12 @@ export const metaByRoute = {
       "https://www.jhonsebastianas.com/images/funnels/portada_web_image.png",
   },
   // Agrega más rutas si lo necesitas
+  "/politica-de-privacidad": {
+    title: "Políticas de privacidad - Sebastian Agudelo",
+    description: "Políticas de privacidad",
+    image:
+      "https://www.jhonsebastianas.com/images/funnels/portada_web_image.png",
+  },
 };
 
 export const defaultMeta = {
