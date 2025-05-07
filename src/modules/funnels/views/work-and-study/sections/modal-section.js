@@ -28,7 +28,7 @@ const ModalSection = () => {
             <CheckboxContainer>
               <input type="checkbox" />
               He leído y{" "}
-              <PrivacyLink href="#">
+              <PrivacyLink href={"/politica-de-privacidad"} target="_blank">
                 acepto la política de privacidad
               </PrivacyLink>
             </CheckboxContainer>
@@ -84,10 +84,6 @@ const Subtitle = styled.p`
   color: var(--first-color);
   font-weight: bold;
   margin-top: -0.5rem;
-`;
-
-const DateText = styled.p`
-  margin-bottom: 1rem;
 `;
 
 const StyledForm = styled.form`
