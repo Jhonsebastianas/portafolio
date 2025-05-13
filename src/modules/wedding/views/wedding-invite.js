@@ -11,6 +11,37 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     overflow-x: hidden;
   }
+
+  .shimmer {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    color: transparent;
+    background-image: linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.7) 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    background-size: 200% auto;
+    background-position: -100% center;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #fff; /* Hace el texto blanco */
+    animation: shimmer-text 4s infinite;
+  }
+
+  @keyframes shimmer-text {
+    0% {
+      background-position: -100% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+    
 `;
 
 const Container = styled.div`
@@ -200,6 +231,14 @@ const WeddingInvite = () => {
         });
       });
 
+      gsap.to(".shimmer", {
+        y: -4,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
       // Función para el contador de cuenta regresiva
       const interval = setInterval(() => {
         const eventDate = new Date("2025-06-28T00:00:00");
@@ -233,7 +272,9 @@ const WeddingInvite = () => {
         <Hero>
           <HeroContent className="animate">
             <h3>28 de Junio - Iglesia Rionegro</h3>
-            <h1>Natalia & Sebastian</h1>
+            <h1>
+              <span className="shimmer">Natalia & Sebastian</span>
+            </h1>
             <Countdown ref={countdownRef} />
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </HeroContent>
