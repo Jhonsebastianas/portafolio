@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import 'lenis/dist/lenis.css'
-import gsap from "gsap";
+import "lenis/dist/lenis.css";
 import Lenis from "@studio-freight/lenis";
-import HeroZoomScroll from "./sections/hero";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -200,20 +198,41 @@ const WeddingInvite = () => {
   const countdownRef = useRef(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const initAnimation = async () => {
+      const Lenis = (await import("@studio-freight/lenis")).default;
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis();
+      const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
+      requestAnimationFrame(raf);
+
+      gsap.from(".animate", {
+        y: 80,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power3.out",
+      });
+    };
+
+    initAnimation();
+  }, []);
+
+  useEffect(() => {
     const lenis = new Lenis();
     const raf = (time) => {
       lenis.raf(time);
       requestAnimationFrame(raf);
     };
     requestAnimationFrame(raf);
-
-    gsap.from(".animate", {
-      y: 80,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.3,
-      ease: "power3.out",
-    });
 
     const interval = setInterval(() => {
       const eventDate = new Date("2025-06-28T00:00:00");
@@ -240,7 +259,6 @@ const WeddingInvite = () => {
     <>
       <GlobalStyle />
       <Container ref={containerRef}>
-        
         <Hero>
           <HeroContent className="animate">
             <h3>28 de Junio - Iglesia Rionegro</h3>
@@ -248,14 +266,20 @@ const WeddingInvite = () => {
             <Countdown ref={countdownRef} />
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </HeroContent>
-          <HeroImage className="animate" src="/images/wedding/hero_our.png" alt="Pareja" />
+          <HeroImage
+            className="animate"
+            src="/images/wedding/hero_our.png"
+            alt="Pareja"
+          />
         </Hero>
-        <HeroZoomScroll />
 
         <Section alt>
           <h2 className="animate">Nuestra Historia de Amor 💖</h2>
           <StoryWrapper>
-            <StoryImage src="/images/wedding/our_history.JPG" alt="Nuestra Historia" />
+            <StoryImage
+              src="/images/wedding/our_history.JPG"
+              alt="Nuestra Historia"
+            />
             <StoryText>
               <h3>Un camino juntos</h3>
               <p>
