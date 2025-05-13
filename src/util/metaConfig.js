@@ -19,6 +19,12 @@ export const metaByRoute = {
     image:
       "https://www.jhonsebastianas.com/images/funnels/portada_web_image.png",
   },
+  "/wedding/invitation": {
+    title: "Invitación de boda: Naty & Sebas",
+    description: "Estas invitado a nuestra boda",
+    image:
+      "https://www.jhonsebastianas.com/images/wedding/meta_image.png",
+  },
 };
 
 export const defaultMeta = {
