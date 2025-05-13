@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import "lenis/dist/lenis.css";
-import Lenis from "@studio-freight/lenis";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -69,37 +68,6 @@ const HeroImage = styled.img`
     height: auto;
     width: 100%;
     margin-top: 2rem;
-  }
-`;
-
-const Names = styled.h1`
-  font-size: 4.5rem;
-  margin: 0;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-`;
-
-const WeddingDate = styled.h3`
-  font-size: 1.8rem;
-  margin-top: 1rem;
-  color: #ffe6ef;
-`;
-
-const RSVPButton = styled.button`
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 50px;
-  background-color: #f090b7;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #d36d9c;
-    transform: scale(1.05);
   }
 `;
 
@@ -200,13 +168,15 @@ const WeddingInvite = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const initAnimation = async () => {
+    const initAnimationAndCountdown = async () => {
+      // Cargar las librerías de forma dinámica
       const Lenis = (await import("@studio-freight/lenis")).default;
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
 
       gsap.registerPlugin(ScrollTrigger);
 
+      // Inicializar Lenis
       const lenis = new Lenis();
       const raf = (time) => {
         lenis.raf(time);
@@ -214,6 +184,7 @@ const WeddingInvite = () => {
       };
       requestAnimationFrame(raf);
 
+      // Animación de elementos con clase "animate"
       gsap.from(".animate", {
         y: 80,
         opacity: 0,
@@ -221,38 +192,31 @@ const WeddingInvite = () => {
         stagger: 0.3,
         ease: "power3.out",
       });
+
+      // Función para el contador de cuenta regresiva
+      const interval = setInterval(() => {
+        const eventDate = new Date("2025-06-28T00:00:00");
+        const now = new Date();
+        const diff = eventDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        if (countdownRef.current) {
+          countdownRef.current.textContent = `Faltan ${days} días, ${hours}h ${minutes}m ${seconds}s`;
+        }
+      }, 1000);
+
+      // Limpiar al desmontar el componente
+      return () => {
+        lenis.destroy();
+        clearInterval(interval);
+      };
     };
 
-    initAnimation();
-  }, []);
-
-  useEffect(() => {
-    const lenis = new Lenis();
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-
-    const interval = setInterval(() => {
-      const eventDate = new Date("2025-06-28T00:00:00");
-      const now = new Date();
-      const diff = eventDate - now;
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      if (countdownRef.current) {
-        countdownRef.current.textContent = `Faltan ${days} días, ${hours}h ${minutes}m ${seconds}s`;
-      }
-    }, 1000);
-
-    return () => {
-      lenis.destroy();
-      clearInterval(interval);
-    };
+    initAnimationAndCountdown();
   }, []);
 
   return (
