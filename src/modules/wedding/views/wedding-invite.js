@@ -45,6 +45,7 @@ const HeroContent = styled.div`
     font-weight: 700;
     margin-bottom: 1rem;
     color: #fff;
+    text-shadow: 0 0 8px rgba(255, 200, 230, 0.8);
   }
 
   h3 {
@@ -184,13 +185,19 @@ const WeddingInvite = () => {
       };
       requestAnimationFrame(raf);
 
-      // Animación de elementos con clase "animate"
-      gsap.from(".animate", {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.3,
-        ease: "power3.out",
+      // Animación de elementos con clase "animate" al hacer scroll
+      gsap.utils.toArray(".animate").forEach((el) => {
+        gsap.from(el, {
+          y: 80,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+            toggleActions: "play none none none",
+          },
+        });
       });
 
       // Función para el contador de cuenta regresiva
@@ -226,7 +233,7 @@ const WeddingInvite = () => {
         <Hero>
           <HeroContent className="animate">
             <h3>28 de Junio - Iglesia Rionegro</h3>
-            <h1>Natalia & Jhon</h1>
+            <h1>Natalia & Sebastian</h1>
             <Countdown ref={countdownRef} />
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </HeroContent>
