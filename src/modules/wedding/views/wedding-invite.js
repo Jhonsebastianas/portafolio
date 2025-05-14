@@ -258,13 +258,25 @@ const FancyCountdown = styled.div`
     color: #8c5c73;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 500px) {
     justify-content: center;
+    gap: 0.5rem;
+
     .unit {
-      min-width: 80px;
-      padding: 0.75rem;
+      min-width: 65px;
+      padding: 0.5rem 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .number {
+      font-size: 1.4rem;
+    }
+
+    .label {
+      font-size: 0.7rem;
     }
   }
+
 `;
 
 const Gallery = styled.div`
