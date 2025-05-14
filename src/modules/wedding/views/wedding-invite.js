@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import "lenis/dist/lenis.css";
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
   body {
     margin: 0;
     padding: 0;
@@ -10,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
     background-color: #fef6f9;
     color: #fff;
     overflow-x: hidden;
+  }
+
+  .cursive {
+    //font-family: 'Great Vibes', cursive;
+    font-family: 'Playfair Display', cursive;
   }
 
   .shimmer {
@@ -41,7 +48,60 @@ const GlobalStyle = createGlobalStyle`
       background-position: 200% center;
     }
   }
-    
+
+  // CONTADOR
+
+  @keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -150% center;
+  }
+  100% {
+    background-position: 150% center;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #d4af37 100%, /* dorado */
+    #ffffff 100%
+  );
+  background-size: 150% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s infinite;
+}
+
+
+`;
+
+export const CeremonyInfo = styled.p`
+  font-family: "Great Vibes", cursive;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.7); /* Blanco suave */
+  text-align: center;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+
+  background: linear-gradient(to right, #f5e3b3, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 `;
 
 const Container = styled.div`
@@ -63,7 +123,7 @@ const Hero = styled.section`
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 8rem 2rem 2rem 2rem;
   }
 `;
 
@@ -77,12 +137,6 @@ const HeroContent = styled.div`
     margin-bottom: 1rem;
     color: #fff;
     text-shadow: 0 0 8px rgba(255, 200, 230, 0.8);
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    color: #ffe6ef;
-    margin-bottom: 2rem;
   }
 `;
 
@@ -164,9 +218,53 @@ const StoryText = styled.div`
   }
 `;
 
-const Countdown = styled.div`
-  font-size: 1.5rem;
+const FancyCountdown = styled.div`
+  display: flex;
+  gap: 1rem;
   margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .unit {
+    background: #fff;
+    color: #8c5c73;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 100px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #5e2c45;
+    animation: float 3s ease-in-out infinite;
+    &.shimmer-text {
+      animation: shimmer 5s infinite, float 3s ease-in-out infinite;
+    }
+  }
+
+  .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8c5c73;
+  }
+
+  @media (max-width: 480px) {
+    justify-content: center;
+    .unit {
+      min-width: 80px;
+      padding: 0.75rem;
+    }
+  }
 `;
 
 const Gallery = styled.div`
@@ -195,7 +293,14 @@ const MapEmbed = styled.iframe`
 
 const WeddingInvite = () => {
   const containerRef = useRef(null);
-  const countdownRef = useRef(null);
+  const textRef = useRef(null);
+
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -239,6 +344,14 @@ const WeddingInvite = () => {
         ease: "sine.inOut",
       });
 
+      gsap.from(textRef.current, {
+        opacity: 0,
+        y: -30,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+
       // Función para el contador de cuenta regresiva
       const interval = setInterval(() => {
         const eventDate = new Date("2025-06-28T00:00:00");
@@ -250,9 +363,7 @@ const WeddingInvite = () => {
         const minutes = Math.floor((diff / 1000 / 60) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
 
-        if (countdownRef.current) {
-          countdownRef.current.textContent = `Faltan ${days} días, ${hours}h ${minutes}m ${seconds}s`;
-        }
+        setCountdown({ days, hours, minutes, seconds });
       }, 1000);
 
       // Limpiar al desmontar el componente
@@ -271,11 +382,32 @@ const WeddingInvite = () => {
       <Container ref={containerRef}>
         <Hero>
           <HeroContent className="animate">
-            <h3>28 de Junio - Iglesia Rionegro</h3>
-            <h1>
+            <div ref={textRef}>
+              <CeremonyInfo>28 de junio de 2025</CeremonyInfo>
+              <CeremonyInfo>Parroquia María Madre de Dios</CeremonyInfo>
+            </div>
+            <h1 className="cursive">
               <span className="shimmer">Natalia & Sebastian</span>
             </h1>
-            <Countdown ref={countdownRef} />
+            <FancyCountdown>
+              <div className="unit">
+                <span className="number shimmer-text">{countdown.days}</span>
+                <span className="label">Días</span>
+              </div>
+              <div className="unit">
+                <span className="number shimmer-text">{countdown.hours}</span>
+                <span className="label">Horas</span>
+              </div>
+              <div className="unit">
+                <span className="number shimmer-text">{countdown.minutes}</span>
+                <span className="label">Minutos</span>
+              </div>
+              <div className="unit">
+                <span className="number shimmer-text">{countdown.seconds}</span>
+                <span className="label">Segundos</span>
+              </div>
+            </FancyCountdown>
+
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </HeroContent>
           <HeroImage
