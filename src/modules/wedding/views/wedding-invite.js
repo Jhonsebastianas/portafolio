@@ -384,7 +384,6 @@ const WeddingInvite = () => {
           <HeroContent className="animate">
             <div ref={textRef}>
               <CeremonyInfo>28 de junio de 2025</CeremonyInfo>
-              <CeremonyInfo>Parroquia María Madre de Dios</CeremonyInfo>
             </div>
             <h1 className="cursive">
               <span className="shimmer">Natalia & Sebastian</span>
