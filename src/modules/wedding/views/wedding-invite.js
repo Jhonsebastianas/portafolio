@@ -27,8 +27,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .cursive {
-    //font-family: 'Great Vibes', cursive;
-    font-family: 'Playfair Display', cursive;
+    font-family: 'Great Vibes', cursive;;
   }
 
   .shimmer {
