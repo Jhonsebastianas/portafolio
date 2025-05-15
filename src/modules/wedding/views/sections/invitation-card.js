@@ -1,12 +1,8 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styled from "styled-components";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const InvitationCardWrapper = styled.section`
   display: flex;
@@ -25,7 +21,7 @@ const InvitationCardWrapper = styled.section`
     opacity: 0;
     transform: translateY(100px);
     z-index: 2;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
 
   .intro {
@@ -35,14 +31,14 @@ const InvitationCardWrapper = styled.section`
   }
 
   .our-wedding {
-    font-family: 'Great Vibes', cursive;
+    font-family: "Great Vibes", cursive;
     font-size: 1.8rem;
     color: #b89d57;
     margin-bottom: 0.5rem;
   }
 
   .names {
-    font-family: 'Great Vibes', cursive;
+    font-family: "Great Vibes", cursive;
     font-size: 2.5rem;
     color: #4a6fa5;
     margin-bottom: 1rem;
@@ -99,7 +95,7 @@ const InvitationCardWrapper = styled.section`
   }
 
   .footer {
-    font-family: 'Great Vibes', cursive;
+    font-family: "Great Vibes", cursive;
     font-size: 1.6rem;
     color: #b89d57;
   }
@@ -120,7 +116,14 @@ export default function InvitationCard() {
   }, [searchParams]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    if (typeof window === "undefined") return;
+
+    const initAnimations = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      gsap.registerPlugin(ScrollTrigger);
+
       gsap.to(cardRef.current, {
         scrollTrigger: {
           trigger: cardRef.current,
@@ -132,28 +135,28 @@ export default function InvitationCard() {
         duration: 1,
         ease: "power3.out",
       });
-    });
+    };
 
-    return () => ctx.revert();
+    initAnimations();
   }, []);
 
   return (
     <InvitationCardWrapper>
       <div className="card" ref={cardRef}>
         <div className="intro">
-          Tenemos el gusto de invitarte en este día tan importante de nuestras vidas
+          Tenemos el gusto de invitarte en este día tan importante de nuestras
+          vidas
         </div>
         <div className="our-wedding">Nuestra Boda</div>
         <div className="names">Natalia y Sebastián</div>
         <div className="note">
-          Este día muy especial estaremos junto a nuestros seres queridos, por eso tenemos el gusto de invitarte.
+          Este día muy especial estaremos junto a nuestros seres queridos, por
+          eso tenemos el gusto de invitarte.
           <br />
           <br />
-          <div className="footer">
-            {name && name || "invitado especial"}
-          </div>
+          <div className="footer">{(name && name) || "invitado especial"}</div>
           <br />
-          {adults && `invitados: ${adults}` || ""}
+          {(adults && `invitados: ${adults}`) || ""}
         </div>
 
         <div className="date-time">
