@@ -1,17 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import "lenis/dist/lenis.css";
+import InvitationCard from "./sections/invitation-card";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap');
 
-  body {
+  html, body {
     margin: 0;
     padding: 0;
+    scroll-behavior: auto; /* evitar conflicto con Lenis */
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
     font-family: 'Playfair Display', serif;
     background-color: #fef6f9;
     color: #fff;
-    overflow-x: hidden;
   }
 
   .cursive {
@@ -276,7 +289,6 @@ const FancyCountdown = styled.div`
       font-size: 0.7rem;
     }
   }
-
 `;
 
 const Gallery = styled.div`
@@ -326,7 +338,11 @@ const WeddingInvite = () => {
       gsap.registerPlugin(ScrollTrigger);
 
       // Inicializar Lenis
-      const lenis = new Lenis();
+      const lenis = new Lenis({
+        smooth: true,
+        lerp: 0.08,
+        smoothTouch: false,
+      });
       const raf = (time) => {
         lenis.raf(time);
         requestAnimationFrame(raf);
@@ -427,6 +443,10 @@ const WeddingInvite = () => {
             alt="Pareja"
           />
         </Hero>
+        <Section>
+          <h2 className="animate">Nuestro invitado especial 💍</h2>
+          <InvitationCard />
+        </Section>
 
         <Section alt>
           <h2 className="animate">Nuestra Historia de Amor 💖</h2>
