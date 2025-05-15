@@ -4,7 +4,6 @@ import "lenis/dist/lenis.css";
 import InvitationCard from "./sections/invitation-card";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap');
 
   html, body {
     margin: 0;

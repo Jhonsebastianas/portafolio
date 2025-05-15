@@ -13,16 +13,18 @@ const InvitationCardWrapper = styled.section`
 
   .card {
     background: rgba(255, 255, 255, 0.9);
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
+    margin: 1rem; /* NUEVO */
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     max-width: 500px;
+    width: 100%; /* NUEVO */
+    box-sizing: border-box; /* NUEVO */
     text-align: center;
-    opacity: 0;
-    transform: translateY(100px);
-    z-index: 2;
-    font-family: "Playfair Display", serif;
-  }
+    overflow-wrap: break-word; /* NUEVO */
+    word-break: break-word;     /* NUEVO */
+    }
+
 
   .intro {
     font-size: 1rem;
@@ -98,6 +100,8 @@ const InvitationCardWrapper = styled.section`
     font-family: "Great Vibes", cursive;
     font-size: 1.6rem;
     color: #b89d57;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 `;
 
@@ -109,10 +113,12 @@ export default function InvitationCard() {
   const [adults, setAdults] = useState("");
 
   useEffect(() => {
-    const nameParam = searchParams.name || "invitado especial";
-    const adultsParam = searchParams.adults;
+    const nameParam = decodeURIComponent(searchParams.name || "invitado especial");
+    const adultsParam = decodeURIComponent(searchParams.adults);
     setName(nameParam);
-    setAdults(adultsParam);
+    if (!adultsParam) {
+        setAdults(adultsParam);
+    }
   }, [searchParams]);
 
   useEffect(() => {
