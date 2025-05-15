@@ -25,6 +25,12 @@ export const metaByRoute = {
     image:
       "https://www.jhonsebastianas.com/images/wedding/meta_image.png",
   },
+  "/wedding/generate-invitation": {
+    title: "Generar invitación de boda: Naty & Sebas",
+    description: "genera invitación de bodas",
+    image:
+      "https://www.jhonsebastianas.com/images/wedding/meta_image.png",
+  },
 };
 
 export const defaultMeta = {
