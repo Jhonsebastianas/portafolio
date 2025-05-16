@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import "lenis/dist/lenis.css";
 import InvitationCard from "./sections/invitation-card";
 import LoveStory from "./sections/LoveStory";
+import WeddingTimeline from "./sections/WeddingTimeline";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -445,8 +446,11 @@ const WeddingInvite = () => {
         <Section alt>
           <LoveStory />
         </Section>
-        <Section >
-          <h2 className="animate">Nuestro invitado especial 💍</h2>
+        <Section>
+          <WeddingTimeline />
+        </Section>
+        <Section alt>
+          <h2 className="animate">Estas invitado 💍</h2>
           <InvitationCard />
         </Section>
 
@@ -459,7 +463,7 @@ const WeddingInvite = () => {
           </Gallery>
         </Section> */}
 
-        <Section alt>
+        <Section>
           <h2 className="animate">Ubicación 📍</h2>
           <p className="animate">
             La ceremonia tendrá lugar en la hermosa Parroquia María Madre de

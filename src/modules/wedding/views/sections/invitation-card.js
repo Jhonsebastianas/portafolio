@@ -22,9 +22,8 @@ const InvitationCardWrapper = styled.section`
     box-sizing: border-box; /* NUEVO */
     text-align: center;
     overflow-wrap: break-word; /* NUEVO */
-    word-break: break-word;     /* NUEVO */
-    }
-
+    word-break: break-word; /* NUEVO */
+  }
 
   .intro {
     font-size: 1rem;
@@ -103,6 +102,14 @@ const InvitationCardWrapper = styled.section`
     word-break: break-word;
     overflow-wrap: break-word;
   }
+
+  .invitados {
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    color: #b89d57;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
 `;
 
 export default function InvitationCard() {
@@ -113,11 +120,13 @@ export default function InvitationCard() {
   const [adults, setAdults] = useState("");
 
   useEffect(() => {
-    const nameParam = decodeURIComponent(searchParams.name || "invitado especial");
+    const nameParam = decodeURIComponent(
+      searchParams.name || "invitado especial"
+    );
     const adultsParam = decodeURIComponent(searchParams.adults);
     setName(nameParam);
     if (!adultsParam) {
-        setAdults(adultsParam);
+      setAdults(adultsParam);
     }
   }, [searchParams]);
 
@@ -160,7 +169,9 @@ export default function InvitationCard() {
           eso tenemos el gusto de invitarte.
           <br />
           <br />
-          <div className="footer">{(name && name) || "invitado especial"}</div>
+          <div className="invitados">
+            {(name && name) || "invitado especial"}
+          </div>
           <br />
           {(adults && `invitados: ${adults}`) || ""}
         </div>
