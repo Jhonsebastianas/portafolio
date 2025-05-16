@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import "lenis/dist/lenis.css";
 import InvitationCard from "./sections/invitation-card";
+import LoveStory from "./sections/LoveStory";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -441,52 +442,32 @@ const WeddingInvite = () => {
             alt="Pareja"
           />
         </Hero>
-        <Section>
+        <Section alt>
+          <LoveStory />
+        </Section>
+        <Section >
           <h2 className="animate">Nuestro invitado especial 💍</h2>
           <InvitationCard />
         </Section>
 
-        <Section alt>
-          <h2 className="animate">Nuestra Historia de Amor 💖</h2>
-          <StoryWrapper>
-            <StoryImage
-              src="/images/wedding/our_history.JPG"
-              alt="Nuestra Historia"
-            />
-            <StoryText>
-              <h3>Un camino juntos</h3>
-              <p>
-                Desde la primera mirada hasta este momento mágico, nuestra
-                historia ha estado llena de aventuras, sueños compartidos y amor
-                profundo. El 28 de junio será un nuevo capítulo de nuestro
-                cuento de hadas, y queremos compartirlo contigo.
-              </p>
-              <p>
-                Gracias por acompañarnos en este viaje. Cada paso ha sido más
-                hermoso porque tú has estado ahí.
-              </p>
-            </StoryText>
-          </StoryWrapper>
-        </Section>
-
-        <Section>
+        {/* <Section>
           <h2 className="animate">Momentos especiales ✨</h2>
           <Gallery>
             <Image src="/img/photo1.jpg" alt="Foto 1" />
             <Image src="/img/photo2.jpg" alt="Foto 2" />
             <Image src="/img/photo3.jpg" alt="Foto 3" />
           </Gallery>
-        </Section>
+        </Section> */}
 
         <Section alt>
           <h2 className="animate">Ubicación 📍</h2>
           <p className="animate">
-            La ceremonia tendrá lugar en la hermosa Iglesia de Rionegro. ¡Te
-            esperamos para celebrar juntos!
+            La ceremonia tendrá lugar en la hermosa Parroquia María Madre de
+            Dios, de Rionegro ¡Te esperamos para celebrar juntos!
           </p>
           <MapEmbed
             className="animate"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.8416474421326!2d-75.37913068523753!3d6.154898527710334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4682f3b78f015d%3A0xf31d64e2f6f56345!2sIglesia%20San%20Nicol%C3%A1s%20de%20Rionegro!5e0!3m2!1ses-419!2sco!4v1622055435390!5m2!1ses-419!2sco"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1809.291104120588!2d-75.45135551239612!3d6.1763465117139615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e469dc47dd516bd%3A0x9718733a0431c90c!2sParroquia%20Mar%C3%ADa%20Madre%20de%20Dios!5e0!3m2!1ses!2sco!4v1747373606981!5m2!1ses!2sco"
             allowFullScreen=""
             loading="lazy"
           ></MapEmbed>
