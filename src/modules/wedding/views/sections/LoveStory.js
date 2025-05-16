@@ -119,7 +119,7 @@ const LoveStory = () => {
 
         <StoryBlock className="story-block" reverse>
           <StoryImage
-            src="/images/wedding/first_date.jpg"
+            src="/images/wedding/first_date.JPG"
             alt="Primera Cita"
             reverse
           />
