@@ -80,7 +80,7 @@ const SoundToggle = () => {
   return (
     <Wrapper onClick={toggleSound} isPlaying={isPlaying}>
       SOUND <span className="dot" /> {isPlaying ? "ON" : "OFF"}
-      <audio ref={audioRef} loop src="/audio/music_page.webm" preload="auto" />
+      <audio ref={audioRef} loop src="/audio/music_page.webm" preload="none" />
     </Wrapper>
   );
 };

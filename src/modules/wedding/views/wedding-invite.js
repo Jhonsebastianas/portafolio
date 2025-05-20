@@ -370,12 +370,11 @@ const WeddingInvite = () => {
         <Section>
           <h2 className="animate">Ubicación 📍</h2>
           <p className="animate">
-            La ceremonia tendrá lugar en la hermosa Parroquia María Madre de
-            Dios, de Rionegro ¡Te esperamos para celebrar juntos!
+            La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te esperamos para celebrar juntos!
           </p>
           <MapEmbed
             className="animate"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1809.291104120588!2d-75.45135551239612!3d6.1763465117139615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e469dc47dd516bd%3A0x9718733a0431c90c!2sParroquia%20Mar%C3%ADa%20Madre%20de%20Dios!5e0!3m2!1ses!2sco!4v1747373606981!5m2!1ses!2sco"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0486590478913!2d-75.61230465008174!3d6.257320710101229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442970f81f3d8f%3A0x4d3ebe01bb4c168!2sParroquia%20Santa%20Lucia!5e0!3m2!1ses!2sco!4v1747772447425!5m2!1ses!2sco"
             allowFullScreen=""
             loading="lazy"
           ></MapEmbed>
