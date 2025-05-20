@@ -13,7 +13,6 @@ const StorySection = styled.section`
   }
 
   .cursive {
-    //font-family: "Updock", serif;
     font-family: "Luxurious Script", cursive;
   }
 
@@ -97,6 +96,7 @@ const StoryContent = styled.div`
   }
 
   p {
+    text-align: justify;
     font-size: 1.1rem;
     line-height: 1.7;
     color: #5e4c58;
@@ -149,12 +149,12 @@ const LoveStory = () => {
             <h3>Primer Encuentro</h3>
             <p>
               Dios tenía preparado nuestro encuentro en su casa, la sagrada
-              familia, nos conocimos en el grupo universitario, una muchacha
+              familia, nos conocimos en el grupo universitario, una niña
               liderando el grupo, y un chico que llegaba nuevo al barrio, fueron
               dos los encuentros que pasaron, hasta que en una actividad…
-              ocurrió una mirada, una de esas miradas que cuando se chocan en el
-              momento preciso… le dan sentido a todo, fue el clic que inició
-              nuestra historia de dos.
+              ocurrió una mirada, una de esas miradas que cuando se cruzan en el
+              momento preciso, le dan sentido a todo, fue el clic que inició
+              nuestra historia de amor.
             </p>
           </StoryContent>
         </StoryBlock>
@@ -166,14 +166,16 @@ const LoveStory = () => {
             reverse
           />
           <StoryContent>
-            <h3>Primera Cita</h3>
+            <h3>
+              Primera Cita <i class="uil uil-heart"></i>
+            </h3>
             <p>
-              Acordamos encontrarnos a las 3 p.m. en la Ruana para tomar un café
-              conversar y conocernos, ella estaba radiante ese día, sus ojos
+              Acordaron encontrarse a las 3 p.m. en La Ruana para tomar un café
+              conversar y conocerse, ella estaba radiante ese día, sus ojos
               brillaban y cada peca de su cuerpo adornaba perfectamente su piel,
               él estaba muy guapo, y con una sonrisa encantadora; luego de
-              hablar y sentir la conexión más especial, nos dimos nuestro primer
-              beso 🙈, 4 horas pasaron, y se sintieron como 5 minutos, una
+              hablar y sentir la conexión más especial, se dieron nuestro primer
+              beso. Pasaron unas horas, y se sintieron como 5 minutos, una
               primera cita espectacular.
             </p>
           </StoryContent>
@@ -192,7 +194,7 @@ const LoveStory = () => {
 
         <StoryBlock className="story-block">
           <StoryImage
-            src="/images/wedding/wedding_day.png"
+            src="/images/wedding/wedding_day.jpg"
             alt="Día de la Boda"
           />
           <StoryContent>

@@ -163,7 +163,7 @@ export default function InvitationCard() {
           vidas
         </div>
         <div className="our-wedding">Nuestra Boda</div>
-        <div className="names">Natalia y Sebastián</div>
+        <div className="names">Sebastian y Natalia</div>
         <div className="note">
           Este día muy especial estaremos junto a nuestros seres queridos, por
           eso tenemos el gusto de invitarte.
