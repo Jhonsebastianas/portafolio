@@ -1,4 +1,3 @@
-// components/SoundToggle.js
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
@@ -27,37 +26,61 @@ const Wrapper = styled.div`
 const SoundToggle = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   useEffect(() => {
-    // Autoplay al cargar la página
-    const audio = audioRef.current;
-    const playAudio = () => {
-      if (audio) {
+    const unlockAudio = () => {
+      if (!isUnlocked && audioRef.current) {
+        const audio = audioRef.current;
         audio.volume = 0.5;
-        audio.play().catch((err) => {
-          console.warn("Autoplay bloqueado, el usuario debe interactuar.");
-        });
+
+        audio
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            setIsUnlocked(true);
+          })
+          .catch((err) => {
+            console.warn("Bloqueado por autoplay. Esperando interacción.", err);
+          });
       }
     };
-    playAudio();
-  }, []);
+
+    // Solo activa al primer clic o tecla
+    const handleFirstInteraction = () => {
+      unlockAudio();
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
+    };
+
+    document.addEventListener("click", handleFirstInteraction);
+    document.addEventListener("keydown", handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
+    };
+  }, [isUnlocked]);
 
   const toggleSound = () => {
     const audio = audioRef.current;
-    if (audio) {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        audio.play();
-      }
-      setIsPlaying(!isPlaying);
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch((err) => {
+        console.warn("Error al reproducir:", err);
+      });
     }
+
+    setIsPlaying(!isPlaying);
   };
 
   return (
     <Wrapper onClick={toggleSound} isPlaying={isPlaying}>
       SOUND <span className="dot" /> {isPlaying ? "ON" : "OFF"}
-      <audio ref={audioRef} loop src="/audio/music_page.webm" />
+      <audio ref={audioRef} loop src="/audio/music_page.webm" preload="auto" />
     </Wrapper>
   );
 };
