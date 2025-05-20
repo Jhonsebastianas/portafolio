@@ -4,6 +4,7 @@ import "lenis/dist/lenis.css";
 import InvitationCard from "./sections/invitation-card";
 import LoveStory from "./sections/LoveStory";
 import WeddingTimeline from "./sections/WeddingTimeline";
+import SoundToggle from "../components/SoundToggle";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -301,6 +302,7 @@ const WeddingInvite = () => {
 
   return (
     <>
+      <SoundToggle />
       <GlobalStyle />
       <Container ref={containerRef}>
         <Hero>
