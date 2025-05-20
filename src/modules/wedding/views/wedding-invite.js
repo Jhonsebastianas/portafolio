@@ -102,11 +102,11 @@ const GlobalStyle = createGlobalStyle`
 
 export const CeremonyInfo = styled.p`
   font-family: "Great Vibes", cursive;
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.7); /* Blanco suave */
+  font-size: clamp(1.25rem, 4vw, 2.5rem);
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
   letter-spacing: 0.5px;
   text-shadow: 0 1px 4px rgba(255, 255, 255, 0.25);
 
@@ -421,7 +421,7 @@ const WeddingInvite = () => {
         <Hero>
           <HeroContent className="animate">
             <h1 className="cursive">
-              <span className="shimmer">Natalia & Sebastian</span>
+              <span className="shimmer">Sebastian & Natalia</span>
             </h1>
             <div ref={textRef}>
               <CeremonyInfo>
