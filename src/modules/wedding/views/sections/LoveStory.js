@@ -7,9 +7,44 @@ const StorySection = styled.section`
   overflow: hidden;
 
   h2 {
-    font-size: 3rem;
+    font-size: 6rem !important;
     margin-bottom: 3rem;
-    color: #8c5c73;
+    color: #9d7d1e;
+  }
+
+  .cursive {
+    //font-family: "Updock", serif;
+    font-family: "Luxurious Script", cursive;
+  }
+
+  .h2-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 6rem !important;
+      margin: 0;
+    }
+
+    .h2-icon {
+      height: 100px;
+      object-fit: contain;
+      margin-top: 0.2em;
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 3.5rem !important;
+      }
+
+      .h2-icon {
+        height: 70px;
+      }
+    }
   }
 `;
 
@@ -57,7 +92,7 @@ const StoryContent = styled.div`
 
   h3 {
     font-size: 2rem;
-    color: #8c5c73;
+    color: #9d7d1e;
     margin-bottom: 1rem;
   }
 
@@ -96,7 +131,14 @@ const LoveStory = () => {
 
   return (
     <StorySection ref={sectionRef}>
-      <h2 className="animate">Nuestra Historia 💕</h2>
+      <div className="h2-with-icon">
+        <h2 className="animate cursive">Nuestra Historia</h2>
+        <img
+          src="/images/wedding/items/rosario.png"
+          alt="Icono"
+          className="animate h2-icon"
+        />
+      </div>
       <StoryContainer>
         <StoryBlock className="story-block">
           <StoryImage
