@@ -189,7 +189,7 @@ export default function InvitationCard() {
           </div>
         </div>
 
-        <div className="address">Parroquia María Madre de Dios, Rionegro</div>
+        <div className="address">Parroquia Santa Lucia, Rionegro</div>
         <div className="confirm">Confirmar asistencia al: (304) 658-8830</div>
         <div className="footer">¡Te esperamos!</div>
       </div>

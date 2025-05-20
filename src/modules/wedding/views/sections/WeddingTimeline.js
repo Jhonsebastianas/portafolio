@@ -105,7 +105,7 @@ const WeddingTimeline = () => {
             <img src="/images/wedding/ceremony.png" alt="Ceremony" />
           </div>
           <div className="time">3:00 PM</div>
-          <div className="location">Parroquia María Madre de Dios</div>
+          <div className="location">Parroquia Santa Lucia</div>
         </EventCard>
         <EventCard className="event">
           <h3>El Brindis</h3>
@@ -114,7 +114,7 @@ const WeddingTimeline = () => {
             <img src="/images/wedding/brindis.png" alt="Brindis" />
           </div>
           <div className="time">5:00 PM</div>
-          <div className="location">Parroquia María Madre de Dios</div>
+          <div className="location">Parroquia Santa Lucia</div>
         </EventCard>
       </div>
     </TimelineWrapper>
