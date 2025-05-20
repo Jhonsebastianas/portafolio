@@ -14,10 +14,12 @@ class MyDocument extends Document {
                     {/*manifest.json provides metadata used when your web app is installed on a
              user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/ */}
                     <link rel="manifest" href="/manifest.json" />
+                    {/** Google Fonts */}
                     <link
                         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap"
                         rel="stylesheet"
                     />
+                    <link href="https://fonts.googleapis.com/css2?family=Updock&display=swap" rel="stylesheet" />
                     {/** scripts */}
                 </Head>
                 <body className="my-body-class">

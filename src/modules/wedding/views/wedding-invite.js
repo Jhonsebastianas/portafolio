@@ -29,13 +29,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .cursive {
-    font-family: 'Great Vibes', cursive;;
+    font-family: "Updock", cursive;
   }
 
   .shimmer {
     position: relative;
     display: inline-block;
-    font-weight: bold;
+    //font-weight: bold;
     color: transparent;
     background-image: linear-gradient(
       120deg,
@@ -108,7 +108,7 @@ export const CeremonyInfo = styled.p`
   margin-bottom: 0.5rem;
   margin-top: 2rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.25);
 
   background: linear-gradient(to right, #f5e3b3, #ffffff);
   background-clip: text;
@@ -143,13 +143,23 @@ const Hero = styled.section`
 const HeroContent = styled.div`
   max-width: 600px;
   z-index: 2;
+  padding: 0 1rem; /* Asegura algo de padding lateral */
 
   h1 {
-    font-size: 4rem;
-    font-weight: 700;
+    font-size: clamp(2.5rem, 10vw, 10rem); /* Adaptativo */
+    text-align: center;
+    font-weight: 500;
     margin-bottom: 1rem;
     color: #fff;
-    text-shadow: 0 0 8px rgba(255, 200, 230, 0.8);
+    text-shadow: 0 0 8px rgba(255, 250, 250, 0.8);
+    word-break: break-word;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: clamp(7rem, 8vw, 5rem); /* Opcional: más suave en tablets */
+    }
   }
 `;
 
@@ -410,30 +420,15 @@ const WeddingInvite = () => {
       <Container ref={containerRef}>
         <Hero>
           <HeroContent className="animate">
-            <div ref={textRef}>
-              <CeremonyInfo>28 de junio de 2025</CeremonyInfo>
-            </div>
             <h1 className="cursive">
               <span className="shimmer">Natalia & Sebastian</span>
             </h1>
-            <FancyCountdown>
-              <div className="unit">
-                <span className="number shimmer-text">{countdown.days}</span>
-                <span className="label">Días</span>
-              </div>
-              <div className="unit">
-                <span className="number shimmer-text">{countdown.hours}</span>
-                <span className="label">Horas</span>
-              </div>
-              <div className="unit">
-                <span className="number shimmer-text">{countdown.minutes}</span>
-                <span className="label">Minutos</span>
-              </div>
-              <div className="unit">
-                <span className="number shimmer-text">{countdown.seconds}</span>
-                <span className="label">Segundos</span>
-              </div>
-            </FancyCountdown>
+            <div ref={textRef}>
+              <CeremonyInfo>
+                "Por sobre todas las cosas, vístanse de amor, que es el vínculo
+                perfecto." — Colosenses 3:14
+              </CeremonyInfo>
+            </div>
 
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </HeroContent>
@@ -443,6 +438,7 @@ const WeddingInvite = () => {
             alt="Pareja"
           />
         </Hero>
+
         <Section alt>
           <LoveStory />
         </Section>
@@ -453,6 +449,27 @@ const WeddingInvite = () => {
           <h2 className="animate">Estas invitado 💍</h2>
           <InvitationCard />
         </Section>
+        {/* <FancyCountdown>
+          <div className="unit">
+            <span className="number shimmer-text">{countdown.days}</span>
+            <span className="label">Días</span>
+          </div>
+          <div className="unit">
+            <span className="number shimmer-text">{countdown.hours}</span>
+            <span className="label">Horas</span>
+          </div>
+          <div className="unit">
+            <span className="number shimmer-text">{countdown.minutes}</span>
+            <span className="label">Minutos</span>
+          </div>
+          <div className="unit">
+            <span className="number shimmer-text">{countdown.seconds}</span>
+            <span className="label">Segundos</span>
+          </div>
+        </FancyCountdown>
+        <div ref={textRef}>
+          <CeremonyInfo>28 de junio de 2025</CeremonyInfo>
+        </div> */}
 
         {/* <Section>
           <h2 className="animate">Momentos especiales ✨</h2>
