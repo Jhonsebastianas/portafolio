@@ -1,16 +1,12 @@
 // components/ParallaxImage.jsx
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import styled from 'styled-components'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   height: 150vh;
   background: #ffeaf3;
   position: relative;
-`
+`;
 
 const FloatingImage = styled.img`
   position: absolute;
@@ -18,22 +14,30 @@ const FloatingImage = styled.img`
   bottom: 0;
   transform: translateX(-50%);
   width: 300px;
-`
+`;
 
 export default function ParallaxImage() {
-  const imgRef = useRef()
+  const imgRef = useRef();
 
   useEffect(() => {
-    gsap.to(imgRef.current, {
-      y: -150,
-      scrollTrigger: {
-        trigger: imgRef.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      },
-    })
-  }, [])
+    const animate = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to(imgRef.current, {
+        y: -150,
+        scrollTrigger: {
+          trigger: imgRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    };
+
+    animate();
+  }, []);
 
   return (
     <Container>
@@ -43,5 +47,5 @@ export default function ParallaxImage() {
         alt="Imagen en parallax"
       />
     </Container>
-  )
+  );
 }

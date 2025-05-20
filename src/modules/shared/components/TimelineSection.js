@@ -1,10 +1,6 @@
 // components/TimelineSection.jsx
-import { useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 const Section = styled.section`
   height: 150vh;
@@ -13,7 +9,7 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Item = styled.div`
   opacity: 0;
@@ -22,38 +18,46 @@ const Item = styled.div`
   background: #c6e2ff;
   padding: 1rem 2rem;
   border-radius: 8px;
-`
+`;
 
 export default function TimelineSection() {
-  const itemRefs = useRef([])
+  const itemRefs = useRef([]);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: itemRefs.current[0],
-        start: 'top 80%',
-        end: 'bottom top',
-        scrub: false,
-      },
-    })
+    const animate = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-    itemRefs.current.forEach((el, i) => {
-      tl.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-      })
-    })
-  }, [])
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: itemRefs.current[0],
+          start: "top 80%",
+          end: "bottom top",
+          scrub: false,
+        },
+      });
+
+      itemRefs.current.forEach((el, i) => {
+        tl.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+      });
+    };
+
+    animate();
+  }, []);
 
   return (
     <Section>
-      {['Primero', 'Segundo', 'Tercero'].map((text, i) => (
+      {["Primero", "Segundo", "Tercero"].map((text, i) => (
         <Item key={i} ref={(el) => (itemRefs.current[i] = el)}>
           🕒 {text}
         </Item>
       ))}
     </Section>
-  )
+  );
 }
