@@ -5,6 +5,7 @@ import InvitationCard from "./sections/invitation-card";
 import LoveStory from "./sections/LoveStory";
 import WeddingTimeline from "./sections/WeddingTimeline";
 import SoundToggle from "../components/SoundToggle";
+import CalendarioBoda from "./sections/CalendarioBoda";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -211,6 +212,122 @@ const MapEmbed = styled.iframe`
   margin-top: 2rem;
 `;
 
+
+const StoryWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+
+const StoryImage = styled.img`
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+`;
+
+const StoryText = styled.div`
+  max-width: 600px;
+  text-align: left;
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #8c5c73;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #5e4c58;
+    line-height: 1.7;
+  }
+`;
+
+const FancyCountdown = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .unit {
+    background: #fff;
+    color: #8c5c73;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 100px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #5e2c45;
+    animation: float 3s ease-in-out infinite;
+    &.shimmer-text {
+      animation: shimmer 5s infinite, float 3s ease-in-out infinite;
+    }
+  }
+
+  .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8c5c73;
+  }
+
+  @media (max-width: 500px) {
+    justify-content: center;
+    gap: 0.5rem;
+
+    .unit {
+      min-width: 65px;
+      padding: 0.5rem 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .number {
+      font-size: 1.4rem;
+    }
+
+    .label {
+      font-size: 0.7rem;
+    }
+  }
+`;
+
+const Gallery = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+`;
+
 const WeddingInvite = () => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
@@ -330,6 +447,9 @@ const WeddingInvite = () => {
           <LoveStory />
         </Section>
         <Section>
+          <CalendarioBoda />
+        </Section>
+        <Section alt>
           <WeddingTimeline />
         </Section>
         <Section alt>

@@ -61,6 +61,7 @@ const StoryContainer = styled.div`
 
 const StoryBlock = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   text-align: left;
@@ -103,6 +104,18 @@ const StoryContent = styled.div`
   }
 `;
 
+const ParentsContainer = styled.div`
+
+  h3 {
+    font-size: 4rem;
+    color: #9d7d1e;
+  }
+
+  p {
+    color: #5e4c58;
+  }
+`;
+
 const LoveStory = () => {
   const sectionRef = useRef();
 
@@ -113,6 +126,19 @@ const LoveStory = () => {
       gsap.registerPlugin(ScrollTrigger);
 
       gsap.utils.toArray(".story-block").forEach((block) => {
+        gsap.from(block, {
+          y: 100,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: block,
+            start: "top 90%",
+          },
+        });
+      });
+
+      gsap.utils.toArray("animate").forEach((block) => {
         gsap.from(block, {
           y: 100,
           opacity: 0,
@@ -174,7 +200,7 @@ const LoveStory = () => {
               conversar y conocerse, ella estaba radiante ese día, sus ojos
               brillaban y cada peca de su cuerpo adornaba perfectamente su piel,
               él estaba muy guapo, y con una sonrisa encantadora; luego de
-              hablar y sentir la conexión más especial, se dieron nuestro primer
+              hablar y sentir la conexión más especial, se dieron su primer
               beso. Pasaron unas horas, y se sintieron como 5 minutos, una
               primera cita espectacular.
             </p>
@@ -192,13 +218,40 @@ const LoveStory = () => {
           </StoryContent>
         </StoryBlock> */}
 
+        <ParentsContainer className="animate">
+          <p>
+            Con la bendición de Dios y de nuestros padres:
+          </p>
+          <br />
+          <h3 className="cursive">Padres del novio</h3>
+          <p>
+            Jhon Alexander Agudelo Giraldo
+          </p>
+          <p>
+            Claudia Maryori Sierra Cardona
+          </p>
+          <br />
+          <h3 className="cursive">Padres de la novia</h3>
+          <p>
+            Julio Cesar Gómez Pineda
+          </p>
+          <p>
+            Maria Yolima Builes Gómez
+          </p>
+          <br />
+          <br />
+          <p>
+            Tenemos el honor de invitarte a
+          </p>
+        </ParentsContainer>
+
         <StoryBlock className="story-block">
           <StoryImage
             src="/images/wedding/wedding_day.jpg"
             alt="Día de la Boda"
           />
           <StoryContent>
-            <h3>El Gran Día</h3>
+            <h3>Nuestra Boda</h3>
             <p>
               El 28 de junio será el día en que nuestras almas se unan para
               siempre, delante de Dios, quien fue el autor de nuestro amor. Y
