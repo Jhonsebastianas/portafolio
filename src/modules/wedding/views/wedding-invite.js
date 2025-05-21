@@ -147,22 +147,18 @@ const Frase2 = styled.section`
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* importante: empieza desde arriba */
   align-items: center;
-  justify-content: center;
-  padding: 4rem 8%;
+  padding: 30vh 2rem 10vh; /* margen arriba y abajo para posicionar contenido */
   position: relative;
   overflow: hidden;
 
   @media (max-width: 768px) {
     background-position: center top;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding: 8rem 2rem 2rem 2rem;
+    padding: 40vh 1.5rem 0vh; /* más margen arriba en celular */
   }
 
-  /* Gradiente superior */
   &::before,
   &::after {
     content: "";
@@ -192,10 +188,10 @@ const FraseContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 70vh; /* mueve el contenido hacia abajo en móviles */
+  z-index: 5; /* sobre los gradientes */
 
   @media (max-width: 768px) {
-    margin-top: 30vh; /* mueve el contenido hacia abajo en móviles */
+    margin-top: 35vh; /* mueve el contenido hacia abajo en móviles */
   }
 `;
 
@@ -527,7 +523,6 @@ const WeddingInvite = () => {
           <CalendarioBoda />
         </Section>
         <Frase2>
-          <div style={{ height: "40vh" }} /> {/* espacio antes del contenido */}
           <FraseContent className="animate">
             <div>
               <FraseInfo>
