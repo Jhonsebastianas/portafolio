@@ -196,9 +196,9 @@ const LoveStory = () => {
               Primera Cita <i class="uil uil-heart"></i>
             </h3>
             <p>
-              Acordaron encontrarse a las 3 p.m. en La Ruana para tomar un café
+              Acordaron encontrarse a las 3 p.m. para tomar un café
               conversar y conocerse, ella estaba radiante ese día, sus ojos
-              brillaban y cada peca de su cuerpo adornaba perfectamente su piel,
+              brillaban y cada peca de su cuerpo adornaba perfectamente su piel;
               él estaba muy guapo, y con una sonrisa encantadora; luego de
               hablar y sentir la conexión más especial, se dieron su primer
               beso. Pasaron unas horas, y se sintieron como 5 minutos, una
