@@ -557,9 +557,7 @@ const WeddingInvite = () => {
             loading="lazy"
           ></MapEmbed>
         </Section>
-        <Section alt>
-          <FinalSection />
-        </Section>
+        <FinalSection />
       </Container>
     </>
   );

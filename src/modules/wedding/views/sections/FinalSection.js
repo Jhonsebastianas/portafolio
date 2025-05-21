@@ -20,7 +20,7 @@ const Image = styled.img`
   z-index: 1;
 
   @media (max-width: 768px) {
-    width: 80%;
+    width: 45%;
   }
 `;
 
@@ -35,7 +35,8 @@ const Phrase = styled.div`
   white-space: pre-line;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    margin-top: 5rem;
+    font-size: 3rem;
     top: 20px;
     padding: 0 1rem;
   }

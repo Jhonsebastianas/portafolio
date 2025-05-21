@@ -120,7 +120,7 @@ const WeddingTimeline = () => {
           </div>
           <h3>El Brindis</h3>
           <div className="date">Junio 28, 2025</div>
-          <div className="time">3:30 PM</div>
+          <div className="time">3:00 PM</div>
           <div className="location">Parroquia Santa Lucia</div>
         </EventCard>
       </div>
