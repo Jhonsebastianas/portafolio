@@ -46,16 +46,19 @@ const SoundToggle = () => {
       }
     };
 
-    // Pausar la música al cambiar de pestaña
     useEffect(() => {
       const handleVisibilityChange = () => {
+        const audio = audioRef.current;
+
+        if (!audio || !isUnlocked) return;
+
         if (document.hidden) {
-          if (audioRef.current && isPlaying) {
-            audioRef.current.pause();
+          if (isPlaying) {
+            audio.pause();
           }
         } else {
-          if (audioRef.current && isPlaying) {
-            audioRef.current.play().catch((err) => {
+          if (isPlaying) {
+            audio.play().catch((err) => {
               console.warn("Error al reanudar música:", err);
             });
           }
@@ -66,7 +69,8 @@ const SoundToggle = () => {
       return () => {
         document.removeEventListener("visibilitychange", handleVisibilityChange);
       };
-    }, [isPlaying]);
+    }, [isPlaying, isUnlocked]);
+
 
     // Solo activa al primer clic o tecla
     const handleFirstInteraction = () => {
