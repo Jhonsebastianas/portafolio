@@ -533,6 +533,8 @@ const WeddingInvite = () => {
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
           </FraseContent>
         </Frase2>
+        <Section>
+        </Section>
         <Section alt>
           <WeddingTimeline />
         </Section>
