@@ -105,10 +105,14 @@ const InvitationCardWrapper = styled.section`
 
   .invitados {
     font-family: "Playfair Display", serif;
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: #b89d57;
     word-break: break-word;
     overflow-wrap: break-word;
+  }
+
+  .cantidad-invitados {
+    font-size: 1.5rem;
   }
 `;
 
@@ -199,7 +203,7 @@ export default function InvitationCard() {
             {(name && name) || "invitado especial"}
           </div>
           <br />
-          {(adults && `Invitados: ${adults}`) || ""}
+          <p className="cantidad-invitados">{(adults && `Invitados: ${adults}`) || ""}</p>
         </div>
 
         <div className="date-time">

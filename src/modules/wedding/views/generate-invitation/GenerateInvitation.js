@@ -86,7 +86,6 @@ const Container = styled.div`
 export default function GenerateInvitation() {
   const [nombre, setNombre] = useState("");
   const [adults, setAdults] = useState("");
-  const [children, setChildren] = useState("");
   const [url, setUrl] = useState("");
 
   const qrRef = useRef(null);
@@ -112,7 +111,7 @@ export default function GenerateInvitation() {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
     const fullUrl = `${baseUrl}/wedding/invitation?name=${encodeURIComponent(
       nombre
-    )}&adults=${adults}&children=${children}`;
+    )}&adults=${adults}`;
     setUrl(fullUrl);
   };
 
@@ -140,19 +139,6 @@ export default function GenerateInvitation() {
             pattern="[0-9]*"
             value={adults}
             onChange={(e) => setAdults(e.target.value.replace(/\D/, ""))}
-            required
-          />
-        </label>
-
-        <label>
-          Número de niños
-          <input
-            type="number"
-            placeholder="Ej: 1"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            value={children}
-            onChange={(e) => setChildren(e.target.value.replace(/\D/, ""))}
             required
           />
         </label>
