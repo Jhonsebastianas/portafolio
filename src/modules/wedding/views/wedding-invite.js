@@ -191,7 +191,7 @@ const FraseContent = styled.div`
   z-index: 5; /* sobre los gradientes */
 
   @media (max-width: 768px) {
-    margin-top: 40vh; /* mueve el contenido hacia abajo en móviles */
+    margin-top: 45vh; /* mueve el contenido hacia abajo en móviles */
   }
 `;
 
