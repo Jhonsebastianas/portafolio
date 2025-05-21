@@ -177,8 +177,8 @@ const LoveStory = () => {
               Dios tenía preparado nuestro encuentro en su casa, la sagrada
               familia, nos conocimos en el grupo universitario, una niña
               liderando el grupo, y un chico que llegaba nuevo al barrio, fueron
-              dos los encuentros que pasaron, hasta que en una actividad…
-              ocurrió una mirada, una de esas miradas que cuando se cruzan en el
+              dos los momentos que pasaron, hasta que en una actividad…
+              ocurrió una mirada, una de esas que cuando se cruzan en el
               momento preciso, le dan sentido a todo, fue el clic que inició
               nuestra historia de amor.
             </p>
