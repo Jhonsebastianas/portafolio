@@ -195,7 +195,7 @@ const FraseContent = styled.div`
   margin-top: 70vh; /* mueve el contenido hacia abajo en móviles */
 
   @media (max-width: 768px) {
-    margin-top: 20vh; /* mueve el contenido hacia abajo en móviles */
+    margin-top: 30vh; /* mueve el contenido hacia abajo en móviles */
   }
 `;
 
@@ -531,7 +531,7 @@ const WeddingInvite = () => {
           <FraseContent className="animate">
             <div>
               <FraseInfo>
-                "El amor nunca se da por vencido, nunca pierde la fé, siempre tiene esperanza y se mantiene firme en toda circunstancia." — 1 Corintios 13:4-7
+                "El amor nunca se da por vencido, nunca pierde la fé, siempre tiene esperanza y se mantiene firme en toda circunstancia." <br /> — 1 Corintios 13:4-7
               </FraseInfo>
             </div>
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
