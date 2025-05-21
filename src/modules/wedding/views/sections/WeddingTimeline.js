@@ -49,6 +49,7 @@ const EventCard = styled.div`
     position: relative;
     margin: 1rem 0;
     overflow: hidden;
+    text-align: center;
   }
 
   .image-container img {
@@ -56,6 +57,7 @@ const EventCard = styled.div`
     justify-self: center;
     height: auto;
     display: block;
+    margin: 0 auto;
   }
 
   .time {
