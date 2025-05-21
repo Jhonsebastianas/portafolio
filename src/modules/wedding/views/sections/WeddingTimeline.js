@@ -6,7 +6,7 @@ const TimelineWrapper = styled.section`
   text-align: center;
 
   h2 {
-    font-size: 6rem;
+    font-size: 6rem !important;
     margin-bottom: 2rem;
     font-family: "Playfair Display", serif;
     color: #5e4c58;
