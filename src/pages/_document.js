@@ -21,6 +21,10 @@ class MyDocument extends Document {
                     />
                     <link href="https://fonts.googleapis.com/css2?family=Updock&display=swap" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap" rel="stylesheet" />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap"
+                        rel="stylesheet"
+                    />
                     {/** scripts */}
                 </Head>
                 <body className="my-body-class">

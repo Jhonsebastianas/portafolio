@@ -7,6 +7,7 @@ import WeddingTimeline from "./sections/WeddingTimeline";
 import SoundToggle from "../components/SoundToggle";
 import CalendarioBoda from "./sections/CalendarioBoda";
 import TemarioBoda from "./sections/TemarioBoda";
+import FinalSection from "./sections/FinalSection";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -545,7 +546,7 @@ const WeddingInvite = () => {
           <InvitationCard />
         </Section>
         <Section>
-          <h2 className="animate">Ubicación 📍</h2>
+          <h2 className="animate cursive" style={{ "font-size": "6rem;", "color": "#5e4c58;"}}>Ubicación</h2>
           <p className="animate">
             La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te esperamos para celebrar juntos!
           </p>
@@ -555,6 +556,9 @@ const WeddingInvite = () => {
             allowFullScreen=""
             loading="lazy"
           ></MapEmbed>
+        </Section>
+        <Section alt>
+          <FinalSection />
         </Section>
       </Container>
     </>

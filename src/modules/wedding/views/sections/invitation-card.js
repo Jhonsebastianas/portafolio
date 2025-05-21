@@ -154,7 +154,7 @@ export default function InvitationCard() {
     const nameParam = decodeURIComponent(
       searchParams.name || "invitado especial"
     );
-    const adultsParam = decodeURIComponent(searchParams.adults);
+    const adultsParam = decodeURIComponent(searchParams.adults || 0);
     setName(nameParam);
     setAdults(adultsParam);
   }, [searchParams]);
@@ -203,7 +203,7 @@ export default function InvitationCard() {
             {(name && name) || "invitado especial"}
           </div>
           <br />
-          <p className="cantidad-invitados">{(adults && `Invitados: ${adults}`) || ""}</p>
+          <p className="cantidad-invitados">{((adults && adults > 0) && `Invitados: ${adults}`) || ""}</p>
         </div>
 
         <div className="date-time">
