@@ -151,6 +151,7 @@ const Frase2 = styled.section`
   justify-content: center;
   padding: 4rem 8%;
   position: relative;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     background-position: center top;
@@ -159,6 +160,28 @@ const Frase2 = styled.section`
     text-align: center;
     justify-content: center;
     padding: 8rem 2rem 2rem 2rem;
+  }
+
+  /* Gradiente superior */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+  }
+
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(254, 246, 249, 0.7), transparent);
   }
 `;
 
@@ -517,7 +540,7 @@ const WeddingInvite = () => {
         <Section alt>
           <WeddingTimeline />
         </Section>
-        <Section alt>
+        <Section>
           <h2 className="animate">Estas invitado 💍</h2>
           <InvitationCard />
         </Section>
@@ -552,7 +575,7 @@ const WeddingInvite = () => {
           </Gallery>
         </Section> */}
 
-        <Section>
+        <Section alt>
           <h2 className="animate">Ubicación 📍</h2>
           <p className="animate">
             La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te esperamos para celebrar juntos!
