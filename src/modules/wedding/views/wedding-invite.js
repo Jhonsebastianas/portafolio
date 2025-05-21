@@ -188,6 +188,7 @@ const FraseContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 70vh;
   z-index: 5; /* sobre los gradientes */
 
   @media (max-width: 768px) {
