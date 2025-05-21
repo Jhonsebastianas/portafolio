@@ -19,7 +19,7 @@ const Wrapper = styled.div`
     border-radius: 50%;
     margin: 0 6px;
     box-shadow: ${({ isPlaying }) =>
-      isPlaying ? "0 0 8px 4px rgba(0,0,0,0.4)" : "none"};
+    isPlaying ? "0 0 8px 4px rgba(0,0,0,0.4)" : "none"};
   }
 `;
 
@@ -45,6 +45,28 @@ const SoundToggle = () => {
           });
       }
     };
+
+    // Pausar la música al cambiar de pestaña
+    useEffect(() => {
+      const handleVisibilityChange = () => {
+        if (document.hidden) {
+          if (audioRef.current && isPlaying) {
+            audioRef.current.pause();
+          }
+        } else {
+          if (audioRef.current && isPlaying) {
+            audioRef.current.play().catch((err) => {
+              console.warn("Error al reanudar música:", err);
+            });
+          }
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
+    }, [isPlaying]);
 
     // Solo activa al primer clic o tecla
     const handleFirstInteraction = () => {
