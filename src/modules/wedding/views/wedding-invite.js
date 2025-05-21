@@ -119,9 +119,63 @@ export const CeremonyInfo = styled.p`
   -webkit-text-fill-color: transparent;
 `;
 
+export const FraseInfo = styled.p`
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  color: #f5e3b3 !important;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.25);
+
+  background: linear-gradient(to right, #9d7d1e, #9d7d1e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+`;
+
 const Container = styled.div`
   background: radial-gradient(circle at top, #fddde6 0%, #fae1e9 100%);
 `;
+
+const Frase2 = styled.section`
+  min-height: 100vh;
+  background-image: url("/images/wedding/frase.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 8%;
+  position: relative;
+
+  @media (max-width: 768px) {
+    background-position: center top;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 8rem 2rem 2rem 2rem;
+  }
+`;
+
+
+const FraseContent = styled.div`
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70vh; /* mueve el contenido hacia abajo en móviles */
+
+  @media (max-width: 768px) {
+    margin-top: 20vh; /* mueve el contenido hacia abajo en móviles */
+  }
+`;
+
 
 const Hero = styled.section`
   height: 100vh;
@@ -449,6 +503,17 @@ const WeddingInvite = () => {
         <Section>
           <CalendarioBoda />
         </Section>
+        <Frase2>
+          <div style={{ height: "40vh" }} /> {/* espacio antes del contenido */}
+          <FraseContent className="animate">
+            <div>
+              <FraseInfo>
+                "El amor nunca se da por vencido, nunca pierde la fé, siempre tiene esperanza y se mantiene firme en toda circunstancia." — 1 Corintios 13:4-7
+              </FraseInfo>
+            </div>
+            {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
+          </FraseContent>
+        </Frase2>
         <Section alt>
           <WeddingTimeline />
         </Section>

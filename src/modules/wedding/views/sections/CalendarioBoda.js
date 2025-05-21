@@ -51,6 +51,7 @@ const Tiempo = styled.div`
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding: 0.2rem 0.5rem;
+  text-shadow: 0 0 8px rgba(250, 250, 250, 0.8);
 `;
 
 const Numero = styled.span`
@@ -114,6 +115,8 @@ const CalendarioBoda = () => {
     return (
         <Contenedor ref={ref}>
             <Titulo>Reserva la fecha</Titulo>
+            <p style={{ color: "#b17259" }}>Junio 2025</p>
+            <br />
             <Calendario>
                 {diasSemana.map((dia, idx) => (
                     <Dia key={`semana-${idx}`} resaltado>{dia}</Dia>
