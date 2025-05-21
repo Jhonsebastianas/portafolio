@@ -6,6 +6,7 @@ import LoveStory from "./sections/LoveStory";
 import WeddingTimeline from "./sections/WeddingTimeline";
 import SoundToggle from "../components/SoundToggle";
 import CalendarioBoda from "./sections/CalendarioBoda";
+import TemarioBoda from "./sections/TemarioBoda";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -537,41 +538,13 @@ const WeddingInvite = () => {
           <WeddingTimeline />
         </Section>
         <Section>
-          <h2 className="animate">Estas invitado 💍</h2>
+          <TemarioBoda />
+        </Section>
+        <Section alt>
+          <h2 style={{"font-size": "6rem !important", color: "#5e4c58"}} className="animate cursive">Confirmar asistencia</h2>
           <InvitationCard />
         </Section>
-        {/* <FancyCountdown>
-          <div className="unit">
-            <span className="number shimmer-text">{countdown.days}</span>
-            <span className="label">Días</span>
-          </div>
-          <div className="unit">
-            <span className="number shimmer-text">{countdown.hours}</span>
-            <span className="label">Horas</span>
-          </div>
-          <div className="unit">
-            <span className="number shimmer-text">{countdown.minutes}</span>
-            <span className="label">Minutos</span>
-          </div>
-          <div className="unit">
-            <span className="number shimmer-text">{countdown.seconds}</span>
-            <span className="label">Segundos</span>
-          </div>
-        </FancyCountdown>
-        <div ref={textRef}>
-          <CeremonyInfo>28 de junio de 2025</CeremonyInfo>
-        </div> */}
-
-        {/* <Section>
-          <h2 className="animate">Momentos especiales ✨</h2>
-          <Gallery>
-            <Image src="/img/photo1.jpg" alt="Foto 1" />
-            <Image src="/img/photo2.jpg" alt="Foto 2" />
-            <Image src="/img/photo3.jpg" alt="Foto 3" />
-          </Gallery>
-        </Section> */}
-
-        <Section alt>
+        <Section>
           <h2 className="animate">Ubicación 📍</h2>
           <p className="animate">
             La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te esperamos para celebrar juntos!

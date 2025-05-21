@@ -112,12 +112,39 @@ const InvitationCardWrapper = styled.section`
   }
 `;
 
+const Boton = styled.a`
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  background: linear-gradient(135deg, #f3d1dc, #e6c6f2); /* tonos pastel rosados y lilas */
+  color: #4a2c52;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-bottom: 1.2rem;
+
+  &:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #e6c6f2, #f3d1dc);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.5rem;
+  }
+`;
+
 export default function InvitationCard() {
   const router = useRouter();
   const searchParams = router.query;
   const cardRef = useRef();
   const [name, setName] = useState("");
-  const [adults, setAdults] = useState("");
+  const [adults, setAdults] = useState(0);
 
   useEffect(() => {
     const nameParam = decodeURIComponent(
@@ -125,10 +152,15 @@ export default function InvitationCard() {
     );
     const adultsParam = decodeURIComponent(searchParams.adults);
     setName(nameParam);
-    if (!adultsParam) {
-      setAdults(adultsParam);
-    }
+    setAdults(adultsParam);
   }, [searchParams]);
+
+  function getTextoEnviar() {
+    if (adults < 1) {
+      return encodeURIComponent(`Hola Naty, confirmo mi asistencia a la boda, soy ${name}, muchas gracias por la invitación`);
+    }
+    return encodeURIComponent(`Hola Naty, confirmo mi asistencia a la boda, somos ${name}, confirmo que asistiremos los ${adults}, muchas gracias por la invitación`);
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -158,12 +190,6 @@ export default function InvitationCard() {
   return (
     <InvitationCardWrapper>
       <div className="card" ref={cardRef}>
-        <div className="intro">
-          Tenemos el gusto de invitarte en este día tan importante de nuestras
-          vidas
-        </div>
-        <div className="our-wedding">Nuestra Boda</div>
-        <div className="names">Sebastian y Natalia</div>
         <div className="note">
           Este día muy especial estaremos junto a nuestros seres queridos, por
           eso tenemos el gusto de invitarte.
@@ -173,7 +199,7 @@ export default function InvitationCard() {
             {(name && name) || "invitado especial"}
           </div>
           <br />
-          {(adults && `invitados: ${adults}`) || ""}
+          {(adults && `Invitados: ${adults}`) || ""}
         </div>
 
         <div className="date-time">
@@ -185,12 +211,17 @@ export default function InvitationCard() {
             <div className="sub">JUNIO</div>
           </div>
           <div className="block">
-            <div className="label">3:00 PM</div>
+            <div className="label">2:00 PM</div>
           </div>
         </div>
+        <Boton
+          href={`https://wa.me/3046588830?text=${getTextoEnviar()}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Confirmar asistencia
+        </Boton>
 
-        <div className="address">Parroquia Santa Lucia, Rionegro</div>
-        <div className="confirm">Confirmar asistencia al: (304) 658-8830</div>
         <div className="footer">¡Te esperamos!</div>
       </div>
     </InvitationCardWrapper>
