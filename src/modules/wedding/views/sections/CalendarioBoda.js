@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Contenedor = styled.section`
   display: flex;
@@ -72,16 +68,24 @@ const CalendarioBoda = () => {
     const [tiempoRestante, setTiempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
 
     useEffect(() => {
-        gsap.from(ref.current, {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            scrollTrigger: {
-                trigger: ref.current,
-                start: 'top 80%',
-            },
-        });
-    }, []);
+        const animate = async () => {
+          const { gsap } = await import("gsap");
+          const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+          gsap.registerPlugin(ScrollTrigger);
+
+            gsap.from(ref.current, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: ref.current,
+                    start: 'top 80%',
+                },
+            });
+        };
+    
+        animate();
+      }, []);
 
     useEffect(() => {
         const fechaObjetivo = new Date('2025-06-28T00:00:00');
