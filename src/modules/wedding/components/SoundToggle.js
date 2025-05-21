@@ -62,6 +62,31 @@ const SoundToggle = () => {
     };
   }, [isUnlocked]);
 
+  useEffect(() => {
+      const handleVisibilityChange = () => {
+        const audio = audioRef.current;
+
+        if (!audio || !isUnlocked) return;
+
+        if (document.hidden) {
+          if (isPlaying) {
+            audio.pause();
+          }
+        } else {
+          if (isPlaying) {
+            audio.play().catch((err) => {
+              console.warn("Error al reanudar música:", err);
+            });
+          }
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
+    }, [isPlaying, isUnlocked]);
+
   const toggleSound = () => {
     const audio = audioRef.current;
     if (!audio) return;
