@@ -8,6 +8,7 @@ import SoundToggle from "../components/SoundToggle";
 import CalendarioBoda from "./sections/CalendarioBoda";
 import TemarioBoda from "./sections/TemarioBoda";
 import FinalSection from "./sections/FinalSection";
+import MusicPrompt from "../components/MusicPrompt";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -30,6 +31,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Playfair Display', serif;
     background-color: #fef6f9;
     color: #fff;
+  }
+
+  body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh;
   }
 
   .cursive {
@@ -174,7 +180,11 @@ const Frase2 = styled.section`
 
   &::before {
     top: 0;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.7),
+      transparent
+    );
   }
 
   &::after {
@@ -182,7 +192,6 @@ const Frase2 = styled.section`
     background: linear-gradient(to top, rgba(254, 246, 249, 0.7), transparent);
   }
 `;
-
 
 const FraseContent = styled.div`
   width: 100%;
@@ -197,7 +206,6 @@ const FraseContent = styled.div`
     margin-top: 45vh; /* mueve el contenido hacia abajo en móviles */
   }
 `;
-
 
 const Hero = styled.section`
   height: 100vh;
@@ -231,7 +239,7 @@ const HeroContent = styled.div`
     color: #fff;
     text-shadow: 0 0 8px rgba(255, 250, 250, 0.8);
     word-break: break-word;
-    line-height: .8;
+    line-height: 0.8;
   }
 
   @media (max-width: 768px) {
@@ -287,7 +295,6 @@ const MapEmbed = styled.iframe`
   border-radius: 15px;
   margin-top: 2rem;
 `;
-
 
 const StoryWrapper = styled.div`
   display: flex;
@@ -408,6 +415,13 @@ const WeddingInvite = () => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  const handleStart = () => {
+    setShowOverlay(false);
+    // Aquí puedes iniciar música o animaciones
+  };
+
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -469,21 +483,6 @@ const WeddingInvite = () => {
         delay: 0.5,
       });
 
-      // Función para el contador de cuenta regresiva
-      const interval = setInterval(() => {
-        const eventDate = new Date("2025-06-28T00:00:00");
-        const now = new Date();
-        const diff = eventDate - now;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / 1000 / 60) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        setCountdown({ days, hours, minutes, seconds });
-      }, 1000);
-
-      // Limpiar al desmontar el componente
       return () => {
         lenis.destroy();
         clearInterval(interval);
@@ -495,6 +494,7 @@ const WeddingInvite = () => {
 
   return (
     <>
+      <MusicPrompt />
       <SoundToggle />
       <GlobalStyle />
       <Container ref={containerRef}>
@@ -529,7 +529,9 @@ const WeddingInvite = () => {
           <FraseContent className="animate">
             <div>
               <FraseInfo>
-                "El amor nunca se da por vencido, nunca pierde la fé, siempre tiene esperanza y se mantiene firme en toda circunstancia." <br /> — 1 Corintios 13:4-7
+                "El amor nunca se da por vencido, nunca pierde la fé, siempre
+                tiene esperanza y se mantiene firme en toda circunstancia."{" "}
+                <br /> — 1 Corintios 13:4-7
               </FraseInfo>
             </div>
             {/* <RSVPButton>Confirmar asistencia</RSVPButton> */}
@@ -542,13 +544,24 @@ const WeddingInvite = () => {
           <TemarioBoda />
         </Section>
         <Section alt>
-          <h2 style={{"font-size": "6rem !important", color: "#5e4c58"}} className="animate cursive">Confirmar asistencia</h2>
+          <h2
+            style={{ "font-size": "6rem !important", color: "#5e4c58" }}
+            className="animate cursive"
+          >
+            Confirmar asistencia
+          </h2>
           <InvitationCard />
         </Section>
         <Section>
-          <h2 className="animate cursive" style={{ "font-size": "6rem;", "color": "#5e4c58;"}}>Ubicación</h2>
+          <h2
+            className="animate cursive"
+            style={{ "font-size": "6rem;", color: "#5e4c58;" }}
+          >
+            Ubicación
+          </h2>
           <p className="animate">
-            La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te esperamos para celebrar juntos!
+            La ceremonia tendrá lugar en la hermosa Parroquia Santa Lucia, ¡Te
+            esperamos para celebrar juntos!
           </p>
           <MapEmbed
             className="animate"

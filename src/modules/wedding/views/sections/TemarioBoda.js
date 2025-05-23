@@ -1,4 +1,6 @@
 // components/WeddingTimeline.js
+import ButtonConfirmarAsistencia from "@modules/wedding/components/ButtonConfirmarAsistencia";
+import ButtonIdeasVestimenta from "@modules/wedding/components/ButtonIdeasVestimenta";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
@@ -108,6 +110,8 @@ const TemarioBoda = () => {
             <img src="/images/wedding/vestimenta.png" alt="Ceremony" />
           </div>
           <h3>Vestimenta de cóctel</h3>
+          <p>Se reserva el color blanco para la novia</p>
+          <ButtonIdeasVestimenta />
         </EventCard>
         <EventCard className="temario">
           <div className="image-container">
@@ -120,6 +124,8 @@ const TemarioBoda = () => {
             <img src="/images/wedding/confirmar_asistencia.png" alt="Brindis" />
           </div>
           <h3>Confirmar asistencia</h3>
+          <p>Confirmar antes del 2 de junio</p>
+          <ButtonConfirmarAsistencia />
         </EventCard>
       </div>
     </TimelineWrapper>
