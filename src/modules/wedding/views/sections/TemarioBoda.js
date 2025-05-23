@@ -23,10 +23,18 @@ const TimelineWrapper = styled.section`
     flex-direction: column;
     gap: 3rem;
 
+    .mobile-not-show {
+      display: none;
+    }
+
     @media (min-width: 768px) {
       flex-direction: row;
       justify-content: center;
       gap: 5rem;
+
+      .mobile-not-show {
+        display: block;
+      }
     }
   }
 `;
@@ -119,7 +127,7 @@ const TemarioBoda = () => {
           </div>
           <h3>Lluvia de sobres</h3>
         </EventCard>
-        <EventCard className="temario">
+        <EventCard className="temario mobile-not-show">
           <div className="image-container">
             <img src="/images/wedding/confirmar_asistencia.png" alt="Brindis" />
           </div>
