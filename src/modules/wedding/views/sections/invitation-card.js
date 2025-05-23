@@ -120,13 +120,17 @@ const Boton = styled.a`
   display: inline-block;
   text-decoration: none;
   border: none;
-  background: linear-gradient(135deg, #f3d1dc, #e6c6f2); /* tonos pastel rosados y lilas */
+  background: linear-gradient(
+    135deg,
+    #f3d1dc,
+    #e6c6f2
+  ); /* tonos pastel rosados y lilas */
   color: #4a2c52;
   font-weight: 600;
   font-size: 1rem;
   padding: 1rem 2rem;
   border-radius: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
   margin-bottom: 1.2rem;
@@ -134,7 +138,7 @@ const Boton = styled.a`
   &:hover {
     transform: scale(1.05);
     background: linear-gradient(135deg, #e6c6f2, #f3d1dc);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 
   @media (max-width: 600px) {
@@ -161,9 +165,13 @@ export default function InvitationCard() {
 
   function getTextoEnviar() {
     if (adults < 1) {
-      return encodeURIComponent(`Hola Naty, confirmo mi asistencia a la boda, soy ${name}, muchas gracias por la invitación`);
+      return encodeURIComponent(
+        `Hola Naty, confirmo mi asistencia a la boda, soy ${name}, muchas gracias por la invitación`
+      );
     }
-    return encodeURIComponent(`Hola Naty, confirmo mi asistencia a la boda, somos ${name}, confirmo que asistiremos los ${adults}, muchas gracias por la invitación`);
+    return encodeURIComponent(
+      `Hola Naty, confirmo mi asistencia a la boda, somos ${name}, confirmo que asistiremos los ${adults}, muchas gracias por la invitación`
+    );
   }
 
   useEffect(() => {
@@ -203,7 +211,9 @@ export default function InvitationCard() {
             {(name && name) || "invitado especial"}
           </div>
           <br />
-          <p className="cantidad-invitados">{((adults && adults > 0) && `Invitados: ${adults}`) || ""}</p>
+          <p className="cantidad-invitados">
+            {(adults && adults > 0 && `Invitados: ${adults}`) || ""}
+          </p>
         </div>
 
         <div className="date-time">
@@ -225,6 +235,7 @@ export default function InvitationCard() {
         >
           Confirmar asistencia
         </Boton>
+        <div className="note">Confirmar antes del 2 de junio</div>
 
         <div className="footer">¡Te esperamos!</div>
       </div>
