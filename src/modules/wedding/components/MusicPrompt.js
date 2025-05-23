@@ -4,8 +4,6 @@ import styled from "styled-components";
 
 const Prompt = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
   pointer-events: none;
   z-index: 9999;
   background: rgba(255, 240, 245, 0.9);
@@ -15,23 +13,29 @@ const Prompt = styled.div`
   font-size: 0.8rem;
   color: black;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%);
 `;
 
 const MusicPrompt = () => {
   const [position, setPosition] = useState({ x: -9999, y: -9999 });
   const [visible, setVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const move = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY - 15 });
-    };
-    if (visible) {
-      window.addEventListener("mousemove", move);
-    }
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    setIsMobile(isTouch);
 
-    return () => window.removeEventListener("mousemove", move);
+    if (!isTouch && visible) {
+      const move = (e) => {
+        setPosition({ x: e.clientX, y: e.clientY - 15 });
+      };
+      window.addEventListener("mousemove", move);
+      return () => window.removeEventListener("mousemove", move);
+    } else {
+      // Si es móvil, centro el texto
+      setPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    }
   }, [visible]);
 
   if (!visible) return null;
