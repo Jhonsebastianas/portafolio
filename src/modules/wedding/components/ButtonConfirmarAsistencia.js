@@ -12,13 +12,15 @@ const ButtonConfirmarAsistencia = () => {
     const nameParam = decodeURIComponent(
       searchParams.name || "invitado especial"
     );
-    const adultsParam = decodeURIComponent(searchParams.adults || 0);
+    const adultsParam = parseInt(searchParams.adults || "0", 10);
     setName(nameParam);
     setAdults(adultsParam);
   }, [searchParams]);
 
   function getTextoEnviar() {
-    if (adults < 1) {
+    console.log("--------");
+    console.log(adults);
+    if (adults <= 1) {
       return encodeURIComponent(
         `Hola Naty, confirmo mi asistencia a la boda, soy ${name}, muchas gracias por la invitación`
       );
