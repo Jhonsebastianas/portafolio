@@ -119,9 +119,9 @@ const WeddingTimeline = () => {
             <img src="/images/wedding/brindis.png" alt="Brindis" />
           </div>
           <h3>El Brindis</h3>
-          <div className="date">Junio 28, 2025</div>
+          <div className="date">Acuarela del parque</div>
           <div className="time">3:00 PM</div>
-          <div className="location">Parroquia Santa Lucia</div>
+          <div className="location">Calle 54 # 81 - 55</div>
         </EventCard>
       </div>
     </TimelineWrapper>
