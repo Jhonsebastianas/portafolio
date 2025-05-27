@@ -68,7 +68,7 @@ const EventCard = styled.div`
   }
 
   .location {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     margin-top: 0.5rem;
     color: #7a7a7a;
   }
@@ -119,9 +119,9 @@ const WeddingTimeline = () => {
             <img src="/images/wedding/brindis.png" alt="Brindis" />
           </div>
           <h3>El Brindis</h3>
-          <div className="date">Acuarela del parque</div>
+          <div className="date">Junio 28, 2025</div>
           <div className="time">3:00 PM</div>
-          <div className="location">Calle 54 # 81 - 55</div>
+          <div className="location">Acuarela del parque <br /> Calle 54 # 81 - 55</div>
         </EventCard>
       </div>
     </TimelineWrapper>
