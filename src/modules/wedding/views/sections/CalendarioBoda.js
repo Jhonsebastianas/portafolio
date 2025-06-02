@@ -121,7 +121,7 @@ const CalendarioBoda = () => {
                 {diasSemana.map((dia, idx) => (
                     <Dia key={`semana-${idx}`} resaltado>{dia}</Dia>
                 ))}
-                {Array(5).fill('').map((_, i) => <Dia key={`espacio-${i}`} />)} {/* junio inicia sábado */}
+                {Array(7).fill('').map((_, i) => <Dia key={`espacio-${i}`} />)} {/* junio inicia sábado */}
                 {diasMes.map(d => (
                     <Dia key={d} resaltado={d === 28}>{d}</Dia>
                 ))}
