@@ -132,7 +132,6 @@ const TemarioBoda = () => {
             <img src="/images/wedding/confirmar_asistencia.png" alt="Brindis" />
           </div>
           <h3>Confirmar asistencia</h3>
-          <p>Confirmar antes del 2 de junio</p>
           <ButtonConfirmarAsistencia />
         </EventCard>
       </div>
