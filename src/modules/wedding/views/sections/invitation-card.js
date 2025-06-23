@@ -199,7 +199,6 @@ export default function InvitationCard() {
           </div>
         </div>
         <ButtonConfirmarAsistencia />
-        <div className="note">Confirmar antes del 2 de junio</div>
 
         <div className="footer">¡Te esperamos!</div>
       </div>
