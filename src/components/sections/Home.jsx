@@ -3,6 +3,7 @@ import StyledComponents from 'styled-components'
 import ScrollButton from '@components/commons/button-scroll'
 import Button from '@components/commons/button'
 import { SOCIAL_MEDIA } from 'src/util/constants'
+import { useGSAP } from '@gsap/react'
 
 const StyledHomeContainer = StyledComponents.div`
     gap: 1rem;
@@ -58,6 +59,67 @@ const StyledHomeContainer = StyledComponents.div`
 `
 
 const Home = () => {
+
+    useGSAP(() => {
+        const animate = async () => {
+            const { gsap } = await import("gsap");
+            const { SplitText } = await import("gsap/all");
+            const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+    
+
+            const roleSplit = new SplitText('.home__title', { type: 'chars, words' });
+
+            gsap.from(roleSplit.chars, {
+                yPercent: 100,
+                duration: 1,
+                ease: 'expo.out',
+                stagger: 0.05,
+            });
+
+            const paragraphSplit = new SplitText('.home__subtitle', { type: 'lines' });
+
+            gsap.from(paragraphSplit.lines, {
+                opacity: 0,
+                yPercent: 100,
+                duration: 1.8,
+                ease: 'expo.out',
+                stagger: 0.06,
+                delay: 1,
+            });
+
+            const descriptionSplit = new SplitText('.home__description', { type: 'lines' });
+
+            gsap.from(descriptionSplit.lines, {
+                opacity: 0,
+                yPercent: 100,
+                duration: 1.8,
+                ease: 'expo.out',
+                stagger: 0.06,
+                delay: 1,
+            });
+
+            gsap.from('#home__contact-button', {
+                opacity: 0,
+                yPercent: 100,
+                duration: 1.8,
+                ease: 'expo.out',
+                stagger: 0.06,
+                delay: 1,
+            });
+
+            gsap.to('.home__scroll', {
+                y: 5,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+            
+        }
+
+        animate();
+    });
+
     return (
         <section className="home section" id="home">
             <StyledHomeContainer className="home__container container grid">
@@ -106,7 +168,7 @@ const Home = () => {
                         <p className="home__description">
                             Software architect and full stack software developer, with extensive knowledge in web and mobile applications, as well as trainer and content creator, producing quality work.
                         </p>
-                        <Button href="#contact">
+                        <Button id="home__contact-button" href="#contact">
                             Contact Me <i className="uil uil-message button__icon"></i>
                         </Button>
                     </div>

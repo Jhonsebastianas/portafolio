@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@studio-freight/lenis": "^1.0.42",
     "classnames": "^2.5.1",
     "dotenv": "^16.4.5",
