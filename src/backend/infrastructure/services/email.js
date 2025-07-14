@@ -20,15 +20,15 @@ async function buildTemplate(templateName, parameters) {
   const templatePath = path.join(process.cwd(), 'public', 'templates', `${templateName}.html`);
   let html = fs.readFileSync(templatePath, 'utf8');
 
-  html = html.replace(/{APP_NAME}/g, VARIABLES.APP_NAME);
-  html = html.replace(/{URL_FRONTEND}/g, VARIABLES.APP_URL_FRONT);
+  // Unir las variables globales con las específicas de este envío
+  const allVariables = {
+    ...VARIABLES,
+    ...parameters
+  };
 
-  for (const [key, value] of Object.entries(parameters)) {
-    html = html.replace(new RegExp(`{${key}}`, 'gi'), value);
-  }
-
-  return html;
+  return html = replaceVariables(html, allVariables);;
 }
+
 
 async function sendMail(subject, htmlContent, recipientEmails) {
   const transporter = nodemailer.createTransport({
@@ -51,3 +51,17 @@ async function sendMail(subject, htmlContent, recipientEmails) {
 
   console.log("Correo enviado:", info.messageId);
 }
+
+/**
+ * Reemplaza todas las llaves {VAR_NAME} por su valor correspondiente
+ */
+export const replaceVariables = (html, variables = {}) => {
+  let result = html;
+
+  Object.entries(variables).forEach(([key, value]) => {
+    const pattern = new RegExp(`{${key}}`, 'g');
+    result = result.replace(pattern, value);
+  });
+
+  return result;
+};
