@@ -124,25 +124,68 @@ const ImageWrapper = styled.div`
 `;
 
 const Hero = () => {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    console.log(nombre, email, phone, isChecked);
+    if (!nombre || !email || !phone || !isChecked) {
+      alert("Por favor completa todos los campos y acepta la política.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/register-funnel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          nombre,
+          telefono: phone,
+          campaign: "7-habitos-para-estudiar-y-trabajar-ebook"
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("¡Te has registrado con éxito! Revisa tu correo.");
+        setNombre("");
+        setEmail("");
+        setPhone("");
+        setIsChecked(false);
+      } else {
+        alert("Error al registrarte: " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Ocurrió un error inesperado.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <HeroContainer>
       <Overlay />
       <Content>
-        <Logo>
-          i<span>DS.</span>
-        </Logo>
+        <Logo>i<span>DS.</span></Logo>
         <Subtitle>ebook gratuito</Subtitle>
         <Title>
           <span>Estudia y trabaja</span> <br />
-          Aprende a ser un estudiante exitoso que trabaja, con 7 hábitos
-          poderosos.
+          Aprende a ser un estudiante exitoso que trabaja, con 7 hábitos poderosos.
         </Title>
-        {/* <Date>Del martes 8 al lunes 14 de abril 🔥</Date> */}
 
         <Form>
           <InputRow>
-            <Input placeholder="Nombre" />
+            <Input
+              placeholder="Nombre"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
             <InputPhone
               placeholder="311 325 4040"
               country={"co"}
@@ -151,12 +194,29 @@ const Hero = () => {
             />
           </InputRow>
 
-          <Input placeholder="Email" />
+          <Input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
           <CheckboxRow>
-            <input type="checkbox" required />
-            He leído y <Link href={"/politica-de-privacidad"}><a target="_blank">acepto la política de privacidad</a></Link>
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+              required
+            />
+            He leído y{" "}
+            <Link href="/politica-de-privacidad" target="_blank">
+              acepto la política de privacidad
+            </Link>
           </CheckboxRow>
-          <SubmitButton>QUIERO MI EBOOK</SubmitButton>
+
+          <SubmitButton type="button" onClick={handleSubmit} disabled={loading}>
+            {loading ? "Enviando..." : "QUIERO MI EBOOK"}
+          </SubmitButton>
         </Form>
       </Content>
 

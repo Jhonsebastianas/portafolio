@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Recovery OTP</title>
+  <style>
+    /* Reset */
+    body, table, td, a { text-decoration: none; color: inherit; }
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    
+    /* Wrapper */
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+    }
+
+    /* Header */
+    .header {
+      background-color: #0073e6;
+      color: #ffffff;
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Content */
+    .content {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    /* OTP Code */
+    .otp-code {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0073e6;
+      letter-spacing: 5px;
+      margin: 20px 0;
+    }
+
+    /* Button */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #0073e6;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 12px;
+      color: #777777;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    
+    <!-- Header -->
+    <div class="header">
+      Cuenta - Recuperación de Contraseña
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <p>Hola, {userNames}</p>
+      <p>Has solicitado recuperar el acceso a tu cuenta. Utiliza el siguiente código de verificación para continuar:</p>
+      
+      <!-- OTP Code -->
+      <div class="otp-code">{otpCode}</div>
+      
+      <p>Ingresa este código en la pantalla de recuperación de cuenta. Este código es válido solo por <strong>5 minutos</strong>.</p>
+      
+      <!-- Button to Support or Login -->
+      <!-- <a href="https://tusitio.com/recuperar" class="button">Recuperar Cuenta</a> -->
+
+      <p>Si no has solicitado recuperar tu cuenta, ignora este mensaje o <a href="https://tusitio.com/soporte">contacta a soporte</a>.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2024 {APP_NAME}. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -8,8 +8,8 @@ const InputStyle = styled.input`
   border-radius: 4px;
 `;
 
-const Input = ({ placeholder, type = "text" }) => {
-  return <InputStyle type={type} placeholder={placeholder} />;
+const Input = ({ placeholder, type = "text", ...props }) => {
+  return <InputStyle type={type} placeholder={placeholder} {...props} />;
 };
 
 export default Input;

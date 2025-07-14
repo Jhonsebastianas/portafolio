@@ -6,8 +6,51 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const ModalSection = () => {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { isOpen, closeModal } = useModal();
+
+  const handleSubmit = async () => {
+    if (!nombre || !email || !phone || !isChecked) {
+      alert("Por favor completa todos los campos y acepta la política.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/register-funnel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          nombre,
+          telefono: phone,
+          campaign: "7-habitos-para-estudiar-y-trabajar-ebook"
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("¡Registro exitoso! Revisa tu correo.");
+        setNombre("");
+        setEmail("");
+        setPhone("");
+        setIsChecked(false);
+        closeModal();
+      } else {
+        alert("Error al registrar: " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Ocurrió un error al enviar el formulario.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
@@ -17,29 +60,46 @@ const ModalSection = () => {
           <Subtitle>GUÍA PRÁCTICA GRATUITA</Subtitle>
 
           <StyledForm>
-            <Input placeholder="Nombre" />
+            <Input
+              placeholder="Nombre"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+
             <InputPhone
               country={"co"}
               value={phone}
-              onChange={(phone) => setPhone(phone)}
+              onChange={(value) => setPhone(value)}
+              placeholder="311 325 4040"
             />
-            <Input type="email" placeholder="Email" />
+
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
             <CheckboxContainer>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={(e) => setIsChecked(e.target.checked)}
+              />
               He leído y{" "}
               <PrivacyLink href={"/politica-de-privacidad"} target="_blank">
                 acepto la política de privacidad
               </PrivacyLink>
             </CheckboxContainer>
 
-            <SubmitButton type="button">QUIERO MI EBOOK</SubmitButton>
+            <SubmitButton type="button" onClick={handleSubmit} disabled={loading}>
+              {loading ? "Enviando..." : "QUIERO MI EBOOK"}
+            </SubmitButton>
           </StyledForm>
 
           <GiftBadge>🎁 GUÍA PRÁCTICA SOLO CON TU REGISTRO</GiftBadge>
           <Description>
-            Llévate gratis nuestro PDF con el método para organizar tu vida
-            profesional y estudiantil perfecta en menos de 5 minutos.
+            Llévate gratis nuestro PDF con el método para organizar tu vida profesional y estudiantil perfecta en menos de 5 minutos.
           </Description>
         </LeftSide>
 
