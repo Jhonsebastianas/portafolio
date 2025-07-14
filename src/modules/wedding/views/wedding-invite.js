@@ -9,6 +9,7 @@ import CalendarioBoda from "./sections/CalendarioBoda";
 import TemarioBoda from "./sections/TemarioBoda";
 import FinalSection from "./sections/FinalSection";
 import MusicPrompt from "../components/MusicPrompt";
+import Art from "./sections/Art";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -518,8 +519,11 @@ const WeddingInvite = () => {
             alt="Pareja"
           />
         </Hero>
+         {/* <Section alt>
+          <Art goodLists={["Eso", "Esto otro"]} featureLists={['Aquello', 'además']} />
+         </Section> */}
 
-        <Section alt>
+        <Section>
           <LoveStory />
         </Section>
         <Section>
