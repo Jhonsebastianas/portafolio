@@ -1,6 +1,7 @@
 import connectToDatabase from "../../backend/infrastructure/lib/mongodb";
 import MarketingPreferences from "../../backend/domain/models/MarketingPreferencesDocument";
 import jwt from "jsonwebtoken";
+import { verifyToken } from "src/backend/infrastructure/services/jwt";
 
 const SECRET_KEY = process.env.UNSUBSCRIBE_SECRET;
 
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
 
   try {
     // Validar token
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = verifyToken(token);
     if (decoded.email !== email) {
       return res.status(403).json({ message: 'Invalid token' });
     }
