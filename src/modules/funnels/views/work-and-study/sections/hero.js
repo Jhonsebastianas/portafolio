@@ -5,6 +5,7 @@ import Input from "@modules/funnels/components/input";
 import { useState } from "react";
 import InputPhone from "@modules/funnels/components/input-phone";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const HeroContainer = styled.section`
   display: flex;
@@ -124,6 +125,8 @@ const ImageWrapper = styled.div`
 `;
 
 const Hero = () => {
+  const router = useRouter();
+
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -152,11 +155,11 @@ const Hero = () => {
 
       const data = await res.json();
       if (res.ok) {
-        alert("¡Te has registrado con éxito! Revisa tu correo.");
         setNombre("");
         setEmail("");
         setPhone("");
         setIsChecked(false);
+        router.push("/funnel/email-confirmation");
       } else {
         alert("Error al registrarte: " + data.message);
       }

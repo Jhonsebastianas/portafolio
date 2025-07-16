@@ -2,10 +2,13 @@ import Input from "@modules/funnels/components/input";
 import InputPhone from "@modules/funnels/components/input-phone";
 import Modal from "@modules/funnels/components/modal";
 import { useModal } from "@modules/funnels/context/ModalContext";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 
 const ModalSection = () => {
+  const router = useRouter();
+
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,6 +44,7 @@ const ModalSection = () => {
         setPhone("");
         setIsChecked(false);
         closeModal();
+        router.push("/funnel/email-confirmation");
       } else {
         alert("Error al registrar: " + data.message);
       }
