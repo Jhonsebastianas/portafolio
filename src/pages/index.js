@@ -4,11 +4,8 @@ import About from '@components/sections/AboutNew'
 import Skills from '@components/sections/Skills'
 import Qualification from '@components/sections/Qualification'
 import Services from '@components/sections/Services'
-import PortFolio from '@components/sections/Portfolio';
-// import PortfolioNew from '@modules/portfolio/Portfolio'
-
 import Contact from '@components/sections/Contactme'
-import { Projects } from '@components/sections/projects/projects'
+import ProjectsShowcase from '@components/sections/ProjectsShowcase'
 
 export default function Home() {
   return (
@@ -18,9 +15,7 @@ export default function Home() {
       <Skills />
       <Qualification />
       <Services />
-      <Projects />
-      {/* <PortFolio /> */}
-      {/* <PortfolioNew /> */}
+      <ProjectsShowcase />
       <Contact />
     </Layout>
   )

@@ -1,57 +1,62 @@
 const portfolioProjects = [
     {
         title: 'Controlsep',
+        slug: 'controlsep',
         categories: ["frontend","backend"],
+        languages: ['React', 'Node.js', 'Express', 'MongoDB', 'Styled Components'],
         img: 'Controlsep.webp',
-        description: `
-            Controlsep is a project created to encourage 
-            and allow people to measure the consumption of water and energy in their homes.
-        `,
+        description: `Control your home water and energy consumption with insightful dashboards and alerts.`,
+        longDescription: `Controlsep helps households monitor and optimize water and energy usage. I designed the architecture, built the API and created a reactive UI with real‑time charts, offline storage and PWA capabilities.`,
         url: 'https://controlsep.com/'
     },
     {
         title: 'Tagmascota',
+        slug: 'tagmascota',
         categories: ["backend","frontend"],
+        languages: ['Next.js', 'Node.js', 'MongoDB', 'Vercel', 'Styled Components'],
         img: 'Tagmascota.webp',
-        description: `
-            Tagmascota is a project that will provide a reporting point for lost and found pets.
-        `,
+        description: `A lost & found hub for pets with QR tags and instant owner contact.`,
+        longDescription: `A complete solution for pet identification and recovery. Each pet has a QR code linking to a secure profile. When scanned, the system notifies owners and shares a safe contact channel.`,
         url: 'https://tagmascotas.vercel.app/',
     },
     {
         title: 'Movilidad en Línea (Quipux)',
+        slug: 'movilidad-en-linea-quipux',
         categories: ["companie","backend","frontend"],
+        languages: ['Vue', 'Java', 'Spring', 'Oracle', 'K8s'],
         img: 'CompanieQuipuxMovilidadEnLinea.webp',
-        description: `
-            Movilidad en Línea es un portal donde se busca brindarle a los ciudadanos una mejor calidad de vida ofreciendo la posibilidad de realizar trámites relacionados con movilidad y gobierno. Queremos evitar los desplazamientos de las personas a los puntos de atención, las largas filas y solucionar todo desde la comodidad de la casa.
-        `,
+        description: `City e‑government platform for online mobility procedures.`,
+        longDescription: `A large scale portal for citizens to perform mobility procedures online. I contributed to microservices hardening, CI/CD, caching and UX improvements to reduce queue times and visits.`,
         url: 'https://www.medellin.gov.co/portal-movilidad/#/public',
     },
     {
         title: "CGI DIGITAL Côte d'Ivoire (Quipux Afrique)",
+        slug: 'cgi-digital-quipux-afrique',
         categories: ["companie","backend","frontend"],
+        languages: ['Angular', 'Java', 'Spring', 'PostgreSQL', 'Redis'],
         img: 'CompanieQuipuxAfrique.webp',
-        description: `
-            Le centre de gestion intégrée (CGI) est une plateforme technologique alliant le confort et l’optimisation des processus administratifs sous forme d’un guichet unique et qui a pour but la modernisation de l’activité du transport routier en Côte d’Ivoire. Il facilite dans un premier temps toutes les procédures liées au traitement à l’édition et à la délivrance des documents administratifs du transport. Dans un second temps, cette plateforme rend possible la gestion en temps réel sur l’ensemble du territoire national. Où que vous vous trouviez sur l’ensemble du territoire, dès lors que vous vous adressez à l’administration des transports, vous bénéficiez de la même qualité de service. En plus d’améliorer l’accessibilité aux services de transport, un certain nombre d’avantages tels que la production de statistiques, le suivi opérationnel, la coordination sur l’ensemble du territoire sont liés à la gestion en temps réel qui en découle. 
-        `,
+        description: `Integrated transport management platform for Côte d’Ivoire.`,
+        longDescription: `As part of a distributed team, I worked on backend services, security hardening and API integrations to enable real‑time document issuance and nationwide service consistency.`,
         url: 'https://eservices.cgi.ci/avit/#/public',
     },
     {
         title: 'Snippets en JavaScript: optimiza tus tareas repetitivas en VSCode.',
+        slug: 'blog-snippets-js',
         categories: ["blog"],
+        languages: ['JavaScript'],
         img: 'BlogSnippetsJavascript.webp',
-        description: `
-            Tagmascota is a project that will provide a reporting point for lost and found pets.
-        `,
+        description: `Article: Boost your productivity with custom JS snippets in VSCode.`,
+        longDescription: `A practical guide to create and organize VSCode snippets that speed up everyday tasks in JavaScript projects.`,
         url: 'https://www.jhonsebastianas.com/blog/articles/snippets-en-javaScript-optimiza-tus-tareas-repetitivas-en-vscode',
     },
     {
         title: 'Un vistazo al futuro: el internet de las cosas (IOT) en el 2021 para “consumidores inteligentes”',
+        slug: 'blog-iot-2021',
         categories: ["blog"],
+        languages: ['IoT', 'Edge'],
         img: 'BlogUnVistazoAlFuturo.webp',
-        description: `
-            El internet de las cosas es un tema que se ha vuelto muy popular en la industria de la tecnología, algunos hablan sobre “poder apagar y encender los interruptores de luz desde cualquier sitio”. También sobre “la conexión de todo dispositivo electrónico, con tu celular por medio de internet”, algo de razón llevan y vamos a verlo.
-        `,
+        description: `Article: Where IoT is heading and how it impacts consumers.`,
+        longDescription: `An overview of IoT adoption and practical implications for consumers and businesses alike.`,
         url: 'https://medium.com/@jhonsebastianas/un-vistazo-al-futuro-el-internet-de-las-cosas-iot-en-el-2021-para-consumidores-inteligentes-f3f1375cecb5',
     },
 ]
