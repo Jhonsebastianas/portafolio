@@ -28,7 +28,7 @@ const LeftCopy = styled.div`
   grid-column: span 4;
   align-self: center;
   position: relative;
-  z-index: 10;
+  z-index: 0;
   transition: transform 0.4s ease;
 
   @media (max-width: 1024px) {
@@ -69,7 +69,7 @@ const Cards = styled.div`
   display: grid;
   gap: 2rem;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(400px, 50vw);
+  grid-auto-columns: minmax(600px, 50vw);
   padding-right: 4rem;
 
   @media (max-width: 1024px) {
@@ -90,7 +90,7 @@ const Card = styled.article`
   z-index: 1;
 
   &:hover {
-    transform: translateY(-8px);
+    #transform: translateY(-8px);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     border-color: var(--first-color);
     z-index: 10;
@@ -99,12 +99,18 @@ const Card = styled.article`
 
 const Thumb = styled.div`
   aspect-ratio: 16/9;
-  background: var(--gray-color);
   position: relative;
   overflow: hidden;
-  border-radius: 1rem;
   margin: 1.5rem;
   transition: all 0.4s ease;
+
+  width: 95%;
+
+  /* alineación configurable */
+  margin-left: ${({ align }) =>
+    align === "left" ? "0" : align === "center" ? "auto" : "auto"};
+  margin-right: ${({ align }) =>
+    align === "right" ? "0" : align === "center" ? "auto" : "auto"};
 
   img {
     width: 100%;
@@ -116,17 +122,13 @@ const Thumb = styled.div`
 
   ${Card}:hover & {
     transform: translateY(-10px);
-
-    img {
-      transform: scale(1.05);
-    }
   }
 `;
 
 const Meta = styled.div`
   padding: 0 1.5rem 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 1rem;
   transition: all 0.4s ease;
 `;
@@ -254,7 +256,7 @@ const ProjectsShowcase = () => {
             timeline.to(
               leftCopy,
               {
-                x: () => -scrollDistance * 0.3, // Se mueve 30% de la distancia del scroll
+                x: () => -scrollDistance * 0.2, // Se mueve 30% de la distancia del scroll
                 ease: "none",
               },
               0
@@ -304,7 +306,7 @@ const ProjectsShowcase = () => {
             <Cards ref={railRef}>
               {portfolioProjects.map((p) => (
                 <Card key={p.slug || p.title}>
-                  <Thumb>
+                  <Thumb align={p.align || "right"}>
                     <img src={`/images/projects/${p.img}`} alt={p.title} />
                   </Thumb>
                   <Meta>
