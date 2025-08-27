@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
   transition: transform 0.35s ease;
@@ -11,8 +11,8 @@ const Title = styled.h3`
 
 const SubTitle = styled.h4`
   font-size: 1rem;
-  font-weight: 500;
-  color: #666;
+  font-weight: 300;
+  color: #444;
   margin: 0 0 0.5rem 0;
   transition: transform 0.35s ease;
 `;
@@ -27,6 +27,13 @@ const Description = styled.p`
   overflow: hidden;
   transform: translateY(8px);
   transition: all 0.35s ease;
+
+  /* Siempre visible en mobile */
+  @media (max-width: 768px) {
+    opacity: 1;
+    max-height: none;
+    transform: none;
+  }
 `;
 
 const Button = styled.a`
@@ -45,6 +52,13 @@ const Button = styled.a`
   overflow: hidden;
   transform: translateY(8px);
   transition: all 0.35s ease;
+
+  /* Siempre visible en mobile */
+  @media (max-width: 768px) {
+    opacity: 1;
+    max-height: none;
+    transform: none;
+  }
 
   &:hover {
     background: #333;
@@ -68,13 +82,15 @@ const CardContainer = styled.div`
   @media (max-width: 768px) {
     max-width: 100%;
     padding: 1.5rem;
-    min-height: 400px;
+    min-height: 570px;
   }
 
   /* Hover effect: reveal hidden content */
   &:hover {
     & ${Title}, & ${SubTitle} {
-      transform: translateY(-25px);
+        @media (min-width: 768px) {
+            transform: translateY(-25px);
+        }
     }
 
     & ${Description}, & ${Button} {
@@ -93,7 +109,8 @@ const ImageWrapper = styled.div`
   margin-bottom: 1.5rem;
 
   img {
-    max-width: 90%;
+  aspect-ratio: 16 / 9;
+    max-width: 100%;
     height: auto;
     border-radius: 12px;
   }
@@ -121,7 +138,7 @@ export default function CardWrapper({
   return (
     <CardContainer bg={bg}>
       <ImageWrapper>
-        <Image src={image} alt={title} width={350} height={200} />
+        <Image src={image} alt={title} width={500} height={350} />
       </ImageWrapper>
 
       <Content>
