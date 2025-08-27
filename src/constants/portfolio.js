@@ -1,5 +1,5 @@
 const portfolioProjects = [
-        {
+    {
         title: 'Movilidad en Línea (Quipux)',
         slug: 'movilidad-en-linea-quipux',
         categories: ["companie","backend","frontend"],
@@ -9,6 +9,8 @@ const portfolioProjects = [
         longDescription: `A large scale portal for citizens to perform mobility procedures online. I contributed to microservices hardening, CI/CD, caching and UX improvements to reduce queue times and visits.`,
         url: 'https://www.medellin.gov.co/portal-movilidad/#/public',
         align: 'right',
+        background: 'rgb(176, 151, 227)',
+        job: 'Software Architect & Senior Analyst Developer',
     },
     {
         title: "CGI DIGITAL Côte d'Ivoire (Quipux Afrique)",
@@ -20,6 +22,8 @@ const portfolioProjects = [
         longDescription: `As part of a distributed team, I worked on backend services, security hardening and API integrations to enable real‑time document issuance and nationwide service consistency.`,
         url: 'https://eservices.cgi.ci/avit/#/public',
         align: 'right',
+        background: 'rgb(253, 192, 26)',
+        job: 'Senior Analyst Developer Leader',
     },
     {
         title: 'Controlsep',
@@ -31,6 +35,7 @@ const portfolioProjects = [
         longDescription: `Controlsep helps households monitor and optimize water and energy usage. I designed the architecture, built the API and created a reactive UI with real‑time charts, offline storage and PWA capabilities.`,
         url: 'https://controlsep.com/',
         align: 'center',
+        background: 'rgb(233, 233, 233)',
     },
     {
         title: 'Tagmascota',

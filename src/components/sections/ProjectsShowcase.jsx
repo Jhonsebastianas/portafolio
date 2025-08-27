@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import Link from "next/link";
 import portfolioProjects from "@constants/portfolio";
 import { createHorizontalScroll } from "../../util/animations";
+import CardWrapper from "@components/commons/CardWrapper";
 
 const Section = styled.section`
   min-height: 100vh;
@@ -69,150 +69,12 @@ const Cards = styled.div`
   display: grid;
   gap: 2rem;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(600px, 50vw);
+  grid-auto-columns: minmax(560px, 50vw);
   padding-right: 4rem;
 
   @media (max-width: 1024px) {
     grid-auto-columns: 100%;
     padding-right: 0;
-  }
-`;
-
-const Card = styled.article`
-  border-radius: 1.5rem;
-  overflow: visible;
-  background: var(--container-color);
-  border: 2px solid var(--gray-color);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    #transform: translateY(-8px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    border-color: var(--first-color);
-    z-index: 10;
-  }
-`;
-
-const Thumb = styled.div`
-  aspect-ratio: 16/9;
-  position: relative;
-  overflow: hidden;
-  margin: 1.5rem;
-  transition: all 0.4s ease;
-
-  width: 95%;
-
-  /* alineación configurable */
-  margin-left: ${({ align }) =>
-    align === "left" ? "0" : align === "center" ? "auto" : "auto"};
-  margin-right: ${({ align }) =>
-    align === "right" ? "0" : align === "center" ? "auto" : "auto"};
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-
-  ${Card}:hover & {
-    transform: translateY(-10px);
-  }
-`;
-
-const Meta = styled.div`
-  padding: 0 1.5rem 1.5rem;
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 1rem;
-  transition: all 0.4s ease;
-`;
-
-const Title = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin: 0;
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color 0.3s ease;
-`;
-
-const Categories = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-
-  span {
-    background: var(--first-color-lighter);
-    color: var(--first-color-alt);
-    padding: 0.4rem 0.8rem;
-    border-radius: 999px;
-    font-size: var(--smaller-font-size);
-    font-weight: var(--font-medium);
-    border: 1px solid var(--first-color);
-    transition: all 0.3s ease;
-  }
-`;
-
-const HoverContent = styled.div`
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-  margin-top: 1rem;
-
-  ${Card}:hover & {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const Description = styled.p`
-  color: var(--text-color);
-  font-size: var(--normal-font-size);
-  line-height: 1.6;
-  margin: 0 0 1rem;
-  opacity: 0.9;
-`;
-
-const Languages = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-
-  span {
-    background: var(--gray-color);
-    color: var(--text-color);
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    font-size: var(--smaller-font-size);
-    font-weight: var(--font-medium);
-    border: 1px solid var(--gray-color);
-  }
-`;
-
-const Footer = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-
-  a {
-    color: var(--first-color);
-    font-weight: var(--font-semi-bold);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: var(--first-color-lighter);
-      color: var(--first-color-alt);
-    }
   }
 `;
 
@@ -304,56 +166,21 @@ const ProjectsShowcase = () => {
           </LeftCopy>
           <RightRail>
             <Cards ref={railRef}>
-              {portfolioProjects.map((p) => (
-                <Card key={p.slug || p.title}>
-                  <Thumb align={p.align || "right"}>
-                    <img src={`/images/projects/${p.img}`} alt={p.title} />
-                  </Thumb>
-                  <Meta>
-                    <div>
-                      <Title>{p.title}</Title>
-                      <Categories>
-                        {p.categories &&
-                          p.categories.map((cat) => (
-                            <span key={cat}>
-                              {cat === "companie"
-                                ? "Company"
-                                : cat.charAt(0).toUpperCase() + cat.slice(1)}
-                            </span>
-                          ))}
-                      </Categories>
-                    </div>
-                    <HoverContent>
-                      <Description>{p.description}</Description>
-                      {p.languages && (
-                        <Languages>
-                          {p.languages.map((t) => (
-                            <span key={t}>{t}</span>
-                          ))}
-                        </Languages>
-                      )}
-                      <Footer>
-                        <Link
-                          href={`/projects/${
-                            p.slug || encodeURIComponent(p.title.toLowerCase())
-                          }`}
-                        >
-                          View details →
-                        </Link>
-                        {p.url && (
-                          <a
-                            href={p.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Live ↗
-                          </a>
-                        )}
-                      </Footer>
-                    </HoverContent>
-                  </Meta>
-                </Card>
-              ))}
+              {portfolioProjects.map((project) => {
+                const { background, description, img, job, slug, title } = project;
+                const exploreLink = `/projects/${slug || encodeURIComponent(p.title.toLowerCase())}`;
+                const imageProject = `/images/projects/${img}`;
+                return (
+                  <CardWrapper
+                    title={title}
+                    subtitle={job || null}
+                    description={description}
+                    image={imageProject}
+                    bg={background}
+                    link={exploreLink}
+                  />
+                );
+              })}
             </Cards>
           </RightRail>
         </Grid>
