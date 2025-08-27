@@ -77,6 +77,23 @@ const Cards = styled.div`
   }
 `;
 
+const ShowNotTellMobile = styled.div`
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  max-width: 550px;
+  min-height: 820px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: flex;
+    max-width: 100%;
+    min-height: 570px;
+  }
+`;
+
 const ProjectsShowcase = () => {
   const railRef = useRef(null);
   const sectionRef = useRef(null);
@@ -105,7 +122,7 @@ const ProjectsShowcase = () => {
 
         if (scrollDistance <= 0) return;
 
-        const start = isMobile ? 'top -10%' : 'top top';
+        const start = isMobile ? "top top" : "top top";
 
         // Usar la utilidad de animación para el scroll horizontal
         const tl = await createHorizontalScroll(
@@ -159,22 +176,43 @@ const ProjectsShowcase = () => {
     <>
       <Section id="portfolio" ref={sectionRef}>
         <Grid>
-          <LeftCopy ref={leftCopyRef}>
-            <h2>
-              Show
-              <br />
-              not tell
-            </h2>
-            <p>
-              Selected work spanning product, web and platform engineering.
-              Click any project to see the full story, architecture and impact.
-            </p>
-          </LeftCopy>
+          {!isMobile && (
+            <LeftCopy ref={leftCopyRef}>
+              <h2>
+                Show
+                <br />
+                not tell
+              </h2>
+              <p>
+                Selected work spanning product, web and platform engineering.
+                Click any project to see the full story, architecture and
+                impact.
+              </p>
+            </LeftCopy>
+          )}
+
           <RightRail>
             <Cards ref={railRef}>
+              <ShowNotTellMobile key={"ejempl"}>
+                <LeftCopy ref={leftCopyRef}>
+                  <h2>
+                    Show
+                    <br />
+                    not tell
+                  </h2>
+                  <p>
+                    Selected work spanning product, web and platform
+                    engineering. Click any project to see the full story,
+                    architecture and impact.
+                  </p>
+                </LeftCopy>
+              </ShowNotTellMobile>
               {portfolioProjects.map((project) => {
-                const { background, description, img, job, slug, title } = project;
-                const exploreLink = `/projects/${slug || encodeURIComponent(p.title.toLowerCase())}`;
+                const { background, description, img, job, slug, title } =
+                  project;
+                const exploreLink = `/projects/${
+                  slug || encodeURIComponent(p.title.toLowerCase())
+                }`;
                 const imageProject = `/images/projects/${img}`;
                 return (
                   <CardWrapper
