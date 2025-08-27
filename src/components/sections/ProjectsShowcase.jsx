@@ -3,6 +3,7 @@ import styled from "styled-components";
 import portfolioProjects from "@constants/portfolio";
 import { createHorizontalScroll } from "../../util/animations";
 import CardWrapper from "@components/commons/CardWrapper";
+import { useMediaQuery } from "react-responsive";
 
 const Section = styled.section`
   min-height: 100vh;
@@ -61,7 +62,7 @@ const RightRail = styled.div`
 
   @media (max-width: 1024px) {
     grid-column: span 12;
-    overflow-x: auto;
+    overflow-x: hidden;
   }
 `;
 
@@ -84,6 +85,8 @@ const ProjectsShowcase = () => {
   const leftCopyRef = useRef(null);
   const animationRef = useRef(null);
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -92,7 +95,7 @@ const ProjectsShowcase = () => {
     const setup = async () => {
       try {
         // Solo activar el scroll horizontal con GSAP en desktop
-        if (window.innerWidth < 1024) return;
+        //if (window.innerWidth < 1024) return;
 
         const rail = railRef.current;
         const leftCopy = leftCopyRef.current;
@@ -104,17 +107,22 @@ const ProjectsShowcase = () => {
 
         if (scrollDistance <= 0) return;
 
+        const start = isMobile ? 'top -10%' : 'top top';
+
         // Usar la utilidad de animación para el scroll horizontal
         const tl = await createHorizontalScroll(
           sectionRef.current,
           rail,
           {
-            start: "top top",
+            start,
             end: `+=${scrollDistance + window.innerHeight}`,
           },
           (timeline) => {
             // Añadir animación para que el texto izquierdo se mueva hacia la izquierda
             // en el mismo timeline, para que estén perfectamente sincronizados
+            if (isMobile) {
+              return;
+            }
             timeline.to(
               leftCopy,
               {
