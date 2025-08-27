@@ -51,7 +51,6 @@ const LeftCopy = styled.div`
     max-width: 38ch;
     font-size: var(--normal-font-size);
     line-height: 1.6;
-    margin-bottom: 2rem;
   }
 `;
 
