@@ -34,8 +34,7 @@ const LeftCopy = styled.div`
 
   @media (max-width: 1024px) {
     grid-column: span 12;
-    position: static;
-    margin-bottom: 3rem;
+    position: flex;
   }
 
   h2 {
