@@ -74,15 +74,20 @@ const CardContainer = styled.div`
   color: #111;
   width: 100%;
   max-width: 550px;
-  min-height: 820px;
+  min-height: 700px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
 
+  @media (max-height: 800px) {
+    min-height: auto;
+  }
+
+
   @media (max-width: 768px) {
     max-width: 100%;
     padding: 1.5rem;
-    min-height: 570px;
+    min-height: auto;
   }
 
   /* Hover effect: reveal hidden content */
