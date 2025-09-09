@@ -1,10 +1,16 @@
 import Head from "next/head";
+import { createGlobalStyle } from 'styled-components';
+import { globalStyles } from '@styles/theme';
 
 /** New portafolio */
 import "@styles/css/styles.css";
 import "@styles/css/styles-resume.css";
 import "@styles/css/swiper-bundle.min.css";
 import "highlight.js/styles/github.css"; // Cambia 'github' por cualquier otro tema predeterminado
+
+const GlobalStyle = createGlobalStyle`
+  ${globalStyles}
+`;
 
 import { useRouter } from "next/router";
 import { defaultMeta, metaByRoute } from "src/util/metaConfig";
@@ -24,6 +30,7 @@ function MyApp({ Component, pageProps }) {
   const meta = metaByRoute[path] || defaultMeta;
   return (
     <>
+      <GlobalStyle />
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
