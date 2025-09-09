@@ -20,7 +20,7 @@ export const theme = {
     },
   },
   fonts: {
-    primary: '"Roobert SemiBold", "Roobert SemiBold Placeholder", sans-serif',
+    primary: '"Roobert Bold", "Roobert Bold Placeholder", sans-serif',
     secondary: '"Roobert Regular", "Roobert Regular Placeholder", sans-serif',
     fallback: 'Inter, Inter Placeholder, sans-serif',
   },

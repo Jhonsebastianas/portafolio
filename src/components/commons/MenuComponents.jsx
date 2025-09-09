@@ -30,11 +30,12 @@ export const BaseButton = styled.button`
 export const MenuItem = styled(BaseButton)`
   opacity: ${props => props.$active ? 1 : 0.5};
   color: ${props => props.$active ? 'var(--color-primary)' : 'var(--color-text-secondary)'};
-  font-family: var(--font-primary);
-  font-weight: 600;
+  font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+  font-weight: 700;
   font-size: var(--font-size-base);
   white-space: nowrap;
   transition: var(--transition-fast);
+  letter-spacing: -0.01em;
   
   &:hover {
     opacity: 1;
@@ -47,12 +48,13 @@ export const CTAButton = styled(BaseButton)`
   background-color: var(--color-secondary);
   border-radius: var(--border-radius-full);
   padding: 6px 16px 8px;
-  font-family: var(--font-primary);
-  font-weight: 600;
+  font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+  font-weight: 700;
   font-size: var(--font-size-base);
   color: var(--color-primary);
   box-shadow: var(--shadow-sm);
   transition: var(--transition-fast);
+  letter-spacing: -0.01em;
   
   &:hover {
     transform: translateY(-1px);
@@ -75,7 +77,7 @@ export const StatusIndicator = styled.div`
 
 // Status text component
 export const StatusText = styled.span`
-  font-family: var(--font-secondary);
+  font-family: "Roobert Regular", "Roobert Regular Placeholder", sans-serif;
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   opacity: 0.5;
@@ -171,9 +173,12 @@ export const MobileMenuItems = styled.div`
 
 // Mobile menu item
 export const MobileMenuItem = styled(MenuItem)`
+  font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+  font-weight: 700;
   font-size: var(--font-size-lg);
   padding: var(--spacing-md) 0;
   border-bottom: 1px solid var(--color-border-light);
+  letter-spacing: -0.01em;
   
   &:last-child {
     border-bottom: none;

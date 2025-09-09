@@ -65,7 +65,7 @@ const Footer = () => {
                 <div className="footer__container container grid">
                     <div>
                         <h1 className="footer__title">Sebastian</h1>
-                        <span className="footer__subtitle">Senior Analyst developer</span>
+                        <span className="footer__subtitle">Software Architect & senior developer</span>
                     </div>
 
                     <ul className="footer__links">
@@ -81,6 +81,10 @@ const Footer = () => {
                     </ul>
 
                     <div className="footer__socials">
+                        <a target="_blank" className="footer__social" href="https://www.facebook.com/jhonsebastianas"
+                            rel="noopener noreferrer" aria-label="YouTube jhonsabastianas">
+                            <i className="uil uil-youtube"></i>
+                        </a>
                         <a target="_blank" className="footer__social" href="https://www.facebook.com/jhonsebastianas"
                             rel="noopener noreferrer" aria-label="Facebook jhonsabastianas">
                             <i className="uil uil-facebook-f"></i>

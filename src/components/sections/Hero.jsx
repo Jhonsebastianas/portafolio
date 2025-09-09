@@ -35,7 +35,7 @@ const HeroContent = styled.div`
   text-align: center;
   z-index: 2;
   max-width: 900px;
-  margin-bottom: 8rem;
+  margin-bottom: 11rem;
 
   @media (max-width: 768px) {
     text-align: left;
@@ -45,25 +45,29 @@ const HeroContent = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem);
   font-weight: 700;
   color: var(--first-color);
   margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
 
   @media (max-width: 768px) {
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-size: clamp(3rem, 10vw, 5rem);
     margin-bottom: 1rem;
-    line-height: 1.1;
+    line-height: 0.95;
   }
 `;
 
 const SubInfo = styled.div`
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  font-size: 1rem;
+  gap: 3rem;
+  font-family: "Roobert Regular", "Roobert Regular Placeholder", sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: var(--first-color);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 
   div {
     display: flex;
@@ -72,8 +76,11 @@ const SubInfo = styled.div`
   }
 
   span {
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
   }
 
   @media (max-width: 768px) {
@@ -118,12 +125,55 @@ const DarkOverlay = styled.div`
 `;
 
 const AboutWrapper = styled.section`
-  p {
+  position: relative;
+  /* Keep title centered via parent text-align, override desc for desktop */
+  .about__title {
+    font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20ch;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .about__desc {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .about__desc {
+      position: absolute;
+      left: calc(-50vw + 50%);
+      bottom: 2rem;
+      width: 100vw;
+      padding-left: 4rem;
+      padding-right: 2rem;
+      margin-top: 0;
+    }
+  }
+
+  .about__desc p {
+    font-family: "Roobert Regular", "Roobert Regular Placeholder", sans-serif;
     color: #888;
+    max-width: 640px;
+    line-height: 1.6;
+    font-size: clamp(1.2rem, 2.5vw, 1.2rem);
+  }
+
+  @media (min-width: 768px) {
+    /* On desktop keep the title visually centered and push desc to left edge */
+    .about__title {
+      text-align: center;
+    }
   }
 
   @media (max-width: 767.98px) {
-    p {
+    .about__desc p {
       color: #999;
     }
   }
@@ -228,7 +278,8 @@ export default function HeroSection() {
         },
       });
 
-      const titleHeroDuration = 6;
+      const titleHeroDuration = 4; // Reducido para que termine antes
+      const aboutTextDuration = 2; // Duración específica para el texto about
 
       // Hero sale
 
@@ -267,10 +318,13 @@ export default function HeroSection() {
       // About entra
       if (isMobile) {
         // 👉 Animación del fondo (zoom + desplazamiento)
-        heroTimeline.to(
+        heroTimeline.fromTo(
           ".hero__photo",
           {
-            scale: 1.2, // zoom suave
+            scale: 1,
+          },
+          {
+            scale: 1.05, // zoom suave
             x: () => window.innerWidth * 0.02,
             duration: 10,
             transformOrigin: "center center",
@@ -290,7 +344,7 @@ export default function HeroSection() {
             position: "relative",
             yPercent: 0,
             autoAlpha: 1,
-            duration: 1.5,
+            duration: aboutTextDuration,
           },
           `fadeStart+=${titleHeroDuration - 0.2}`
         );
@@ -306,9 +360,9 @@ export default function HeroSection() {
             position: "relative",
             yPercent: 0,
             autoAlpha: 1,
-            duration: 1.2,
+            duration: aboutTextDuration * 0.8,
           },
-          ">0.3"
+          ">0.2"
         );
       } else {
         // 👉 Animación del fondo (zoom + desplazamiento)
@@ -318,7 +372,7 @@ export default function HeroSection() {
             scale: 1,
           },
           {
-            scale: 1.3, // zoom suave
+            scale: 1.1, // zoom suave
             x: () => window.innerWidth * 0.2,
             duration: 10,
             transformOrigin: "center center",
@@ -338,7 +392,7 @@ export default function HeroSection() {
             position: "relative",
             xPercent: 0,
             autoAlpha: 1,
-            duration: 1.5,
+            duration: aboutTextDuration,
             ease: "power1.out",
           },
           `fadeStart+=${titleHeroDuration - 0.2}`
@@ -347,16 +401,16 @@ export default function HeroSection() {
           ".about__desc",
           {
             position: "absolute",
-            yPercent: 50,
+            yPercent: 300,
             autoAlpha: 0,
           },
           {
-            position: "relative",
-            yPercent: 0,
+            position: "absolute",
+            yPercent: 130,
             autoAlpha: 1,
-            duration: 1.2,
+            duration: aboutTextDuration * 0.8,
           },
-          ">0.3"
+          ">0.2"
         );
       }
     };
@@ -379,8 +433,8 @@ export default function HeroSection() {
         </Title>
         <SubInfo>
           <div className="hero_subtitles hero__subtitle-fade">
-            <span>$450M+</span>
-            <p>en proyectos gestionados</p>
+            <span>Java</span>
+            <p>In-depth knowledge</p>
           </div>
           <div className="hero_subtitles hero__subtitle-fade">
             <span>{yearsWorked}+</span>
