@@ -122,7 +122,7 @@ const ProjectsShowcase = () => {
 
         if (scrollDistance <= 0) return;
 
-        const start = isMobile ? "top -10%" : "top top";
+        const start = isMobile ? "top -5%" : "top top";
 
         // Usar la utilidad de animación para el scroll horizontal
         const tl = await createHorizontalScroll(
