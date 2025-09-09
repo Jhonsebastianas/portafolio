@@ -24,7 +24,7 @@ const MenuWrapper = styled.div`
   right: 0;
   width: 100%;
   z-index: var(--z-index-menu);
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: var(--spacing-md) 0;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: var(--spacing-sm) var(--spacing-lg);
@@ -35,14 +35,13 @@ const MenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   background: transparent;
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: 0 var(--spacing-xl);
   position: relative;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: 0;
   }
 `;
 
