@@ -175,16 +175,30 @@ export default function HeroSection() {
         "fadeStart+=1.5"
       );
 
-      introTimeline.from(
-        ".hero__logo-img",
-        {
-          opacity: 0,
-          duration: 4,
-          xPercent: 100,
-          stagger: 0.06,
-        },
-        "fadeStart"
-      );
+      // Hero logo
+      if (isMobile) {
+        introTimeline.from(
+          ".hero__logo-img",
+          {
+            opacity: 0,
+            duration: 4,
+            xPercent: -100,
+            stagger: 0.06,
+          },
+          "fadeStart"
+        );
+      } else {
+        introTimeline.from(
+          ".hero__logo-img",
+          {
+            opacity: 0,
+            duration: 4,
+            xPercent: 100,
+            stagger: 0.06,
+          },
+          "fadeStart"
+        );
+      }
 
       // Hero zoom
       introTimeline.fromTo(

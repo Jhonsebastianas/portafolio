@@ -63,7 +63,7 @@ const HeroLogoContainer = styled.div`
   @media (max-width: 767.98px) {
     aspect-ratio: 1 / 1;
     height: var(--framer-aspect-ratio-supported, 44px);
-    width: 44px;
+    width: 65px;
   }
 `;
 
