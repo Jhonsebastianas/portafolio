@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Footer from '@components/layouts/Footer'
 // import Social from '@components/layouts/Social'
-import Header from '@components/sections/Header'
+// import Header from '@components/sections/Header'
 import ScrollUp from '@components/commons/button-scroll-up'
+import Menu from '@modules/portfolio/components/Menu'
 
 const Layout = ({ children }) => {
 
@@ -18,7 +19,8 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            <Header />
+            <Menu />
+            {/* <Header /> */}
             <div className="main">
                 {children}
             </div>

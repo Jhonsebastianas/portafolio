@@ -56,9 +56,9 @@ const HeroLogoBottom = styled.div`
 
 const HeroLogoContainer = styled.div`
   flex: none;
-  height: 62px;
+  height: 80px;
   position: relative;
-  width: 62px;
+  width: 80px;
 
   @media (max-width: 767.98px) {
     aspect-ratio: 1 / 1;
@@ -94,7 +94,7 @@ const HeroLogo = () => {
         <HeroLogoIn>
           <HeroLogoLottie>
             <HeroLogoImgContent>
-              <img src="/images/logo.svg" />
+              <img className="hero__logo-img" src="/images/logo.svg" />
             </HeroLogoImgContent>
           </HeroLogoLottie>
         </HeroLogoIn>

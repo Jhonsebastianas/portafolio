@@ -45,7 +45,7 @@ const HeroContent = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
   color: var(--first-color);
   margin-bottom: 1.5rem;
@@ -117,7 +117,7 @@ const DarkOverlay = styled.div`
   }
 `;
 
-const AboutWrapper = styled.div`
+const AboutWrapper = styled.section`
   p {
     color: #888;
   }
@@ -147,21 +147,21 @@ export default function HeroSection() {
 
       const start = isMobile ? "top top" : "top top";
 
-      const titleSplit = new SplitText(".hero__title", { type: "lines" });
+      const titleSplit = new SplitText(".hero__title", { type: "words" });
       const subtitleSplit = new SplitText(".hero_subtitles", { type: "lines" });
 
       // 🔹 Animaciones al cargar (sin scroll)
       const introTimeline = gsap.timeline({ defaults: { ease: "expo.out" } });
 
       introTimeline.from(
-        titleSplit.lines,
+        titleSplit.words,
         {
           opacity: 0,
           yPercent: 100,
           duration: 1.8,
           stagger: 0.06,
         },
-        "fadeStart"
+        "fadeStart+=1"
       );
 
       introTimeline.from(
@@ -173,6 +173,17 @@ export default function HeroSection() {
           stagger: 0.06,
         }, // empieza medio segundo después del título
         "fadeStart+=1.5"
+      );
+
+      introTimeline.from(
+        ".hero__logo-img",
+        {
+          opacity: 0,
+          duration: 4,
+          xPercent: 100,
+          stagger: 0.06,
+        },
+        "fadeStart"
       );
 
       // Hero zoom
@@ -225,6 +236,19 @@ export default function HeroSection() {
         },
         "fadeStart+=0.2"
       ); // etiqueta de control
+
+      heroTimeline.fromTo(
+        ".hero__logo-img",
+        {
+          opacity: 1,
+        },
+        {
+          opacity: 0,
+          duration: 4,
+          transformOrigin: "center center",
+        },
+        "fadeStart"
+      );
 
       // About entra
       if (isMobile) {
@@ -327,7 +351,7 @@ export default function HeroSection() {
   });
 
   return (
-    <HeroWrapper ref={heroRef}>
+    <HeroWrapper ref={heroRef} id="hero">
       <HeroLogo />
       <HeroPhoto />
 
@@ -354,7 +378,7 @@ export default function HeroSection() {
           </div>
         </SubInfo>
 
-        <AboutWrapper>
+        <AboutWrapper id="about">
           <Title className="about__title">
             I design and build scalable software solutions.
           </Title>
