@@ -174,7 +174,12 @@ const AboutWrapper = styled.section`
 
   @media (max-width: 767.98px) {
     .about__desc p {
+      font-size: clamp(1.1rem, 2.5vw, 1.1rem);
       color: #999;
+    }
+
+    .about__title {
+      font-size: clamp(3rem, 8vw, 5rem);
     }
   }
 `;
