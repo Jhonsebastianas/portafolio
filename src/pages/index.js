@@ -1,6 +1,4 @@
 import Layout from "@components/layouts/Layout";
-import Home2 from "@components/sections/Home";
-import About from "@components/sections/AboutNew";
 import Skills from "@components/sections/Skills";
 import Qualification from "@components/sections/Qualification";
 import Services from "@components/sections/Services";
@@ -15,11 +13,21 @@ export default function Home() {
       <Layout>
         {/* <Home2 />
         <About /> */}
-        <Skills />
-        <Qualification />
-        <Services />
-        <ProjectsShowcase />
-        <Contact />
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="qualification">
+          <Qualification />
+        </div>
+        <div id="services">
+          <Services />
+        </div>
+        <div id="projects">
+          <ProjectsShowcase />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
       </Layout>
     </>
   );
