@@ -65,89 +65,103 @@ const Label = styled.span`
 `;
 
 const CalendarioBoda = () => {
-    const ref = useRef();
-    const [tiempoRestante, setTiempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+  const ref = useRef();
+  const [tiempoRestante, setTiempoRestante] = useState({ dias: 0, horas: 0, minutos: 0, segundos: 0 });
+  const [pasoBoda, setPasoBoda] = useState(false);
 
-    useEffect(() => {
-        const animate = async () => {
-          const { gsap } = await import("gsap");
-          const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-          gsap.registerPlugin(ScrollTrigger);
+  useEffect(() => {
+    const animate = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-            gsap.from(ref.current, {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: ref.current,
-                    start: 'top 80%',
-                },
-            });
-        };
-    
-        animate();
-      }, []);
+      gsap.from(ref.current, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 80%',
+        },
+      });
+    };
 
-    useEffect(() => {
-        const fechaObjetivo = new Date('2025-06-28T00:00:00');
+    animate();
+  }, []);
 
-        const actualizarContador = () => {
-            const ahora = new Date();
-            const diferencia = fechaObjetivo - ahora;
+  useEffect(() => {
+    const fechaObjetivo = new Date('2025-06-28T00:00:00');
 
-            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-            const minutos = Math.floor((diferencia / 1000 / 60) % 60);
-            const segundos = Math.floor((diferencia / 1000) % 60);
+    const actualizarContador = () => {
+      const ahora = new Date();
+      const diferencia = fechaObjetivo - ahora;
 
-            setTiempoRestante({ dias, horas, minutos, segundos });
-        };
+      if (diferencia >= 0) {
+        // Falta para la boda
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diferencia / 1000 / 60) % 60);
+        const segundos = Math.floor((diferencia / 1000) % 60);
 
-        const intervalo = setInterval(actualizarContador, 1000);
-        actualizarContador(); // iniciar inmediatamente
+        setTiempoRestante({ dias, horas, minutos, segundos });
+        setPasoBoda(false);
+      } else {
+        // Ya pasó la boda → contar días de casados
+        const diasCasados = Math.floor(Math.abs(diferencia) / (1000 * 60 * 60 * 24));
+        setTiempoRestante({ dias: diasCasados, horas: 0, minutos: 0, segundos: 0 });
+        setPasoBoda(true);
+      }
+    };
 
-        return () => clearInterval(intervalo);
-    }, []);
+    const intervalo = setInterval(actualizarContador, 1000);
+    actualizarContador();
 
-    const diasSemana = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
-    const diasMes = Array.from({ length: 30 }, (_, i) => i + 1);
+    return () => clearInterval(intervalo);
+  }, []);
 
-    return (
-        <Contenedor ref={ref}>
-            <Titulo>Reserva la fecha</Titulo>
-            <p style={{ color: "#b17259" }}>Junio 2025</p>
-            <br />
-            <Calendario>
-                {diasSemana.map((dia, idx) => (
-                    <Dia key={`semana-${idx}`} resaltado>{dia}</Dia>
-                ))}
-                {Array(7).fill('').map((_, i) => <Dia key={`espacio-${i}`} />)} {/* junio inicia sábado */}
-                {diasMes.map(d => (
-                    <Dia key={d} resaltado={d === 28}>{d}</Dia>
-                ))}
-            </Calendario>
+  const diasSemana = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+  const diasMes = Array.from({ length: 30 }, (_, i) => i + 1);
 
-            <Titulo>Faltan</Titulo>
-            <Contador>
-                <Tiempo>
-                    <Numero>{tiempoRestante.dias}</Numero>
-                    <Label>Días</Label>
-                </Tiempo>
-                <Tiempo>
-                    <Numero>{tiempoRestante.horas}</Numero>
-                    <Label>Horas</Label>
-                </Tiempo>
-                <Tiempo>
-                    <Numero>{tiempoRestante.minutos}</Numero>
-                    <Label>Min</Label>
-                </Tiempo>
-                <Tiempo>
-                    <Numero>{tiempoRestante.segundos}</Numero>
-                    <Label>Seg</Label>
-                </Tiempo>
-            </Contador>
-        </Contenedor>
-    );
+  return (
+    <Contenedor ref={ref}>
+      <Titulo>Reserva la fecha</Titulo>
+      <p style={{ color: "#b17259" }}>Junio 2025</p>
+      <br />
+      <Calendario>
+        {diasSemana.map((dia, idx) => (
+          <Dia key={`semana-${idx}`} resaltado>{dia}</Dia>
+        ))}
+        {Array(7).fill('').map((_, i) => <Dia key={`espacio-${i}`} />)} {/* junio inicia sábado */}
+        {diasMes.map(d => (
+          <Dia key={d} resaltado={d === 28}>{d}</Dia>
+        ))}
+      </Calendario>
+
+      <Titulo>{pasoBoda ? "Llevamos" : "Faltan"}</Titulo>
+      <Contador>
+        <Tiempo>
+          <Numero>{tiempoRestante.dias}</Numero>
+          <Label>{pasoBoda ? "Días de casados" : "Días"}</Label>
+        </Tiempo>
+        {!pasoBoda && (
+          <>
+            <Tiempo>
+              <Numero>{tiempoRestante.horas}</Numero>
+              <Label>Horas</Label>
+            </Tiempo>
+            <Tiempo>
+              <Numero>{tiempoRestante.minutos}</Numero>
+              <Label>Min</Label>
+            </Tiempo>
+            <Tiempo>
+              <Numero>{tiempoRestante.segundos}</Numero>
+              <Label>Seg</Label>
+            </Tiempo>
+          </>
+        )}
+      </Contador>
+    </Contenedor>
+  );
 };
 
 export default CalendarioBoda;
