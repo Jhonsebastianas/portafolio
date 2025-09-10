@@ -2,7 +2,7 @@ const listQualifications = [
     {
         title: 'Informatic Engineer',
         subtitle: 'Colombia - PCJIC',
-        calendar: '2022 - 2026'
+        calendar: '2022 - 2025'
     },
     {
         title: 'Technology in Data Systematization',
