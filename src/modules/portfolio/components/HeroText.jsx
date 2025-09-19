@@ -165,7 +165,7 @@ const HeroText = () => {
           </HeroValuePropsItemBottomP>
         </HeroValuePropsItem>
       </HeroValueProps>
-      {!isMobile && <HeroTextBottom />}
+      <HeroTextBottom />
     </HeroTextWrapper>
   );
 };
