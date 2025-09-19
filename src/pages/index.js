@@ -5,11 +5,13 @@ import Services from "@components/sections/Services";
 import Contact from "@components/sections/Contactme";
 import ProjectsShowcase from "@components/sections/ProjectsShowcase";
 import HeroSection from "@components/sections/Hero";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function Home() {
   return (
     <>
       <HeroSection />
+      <SpeedInsights />
       <Layout>
         {/* <Home2 />
         <About /> */}
