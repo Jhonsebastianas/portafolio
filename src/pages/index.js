@@ -4,7 +4,7 @@ import Qualification from "@components/sections/Qualification";
 import Services from "@components/sections/Services";
 import Contact from "@components/sections/Contactme";
 import ProjectsShowcase from "@components/sections/ProjectsShowcase";
-import HeroSection from "@components/sections/Hero";
+import HeroSection from "@modules/portfolio/pages/Hero";
 
 export default function Home() {
   return (

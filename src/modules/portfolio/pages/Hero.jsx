@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useRef } from "react";
 import HeroText from "@modules/portfolio/components/HeroText";
 import AboutContent from "@modules/portfolio/components/AboutContent";
+import useIsMobile from "@modules/shared/hooks/useIsMobile";
 
 const HeroWrapper = styled.section`
   @supports (aspect-ratio: 1) {
@@ -51,7 +52,7 @@ const DarkOverlay = styled.div`
 
 export default function HeroSection() {
   const heroRef = useRef(null);
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useIsMobile();
 
   useGSAP(() => {
     const animate = async () => {
@@ -69,13 +70,21 @@ export default function HeroSection() {
       // 🔹 Animaciones al cargar (sin scroll)
       const introTimeline = gsap.timeline({ defaults: { ease: "expo.out" } });
 
-      introTimeline.from(
+      introTimeline.fromTo(
         titleSplit.words,
         {
           opacity: 0,
           yPercent: 100,
+        },
+        {
+          opacity: 1,
+          yPercent: 0,
           duration: 1.8,
           stagger: 0.06,
+          onStart: function () {
+            // Asegura que todos los words sean visibles antes de animar
+            titleSplit.words.forEach((el) => (el.style.visibility = "visible"));
+          },
         },
         "fadeStart+=1"
       );
@@ -132,7 +141,7 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: heroRef.current,
           start,
-          end: "bottom center",
+          end: "+=1800",
           pin: true,
           scrub: true,
           anticipatePin: 1,
@@ -140,8 +149,8 @@ export default function HeroSection() {
         },
       });
 
-      const titleHeroDuration = 4; // Reducido para que termine antes
-      const aboutTextDuration = 2; // Duración específica para el texto about
+      const titleHeroDuration = 6; // Reducido para que termine antes
+      const aboutTextDuration = 4; // Duración específica para el texto about
 
       // Hero sale
 
@@ -244,16 +253,18 @@ export default function HeroSection() {
         heroTimeline.fromTo(
           ".about__title",
           {
+            opacity: 1,
             xPercent: 100,
             autoAlpha: 0,
           },
           {
+            opacity: 1,
             xPercent: 0,
             autoAlpha: 1,
             duration: aboutTextDuration,
             ease: "power1.out",
           },
-          `fadeStart+=${titleHeroDuration - 0.2}`
+          `fadeStart+=${titleHeroDuration - 5}`
         );
         heroTimeline.fromTo(
           ".about__desc",

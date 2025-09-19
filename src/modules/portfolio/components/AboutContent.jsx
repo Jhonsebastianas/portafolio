@@ -52,6 +52,9 @@ const AboutHeader = styled.div`
   position: relative;
   overflow: visible;
 
+  opacity: 0;
+  visibility: "hidden";
+
   @media (max-width: 767.98px) {
     width: 100%;
   }
@@ -138,6 +141,9 @@ const AboutBodyContent = styled.div`
   max-width: 100%;
   height: auto;
   position: relative;
+
+  opacity: 0;
+  visibility: "hidden";
 
   /* Desktop constraints */
   @media (min-width: 768px) {
