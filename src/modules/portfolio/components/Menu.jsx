@@ -25,6 +25,10 @@ const MenuWrapper = styled.div`
   width: 100%;
   z-index: var(--z-index-menu);
   padding: var(--spacing-md) 0;
+  background: ${({ $whiteBg }) => ($whiteBg ? '#fff' : 'transparent')};
+  box-shadow: ${({ $whiteBg }) => ($whiteBg ? '0 2px 16px 0 rgba(0,0,0,0.04)' : 'none')};
+
+  transition: background 0.2s, box-shadow 0.2s;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: var(--spacing-sm) var(--spacing-lg);
@@ -155,9 +159,12 @@ const Menu = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Determinar si el fondo debe ser blanco
+  const whiteBg = !['hero', 'about', 'projects'].includes(activeSection);
+
   return (
     <>
-      <MenuWrapper>
+      <MenuWrapper $whiteBg={whiteBg}>
         <MenuContainer>
           {/* Mobile Menu Button - Left */}
           {isMobile && (
