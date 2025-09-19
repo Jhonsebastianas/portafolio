@@ -3,7 +3,7 @@ import styled from "styled-components";
 import portfolioProjects from "@constants/portfolio";
 import { createHorizontalScroll } from "../../util/animations";
 import CardWrapper from "@components/commons/CardWrapper";
-import { useMediaQuery } from "react-responsive";
+import useIsMobile from "@modules/shared/hooks/useIsMobile";
 
 const Section = styled.section`
   min-height: 100vh;
@@ -100,7 +100,7 @@ const ProjectsShowcase = () => {
   const leftCopyRef = useRef(null);
   const animationRef = useRef(null);
 
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (typeof window === "undefined") return;

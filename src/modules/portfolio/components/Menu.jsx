@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useMediaQuery } from "react-responsive";
 import useScrollSection from "@hooks/useScrollSection";
 import {
   MenuItem,
@@ -15,6 +14,7 @@ import {
   Logo,
 } from "@components/commons/MenuComponents";
 import { theme } from "@styles/theme";
+import useIsMobile from "@modules/shared/hooks/useIsMobile";
 
 // Desktop Menu Styles
 const MenuWrapper = styled.div`
@@ -95,15 +95,12 @@ const StatusContainer = styled.div`
 
 const Menu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
+  const isMobile = useIsMobile();
   const { activeSection, scrollToSection } = useScrollSection();
 
   const menuItems = [
     { id: "hero", label: "Sebastian Agudelo" },
     { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "qualification", label: "Experience" },
-    { id: "services", label: "Services" },
     { id: "projects", label: "Projects" },
     { id: "contact", label: "Contact" },
   ];
@@ -177,34 +174,16 @@ const Menu = () => {
 
           {/* Desktop Menu Left */}
           <MenuLeft>
-            {!isMobile && (
-              <>
+            {!isMobile &&
+              menuItems.map((item) => (
                 <MenuItem
-                  $active={activeSection === "hero"}
-                  onClick={() => handleMenuClick("hero")}
+                  key={item.id}
+                  $active={activeSection === item.id}
+                  onClick={() => handleMenuClick(item.id)}
                 >
-                  Sebastian Agudelo
+                  {item.label}
                 </MenuItem>
-                <MenuItem
-                  $active={activeSection === "about"}
-                  onClick={() => handleMenuClick("about")}
-                >
-                  About
-                </MenuItem>
-                <MenuItem
-                  $active={activeSection === "projects"}
-                  onClick={() => handleMenuClick("projects")}
-                >
-                  Work
-                </MenuItem>
-                <MenuItem
-                  $active={activeSection === "contact"}
-                  onClick={() => handleMenuClick("contact")}
-                >
-                  Contact
-                </MenuItem>
-              </>
-            )}
+              ))}
           </MenuLeft>
 
           {/* Center Content - Logo or Name */}

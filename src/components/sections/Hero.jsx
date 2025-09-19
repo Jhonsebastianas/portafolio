@@ -1,11 +1,11 @@
-// components/HeroSection.js
 import styled from "styled-components";
 import HeroLogo from "@modules/portfolio/components/HeroLogo";
 import HeroPhoto from "@modules/portfolio/components/HeroPhoto";
 import { useGSAP } from "@gsap/react";
-import moment from "moment/moment";
 import { useMediaQuery } from "react-responsive";
 import { useRef } from "react";
+import HeroText from "@modules/portfolio/components/HeroText";
+import AboutContent from "@modules/portfolio/components/AboutContent";
 
 const HeroWrapper = styled.section`
   @supports (aspect-ratio: 1) {
@@ -31,81 +31,6 @@ const HeroWrapper = styled.section`
   }
 `;
 
-const HeroContent = styled.div`
-  text-align: center;
-  z-index: 2;
-  max-width: 900px;
-  margin-bottom: 11rem;
-
-  @media (max-width: 768px) {
-    text-align: left;
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-`;
-
-const Title = styled.h1`
-  font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
-  font-size: clamp(3.5rem, 8vw, 6rem);
-  font-weight: 700;
-  color: var(--first-color);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
-
-  @media (max-width: 768px) {
-    font-size: clamp(3rem, 10vw, 5rem);
-    margin-bottom: 1rem;
-    line-height: 0.95;
-  }
-`;
-
-const SubInfo = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  font-family: "Roobert Regular", "Roobert Regular Placeholder", sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: var(--first-color);
-  margin-top: 1.5rem;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  span {
-    font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-
-  @media (max-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    font-size: 0.9rem;
-    margin-top: 2rem;
-
-    div {
-      align-items: flex-start;
-    }
-
-    span {
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
-    }
-
-    p {
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-  }
-`;
-
 // 👉 Overlay oscuro solo para móvil
 const DarkOverlay = styled.div`
   display: none;
@@ -124,72 +49,8 @@ const DarkOverlay = styled.div`
   }
 `;
 
-const AboutWrapper = styled.section`
-  position: relative;
-  /* Keep title centered via parent text-align, override desc for desktop */
-  .about__title {
-    font-family: "Roobert Bold", "Roobert Bold Placeholder", sans-serif;
-    font-weight: 700;
-    font-size: clamp(3.5rem, 8vw, 5.5rem);
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 20ch;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-
-  .about__desc {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .about__desc {
-      position: absolute;
-      left: calc(-50vw + 50%);
-      bottom: 2rem;
-      width: 100vw;
-      padding-left: 4rem;
-      padding-right: 2rem;
-      margin-top: 0;
-    }
-  }
-
-  .about__desc p {
-    font-family: "Roobert Regular", "Roobert Regular Placeholder", sans-serif;
-    color: #888;
-    max-width: 640px;
-    line-height: 1.6;
-    font-size: clamp(1.2rem, 2.5vw, 1.2rem);
-  }
-
-  @media (min-width: 768px) {
-    /* On desktop keep the title visually centered and push desc to left edge */
-    .about__title {
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 767.98px) {
-    .about__desc p {
-      font-size: clamp(1.1rem, 2.5vw, 1.1rem);
-      color: #999;
-    }
-
-    .about__title {
-      font-size: clamp(3rem, 8vw, 5rem);
-    }
-  }
-`;
-
 export default function HeroSection() {
   const heroRef = useRef(null);
-
-  const workStartDate = new Date(2019, 1, 1);
-  const yearsWorked = moment().diff(workStartDate, "years");
-
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   useGSAP(() => {
@@ -263,11 +124,7 @@ export default function HeroSection() {
         "fadeStart" // 🔹 sincronizado con el resto
       );
 
-      // 👉 Estado inicial del About (fuera del flujo y oculto)
-      gsap.set([".about__title", ".about__desc"], {
-        position: "absolute",
-        autoAlpha: 0,
-      });
+      gsap.set(".about__title, .about__desc", { autoAlpha: 0 });
 
       // 🔹 Animación controlada por scroll
       const heroTimeline = gsap.timeline({
@@ -341,12 +198,10 @@ export default function HeroSection() {
         heroTimeline.fromTo(
           ".about__title",
           {
-            position: "absolute",
             yPercent: 100,
             autoAlpha: 0,
           },
           {
-            position: "relative",
             yPercent: 0,
             autoAlpha: 1,
             duration: aboutTextDuration,
@@ -389,12 +244,10 @@ export default function HeroSection() {
         heroTimeline.fromTo(
           ".about__title",
           {
-            position: "absolute",
             xPercent: 100,
             autoAlpha: 0,
           },
           {
-            position: "relative",
             xPercent: 0,
             autoAlpha: 1,
             duration: aboutTextDuration,
@@ -405,13 +258,13 @@ export default function HeroSection() {
         heroTimeline.fromTo(
           ".about__desc",
           {
-            position: "absolute",
+            position: "relative",
             yPercent: 300,
             autoAlpha: 0,
           },
           {
-            position: "absolute",
-            yPercent: 130,
+            position: "relative",
+            yPercent: 0,
             autoAlpha: 1,
             duration: aboutTextDuration * 0.8,
           },
@@ -427,48 +280,10 @@ export default function HeroSection() {
     <HeroWrapper ref={heroRef} id="hero">
       <HeroLogo />
       <HeroPhoto />
-
       {/* Overlay oscuro solo en móvil */}
       <DarkOverlay />
-
-      {/* Texto central */}
-      <HeroContent>
-        <Title className="hero__title hero__title-fade">
-          Software Architect & senior developer
-        </Title>
-        <SubInfo>
-          <div className="hero_subtitles hero__subtitle-fade">
-            <span>Java</span>
-            <p>In-depth knowledge</p>
-          </div>
-          <div className="hero_subtitles hero__subtitle-fade">
-            <span>{yearsWorked}+</span>
-            <p>Years of experience</p>
-          </div>
-          <div className="hero_subtitles hero__subtitle-fade">
-            <span>10+</span>
-            <p>Completed project</p>
-          </div>
-        </SubInfo>
-
-        <AboutWrapper id="about">
-          <Title className="about__title">
-            I design and build scalable software solutions.
-          </Title>
-          <div className="about__desc">
-            <p>
-              Hi, I’m Sebastian Agudelo, a software architect and senior full
-              stack developer with a holistic perspective. Throughout my career,
-              I’ve partnered with businesses to design and deliver scalable,
-              secure, and user-focused systems, creating sustainable value
-              through technology. With over {yearsWorked} years of experience, I
-              bring technical leadership, strategic thinking, and industry best
-              practices to every project, ensuring quality, efficiency, and
-              growth.
-            </p>
-          </div>
-        </AboutWrapper>
-      </HeroContent>
+      <HeroText />
+      <AboutContent />
     </HeroWrapper>
   );
 }
