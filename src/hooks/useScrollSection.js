@@ -12,7 +12,7 @@ const useScrollSection = (sections = ['hero', 'about', 'skills', 'qualification'
   }, []);
 
   const updateActiveSection = useCallback(() => {
-    const scrollPosition = window.scrollY + 100; // Offset para activar antes de llegar al centro
+    const scrollPosition = window.scrollY - 5; // Offset para activar antes de llegar al centro
     let currentSection = 'hero';
 
     // Verificar cada sección de abajo hacia arriba

@@ -131,7 +131,6 @@ const HeroValuePropsItemBottomP = styled.p`
 `;
 
 const HeroText = () => {
-  const isMobile = useIsMobile();
   return (
     <HeroTextWrapper>
       <HeroTextTop />

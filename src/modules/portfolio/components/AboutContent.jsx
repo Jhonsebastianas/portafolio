@@ -1,4 +1,3 @@
-import useIsMobile from "@modules/shared/hooks/useIsMobile";
 import styled from "styled-components";
 
 const AboutWrapper = styled.div`
@@ -12,8 +11,6 @@ const AboutWrapper = styled.div`
   overflow: hidden;
 
   @media (max-width: 767.98px) {
-    width: 100%;
-    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -21,46 +18,37 @@ const AboutWrapper = styled.div`
 `;
 
 const AboutContainer = styled.div`
-  flex-flow: column;
-  flex: none;
+  display: flex;
+  flex-direction: column;
   place-content: center flex-end;
   align-items: center;
   gap: 32px;
   width: 100%;
   height: min-content;
   padding: 0 56px;
-  display: flex;
   position: absolute;
   bottom: 56px;
   left: 0;
   overflow: visible;
 
   @media (max-width: 767.98px) {
-    flex-flow: column;
     align-items: flex-start;
     gap: 20px;
-    width: 100%;
     max-width: 480px;
-    height: min-content;
     padding: 0 24px 40px;
-    display: flex;
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%);
   }
 `;
 
 const AboutHeader = styled.div`
-  flex-flow: column;
-  flex: none;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 0;
   width: min-content;
-  height: min-content;
-  padding: 0;
-  display: flex;
   position: relative;
   overflow: visible;
 
@@ -69,27 +57,24 @@ const AboutHeader = styled.div`
   }
 `;
 
-const AboutDesktop = styled.div`
+const AboutDesktopWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 920px;
-  position: relative;
+
+  @media (max-width: 767.98px) {
+    display: none;
+  }
 `;
 
-const AboutHeaderMobile = styled.div`
-  outline: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  transform: none;
-  white-space: pre-wrap;
-  word-break: break-word;
-  word-wrap: break-word;
-  flex: none;
-  width: 100%;
-  height: auto;
-  position: relative;
+const AboutMobileWrapper = styled.div`
+  display: none;
+
+  @media (max-width: 767.98px) {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 
 const AboutH2 = styled.h2`
@@ -99,12 +84,21 @@ const AboutH2 = styled.h2`
   line-height: 100%;
   text-align: center;
   color: var(--first-color);
+  margin: 0;
 
   @media (max-width: 767.98px) {
     font-size: 50px;
     font-weight: 600;
-    text-align: left !important;
+    text-align: left;
   }
+`;
+
+const AboutH2ParagraphHighlight = styled.span`
+  display: inline;
+  font-family: "Roobert Bold", sans-serif;
+  font-size: 45px;
+  line-height: 100%;
+  text-align: left;
 `;
 
 const AboutBody = styled.div`
@@ -113,26 +107,22 @@ const AboutBody = styled.div`
   transform: none;
 
   display: flex;
-  flex-flow: column;
-  flex: none;
+  flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: min-content;
   padding: 0;
   position: relative;
   overflow: visible;
 
-  /* Desktop (default) */
-  place-content: flex-start center;
-  align-items: flex-start;
+  /* mobile default: center */
+  place-content: center;
+  align-items: center;
 
-  /* Mobile (cuando pasas la prop $isMobile) */
-  ${({ $isMobile }) =>
-    $isMobile &&
-    `
-    place-content: center;
-    align-items: center;
-  `}
+  /* desktop: left aligned */
+  @media (min-width: 768px) {
+    place-content: flex-start center;
+    align-items: flex-start;
+  }
 `;
 
 const AboutBodyContent = styled.div`
@@ -140,26 +130,20 @@ const AboutBodyContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex-shrink: 0;
-  transform: none;
-
-  --framer-paragraph-spacing: 0px;
   opacity: 0.6;
   white-space: pre-wrap;
   word-break: break-word;
   word-wrap: break-word;
-  flex: none;
-  width: 38%;
-  min-width: 520px;
-  max-width: 640px;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   position: relative;
 
-  @media (max-width: 767.98px) {
-    will-change: transform;
-    width: 100%;
-    min-width: unset;
-    max-width: 100%;
+  /* Desktop constraints */
+  @media (min-width: 768px) {
+    width: 38%;
+    min-width: 520px;
+    max-width: 640px;
   }
 `;
 
@@ -167,6 +151,7 @@ const AboutBodyParagraph = styled.p`
   font-family: "Roobert Bold", sans-serif;
   font-size: 20px;
   line-height: 140%;
+  margin: 0;
 
   @media (max-width: 767.98px) {
     text-align: left;
@@ -174,55 +159,36 @@ const AboutBodyParagraph = styled.p`
   }
 `;
 
-const AboutH2ParagraphHighlight = styled.span`
-  font-family: "Roobert Bold", sans-serif;
-  font-size: 45px;
-  line-height: 100%;
-  text-align: left;
-`;
-
 const AboutContent = () => {
-  const isMobile = useIsMobile();
   return (
     <AboutWrapper id="about">
       <AboutContainer>
         <AboutHeader className="about__title">
-          {isMobile && (
-            <AboutHeaderMobile>
-              <AboutH2>
-                {`I design and build scalable software solutions`
-                  .split(" ")
-                  .map((word, index) => (
-                    <AboutH2ParagraphHighlight
-                      key={index}
-                      style={{
-                        display: "inline",
-                        willChange: "transform",
-                      }}
-                    >
-                      {word}{" "}
-                    </AboutH2ParagraphHighlight>
-                  ))}
-              </AboutH2>
-            </AboutHeaderMobile>
-          )}
+          <AboutDesktopWrapper>
+            <AboutH2>I design and</AboutH2>
+            <AboutH2>build scalable software</AboutH2>
+            <AboutH2>solutions</AboutH2>
+          </AboutDesktopWrapper>
 
-          {!isMobile && (
-            <>
-              <AboutDesktop>
-                <AboutH2>I design and</AboutH2>
-              </AboutDesktop>
-              <AboutDesktop>
-                <AboutH2>build scalable software</AboutH2>
-              </AboutDesktop>
-              <AboutDesktop>
-                <AboutH2>solutions</AboutH2>
-              </AboutDesktop>
-            </>
-          )}
+          <AboutMobileWrapper>
+            <AboutH2>
+              {`I design and build scalable software solutions`
+                .split(" ")
+                .map((word, index) => (
+                  <AboutH2ParagraphHighlight
+                    key={index}
+                    style={{
+                      willChange: "transform",
+                    }}
+                  >
+                    {word}{" "}
+                  </AboutH2ParagraphHighlight>
+                ))}
+            </AboutH2>
+          </AboutMobileWrapper>
         </AboutHeader>
 
-        <AboutBody $isMobile={isMobile}>
+        <AboutBody className="about__body">
           <AboutBodyContent className="about__desc">
             <AboutBodyParagraph>
               Hi, I’m Sebastian Agudelo, a software architect and senior full
