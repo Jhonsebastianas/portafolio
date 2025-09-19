@@ -1,6 +1,6 @@
 import { theme } from "@styles/theme";
 import { useState, useEffect } from "react";
-import useIsClient from "@hooks/useIsClient";
+import useIsClient from "./useIsClient";
 
 function useIsMobile(breakpoint = theme.breakpoints.mobile) {
   const isClient = useIsClient();
