@@ -130,7 +130,7 @@ const ProjectsShowcase = () => {
           rail,
           {
             start,
-            end: `+=${scrollDistance + window.innerHeight}`,
+            end: `+=${scrollDistance + window.innerHeight * 0.3}`,
           },
           (timeline) => {
             // Añadir animación para que el texto izquierdo se mueva hacia la izquierda
@@ -141,7 +141,7 @@ const ProjectsShowcase = () => {
             timeline.to(
               leftCopy,
               {
-                x: () => -scrollDistance * 0.2, // Se mueve 30% de la distancia del scroll
+                x: () => -scrollDistance * 0.3, // Se mueve 30% de la distancia del scroll
                 ease: "none",
               },
               0
