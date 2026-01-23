@@ -131,6 +131,20 @@ const HeroValuePropsItemBottomP = styled.p`
 `;
 
 const HeroText = () => {
+  
+  const calculateYearsOfExperience = () => {
+    const startDate = new Date('2019-02-14');
+    const currentDate = new Date();
+    let years = currentDate.getFullYear() - startDate.getFullYear();
+    const monthDiff = currentDate.getMonth() - startDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < startDate.getDate())) {
+      years--;
+    }
+    return years;
+  };
+
+  const yearsOfExperience = calculateYearsOfExperience();
+
   return (
     <HeroTextWrapper>
       <HeroTextTop />
@@ -152,7 +166,7 @@ const HeroText = () => {
           </HeroValuePropsItemBottomP>
         </HeroValuePropsItem>
         <HeroValuePropsItem className="hero_subtitles hero__subtitle-fade">
-          <HeroValuePropsItemTopP>+6</HeroValuePropsItemTopP>
+          <HeroValuePropsItemTopP>+{yearsOfExperience}</HeroValuePropsItemTopP>
           <HeroValuePropsItemBottomP>
             Years of experience
           </HeroValuePropsItemBottomP>
