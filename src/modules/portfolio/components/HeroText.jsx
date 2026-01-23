@@ -140,7 +140,7 @@ const HeroText = () => {
             Software architect &
           </HeroTextContainerDesktopH1>
           <HeroTextContainerDesktopH1>
-            computer engineer
+            senior engineer
           </HeroTextContainerDesktopH1>
         </HeroTextContainerDesktop>
       </HeroTextContainerH1>
