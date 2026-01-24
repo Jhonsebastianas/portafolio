@@ -174,7 +174,7 @@ const ProjectsShowcase = () => {
 
   return (
     <>
-      <Section id="portfolio" ref={sectionRef}>
+      <Section id="projects" ref={sectionRef}>
         <Grid>
           {!isMobile && (
             <LeftCopy ref={leftCopyRef}>
