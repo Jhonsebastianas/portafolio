@@ -5,9 +5,7 @@ import AppsHub from "@modules/apps/components/AppsHub/AppsHub";
 const AppsPage = () => {
   return (
     <BlogLayout>
-      <div className="section" style={{ paddingTop: "1.5rem" }}>
-        <AppsHub />
-      </div>
+      <AppsHub />
     </BlogLayout>
   );
 };

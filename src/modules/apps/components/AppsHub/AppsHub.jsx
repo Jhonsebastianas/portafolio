@@ -19,6 +19,7 @@ const HubContainer = styled.div`
 const HubHero = styled.div`
   text-align: center;
   margin-bottom: 3rem;
+  padding-top: 1rem;
   position: relative;
 
   .hub-tag {

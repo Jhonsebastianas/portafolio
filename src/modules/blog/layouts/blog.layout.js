@@ -4,6 +4,10 @@ import Footer from "./footer-layout";
 
 const MainContainer = styled.main`
     min-height: 65vh;
+
+    @media screen and (min-width: 768px) {
+        padding-top: calc(var(--header-height) + 1.5rem);
+    }
 `;
 
 const BlogLayout = ({ children }) => {

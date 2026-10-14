@@ -5,9 +5,7 @@ import LoanCalculator from "@modules/apps/components/LoanCalculator/LoanCalculat
 const CalculadoraPrestamoPage = () => {
   return (
     <BlogLayout>
-      <div className="section" style={{ paddingTop: "2rem" }}>
-        <LoanCalculator />
-      </div>
+      <LoanCalculator />
     </BlogLayout>
   );
 };

@@ -24,7 +24,8 @@ const Breadcrumb = styled.nav`
   gap: 0.5rem;
   font-size: var(--small-font-size);
   color: var(--text-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
 
   a {
     color: var(--first-color);
