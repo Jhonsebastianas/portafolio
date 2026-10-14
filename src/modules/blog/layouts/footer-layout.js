@@ -239,6 +239,9 @@ const Footer = () => {
                         <Link href="/blog/coming-soon" passHref>
                             <NavLink>Cursos</NavLink>
                         </Link>
+                        <Link href="/apps" passHref>
+                            <NavLink>Apps & Herramientas</NavLink>
+                        </Link>
                         <NavLink
                             href="https://www.youtube.com/@jhonsebastianas"
                             target="_blank"

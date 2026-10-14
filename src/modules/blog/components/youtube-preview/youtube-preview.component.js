@@ -25,16 +25,7 @@ const ripple = keyframes`
   100% { transform: scale(2.5); opacity: 0; }
 `;
 
-/*=============================================
-  CONFIG
-  Cambia el videoId y el título del video aquí
-===============================================*/
-const YOUTUBE_CONFIG = {
-    videoId: 't-mGJYxtySY',        // ID del video de YouTube
-    channelUrl: 'https://www.youtube.com/@jhonsebastianas',
-    videoTitle: '6 Buenas prácticas en desarrollo de software que te harán ser un mejor programador',
-    channelName: '@jhonsebastianas',
-};
+
 
 /*=============================================
   STYLED COMPONENTS
@@ -317,10 +308,14 @@ const ChannelLink = styled.a`
 /*=============================================
   COMPONENT
 ===============================================*/
-const YoutubePreview = () => {
+const YoutubePreview = ({
+    videoId = 't-mGJYxtySY',
+    channelUrl = 'https://www.youtube.com/@jhonsebastianas',
+    videoTitle = '6 Buenas prácticas en desarrollo de software que te harán ser un mejor programador',
+    channelName = '@jhonsebastianas'
+}) => {
     const [playing, setPlaying] = useState(false);
     const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
-    const { videoId, channelUrl, videoTitle, channelName } = YOUTUBE_CONFIG;
 
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
@@ -382,7 +377,7 @@ const YoutubePreview = () => {
                     <ChannelInfo>
                         <ChannelAvatar>SA</ChannelAvatar>
                         <ChannelMeta>
-                            <p>Blog SA</p>
+                            <p>Sebastian Agudelo</p>
                             <span>{channelName} · Desarrollo de Software</span>
                         </ChannelMeta>
                     </ChannelInfo>

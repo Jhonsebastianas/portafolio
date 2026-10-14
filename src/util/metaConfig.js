@@ -31,6 +31,24 @@ export const metaByRoute = {
     image:
       "https://www.jhonsebastianas.com/images/wedding/meta_image.png",
   },
+  "/apps": {
+    title: "Apps & Utilidades | Jhon Sebastian Agudelo",
+    description:
+      "Colección de micro-apps, calculadoras financieras y herramientas interactivas diseñadas por Jhon Sebastian Agudelo.",
+    image: "https://www.jhonsebastianas.com/images/portfolio_presentation.png",
+  },
+  "/apps/calculadora-prestamo": {
+    title: "Calculadora y Simulador de Préstamos con Amortización | Apps",
+    description:
+      "Simula tu crédito o préstamo con cuota inicial, tasas mensuales o anuales, tabla de amortización detallada y exportación a CSV.",
+    image: "https://www.jhonsebastianas.com/images/portfolio_presentation.png",
+  },
+  "/apps/qr-code": {
+    title: "Generador de Códigos QR | Apps",
+    description:
+      "Genera y descarga códigos QR personalizados al instante en alta definición.",
+    image: "https://www.jhonsebastianas.com/images/portfolio_presentation.png",
+  },
 };
 
 export const defaultMeta = {

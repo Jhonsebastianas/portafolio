@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "@components/commons/button";
 import BlogLayout from "@modules/blog/layouts/blog.layout";
 import { toPng } from "html-to-image";
@@ -78,6 +79,13 @@ const QrCodePage = () => {
     <BlogLayout>
       <div className="section">
         <div className="container">
+          <div style={{ marginBottom: "1.5rem" }}>
+            <Link href="/apps">
+              <a style={{ color: "var(--first-color)", display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "var(--small-font-size)", fontWeight: 500 }}>
+                <i className="uil uil-arrow-left"></i> Volver a Apps
+              </a>
+            </Link>
+          </div>
           <ContainerStyled>
             <ContainerCenterStyled>
                 <h1>Código QR</h1>

@@ -306,6 +306,13 @@ const Header = () => {
                             </Link>
                         </li>
                         <li className="nav__item">
+                            <Link href="/apps">
+                                <a className='nav__link'>
+                                    <i className="uil uil-apps nav__icon"></i> Apps
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav__item">
                             <a href='/' className='nav__link'>
                                 <i className="uil uil-bag nav__icon"></i> Portafolio
                             </a>

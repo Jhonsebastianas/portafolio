@@ -106,4 +106,14 @@ export const articles = [
         .withHighlight(true)
         .withReadingTime(8)
         .build(),
+    new Article()
+        .withTitle("7 claves para estudiar y trabajar")
+        .withCreatedAt("May 12, 2026")
+        .withDescription("Descubre las claves fundamentales para equilibrar tu vida académica y laboral sin morir en el intento. Desde la gestión del horario hasta la importancia de conectar con tus compañeros.")
+        .withMainImage("/images/articles/estudiar-y-trabajar/estudiar_trabajar_0_portada.webp")
+        .withMainTheme("Productividad")
+        .withSortDescription("Descubre las claves fundamentales para equilibrar tu vida académica y laboral sin morir en el intento...")
+        .withPath(blogRoutes.articles.estudiarTrabajar)
+        .withReadingTime(14)
+        .build(),
 ]
