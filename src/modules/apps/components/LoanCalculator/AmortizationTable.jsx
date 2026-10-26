@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { formatCurrency, exportScheduleToCSV } from "./loanUtils";
+import { formatCurrency, formatPercent, exportScheduleToCSV } from "./loanUtils";
 
 const TableContainer = styled.div`
   background: var(--container-color);
@@ -125,6 +125,11 @@ const StyledTable = styled.table`
       background: hsla(var(--hue-color), 69%, 61%, 0.08);
     }
 
+    &.early-payoff-row {
+      background: rgba(16, 185, 129, 0.12) !important;
+      border: 2px solid #10b981;
+    }
+
     td:first-child {
       text-align: center;
       font-weight: 600;
@@ -145,6 +150,25 @@ const StyledTable = styled.table`
         text-align: center;
       }
     }
+  }
+`;
+
+const EarlyPayoffBanner = styled.div`
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid #10b981;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: var(--small-font-size);
+  color: #065f46;
+
+  strong {
+    color: #047857;
   }
 `;
 
@@ -214,6 +238,7 @@ const AmortizationTable = ({ schedule = [], summary = {}, currency = "COP" }) =>
   }
 
   const hasAdditional = summary.includeAdditionalFees && summary.totalAdditionalFees > 0;
+  const hasPrepay = summary.hasPrepayments && summary.totalPrepaymentsPaid > 0;
   const totalPages = Math.ceil(schedule.length / pageSize);
   const displayedSchedule = showAll
     ? schedule
@@ -224,12 +249,13 @@ const AmortizationTable = ({ schedule = [], summary = {}, currency = "COP" }) =>
 - Monto Solicitado: ${formatCurrency(summary.totalAmount, currency)}
 - Cuota Inicial: ${formatCurrency(summary.downPayment, currency)}
 - Monto Financiado: ${formatCurrency(summary.principal, currency)}
-- Plazo: ${summary.terms} meses
+- Plazo Pactado: ${summary.terms} meses
+${hasPrepay ? `- Plazo Real con Abonos: ${summary.actualTerms} meses (¡Ahorraste ${summary.monthsSaved} meses!)\n- Total Abonos Extraordinarios: ${formatCurrency(summary.totalPrepaymentsPaid, currency)}\n- Intereses Ahorrados: ${formatCurrency(summary.interestSaved, currency)}` : ""}
 - Sistema: ${summary.amortizationSystem === "french" ? "Francés (Cuota Fija)" : "Alemán (Capital Fijo)"}
 - Cuota Base Crédito: ${formatCurrency(summary.monthlyPayment, currency)}
-${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees, currency)}\n- Total Cuota Manejo: ${formatCurrency(summary.totalManagementFees, currency)}\n- Cuota Total Mes: ${formatCurrency(summary.totalMonthlyPayment, currency)}` : ""}
+${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees, currency)}\n- Total Cuota Manejo: ${formatCurrency(summary.totalManagementFees, currency)}` : ""}
 - Total Intereses: ${formatCurrency(summary.totalInterest, currency)}
-- Total a Pagar: ${formatCurrency(hasAdditional ? summary.totalGrandPayment : summary.totalPayment, currency)}`;
+- Total a Pagar: ${formatCurrency(summary.totalGrandPayment, currency)}`;
 
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
@@ -249,7 +275,7 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
             {summary.amortizationSystem === "french"
               ? "Sistema Francés: Cuotas mensuales fijas de crédito con abono progresivo a capital."
               : "Sistema Alemán: Abono a capital constante con cuotas mensuales decrecientes."}
-            {hasAdditional && " (Incluye seguros y cuota de manejo en el pago total)."}
+            {hasPrepay && ` (Simulación con abonos a capital: liquidado en ${summary.actualTerms} meses).`}
           </p>
         </TableTitleGroup>
 
@@ -280,19 +306,30 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
         </ActionsGroup>
       </TableTopBar>
 
+      {summary.monthsSaved > 0 && (
+        <EarlyPayoffBanner>
+          <div>
+            🎉 <strong>¡Meta cumplida antes de tiempo!</strong> Gracias a tus abonos extraordinarios,
+            tu préstamo se liquida en el mes <strong>#{summary.actualTerms}</strong> (ahorraste <strong>{summary.monthsSaved} meses</strong> y{" "}
+            <strong>{formatCurrency(summary.interestSaved, currency)}</strong> en intereses).
+          </div>
+        </EarlyPayoffBanner>
+      )}
+
       <ResponsiveWrapper>
         <StyledTable>
           <thead>
             <tr>
               <th>Cuota</th>
               <th>Cuota Crédito</th>
+              {hasPrepay && <th>Abono Extra</th>}
               {hasAdditional && (
                 <>
                   <th>Seguro</th>
                   <th>Manejo</th>
-                  <th>Pago Total</th>
                 </>
               )}
+              <th>Pago Total</th>
               <th>Abono Capital</th>
               <th>Intereses</th>
               <th>Saldo Pendiente</th>
@@ -300,11 +337,19 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
           </thead>
           <tbody>
             {displayedSchedule.map((row) => (
-              <tr key={row.month}>
-                <td>#{row.month}</td>
+              <tr key={row.month} className={row.isEarlyPayoff ? "early-payoff-row" : ""}>
+                <td>
+                  #{row.month}
+                  {row.isEarlyPayoff && " 🏁"}
+                </td>
                 <td style={{ fontWeight: 600, color: "var(--title-color)" }}>
                   {formatCurrency(row.payment, currency)}
                 </td>
+                {hasPrepay && (
+                  <td style={{ color: "#10b981", fontWeight: row.prepayment > 0 ? 700 : 400 }}>
+                    {row.prepayment > 0 ? `+${formatCurrency(row.prepayment, currency)}` : "-"}
+                  </td>
+                )}
                 {hasAdditional && (
                   <>
                     <td style={{ color: "#ec4899" }}>
@@ -313,13 +358,13 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
                     <td style={{ color: "#8b5cf6" }}>
                       {formatCurrency(row.managementFee, currency)}
                     </td>
-                    <td style={{ fontWeight: 700, color: "var(--first-color)" }}>
-                      {formatCurrency(row.totalMonthlyPayment, currency)}
-                    </td>
                   </>
                 )}
+                <td style={{ fontWeight: 700, color: "var(--first-color)" }}>
+                  {formatCurrency(row.totalMonthlyPayment, currency)}
+                </td>
                 <td style={{ color: "#6366f1" }}>
-                  {formatCurrency(row.principalPaid, currency)}
+                  {formatCurrency(row.principalPaid + (row.prepayment || 0), currency)}
                 </td>
                 <td style={{ color: "#f59e0b" }}>
                   {formatCurrency(row.interestPaid, currency)}
@@ -334,15 +379,20 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
             <tr>
               <td>Totales</td>
               <td>{formatCurrency(summary.totalPayment, currency)}</td>
+              {hasPrepay && (
+                <td style={{ color: "#10b981" }}>
+                  {formatCurrency(summary.totalPrepaymentsPaid, currency)}
+                </td>
+              )}
               {hasAdditional && (
                 <>
                   <td>{formatCurrency(summary.totalInsuranceFees, currency)}</td>
                   <td>{formatCurrency(summary.totalManagementFees, currency)}</td>
-                  <td style={{ color: "var(--first-color)" }}>
-                    {formatCurrency(summary.totalGrandPayment, currency)}
-                  </td>
                 </>
               )}
+              <td style={{ color: "var(--first-color)" }}>
+                {formatCurrency(summary.totalGrandPayment, currency)}
+              </td>
               <td>{formatCurrency(summary.principal, currency)}</td>
               <td>{formatCurrency(summary.totalInterest, currency)}</td>
               <td>{formatCurrency(0, currency)}</td>

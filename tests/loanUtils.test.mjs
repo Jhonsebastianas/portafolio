@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   calculateLoan,
   calculateMonthlyRate,
+  calculateSmartPrepaymentRecommendations,
   formatCurrency,
   formatPercent,
   CURRENCIES,
@@ -293,3 +294,138 @@ describe("Loan Calculator - Input Masking & Thousands Separation", () => {
     assert.strictEqual(getThousandSeparator("MXN"), ",");
   });
 });
+
+describe("Loan Calculator - Projected Prepayments (Abonos a Capital)", () => {
+  it("should reduce loan term and save interest when using reduce_term strategy", () => {
+    const baseLoan = calculateLoan({
+      loanAmount: 15000000,
+      interestRate: 1.6,
+      ratePeriod: "monthly",
+      termMonths: 24,
+      hasPrepayments: false,
+    });
+
+    // Abono recurrente de 200,000 extra al mes
+    const prepaidLoan = calculateLoan({
+      loanAmount: 15000000,
+      interestRate: 1.6,
+      ratePeriod: "monthly",
+      termMonths: 24,
+      hasPrepayments: true,
+      monthlyPrepayment: 200000,
+      prepaymentStrategy: "reduce_term",
+    });
+
+    // Plazo real debe ser menor al pactado
+    assert.ok(prepaidLoan.actualTerms < baseLoan.terms);
+    assert.ok(prepaidLoan.monthsSaved > 0);
+    assert.strictEqual(prepaidLoan.monthsSaved, baseLoan.terms - prepaidLoan.actualTerms);
+
+    // Los intereses pagados deben ser significativamente menores
+    assert.ok(prepaidLoan.totalInterest < baseLoan.totalInterest);
+    assert.ok(prepaidLoan.interestSaved > 0);
+    assert.strictEqual(prepaidLoan.interestSaved, baseLoan.totalInterest - prepaidLoan.totalInterest);
+    assert.ok(prepaidLoan.interestSavedPercent > 0);
+
+    // La última cuota del cronograma debe liquidar el préstamo a 0 y marcar liquidación anticipada
+    const lastRow = prepaidLoan.schedule[prepaidLoan.schedule.length - 1];
+    assert.strictEqual(lastRow.remainingBalance, 0);
+    assert.strictEqual(lastRow.isEarlyPayoff, true);
+  });
+
+  it("should reduce monthly installment when using reduce_payment strategy", () => {
+    const loan = calculateLoan({
+      loanAmount: 12000000,
+      interestRate: 1.5,
+      ratePeriod: "monthly",
+      termMonths: 12,
+      hasPrepayments: true,
+      monthlyPrepayment: 300000,
+      prepaymentStrategy: "reduce_payment",
+    });
+
+    // En reduce_payment se mantiene el plazo pactado
+    assert.strictEqual(loan.actualTerms, 12);
+    assert.strictEqual(loan.monthsSaved, 0);
+
+    // Como cada abono amortiza más capital, la cuota base del mes 2 en adelante disminuye
+    assert.ok(loan.schedule[1].payment < loan.schedule[0].payment);
+    assert.ok(loan.schedule[11].payment < loan.schedule[1].payment);
+
+    // Saldo final en 0
+    assert.strictEqual(loan.schedule[11].remainingBalance, 0);
+  });
+
+  it("should process lump-sum prepayment in specific month (prima/bono)", () => {
+    const loanWithLumpSum = calculateLoan({
+      loanAmount: 10000000,
+      interestRate: 1.5,
+      ratePeriod: "monthly",
+      termMonths: 12,
+      hasPrepayments: true,
+      monthlyPrepayment: 0,
+      hasLumpSum: true,
+      lumpSumAmount: 2000000,
+      lumpSumMonth: 4,
+      prepaymentStrategy: "reduce_term",
+    });
+
+    // En el mes 4 debe verse reflejado el abono extraordinario de 2,000,000
+    const rowMonth4 = loanWithLumpSum.schedule.find((r) => r.month === 4);
+    assert.ok(rowMonth4);
+    assert.strictEqual(rowMonth4.prepayment, 2000000);
+
+    // Debe reducir el plazo y los intereses
+    assert.ok(loanWithLumpSum.actualTerms < 12);
+    assert.ok(loanWithLumpSum.interestSaved > 0);
+  });
+});
+
+describe("Loan Calculator - Smart Prepayment Formulas & Advisor", () => {
+  it("should calculate recommendations with Cuota 13, 10% and 15% formulas", () => {
+    const params = {
+      loanAmount: 20000000,
+      interestRate: 1.5,
+      ratePeriod: "monthly",
+      termMonths: 24,
+      amortizationSystem: "french",
+    };
+
+    const recs = calculateSmartPrepaymentRecommendations(params);
+
+    assert.strictEqual(recs.length, 3);
+
+    // 1. Fórmula de la Cuota 13 (8.33% / Cuota / 12)
+    const cuota13 = recs[0];
+    assert.strictEqual(cuota13.label, "Fórmula de la Cuota 13");
+    assert.strictEqual(cuota13.badge, "Fórmula Clásica");
+    assert.ok(cuota13.extraAmount > 0);
+    assert.ok(cuota13.monthsSaved > 0);
+    assert.ok(cuota13.interestSaved > 0);
+
+    // 2. El 10% Inteligente
+    const tenPct = recs[1];
+    assert.strictEqual(tenPct.label, "El 10% Inteligente");
+    assert.strictEqual(tenPct.badge, "Recomendado");
+    assert.ok(tenPct.extraAmount > cuota13.extraAmount);
+    assert.ok(tenPct.monthsSaved >= cuota13.monthsSaved);
+    assert.ok(tenPct.interestSaved > cuota13.interestSaved);
+
+    // 3. Acelerador del 15%
+    const fifteenPct = recs[2];
+    assert.strictEqual(fifteenPct.label, "Acelerador del 15%");
+    assert.strictEqual(fifteenPct.badge, "Ahorro Máximo");
+    assert.ok(fifteenPct.extraAmount > tenPct.extraAmount);
+    assert.ok(fifteenPct.monthsSaved >= tenPct.monthsSaved);
+    assert.ok(fifteenPct.interestSaved > tenPct.interestSaved);
+  });
+
+  it("should return empty recommendations if principal or term is 0 or invalid", () => {
+    const emptyRecs = calculateSmartPrepaymentRecommendations({
+      loanAmount: 0,
+      termMonths: 12,
+    });
+    assert.deepStrictEqual(emptyRecs, []);
+  });
+});
+

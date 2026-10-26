@@ -1,10 +1,17 @@
 import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import { calculateLoan, CURRENCIES, formatCurrency, formatPercent } from "./loanUtils";
+import {
+  calculateLoan,
+  calculateSmartPrepaymentRecommendations,
+  CURRENCIES,
+  formatCurrency,
+  formatPercent,
+} from "./loanUtils";
 import LoanSummaryCards from "./LoanSummaryCards";
 import AmortizationTable from "./AmortizationTable";
 import MaskedCurrencyInput from "./MaskedCurrencyInput";
+import SmartPrepaymentAdvisor from "./SmartPrepaymentAdvisor";
 
 /*=============================================
   STYLED COMPONENTS
@@ -375,6 +382,158 @@ const AdditionalFeesGrid = styled.div`
   }
 `;
 
+const PrepaymentsContainer = styled.div`
+  grid-column: 1 / -1;
+  background: ${(props) =>
+    props.$active
+      ? "linear-gradient(135deg, hsla(var(--hue-color), 69%, 61%, 0.05) 0%, hsla(var(--hue-color), 69%, 61%, 0.01) 100%)"
+      : "hsla(var(--hue-color), 20%, 96%, 0.35)"};
+  border: 1px ${(props) => (props.$active ? "solid var(--first-color-lighter)" : "dashed var(--gray-color)")};
+  border-radius: 1rem;
+  padding: 1.35rem;
+  margin-top: 0.75rem;
+  transition: all 0.25s ease;
+`;
+
+const PrepaymentsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .title-area {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: var(--normal-font-size);
+    color: var(--title-color);
+
+    i {
+      font-size: 1.35rem;
+      color: #10b981;
+    }
+
+    .badge-accent {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #059669;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .toggle-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--small-font-size);
+    color: var(--first-color);
+    font-weight: 600;
+    cursor: pointer;
+  }
+`;
+
+const PrepaymentsBody = styled.div`
+  margin-top: 1.35rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--gray-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const PrepaymentStrategyGroup = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const StrategySelectCard = styled.div`
+  border: 1.5px solid ${(props) => (props.$selected ? "var(--first-color)" : "var(--gray-color)")};
+  background: ${(props) =>
+    props.$selected ? "hsla(var(--hue-color), 69%, 61%, 0.08)" : "var(--container-color)"};
+  border-radius: 0.75rem;
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  &:hover {
+    border-color: var(--first-color);
+  }
+
+  .radio-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid ${(props) => (props.$selected ? "var(--first-color)" : "var(--text-color-light)")};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: ${(props) => (props.$selected ? "var(--first-color)" : "transparent")};
+    }
+  }
+
+  .text-box {
+    h4 {
+      margin: 0 0 0.25rem 0;
+      font-size: var(--small-font-size);
+      font-weight: 700;
+      color: var(--title-color);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: var(--smaller-font-size);
+      color: var(--text-color);
+      line-height: 1.45;
+    }
+  }
+`;
+
+const PrepaymentsInputsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const LumpSumBox = styled.div`
+  background: var(--body-color);
+  border: 1px solid var(--gray-color);
+  border-radius: 0.75rem;
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
 /*=============================================
   MAIN COMPONENT
 =============================================*/
@@ -404,6 +563,14 @@ const LoanCalculator = () => {
   const [insuranceType, setInsuranceType] = useState("fixed"); // 'fixed' | 'balance_percentage' | 'loan_percentage'
   const [insuranceValue, setInsuranceValue] = useState(20000);
 
+  // Abonos proyectados a capital
+  const [hasPrepayments, setHasPrepayments] = useState(false);
+  const [monthlyPrepayment, setMonthlyPrepayment] = useState(100000);
+  const [prepaymentStrategy, setPrepaymentStrategy] = useState("reduce_term"); // 'reduce_term' | 'reduce_payment'
+  const [hasLumpSum, setHasLumpSum] = useState(false);
+  const [lumpSumAmount, setLumpSumAmount] = useState(1000000);
+  const [lumpSumMonth, setLumpSumMonth] = useState(6);
+
   // Preajustes de plazo rápido
   const termPresets = [6, 12, 24, 36, 48, 60, 72];
 
@@ -413,6 +580,48 @@ const LoanCalculator = () => {
   // Cálculo financiero reactivo con useMemo
   const summary = useMemo(() => {
     return calculateLoan({
+      loanAmount,
+      downPayment: hasDownPayment ? downPayment : 0,
+      interestRate,
+      ratePeriod,
+      annualRateType,
+      termMonths,
+      amortizationSystem,
+      includeAdditionalFees,
+      managementFee,
+      insuranceType,
+      insuranceValue,
+      hasPrepayments,
+      monthlyPrepayment,
+      prepaymentStrategy,
+      hasLumpSum,
+      lumpSumAmount,
+      lumpSumMonth,
+    });
+  }, [
+    loanAmount,
+    hasDownPayment,
+    downPayment,
+    interestRate,
+    ratePeriod,
+    annualRateType,
+    termMonths,
+    amortizationSystem,
+    includeAdditionalFees,
+    managementFee,
+    insuranceType,
+    insuranceValue,
+    hasPrepayments,
+    monthlyPrepayment,
+    prepaymentStrategy,
+    hasLumpSum,
+    lumpSumAmount,
+    lumpSumMonth,
+  ]);
+
+  // Recomendaciones inteligentes de fórmulas (Cuota 13, 10% Inteligente, 15% Acelerador)
+  const recommendations = useMemo(() => {
+    return calculateSmartPrepaymentRecommendations({
       loanAmount,
       downPayment: hasDownPayment ? downPayment : 0,
       interestRate,
@@ -439,6 +648,13 @@ const LoanCalculator = () => {
     insuranceType,
     insuranceValue,
   ]);
+
+  // Manejador para aplicar recomendación con un solo clic
+  const handleApplySmartPrepayment = (extraAmount) => {
+    setHasPrepayments(true);
+    setMonthlyPrepayment(extraAmount);
+    setPrepaymentStrategy("reduce_term");
+  };
 
   // Manejar cambio en cuota inicial con porcentaje
   const handleDownPaymentPercent = (pct) => {
@@ -858,6 +1074,169 @@ const LoanCalculator = () => {
               </AdditionalFeesGrid>
             )}
           </AdditionalFeesSection>
+
+          {/* Sección de Abonos Proyectados a Capital */}
+          <PrepaymentsContainer $active={hasPrepayments}>
+            <PrepaymentsHeader onClick={() => setHasPrepayments(!hasPrepayments)}>
+              <div className="title-area">
+                <i className="uil uil-rocket" />
+                <span>Abonos Proyectados a Capital (Acelera tu Préstamo)</span>
+                <span className="badge-accent">¡Ahorra Años e Intereses!</span>
+              </div>
+              <label className="toggle-checkbox" onClick={(e) => e.stopPropagation()}>
+                <input
+                  type="checkbox"
+                  checked={hasPrepayments}
+                  onChange={(e) => setHasPrepayments(e.target.checked)}
+                />
+                <span>¿Simular abonos a capital?</span>
+              </label>
+            </PrepaymentsHeader>
+
+            {hasPrepayments && (
+              <PrepaymentsBody>
+                {/* Selector de Estrategia de Abono */}
+                <div>
+                  <FormLabel style={{ marginBottom: "0.6rem" }}>
+                    <span>Estrategia de Aplicación del Abono Extra</span>
+                    <span className="hint">¿Cómo deseas que el banco aplique tu dinero?</span>
+                  </FormLabel>
+                  <PrepaymentStrategyGroup>
+                    <StrategySelectCard
+                      $selected={prepaymentStrategy === "reduce_term"}
+                      onClick={() => setPrepaymentStrategy("reduce_term")}
+                    >
+                      <div className="radio-circle" />
+                      <div className="text-box">
+                        <h4>
+                          <i className="uil uil-hourglass" style={{ color: "#10b981" }} />
+                          Reducir Plazo (Recomendado)
+                        </h4>
+                        <p>
+                          Mantienes la cuota mensual pero liquidas la deuda mucho antes. Es la opción que más intereses te ahorra a lo largo de la vida del crédito.
+                        </p>
+                      </div>
+                    </StrategySelectCard>
+
+                    <StrategySelectCard
+                      $selected={prepaymentStrategy === "reduce_payment"}
+                      onClick={() => setPrepaymentStrategy("reduce_payment")}
+                    >
+                      <div className="radio-circle" />
+                      <div className="text-box">
+                        <h4>
+                          <i className="uil uil-money-withdraw" style={{ color: "var(--first-color)" }} />
+                          Reducir Cuota Mensual
+                        </h4>
+                        <p>
+                          Mantienes el plazo pactado en meses, pero tu cuota mensual disminuye tras cada abono, brindándote mayor holgura financiera cada mes.
+                        </p>
+                      </div>
+                    </StrategySelectCard>
+                  </PrepaymentStrategyGroup>
+                </div>
+
+                {/* Inputs de Abono Mensual y Abono Extraordinario Único */}
+                <PrepaymentsInputsGrid>
+                  {/* Abono Mensual Recurrente */}
+                  <FormGroup>
+                    <FormLabel htmlFor="monthly-prepayment-input">
+                      <span>Abono Extra Mensual Recurrente</span>
+                      <span className="hint">Directo a capital en cada cuota</span>
+                    </FormLabel>
+                    <InputWrapper $hasIcon>
+                      <i className="uil uil-plus-circle input-icon" style={{ color: "#10b981" }} />
+                      <MaskedCurrencyInput
+                        id="monthly-prepayment-input"
+                        value={monthlyPrepayment}
+                        onChange={(val) => setMonthlyPrepayment(val)}
+                        currency={currency}
+                        placeholder="Ej. 100.000"
+                      />
+                    </InputWrapper>
+
+                    <QuickPillsRow>
+                      <span style={{ fontSize: "var(--smaller-font-size)", color: "var(--text-color-light)" }}>
+                        Sugeridos:
+                      </span>
+                      {[50000, 100000, 200000, 500000].map((amt) => (
+                        <QuickPill
+                          key={amt}
+                          type="button"
+                          $active={monthlyPrepayment === amt}
+                          onClick={() => setMonthlyPrepayment(amt)}
+                        >
+                          +{formatCurrency(amt, currency)}
+                        </QuickPill>
+                      ))}
+                    </QuickPillsRow>
+                  </FormGroup>
+
+                  {/* Abono Extraordinario Único (Lump sum) */}
+                  <LumpSumBox>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontWeight: 600, fontSize: "var(--small-font-size)", color: "var(--title-color)", cursor: "pointer" }}>
+                        <input
+                          type="checkbox"
+                          checked={hasLumpSum}
+                          onChange={(e) => setHasLumpSum(e.target.checked)}
+                        />
+                        <span>¿Abono único extraordinario?</span>
+                      </label>
+                      <span style={{ fontSize: "var(--smaller-font-size)", color: "var(--text-color-light)" }}>
+                        Ej. prima o bono
+                      </span>
+                    </div>
+
+                    {hasLumpSum && (
+                      <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: "0.75rem", marginTop: "0.35rem" }}>
+                        <div>
+                          <FormLabel style={{ fontSize: "var(--smaller-font-size)", marginBottom: "0.3rem" }}>
+                            Monto del abono
+                          </FormLabel>
+                          <MaskedCurrencyInput
+                            value={lumpSumAmount}
+                            onChange={(val) => setLumpSumAmount(val)}
+                            currency={currency}
+                            placeholder="Ej. 1.000.000"
+                          />
+                        </div>
+                        <div>
+                          <FormLabel style={{ fontSize: "var(--smaller-font-size)", marginBottom: "0.3rem" }}>
+                            En el Mes N°
+                          </FormLabel>
+                          <input
+                            type="number"
+                            min="1"
+                            max={termMonths}
+                            value={lumpSumMonth}
+                            onChange={(e) => setLumpSumMonth(Math.max(1, Math.min(termMonths, Number(e.target.value))))}
+                            style={{
+                              width: "100%",
+                              padding: "0.75rem 0.85rem",
+                              borderRadius: "0.65rem",
+                              border: "1px solid var(--gray-color)",
+                              background: "var(--container-color)",
+                              color: "var(--title-color)",
+                              fontSize: "var(--normal-font-size)",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </LumpSumBox>
+                </PrepaymentsInputsGrid>
+
+                {/* Asesor Inteligente con Fórmulas de Educación Financiera */}
+                <SmartPrepaymentAdvisor
+                  recommendations={recommendations}
+                  currency={currency}
+                  currentPrepayment={hasPrepayments ? monthlyPrepayment : 0}
+                  onApplyPrepayment={handleApplySmartPrepayment}
+                />
+              </PrepaymentsBody>
+            )}
+          </PrepaymentsContainer>
         </FormGrid>
       </FormContainer>
 

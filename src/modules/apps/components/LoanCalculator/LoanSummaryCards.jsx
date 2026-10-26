@@ -4,7 +4,7 @@ import { formatCurrency, formatPercent } from "./loanUtils";
 
 const CardsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(${(props) => (props.$hasFees ? "5" : "4")}, 1fr);
+  grid-template-columns: repeat(${(props) => (props.$cardsCount >= 5 ? "5" : "4")}, 1fr);
   gap: 1.25rem;
   margin-bottom: 2rem;
 
@@ -104,6 +104,80 @@ const SubtitleBadge = styled.div`
   }
 `;
 
+const SavingsBanner = styled.div`
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+
+  .banner-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .rocket-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #065f46;
+      margin: 0 0 0.25rem 0;
+    }
+
+    p {
+      font-size: var(--small-font-size);
+      color: #047857;
+      margin: 0;
+    }
+  }
+
+  .banner-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .stat-pill {
+      background: var(--container-color);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 0.6rem;
+      padding: 0.45rem 0.85rem;
+      text-align: right;
+
+      .stat-num {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #10b981;
+        line-height: 1.2;
+      }
+
+      .stat-lbl {
+        font-size: 0.72rem;
+        color: var(--text-color);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+    }
+  }
+`;
+
 const BreakdownCard = styled.div`
   background: var(--container-color);
   border: 1px solid var(--gray-color);
@@ -199,6 +273,12 @@ const LoanSummaryCards = ({ summary, currency }) => {
     interestRatio,
     amortizationSystem,
     terms,
+    actualTerms,
+    monthsSaved,
+    interestSaved,
+    interestSavedPercent,
+    hasPrepayments,
+    totalPrepaymentsPaid,
     includeAdditionalFees,
     totalManagementFees,
     totalInsuranceFees,
@@ -210,16 +290,53 @@ const LoanSummaryCards = ({ summary, currency }) => {
 
   const isGerman = amortizationSystem === "german";
   const hasFees = includeAdditionalFees && totalAdditionalFees > 0;
+  const hasActivePrepayments = hasPrepayments && totalPrepaymentsPaid > 0;
+
+  let cardsCount = 4;
+  if (hasFees) cardsCount++;
+  if (hasActivePrepayments) cardsCount++;
 
   // Porcentajes para la barra de distribución
-  const grandTotal = hasFees ? totalGrandPayment : (principal + totalInterest);
+  const grandTotal = hasFees ? totalGrandPayment : (principal + totalInterest + (totalPrepaymentsPaid || 0));
   const principalShare = grandTotal > 0 ? (principal / grandTotal) * 100 : 0;
   const interestShare = grandTotal > 0 ? (totalInterest / grandTotal) * 100 : 0;
+  const prepayShare = grandTotal > 0 && hasActivePrepayments ? (totalPrepaymentsPaid / grandTotal) * 100 : 0;
   const feesShare = grandTotal > 0 && hasFees ? (totalAdditionalFees / grandTotal) * 100 : 0;
 
   return (
     <>
-      <CardsGrid $hasFees={hasFees}>
+      {/* Banner de Ahorro y Aceleración con Abonos Extraordinarios */}
+      {hasActivePrepayments && (monthsSaved > 0 || interestSaved > 0) && (
+        <SavingsBanner>
+          <div className="banner-left">
+            <div className="rocket-icon">
+              <i className="uil uil-rocket" />
+            </div>
+            <div>
+              <h4>¡Impacto de tu Estrategia de Abonos Extra!</h4>
+              <p>
+                Terminas de pagar tu crédito en <strong>{actualTerms} meses</strong> en vez de los {terms} meses pactados.
+                Al abonar directo a capital, dejas de pagar intereses compuestos futuros.
+              </p>
+            </div>
+          </div>
+
+          <div className="banner-stats">
+            {monthsSaved > 0 && (
+              <div className="stat-pill">
+                <div className="stat-num">{monthsSaved} meses</div>
+                <div className="stat-lbl">Tiempo ahorrado</div>
+              </div>
+            )}
+            <div className="stat-pill">
+              <div className="stat-num">{formatCurrency(interestSaved, currency)}</div>
+              <div className="stat-lbl">Intereses Ahorrados (-{formatPercent(interestSavedPercent)})</div>
+            </div>
+          </div>
+        </SavingsBanner>
+      )}
+
+      <CardsGrid $cardsCount={cardsCount}>
         {/* Cuota Mensual */}
         <StatCard $gradient="linear-gradient(90deg, #6366f1, #8b5cf6)">
           <CardHeader>
@@ -247,9 +364,13 @@ const LoanSummaryCards = ({ summary, currency }) => {
             {hasFees ? (
               <span>Crédito base: {formatCurrency(monthlyPayment, currency)}</span>
             ) : (
-              <span>Plazo: <strong>{terms} meses</strong></span>
+              <span>Plazo real: <strong>{actualTerms || terms} meses</strong></span>
             )}
-            {isGerman && <span className="badge-tag">Decreciente</span>}
+            {monthsSaved > 0 && (
+              <span className="badge-tag" style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>
+                -{monthsSaved}m
+              </span>
+            )}
           </SubtitleBadge>
         </StatCard>
 
@@ -280,10 +401,33 @@ const LoanSummaryCards = ({ summary, currency }) => {
           </CardHeader>
           <MainValue>{formatCurrency(totalInterest, currency)}</MainValue>
           <SubtitleBadge $badgeBg="rgba(239, 68, 68, 0.12)" $badgeColor="#ef4444">
-            <span>Costo financiero</span>
+            {interestSaved > 0 ? (
+              <span style={{ color: "#10b981", fontWeight: 600 }}>
+                Ahorras {formatCurrency(interestSaved, currency)}
+              </span>
+            ) : (
+              <span>Costo financiero</span>
+            )}
             <span className="badge-tag">+{formatPercent(interestRatio)}</span>
           </SubtitleBadge>
         </StatCard>
+
+        {/* Abonos Extraordinarios a Capital (si aplica) */}
+        {hasActivePrepayments && (
+          <StatCard $gradient="linear-gradient(90deg, #10b981, #059669)">
+            <CardHeader>
+              <CardTitle>Abonos Extra a Capital</CardTitle>
+              <IconBadge $bg="rgba(16, 185, 129, 0.12)" $color="#10b981">
+                <i className="uil uil-arrow-growth" />
+              </IconBadge>
+            </CardHeader>
+            <MainValue>{formatCurrency(totalPrepaymentsPaid, currency)}</MainValue>
+            <SubtitleBadge $badgeBg="rgba(16, 185, 129, 0.12)" $badgeColor="#10b981">
+              <span>Abono directo a capital</span>
+              {monthsSaved > 0 && <span className="badge-tag">-{monthsSaved} meses</span>}
+            </SubtitleBadge>
+          </StatCard>
+        )}
 
         {/* Seguros y Cuota de Manejo (Si aplica) */}
         {hasFees && (
@@ -303,19 +447,21 @@ const LoanSummaryCards = ({ summary, currency }) => {
         )}
 
         {/* Total a Pagar */}
-        <StatCard $gradient="linear-gradient(90deg, #10b981, #059669)">
+        <StatCard $gradient="linear-gradient(90deg, #3b82f6, #1d4ed8)">
           <CardHeader>
             <CardTitle>{hasFees ? "Total General a Pagar" : "Total a Pagar"}</CardTitle>
-            <IconBadge $bg="rgba(16, 185, 129, 0.12)" $color="#10b981">
+            <IconBadge $bg="rgba(59, 130, 246, 0.12)" $color="#3b82f6">
               <i className="uil uil-bill" />
             </IconBadge>
           </CardHeader>
           <MainValue>
-            {formatCurrency(hasFees ? totalGrandPayment : totalPayment, currency)}
+            {formatCurrency(hasFees ? totalGrandPayment : (totalPayment + (totalPrepaymentsPaid || 0)), currency)}
           </MainValue>
-          <SubtitleBadge $badgeBg="rgba(16, 185, 129, 0.12)" $badgeColor="#059669">
-            <span>{hasFees ? "Capital + Interés + Cargos" : "Capital + Intereses"}</span>
-            <span className="badge-tag">{terms} cuotas</span>
+          <SubtitleBadge $badgeBg="rgba(59, 130, 246, 0.12)" $badgeColor="#1d4ed8">
+            <span>{hasActivePrepayments ? `Liquidado en ${actualTerms} cuotas` : `${terms} cuotas`}</span>
+            {hasActivePrepayments && monthsSaved > 0 && (
+              <span className="badge-tag">Ahorro activo</span>
+            )}
           </SubtitleBadge>
         </StatCard>
       </CardsGrid>
@@ -330,12 +476,18 @@ const LoanSummaryCards = ({ summary, currency }) => {
           <BreakdownLegend>
             <LegendItem $color="#6366f1">
               <span className="dot" />
-              <span>Capital Prestado: <strong>{formatPercent(principalShare)}</strong> ({formatCurrency(principal, currency)})</span>
+              <span>Capital Base: <strong>{formatPercent(principalShare)}</strong> ({formatCurrency(principal, currency)})</span>
             </LegendItem>
             <LegendItem $color="#f59e0b">
               <span className="dot" />
               <span>Intereses Totales: <strong>{formatPercent(interestShare)}</strong> ({formatCurrency(totalInterest, currency)})</span>
             </LegendItem>
+            {hasActivePrepayments && (
+              <LegendItem $color="#10b981">
+                <span className="dot" />
+                <span>Abonos Extra: <strong>{formatPercent(prepayShare)}</strong> ({formatCurrency(totalPrepaymentsPaid, currency)})</span>
+              </LegendItem>
+            )}
             {hasFees && (
               <LegendItem $color="#ec4899">
                 <span className="dot" />
@@ -348,6 +500,9 @@ const LoanSummaryCards = ({ summary, currency }) => {
         <ProgressBar>
           <ProgressSegment $percent={principalShare} $color="#6366f1" title={`Capital: ${formatPercent(principalShare)}`} />
           <ProgressSegment $percent={interestShare} $color="#f59e0b" title={`Intereses: ${formatPercent(interestShare)}`} />
+          {hasActivePrepayments && (
+            <ProgressSegment $percent={prepayShare} $color="#10b981" title={`Abonos Extra: ${formatPercent(prepayShare)}`} />
+          )}
           {hasFees && (
             <ProgressSegment $percent={feesShare} $color="#ec4899" title={`Seguros y Manejo: ${formatPercent(feesShare)}`} />
           )}
