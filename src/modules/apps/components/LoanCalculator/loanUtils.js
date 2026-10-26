@@ -3,11 +3,50 @@
  */
 
 export const CURRENCIES = [
-  { code: "COP", symbol: "$", name: "Peso Colombiano (COP)", locale: "es-CO", decimals: 0 },
-  { code: "USD", symbol: "$", name: "Dólar Estadounidense (USD)", locale: "en-US", decimals: 2 },
-  { code: "EUR", symbol: "€", name: "Euro (EUR)", locale: "es-ES", decimals: 2 },
-  { code: "MXN", symbol: "$", name: "Peso Mexicano (MXN)", locale: "es-MX", decimals: 2 },
+  { code: "COP", symbol: "$", name: "Peso Colombiano (COP)", locale: "es-CO", decimals: 0, thousandSeparator: ".", decimalSeparator: "," },
+  { code: "USD", symbol: "$", name: "Dólar Estadounidense (USD)", locale: "en-US", decimals: 2, thousandSeparator: ",", decimalSeparator: "." },
+  { code: "EUR", symbol: "€", name: "Euro (EUR)", locale: "es-ES", decimals: 2, thousandSeparator: ".", decimalSeparator: "," },
+  { code: "MXN", symbol: "$", name: "Peso Mexicano (MXN)", locale: "es-MX", decimals: 2, thousandSeparator: ",", decimalSeparator: "." },
 ];
+
+/**
+ * Obtiene la configuración de la moneda
+ */
+export const getCurrencyConfig = (currencyCode = "COP") => {
+  return CURRENCIES.find((c) => c.code === currencyCode) || CURRENCIES[0];
+};
+
+/**
+ * Obtiene el separador de miles según la moneda
+ */
+export const getThousandSeparator = (currencyCode = "COP") => {
+  const config = getCurrencyConfig(currencyCode);
+  return config.thousandSeparator || (config.locale.startsWith("es") ? "." : ",");
+};
+
+/**
+ * Formatea un número con máscara de miles para inputs en tiempo real
+ * Ej. 15000000 -> "15.000.000" (COP) o "15,000,000" (USD)
+ */
+export const formatMaskedNumber = (value, currencyCode = "COP") => {
+  if (value === null || value === undefined || value === "") return "";
+  const num = Number(value);
+  if (isNaN(num)) return "";
+  if (num === 0) return "0";
+  const sep = getThousandSeparator(currencyCode);
+  const parts = Math.round(num).toString();
+  return parts.replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+};
+
+/**
+ * Parsea un string con separadores de miles y devuelve el número entero limpio
+ * Ej. "15.000.000" -> 15000000
+ */
+export const parseMaskedNumber = (str) => {
+  if (str === null || str === undefined) return 0;
+  const digits = String(str).replace(/\D/g, "");
+  return digits ? parseInt(digits, 10) : 0;
+};
 
 /**
  * Formatea un valor numérico a la moneda seleccionada

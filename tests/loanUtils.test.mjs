@@ -6,6 +6,9 @@ import {
   formatCurrency,
   formatPercent,
   CURRENCIES,
+  formatMaskedNumber,
+  parseMaskedNumber,
+  getThousandSeparator,
 } from "../src/modules/apps/components/LoanCalculator/loanUtils.js";
 
 describe("Loan Calculator - Rate Conversion Tests", () => {
@@ -251,5 +254,42 @@ describe("Loan Calculator - Formatting and Currency Helpers", () => {
     assert.ok(CURRENCIES.some((c) => c.code === "USD"));
     assert.ok(CURRENCIES.some((c) => c.code === "EUR"));
     assert.ok(CURRENCIES.some((c) => c.code === "MXN"));
+  });
+});
+
+describe("Loan Calculator - Input Masking & Thousands Separation", () => {
+  it("should format masked numbers with dot separator for COP and EUR", () => {
+    assert.strictEqual(formatMaskedNumber(15000000, "COP"), "15.000.000");
+    assert.strictEqual(formatMaskedNumber(1000, "COP"), "1.000");
+    assert.strictEqual(formatMaskedNumber(500, "COP"), "500");
+    assert.strictEqual(formatMaskedNumber(2500000, "EUR"), "2.500.000");
+  });
+
+  it("should format masked numbers with comma separator for USD and MXN", () => {
+    assert.strictEqual(formatMaskedNumber(15000000, "USD"), "15,000,000");
+    assert.strictEqual(formatMaskedNumber(1000, "USD"), "1,000");
+    assert.strictEqual(formatMaskedNumber(50000, "MXN"), "50,000");
+  });
+
+  it("should handle edge cases like 0, empty, and undefined gracefully in formatMaskedNumber", () => {
+    assert.strictEqual(formatMaskedNumber(0, "COP"), "0");
+    assert.strictEqual(formatMaskedNumber("", "COP"), "");
+    assert.strictEqual(formatMaskedNumber(null, "COP"), "");
+    assert.strictEqual(formatMaskedNumber(undefined, "COP"), "");
+  });
+
+  it("should parse masked strings back into pure numbers", () => {
+    assert.strictEqual(parseMaskedNumber("15.000.000"), 15000000);
+    assert.strictEqual(parseMaskedNumber("15,000,000"), 15000000);
+    assert.strictEqual(parseMaskedNumber("$ 20.500 COP"), 20500);
+    assert.strictEqual(parseMaskedNumber(""), 0);
+    assert.strictEqual(parseMaskedNumber(null), 0);
+  });
+
+  it("should identify correct thousand separator for each currency", () => {
+    assert.strictEqual(getThousandSeparator("COP"), ".");
+    assert.strictEqual(getThousandSeparator("USD"), ",");
+    assert.strictEqual(getThousandSeparator("EUR"), ".");
+    assert.strictEqual(getThousandSeparator("MXN"), ",");
   });
 });

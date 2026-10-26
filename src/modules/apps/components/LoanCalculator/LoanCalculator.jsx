@@ -4,6 +4,7 @@ import Link from "next/link";
 import { calculateLoan, CURRENCIES, formatCurrency, formatPercent } from "./loanUtils";
 import LoanSummaryCards from "./LoanSummaryCards";
 import AmortizationTable from "./AmortizationTable";
+import MaskedCurrencyInput from "./MaskedCurrencyInput";
 
 /*=============================================
   STYLED COMPONENTS
@@ -510,14 +511,12 @@ const LoanCalculator = () => {
             </FormLabel>
             <InputWrapper $hasIcon>
               <i className="uil uil-money-bill input-icon" />
-              <input
+              <MaskedCurrencyInput
                 id="loan-amount-input"
-                type="number"
-                min="0"
-                step="100000"
-                value={loanAmount || ""}
-                onChange={(e) => setLoanAmount(Math.max(0, Number(e.target.value)))}
-                placeholder="Ej. 10000000"
+                value={loanAmount}
+                onChange={(val) => setLoanAmount(val)}
+                currency={currency}
+                placeholder="Ej. 15.000.000"
               />
             </InputWrapper>
             <QuickPillsRow>
@@ -553,17 +552,16 @@ const LoanCalculator = () => {
             </FormLabel>
             <InputWrapper $hasIcon>
               <i className="uil uil-bill input-icon" />
-              <input
+              <MaskedCurrencyInput
                 id="down-payment-input"
-                type="number"
-                min="0"
-                max={loanAmount}
                 disabled={!hasDownPayment}
-                value={hasDownPayment ? downPayment || "" : 0}
-                onChange={(e) => {
-                  const val = Math.min(loanAmount, Math.max(0, Number(e.target.value)));
-                  setDownPayment(val);
+                value={hasDownPayment ? downPayment : 0}
+                max={loanAmount}
+                onChange={(val) => {
+                  const safeVal = Math.min(loanAmount, Math.max(0, val));
+                  setDownPayment(safeVal);
                 }}
+                currency={currency}
                 placeholder="0"
                 style={{ opacity: hasDownPayment ? 1 : 0.6 }}
               />
@@ -759,14 +757,12 @@ const LoanCalculator = () => {
                   </FormLabel>
                   <InputWrapper $hasIcon>
                     <i className="uil uil-receipt input-icon" />
-                    <input
+                    <MaskedCurrencyInput
                       id="management-fee-input"
-                      type="number"
-                      min="0"
-                      step="1000"
-                      value={managementFee || ""}
-                      onChange={(e) => setManagementFee(Math.max(0, Number(e.target.value)))}
-                      placeholder="Ej. 15000"
+                      value={managementFee}
+                      onChange={(val) => setManagementFee(val)}
+                      currency={currency}
+                      placeholder="Ej. 15.000"
                     />
                   </InputWrapper>
                   <QuickPillsRow>
@@ -830,15 +826,25 @@ const LoanCalculator = () => {
 
                   <InputWrapper $hasIcon>
                     <i className="uil uil-shield input-icon" />
-                    <input
-                      id="insurance-value-input"
-                      type="number"
-                      min="0"
-                      step={insuranceType === "fixed" ? "1000" : "0.01"}
-                      value={insuranceValue || ""}
-                      onChange={(e) => setInsuranceValue(Math.max(0, Number(e.target.value)))}
-                      placeholder={insuranceType === "fixed" ? "Ej. 20000" : "Ej. 0.12"}
-                    />
+                    {insuranceType === "fixed" ? (
+                      <MaskedCurrencyInput
+                        id="insurance-value-input"
+                        value={insuranceValue}
+                        onChange={(val) => setInsuranceValue(val)}
+                        currency={currency}
+                        placeholder="Ej. 20.000"
+                      />
+                    ) : (
+                      <input
+                        id="insurance-value-input"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={insuranceValue || ""}
+                        onChange={(e) => setInsuranceValue(Math.max(0, Number(e.target.value)))}
+                        placeholder="Ej. 0.12"
+                      />
+                    )}
                   </InputWrapper>
 
                   <div style={{ fontSize: "var(--smaller-font-size)", color: "var(--text-color-light)", marginTop: "0.25rem" }}>
