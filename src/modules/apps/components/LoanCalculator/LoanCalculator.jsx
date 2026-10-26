@@ -7,6 +7,10 @@ import {
   CURRENCIES,
   formatCurrency,
   formatPercent,
+  formatInstallmentMonth,
+  isPrimaMonth,
+  getCalendarPrimas,
+  getCalendarBonos,
 } from "./loanUtils";
 import LoanSummaryCards from "./LoanSummaryCards";
 import AmortizationTable from "./AmortizationTable";
@@ -635,10 +639,10 @@ const LumpSumsContainer = styled.div`
 
 const LumpSumItemCard = styled.div`
   display: grid;
-  grid-template-columns: auto 120px 1.5fr 1.5fr auto;
+  grid-template-columns: auto minmax(210px, 1.3fr) 1.5fr 1.5fr auto;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 0.85rem;
+  padding: 0.75rem 0.85rem;
   background: var(--container-color);
   border: 1px solid var(--gray-color);
   border-radius: 0.65rem;
@@ -648,9 +652,9 @@ const LumpSumItemCard = styled.div`
     border-color: var(--first-color-lighter);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 850px) {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
 
   .item-badge {
@@ -679,7 +683,8 @@ const LumpSumItemCard = styled.div`
       letter-spacing: 0.03em;
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       padding: 0.55rem 0.75rem;
       border-radius: 0.5rem;
@@ -752,6 +757,17 @@ const LoanCalculator = () => {
   const [ratePeriod, setRatePeriod] = useState("monthly"); // 'monthly' | 'annual'
   const [annualRateType, setAnnualRateType] = useState("nominal"); // 'nominal' | 'effective'
 
+  // Fecha de inicio / desembolso
+  const getTodayDateString = () => {
+    const today = new Date();
+    const y = today.getFullYear();
+    const m = String(today.getMonth() + 1).padStart(2, "0");
+    const d = String(today.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
+
+  const [startDate, setStartDate] = useState(getTodayDateString);
+
   // Plazo
   const [termMonths, setTermMonths] = useState(24);
 
@@ -769,10 +785,16 @@ const LoanCalculator = () => {
   const [monthlyPrepayment, setMonthlyPrepayment] = useState(100000);
   const [prepaymentStrategy, setPrepaymentStrategy] = useState("reduce_term"); // 'reduce_term' | 'reduce_payment'
   const [hasLumpSum, setHasLumpSum] = useState(false);
-  const [lumpSumPrepayments, setLumpSumPrepayments] = useState([
-    { id: "1", month: 6, amount: 1500000, description: "Prima de mitad de año (Jun)" },
-    { id: "2", month: 12, amount: 1500000, description: "Prima de fin de año (Dic)" },
-  ]);
+  const [lumpSumPrepayments, setLumpSumPrepayments] = useState(() => {
+    const todayStr = getTodayDateString();
+    const primas = getCalendarPrimas(todayStr, 24, 1500000);
+    return primas.length > 0
+      ? primas
+      : [
+          { id: "1", month: 6, amount: 1500000, description: "Prima de mitad de año" },
+          { id: "2", month: 12, amount: 1500000, description: "Prima de fin de año" },
+        ];
+  });
 
   // Manejadores para abonos extraordinarios múltiples
   const handleAddLumpSum = () => {
@@ -780,13 +802,17 @@ const LoanCalculator = () => {
     setLumpSumPrepayments((prev) => {
       const lastMonth = prev.length > 0 ? prev[prev.length - 1].month : 0;
       const nextMonth = Math.min(termMonths, lastMonth + 6 > termMonths ? termMonths : lastMonth + 6);
+      const isPrima = isPrimaMonth(startDate, nextMonth);
+      const dateName = formatInstallmentMonth(startDate, nextMonth, "short");
       return [
         ...prev,
         {
           id: Date.now().toString(),
           month: nextMonth,
           amount: 1500000,
-          description: nextMonth % 12 === 0 ? `Prima fin de año (Mes ${nextMonth})` : `Prima mitad de año (Mes ${nextMonth})`,
+          description: isPrima
+            ? `Prima ${dateName}`
+            : `Abono Cuota #${nextMonth} (${dateName})`,
         },
       ];
     });
@@ -810,22 +836,13 @@ const LoanCalculator = () => {
 
   const handlePresetPrimasSemestrales = () => {
     setHasLumpSum(true);
-    const primas = [];
-    const baseAmt = 1500000;
-    for (let m = 6; m <= termMonths; m += 6) {
-      primas.push({
-        id: `prima-${m}`,
-        month: m,
-        amount: baseAmt,
-        description: m % 12 === 0 ? `Prima Dic (Mes ${m})` : `Prima Jun (Mes ${m})`,
-      });
-    }
+    const primas = getCalendarPrimas(startDate, termMonths, 1500000);
     if (primas.length === 0 && termMonths >= 1) {
       primas.push({
         id: `prima-${termMonths}`,
         month: termMonths,
-        amount: baseAmt,
-        description: `Prima Mes ${termMonths}`,
+        amount: 1500000,
+        description: `Abono Cuota #${termMonths} (${formatInstallmentMonth(startDate, termMonths, "short")})`,
       });
     }
     setLumpSumPrepayments(primas);
@@ -833,22 +850,13 @@ const LoanCalculator = () => {
 
   const handlePresetBonosAnuales = () => {
     setHasLumpSum(true);
-    const bonos = [];
-    const baseAmt = 2000000;
-    for (let m = 12; m <= termMonths; m += 12) {
-      bonos.push({
-        id: `bono-${m}`,
-        month: m,
-        amount: baseAmt,
-        description: `Bono Anual Año ${m / 12}`,
-      });
-    }
+    const bonos = getCalendarBonos(startDate, termMonths, 2000000);
     if (bonos.length === 0 && termMonths >= 1) {
       bonos.push({
         id: `bono-${termMonths}`,
         month: termMonths,
-        amount: baseAmt,
-        description: `Bono Mes ${termMonths}`,
+        amount: 2000000,
+        description: `Bono Cuota #${termMonths} (${formatInstallmentMonth(startDate, termMonths, "short")})`,
       });
     }
     setLumpSumPrepayments(bonos);
@@ -879,6 +887,7 @@ const LoanCalculator = () => {
       ratePeriod,
       annualRateType,
       termMonths,
+      startDate,
       amortizationSystem,
       includeAdditionalFees,
       managementFee,
@@ -898,6 +907,7 @@ const LoanCalculator = () => {
     ratePeriod,
     annualRateType,
     termMonths,
+    startDate,
     amortizationSystem,
     includeAdditionalFees,
     managementFee,
@@ -919,6 +929,7 @@ const LoanCalculator = () => {
       ratePeriod,
       annualRateType,
       termMonths,
+      startDate,
       amortizationSystem,
       includeAdditionalFees,
       managementFee,
@@ -933,6 +944,7 @@ const LoanCalculator = () => {
     ratePeriod,
     annualRateType,
     termMonths,
+    startDate,
     amortizationSystem,
     includeAdditionalFees,
     managementFee,
@@ -993,20 +1005,46 @@ const LoanCalculator = () => {
             Parámetros del Préstamo
           </ControlSectionTitle>
 
-          <CurrencySelectorGroup>
-            <label htmlFor="currency-select">Moneda:</label>
-            <select
-              id="currency-select"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-            >
-              {CURRENCIES.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </CurrencySelectorGroup>
+          <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "var(--small-font-size)", color: "var(--text-color)" }}>
+              <label htmlFor="start-date-input" style={{ fontWeight: 500, display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                <i className="uil uil-calendar-alt" style={{ color: "var(--first-color)" }} />
+                Fecha de inicio:
+              </label>
+              <input
+                id="start-date-input"
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                style={{
+                  padding: "0.45rem 0.75rem",
+                  borderRadius: "0.5rem",
+                  border: "1px solid var(--gray-color)",
+                  background: "var(--body-color)",
+                  color: "var(--title-color)",
+                  fontFamily: "var(--body-font)",
+                  fontSize: "var(--small-font-size)",
+                  cursor: "pointer",
+                  outline: "none",
+                }}
+              />
+            </div>
+
+            <CurrencySelectorGroup>
+              <label htmlFor="currency-select">Moneda:</label>
+              <select
+                id="currency-select"
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </CurrencySelectorGroup>
+          </div>
         </FormTopControls>
 
         <FormGrid>
@@ -1494,10 +1532,10 @@ const LoanCalculator = () => {
                             <i className="uil uil-bolt" /> Atajos:
                           </span>
                           <button type="button" onClick={handlePresetPrimasSemestrales}>
-                            <i className="uil uil-calendar-alt" /> Primas Semestrales (cada 6m)
+                            <i className="uil uil-calendar-alt" /> Primas Semestrales (Jun / Dic)
                           </button>
                           <button type="button" onClick={handlePresetBonosAnuales}>
-                            <i className="uil uil-star" /> Bonos Anuales (cada 12m)
+                            <i className="uil uil-star" /> Bonos Anuales (Fin de año)
                           </button>
                           <button type="button" className="clear-btn" onClick={handleClearLumpSums}>
                             <i className="uil uil-trash-alt" /> Limpiar
@@ -1510,11 +1548,8 @@ const LoanCalculator = () => {
                               <div className="item-badge">#{index + 1}</div>
 
                               <div className="field-group">
-                                <label>Mes N°</label>
-                                <input
-                                  type="number"
-                                  min="1"
-                                  max={termMonths}
+                                <label>Cuota / Fecha de Pago</label>
+                                <select
                                   value={item.month}
                                   onChange={(e) =>
                                     handleUpdateLumpSum(
@@ -1523,8 +1558,28 @@ const LoanCalculator = () => {
                                       Math.max(1, Math.min(termMonths, Number(e.target.value)))
                                     )
                                   }
-                                  placeholder="Mes"
-                                />
+                                >
+                                  {Array.from({ length: termMonths }, (_, i) => i + 1).map((m) => {
+                                    const isPrima = isPrimaMonth(startDate, m);
+                                    const label = formatInstallmentMonth(startDate, m, "short");
+                                    return (
+                                      <option key={m} value={m}>
+                                        Cuota #{m} • {label} {isPrima ? "⭐ (Mes de Prima)" : ""}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                                <div
+                                  style={{
+                                    fontSize: "0.72rem",
+                                    color: isPrimaMonth(startDate, item.month) ? "#10b981" : "var(--text-color-light)",
+                                    fontWeight: 600,
+                                    marginTop: "0.15rem",
+                                  }}
+                                >
+                                  {formatInstallmentMonth(startDate, item.month, "long")} (faltan {item.month}m)
+                                  {isPrimaMonth(startDate, item.month) && " • ⭐ Mes de Prima"}
+                                </div>
                               </div>
 
                               <div className="field-group">

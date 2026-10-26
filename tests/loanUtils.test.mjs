@@ -10,6 +10,11 @@ import {
   formatMaskedNumber,
   parseMaskedNumber,
   getThousandSeparator,
+  getInstallmentDate,
+  formatInstallmentMonth,
+  isPrimaMonth,
+  getCalendarPrimas,
+  getCalendarBonos,
 } from "../src/modules/apps/components/LoanCalculator/loanUtils.js";
 
 describe("Loan Calculator - Rate Conversion Tests", () => {
@@ -463,4 +468,99 @@ describe("Loan Calculator - Smart Prepayment Formulas & Advisor", () => {
     assert.deepStrictEqual(emptyRecs, []);
   });
 });
+
+describe("Loan Calculator - Calendar Dates & Real Primas Detection", () => {
+  it("should project installment calendar dates correctly based on start date", () => {
+    // Si el crédito se adquiere en 2026-10-26 (Octubre 2026):
+    const startDate = "2026-10-26";
+
+    // Cuota 1 = Noviembre 2026
+    const date1 = getInstallmentDate(startDate, 1);
+    assert.strictEqual(date1.getMonth(), 10); // Noviembre (0-indexed 10)
+    assert.strictEqual(date1.getFullYear(), 2026);
+    assert.strictEqual(formatInstallmentMonth(startDate, 1, "short"), "Nov 2026");
+
+    // Cuota 2 = Diciembre 2026
+    const date2 = getInstallmentDate(startDate, 2);
+    assert.strictEqual(date2.getMonth(), 11); // Diciembre (11)
+    assert.strictEqual(date2.getFullYear(), 2026);
+
+    // Cuota 3 = Enero 2027
+    const date3 = getInstallmentDate(startDate, 3);
+    assert.strictEqual(date3.getMonth(), 0); // Enero (0)
+    assert.strictEqual(date3.getFullYear(), 2027);
+  });
+
+  it("should identify real calendar prima months (June & December)", () => {
+    const startDate = "2026-10-26";
+
+    // Cuota 1 (Nov 2026) -> No es prima
+    assert.strictEqual(isPrimaMonth(startDate, 1), false);
+
+    // Cuota 2 (Dic 2026) -> ¡Es prima!
+    assert.strictEqual(isPrimaMonth(startDate, 2), true);
+
+    // Cuota 8 (Jun 2027) -> ¡Es prima!
+    assert.strictEqual(isPrimaMonth(startDate, 8), true);
+
+    // Cuota 14 (Dic 2027) -> ¡Es prima!
+    assert.strictEqual(isPrimaMonth(startDate, 14), true);
+  });
+
+  it("should generate calendar primas accurately matching June and December", () => {
+    const startDate = "2026-10-26";
+    const termMonths = 24;
+
+    const primas = getCalendarPrimas(startDate, termMonths, 1800000);
+
+    // En 24 meses desde Oct 2026:
+    // Cuota 2: Dic 2026
+    // Cuota 8: Jun 2027
+    // Cuota 14: Dic 2027
+    // Cuota 20: Jun 2028
+    assert.strictEqual(primas.length, 4);
+
+    assert.strictEqual(primas[0].month, 2);
+    assert.ok(primas[0].description.includes("Diciembre 2026"));
+
+    assert.strictEqual(primas[1].month, 8);
+    assert.ok(primas[1].description.includes("Junio 2027"));
+
+    assert.strictEqual(primas[2].month, 14);
+    assert.ok(primas[2].description.includes("Diciembre 2027"));
+
+    assert.strictEqual(primas[3].month, 20);
+    assert.ok(primas[3].description.includes("Junio 2028"));
+
+    for (const p of primas) {
+      assert.strictEqual(p.amount, 1800000);
+    }
+  });
+
+  it("should generate annual bonuses matching 12-month periods", () => {
+    const startDate = "2026-10-26";
+    const termMonths = 24;
+
+    const bonos = getCalendarBonos(startDate, termMonths, 2500000);
+    assert.strictEqual(bonos.length, 2);
+    assert.strictEqual(bonos[0].month, 12);
+    assert.strictEqual(bonos[1].month, 24);
+  });
+
+  it("should include calendar date fields in calculateLoan schedule rows", () => {
+    const loan = calculateLoan({
+      loanAmount: 10000000,
+      termMonths: 12,
+      startDate: "2026-10-26",
+    });
+
+    assert.strictEqual(loan.schedule.length, 12);
+    assert.strictEqual(loan.schedule[0].dateFormatted, "Nov 2026");
+    assert.strictEqual(loan.schedule[1].dateFormatted, "Dic 2026");
+    assert.strictEqual(loan.schedule[1].isPrimaCalendarMonth, true);
+    assert.strictEqual(loan.schedule[7].dateFormatted, "Jun 2027");
+    assert.strictEqual(loan.schedule[7].isPrimaCalendarMonth, true);
+  });
+});
+
 

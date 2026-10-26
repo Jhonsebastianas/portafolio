@@ -99,6 +99,109 @@ export const calculateMonthlyRate = (rateInput, ratePeriod = "monthly", annualRa
 };
 
 /**
+ * Parsea una fecha inicial en formato YYYY-MM-DD o YYYY-MM sin desfasar por zona horaria
+ */
+export const parseStartDate = (dateStr) => {
+  if (!dateStr) return new Date();
+  if (dateStr instanceof Date) return dateStr;
+  const parts = String(dateStr).split("-").map(Number);
+  if (parts.length >= 2) {
+    const year = parts[0];
+    const month = parts[1] - 1;
+    const day = parts[2] || 1;
+    return new Date(year, month, day);
+  }
+  return new Date();
+};
+
+/**
+ * Obtiene la fecha exacta correspondiente a la cuota N del préstamo
+ * Por ejemplo, si el préstamo se adquiere el 26/10/2026, la cuota 1 se paga en Noviembre 2026.
+ */
+export const getInstallmentDate = (startDate, monthIndex = 1) => {
+  const base = parseStartDate(startDate);
+  return new Date(base.getFullYear(), base.getMonth() + monthIndex, base.getDate());
+};
+
+/**
+ * Formatea el mes y año de la cuota (ej. "Nov 2026" o "Noviembre de 2026")
+ */
+export const formatInstallmentMonth = (startDate, monthIndex = 1, format = "short") => {
+  const date = getInstallmentDate(startDate, monthIndex);
+  const monthNamesShort = [
+    "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic",
+  ];
+  const monthNamesLong = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+  ];
+  const m = date.getMonth();
+  const y = date.getFullYear();
+
+  if (format === "short") {
+    return `${monthNamesShort[m]} ${y}`;
+  }
+  return `${monthNamesLong[m]} de ${y}`;
+};
+
+/**
+ * Determina si la cuota cae en mes de Prima legal (Junio = mes 5, Diciembre = mes 11 en 0-index)
+ */
+export const isPrimaMonth = (startDate, monthIndex = 1) => {
+  const date = getInstallmentDate(startDate, monthIndex);
+  const m = date.getMonth();
+  return m === 5 || m === 11;
+};
+
+/**
+ * Retorna las primas semestrales exactas según el calendario real (Junio y Diciembre)
+ */
+export const getCalendarPrimas = (startDate, termMonths = 12, defaultAmount = 1500000) => {
+  const primas = [];
+  for (let m = 1; m <= termMonths; m++) {
+    const date = getInstallmentDate(startDate, m);
+    const month = date.getMonth(); // 5 = Junio, 11 = Diciembre
+    const year = date.getFullYear();
+
+    if (month === 5) {
+      primas.push({
+        id: `prima-jun-${year}-${m}`,
+        month: m,
+        amount: defaultAmount,
+        description: `Prima Junio ${year}`,
+      });
+    } else if (month === 11) {
+      primas.push({
+        id: `prima-dic-${year}-${m}`,
+        month: m,
+        amount: defaultAmount,
+        description: `Prima Diciembre ${year}`,
+      });
+    }
+  }
+  return primas;
+};
+
+/**
+ * Retorna bonos anuales según el calendario real (mes 12, 24, 36...)
+ */
+export const getCalendarBonos = (startDate, termMonths = 12, defaultAmount = 2000000) => {
+  const bonos = [];
+  for (let m = 12; m <= termMonths; m += 12) {
+    const date = getInstallmentDate(startDate, m);
+    const year = date.getFullYear();
+    bonos.push({
+      id: `bono-${year}-${m}`,
+      month: m,
+      amount: defaultAmount,
+      description: `Bono Anual ${year}`,
+    });
+  }
+  return bonos;
+};
+
+/**
  * Calcula la simulación completa de préstamo con soporte de cuota inicial,
  * cuota de manejo, seguro adicional y abonos extraordinarios a capital.
  */
@@ -109,6 +212,7 @@ export const calculateLoan = ({
   ratePeriod = "monthly",
   annualRateType = "nominal",
   termMonths = 12,
+  startDate = null, // Fecha de desembolso (YYYY-MM-DD o Date)
   amortizationSystem = "french",
   includeAdditionalFees = false,
   managementFee = 0,
@@ -314,8 +418,15 @@ export const calculateLoan = ({
       totalInsuranceFees += insuranceForMonth;
       totalManagementFees += mgmtForMonth;
 
+      const instDate = getInstallmentDate(startDate, month);
+      const dateFormatted = formatInstallmentMonth(startDate, month, "short");
+      const isPrimaCal = isPrimaMonth(startDate, month);
+
       schedule.push({
         month,
+        date: instDate,
+        dateFormatted,
+        isPrimaCalendarMonth: isPrimaCal,
         payment: currentPayment,
         principalPaid: currentPrincipalPaid,
         prepayment: actualPrepaymentPaid,
@@ -400,6 +511,9 @@ export const calculateLoan = ({
       lumpSumMonth: normalizedLumpSums[0]?.month || 6,
       lumpSumPrepayments: normalizedLumpSums,
       totalLumpSumPrepayments: normalizedLumpSums.reduce((sum, p) => sum + p.amount, 0),
+      startDate,
+      payoffDateFormatted: schedule.length > 0 ? formatInstallmentMonth(startDate, schedule.length, "long") : null,
+      originalPayoffDateFormatted: formatInstallmentMonth(startDate, terms, "long"),
     };
   } else {
     // Sistema Alemán: Amortización Constante de Capital
@@ -457,8 +571,15 @@ export const calculateLoan = ({
       totalInsuranceFees += insuranceForMonth;
       totalManagementFees += mgmtForMonth;
 
+      const instDate = getInstallmentDate(startDate, month);
+      const dateFormatted = formatInstallmentMonth(startDate, month, "short");
+      const isPrimaCal = isPrimaMonth(startDate, month);
+
       schedule.push({
         month,
+        date: instDate,
+        dateFormatted,
+        isPrimaCalendarMonth: isPrimaCal,
         payment: currentPayment,
         principalPaid: currentPrincipalPaid,
         prepayment: actualPrepaymentPaid,
@@ -536,6 +657,9 @@ export const calculateLoan = ({
       lumpSumMonth: normalizedLumpSums[0]?.month || 6,
       lumpSumPrepayments: normalizedLumpSums,
       totalLumpSumPrepayments: normalizedLumpSums.reduce((sum, p) => sum + p.amount, 0),
+      startDate,
+      payoffDateFormatted: schedule.length > 0 ? formatInstallmentMonth(startDate, schedule.length, "long") : null,
+      originalPayoffDateFormatted: formatInstallmentMonth(startDate, terms, "long"),
     };
   }
 };

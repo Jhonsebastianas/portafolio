@@ -310,7 +310,8 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
         <EarlyPayoffBanner>
           <div>
             🎉 <strong>¡Meta cumplida antes de tiempo!</strong> Gracias a tus abonos extraordinarios,
-            tu préstamo se liquida en el mes <strong>#{summary.actualTerms}</strong> (ahorraste <strong>{summary.monthsSaved} meses</strong> y{" "}
+            tu préstamo se liquida en <strong>{summary.payoffDateFormatted || `el mes #${summary.actualTerms}`}</strong> en lugar de{" "}
+            {summary.originalPayoffDateFormatted || `los ${summary.terms} meses pactados`} (ahorraste <strong>{summary.monthsSaved} meses</strong> y{" "}
             <strong>{formatCurrency(summary.interestSaved, currency)}</strong> en intereses).
           </div>
         </EarlyPayoffBanner>
@@ -320,7 +321,7 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
         <StyledTable>
           <thead>
             <tr>
-              <th>Cuota</th>
+              <th>Cuota / Fecha</th>
               <th>Cuota Crédito</th>
               {hasPrepay && <th>Abono Extra</th>}
               {hasAdditional && (
@@ -339,8 +340,18 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
             {displayedSchedule.map((row) => (
               <tr key={row.month} className={row.isEarlyPayoff ? "early-payoff-row" : ""}>
                 <td>
-                  #{row.month}
-                  {row.isEarlyPayoff && " 🏁"}
+                  <div style={{ fontWeight: 700, color: "var(--first-color)" }}>#{row.month}</div>
+                  {row.dateFormatted && (
+                    <div style={{ fontSize: "0.72rem", color: "var(--text-color-light)", fontWeight: 500 }}>
+                      {row.dateFormatted}
+                      {row.isPrimaCalendarMonth && <span title="Mes de Prima"> ⭐</span>}
+                    </div>
+                  )}
+                  {row.isEarlyPayoff && (
+                    <span style={{ fontSize: "0.68rem", color: "#10b981", fontWeight: 700, textTransform: "uppercase" }}>
+                      🏁 Liquidado
+                    </span>
+                  )}
                 </td>
                 <td style={{ fontWeight: 600, color: "var(--title-color)" }}>
                   {formatCurrency(row.payment, currency)}
