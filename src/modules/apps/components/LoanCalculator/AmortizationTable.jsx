@@ -347,7 +347,22 @@ ${hasAdditional ? `- Total Seguros: ${formatCurrency(summary.totalInsuranceFees,
                 </td>
                 {hasPrepay && (
                   <td style={{ color: "#10b981", fontWeight: row.prepayment > 0 ? 700 : 400 }}>
-                    {row.prepayment > 0 ? `+${formatCurrency(row.prepayment, currency)}` : "-"}
+                    {row.prepayment > 0 ? (
+                      <div>
+                        <div>+{formatCurrency(row.prepayment, currency)}</div>
+                        {row.lumpSumItems && row.lumpSumItems.length > 0 && (
+                          <div style={{ fontSize: "0.72rem", color: "#059669", fontWeight: 600, marginTop: "0.15rem" }}>
+                            {row.lumpSumItems.map((item, idx) => (
+                              <span key={item.id || idx} style={{ display: "block" }}>
+                                🎁 {item.description}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      "-"
+                    )}
                   </td>
                 )}
                 {hasAdditional && (

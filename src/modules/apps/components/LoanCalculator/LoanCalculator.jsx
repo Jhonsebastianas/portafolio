@@ -515,23 +515,224 @@ const StrategySelectCard = styled.div`
 `;
 
 const PrepaymentsInputsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+`;
 
-  @media (max-width: 850px) {
-    grid-template-columns: 1fr;
+const LumpSumsContainer = styled.div`
+  background: var(--body-color);
+  border: 1px solid var(--gray-color);
+  border-radius: 0.85rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .lump-sums-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: var(--small-font-size);
+      color: var(--title-color);
+      cursor: pointer;
+    }
+
+    .badge-info {
+      font-size: var(--smaller-font-size);
+      font-weight: 600;
+      color: var(--first-color);
+      background: hsla(var(--hue-color), 69%, 61%, 0.12);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+  }
+
+  .presets-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0.6rem 0.75rem;
+    background: var(--container-color);
+    border: 1px dashed var(--gray-color);
+    border-radius: 0.65rem;
+    font-size: var(--smaller-font-size);
+
+    .presets-label {
+      color: var(--text-color-light);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    button {
+      background: hsla(var(--hue-color), 69%, 61%, 0.08);
+      border: 1px solid var(--first-color-lighter);
+      color: var(--first-color);
+      font-family: var(--body-font);
+      font-size: var(--smaller-font-size);
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--first-color);
+        color: #ffffff;
+      }
+
+      &.clear-btn {
+        margin-left: auto;
+        border-color: #ef4444;
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.08);
+
+        &:hover {
+          background: #ef4444;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .lump-sums-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.25rem;
+
+    .total-badge {
+      font-size: var(--small-font-size);
+      color: var(--text-color);
+      strong {
+        color: #10b981;
+      }
+    }
   }
 `;
 
-const LumpSumBox = styled.div`
-  background: var(--body-color);
-  border: 1px solid var(--gray-color);
-  border-radius: 0.75rem;
-  padding: 1rem 1.15rem;
-  display: flex;
-  flex-direction: column;
+const LumpSumItemCard = styled.div`
+  display: grid;
+  grid-template-columns: auto 120px 1.5fr 1.5fr auto;
+  align-items: center;
   gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--container-color);
+  border: 1px solid var(--gray-color);
+  border-radius: 0.65rem;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--first-color-lighter);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .item-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--first-color);
+    background: hsla(var(--hue-color), 69%, 61%, 0.12);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-color-light);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--gray-color);
+      background: var(--body-color);
+      color: var(--title-color);
+      font-size: var(--small-font-size);
+      font-family: var(--body-font);
+      outline: none;
+
+      &:focus {
+        border-color: var(--first-color);
+      }
+    }
+  }
+
+  .delete-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+  }
+`;
+
+const AddLumpSumButton = styled.button`
+  background: transparent;
+  border: 1px dashed var(--first-color);
+  color: var(--first-color);
+  font-family: var(--body-font);
+  font-size: var(--small-font-size);
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: hsla(var(--hue-color), 69%, 61%, 0.1);
+  }
 `;
 
 /*=============================================
@@ -568,8 +769,100 @@ const LoanCalculator = () => {
   const [monthlyPrepayment, setMonthlyPrepayment] = useState(100000);
   const [prepaymentStrategy, setPrepaymentStrategy] = useState("reduce_term"); // 'reduce_term' | 'reduce_payment'
   const [hasLumpSum, setHasLumpSum] = useState(false);
-  const [lumpSumAmount, setLumpSumAmount] = useState(1000000);
-  const [lumpSumMonth, setLumpSumMonth] = useState(6);
+  const [lumpSumPrepayments, setLumpSumPrepayments] = useState([
+    { id: "1", month: 6, amount: 1500000, description: "Prima de mitad de año (Jun)" },
+    { id: "2", month: 12, amount: 1500000, description: "Prima de fin de año (Dic)" },
+  ]);
+
+  // Manejadores para abonos extraordinarios múltiples
+  const handleAddLumpSum = () => {
+    setHasLumpSum(true);
+    setLumpSumPrepayments((prev) => {
+      const lastMonth = prev.length > 0 ? prev[prev.length - 1].month : 0;
+      const nextMonth = Math.min(termMonths, lastMonth + 6 > termMonths ? termMonths : lastMonth + 6);
+      return [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          month: nextMonth,
+          amount: 1500000,
+          description: nextMonth % 12 === 0 ? `Prima fin de año (Mes ${nextMonth})` : `Prima mitad de año (Mes ${nextMonth})`,
+        },
+      ];
+    });
+  };
+
+  const handleRemoveLumpSum = (id) => {
+    setLumpSumPrepayments((prev) => {
+      const updated = prev.filter((p) => p.id !== id);
+      if (updated.length === 0) {
+        setHasLumpSum(false);
+      }
+      return updated;
+    });
+  };
+
+  const handleUpdateLumpSum = (id, field, value) => {
+    setLumpSumPrepayments((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+    );
+  };
+
+  const handlePresetPrimasSemestrales = () => {
+    setHasLumpSum(true);
+    const primas = [];
+    const baseAmt = 1500000;
+    for (let m = 6; m <= termMonths; m += 6) {
+      primas.push({
+        id: `prima-${m}`,
+        month: m,
+        amount: baseAmt,
+        description: m % 12 === 0 ? `Prima Dic (Mes ${m})` : `Prima Jun (Mes ${m})`,
+      });
+    }
+    if (primas.length === 0 && termMonths >= 1) {
+      primas.push({
+        id: `prima-${termMonths}`,
+        month: termMonths,
+        amount: baseAmt,
+        description: `Prima Mes ${termMonths}`,
+      });
+    }
+    setLumpSumPrepayments(primas);
+  };
+
+  const handlePresetBonosAnuales = () => {
+    setHasLumpSum(true);
+    const bonos = [];
+    const baseAmt = 2000000;
+    for (let m = 12; m <= termMonths; m += 12) {
+      bonos.push({
+        id: `bono-${m}`,
+        month: m,
+        amount: baseAmt,
+        description: `Bono Anual Año ${m / 12}`,
+      });
+    }
+    if (bonos.length === 0 && termMonths >= 1) {
+      bonos.push({
+        id: `bono-${termMonths}`,
+        month: termMonths,
+        amount: baseAmt,
+        description: `Bono Mes ${termMonths}`,
+      });
+    }
+    setLumpSumPrepayments(bonos);
+  };
+
+  const handleClearLumpSums = () => {
+    setLumpSumPrepayments([]);
+    setHasLumpSum(false);
+  };
+
+  const totalExtraordinaryLumpSums = useMemo(() => {
+    if (!hasLumpSum || !Array.isArray(lumpSumPrepayments)) return 0;
+    return lumpSumPrepayments.reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+  }, [hasLumpSum, lumpSumPrepayments]);
 
   // Preajustes de plazo rápido
   const termPresets = [6, 12, 24, 36, 48, 60, 72];
@@ -595,8 +888,7 @@ const LoanCalculator = () => {
       monthlyPrepayment,
       prepaymentStrategy,
       hasLumpSum,
-      lumpSumAmount,
-      lumpSumMonth,
+      lumpSumPrepayments: hasLumpSum ? lumpSumPrepayments : [],
     });
   }, [
     loanAmount,
@@ -615,8 +907,7 @@ const LoanCalculator = () => {
     monthlyPrepayment,
     prepaymentStrategy,
     hasLumpSum,
-    lumpSumAmount,
-    lumpSumMonth,
+    lumpSumPrepayments,
   ]);
 
   // Recomendaciones inteligentes de fórmulas (Cuota 13, 10% Inteligente, 15% Acelerador)
@@ -1172,59 +1463,116 @@ const LoanCalculator = () => {
                     </QuickPillsRow>
                   </FormGroup>
 
-                  {/* Abono Extraordinario Único (Lump sum) */}
-                  <LumpSumBox>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontWeight: 600, fontSize: "var(--small-font-size)", color: "var(--title-color)", cursor: "pointer" }}>
+                  {/* Abonos Extraordinarios Puntuales (Primas / Bonos / Cesantías) */}
+                  <LumpSumsContainer>
+                    <div className="lump-sums-top">
+                      <label className="checkbox-label">
                         <input
                           type="checkbox"
                           checked={hasLumpSum}
-                          onChange={(e) => setHasLumpSum(e.target.checked)}
+                          onChange={(e) => {
+                            const willEnable = e.target.checked;
+                            setHasLumpSum(willEnable);
+                            if (willEnable && lumpSumPrepayments.length === 0) {
+                              handleAddLumpSum();
+                            }
+                          }}
                         />
-                        <span>¿Abono único extraordinario?</span>
+                        <span>¿Programar abonos extraordinarios (primas, bonos, aguinaldos)?</span>
                       </label>
-                      <span style={{ fontSize: "var(--smaller-font-size)", color: "var(--text-color-light)" }}>
-                        Ej. prima o bono
-                      </span>
+                      {hasLumpSum && (
+                        <span className="badge-info">
+                          {lumpSumPrepayments.length} {lumpSumPrepayments.length === 1 ? "abono" : "abonos"} programados
+                        </span>
+                      )}
                     </div>
 
                     {hasLumpSum && (
-                      <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: "0.75rem", marginTop: "0.35rem" }}>
-                        <div>
-                          <FormLabel style={{ fontSize: "var(--smaller-font-size)", marginBottom: "0.3rem" }}>
-                            Monto del abono
-                          </FormLabel>
-                          <MaskedCurrencyInput
-                            value={lumpSumAmount}
-                            onChange={(val) => setLumpSumAmount(val)}
-                            currency={currency}
-                            placeholder="Ej. 1.000.000"
-                          />
+                      <>
+                        <div className="presets-bar">
+                          <span className="presets-label">
+                            <i className="uil uil-bolt" /> Atajos:
+                          </span>
+                          <button type="button" onClick={handlePresetPrimasSemestrales}>
+                            <i className="uil uil-calendar-alt" /> Primas Semestrales (cada 6m)
+                          </button>
+                          <button type="button" onClick={handlePresetBonosAnuales}>
+                            <i className="uil uil-star" /> Bonos Anuales (cada 12m)
+                          </button>
+                          <button type="button" className="clear-btn" onClick={handleClearLumpSums}>
+                            <i className="uil uil-trash-alt" /> Limpiar
+                          </button>
                         </div>
-                        <div>
-                          <FormLabel style={{ fontSize: "var(--smaller-font-size)", marginBottom: "0.3rem" }}>
-                            En el Mes N°
-                          </FormLabel>
-                          <input
-                            type="number"
-                            min="1"
-                            max={termMonths}
-                            value={lumpSumMonth}
-                            onChange={(e) => setLumpSumMonth(Math.max(1, Math.min(termMonths, Number(e.target.value))))}
-                            style={{
-                              width: "100%",
-                              padding: "0.75rem 0.85rem",
-                              borderRadius: "0.65rem",
-                              border: "1px solid var(--gray-color)",
-                              background: "var(--container-color)",
-                              color: "var(--title-color)",
-                              fontSize: "var(--normal-font-size)",
-                            }}
-                          />
+
+                        <div className="items-list">
+                          {lumpSumPrepayments.map((item, index) => (
+                            <LumpSumItemCard key={item.id}>
+                              <div className="item-badge">#{index + 1}</div>
+
+                              <div className="field-group">
+                                <label>Mes N°</label>
+                                <input
+                                  type="number"
+                                  min="1"
+                                  max={termMonths}
+                                  value={item.month}
+                                  onChange={(e) =>
+                                    handleUpdateLumpSum(
+                                      item.id,
+                                      "month",
+                                      Math.max(1, Math.min(termMonths, Number(e.target.value)))
+                                    )
+                                  }
+                                  placeholder="Mes"
+                                />
+                              </div>
+
+                              <div className="field-group">
+                                <label>Monto a Abonar</label>
+                                <MaskedCurrencyInput
+                                  value={item.amount}
+                                  onChange={(val) => handleUpdateLumpSum(item.id, "amount", val)}
+                                  currency={currency}
+                                  placeholder="Ej. 1.500.000"
+                                />
+                              </div>
+
+                              <div className="field-group">
+                                <label>Concepto / Motivo</label>
+                                <input
+                                  type="text"
+                                  value={item.description || ""}
+                                  onChange={(e) => handleUpdateLumpSum(item.id, "description", e.target.value)}
+                                  placeholder="Ej. Prima de mitad de año"
+                                />
+                              </div>
+
+                              <button
+                                type="button"
+                                className="delete-btn"
+                                onClick={() => handleRemoveLumpSum(item.id)}
+                                title="Eliminar abono"
+                                aria-label="Eliminar abono"
+                              >
+                                <i className="uil uil-trash-alt" />
+                              </button>
+                            </LumpSumItemCard>
+                          ))}
                         </div>
-                      </div>
+
+                        <div className="lump-sums-footer">
+                          <AddLumpSumButton type="button" onClick={handleAddLumpSum}>
+                            <i className="uil uil-plus-circle" />
+                            <span>Agregar otro abono extraordinario</span>
+                          </AddLumpSumButton>
+
+                          <div className="total-badge">
+                            Total extraordinarios: <strong>{formatCurrency(totalExtraordinaryLumpSums, currency)}</strong>
+                          </div>
+                        </div>
+                      </>
                     )}
-                  </LumpSumBox>
+                  </LumpSumsContainer>
                 </PrepaymentsInputsGrid>
 
                 {/* Asesor Inteligente con Fórmulas de Educación Financiera */}

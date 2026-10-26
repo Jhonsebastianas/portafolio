@@ -379,6 +379,41 @@ describe("Loan Calculator - Projected Prepayments (Abonos a Capital)", () => {
     assert.ok(loanWithLumpSum.actualTerms < 12);
     assert.ok(loanWithLumpSum.interestSaved > 0);
   });
+
+  it("should process multiple lump-sum prepayments (e.g. primas in months 6 and 12)", () => {
+    const loanWithMultipleLumpSums = calculateLoan({
+      loanAmount: 20000000,
+      interestRate: 1.5,
+      ratePeriod: "monthly",
+      termMonths: 24,
+      hasPrepayments: true,
+      monthlyPrepayment: 0,
+      lumpSumPrepayments: [
+        { id: "1", month: 6, amount: 2000000, description: "Prima Junio" },
+        { id: "2", month: 12, amount: 3000000, description: "Prima Diciembre" },
+        { id: "3", month: 18, amount: 2000000, description: "Prima Junio Año 2" },
+      ],
+      prepaymentStrategy: "reduce_term",
+    });
+
+    // Validar abono mes 6
+    const rowMonth6 = loanWithMultipleLumpSums.schedule.find((r) => r.month === 6);
+    assert.ok(rowMonth6);
+    assert.strictEqual(rowMonth6.prepayment, 2000000);
+    assert.strictEqual(rowMonth6.lumpSumItems.length, 1);
+    assert.strictEqual(rowMonth6.lumpSumItems[0].description, "Prima Junio");
+
+    // Validar abono mes 12
+    const rowMonth12 = loanWithMultipleLumpSums.schedule.find((r) => r.month === 12);
+    assert.ok(rowMonth12);
+    assert.strictEqual(rowMonth12.prepayment, 3000000);
+    assert.strictEqual(rowMonth12.lumpSumItems[0].description, "Prima Diciembre");
+
+    // Validar que se redujo el plazo y los intereses
+    assert.ok(loanWithMultipleLumpSums.actualTerms < 24);
+    assert.ok(loanWithMultipleLumpSums.monthsSaved > 0);
+    assert.ok(loanWithMultipleLumpSums.interestSaved > 0);
+  });
 });
 
 describe("Loan Calculator - Smart Prepayment Formulas & Advisor", () => {

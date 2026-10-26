@@ -121,6 +121,7 @@ export const calculateLoan = ({
   hasLumpSum = false,
   lumpSumAmount = 0,
   lumpSumMonth = 6,
+  lumpSumPrepayments = [], // Array de { id, month, amount, description }
   _isInternalBaseCall = false,
 }) => {
   const totalAmount = Math.max(0, Number(loanAmount) || 0);
@@ -136,8 +137,30 @@ export const calculateLoan = ({
   const validInsuranceValue = includeAdditionalFees ? Math.max(0, Number(insuranceValue) || 0) : 0;
 
   const validMonthlyPrepayment = hasPrepayments ? Math.max(0, Number(monthlyPrepayment) || 0) : 0;
-  const validLumpSumAmount = (hasPrepayments && hasLumpSum) ? Math.max(0, Number(lumpSumAmount) || 0) : 0;
-  const validLumpSumMonth = Math.max(1, Math.round(Number(lumpSumMonth) || 1));
+
+  // Normalizar lista de abonos extraordinarios (puntuales / primas)
+  let normalizedLumpSums = [];
+  if (hasPrepayments) {
+    if (Array.isArray(lumpSumPrepayments) && lumpSumPrepayments.length > 0) {
+      normalizedLumpSums = lumpSumPrepayments
+        .map((p, idx) => ({
+          id: p.id || `lump-${idx}-${p.month}`,
+          month: Math.max(1, Math.round(Number(p.month) || 1)),
+          amount: Math.max(0, Number(p.amount) || 0),
+          description: p.description || `Abono Mes ${p.month}`,
+        }))
+        .filter((p) => p.amount > 0);
+    } else if (hasLumpSum && Number(lumpSumAmount) > 0) {
+      normalizedLumpSums = [
+        {
+          id: "default-lump-sum",
+          month: Math.max(1, Math.round(Number(lumpSumMonth) || 1)),
+          amount: Math.max(0, Number(lumpSumAmount) || 0),
+          description: `Abono Mes ${lumpSumMonth}`,
+        },
+      ];
+    }
+  }
 
   // Si el principal es 0 (ej. cuota inicial cubrió el 100%)
   if (principal === 0) {
@@ -175,9 +198,11 @@ export const calculateLoan = ({
       hasPrepayments,
       monthlyPrepayment: validMonthlyPrepayment,
       prepaymentStrategy,
-      hasLumpSum,
-      lumpSumAmount: validLumpSumAmount,
-      lumpSumMonth: validLumpSumMonth,
+      hasLumpSum: normalizedLumpSums.length > 0,
+      lumpSumAmount: normalizedLumpSums[0]?.amount || 0,
+      lumpSumMonth: normalizedLumpSums[0]?.month || 6,
+      lumpSumPrepayments: normalizedLumpSums,
+      totalLumpSumPrepayments: 0,
     };
   }
 
@@ -244,10 +269,12 @@ export const calculateLoan = ({
 
       // Calcular abono extraordinario para este mes
       let extraForMonth = 0;
+      let monthLumpSumItems = [];
       if (hasPrepayments) {
         extraForMonth += validMonthlyPrepayment;
-        if (hasLumpSum && month === validLumpSumMonth) {
-          extraForMonth += validLumpSumAmount;
+        monthLumpSumItems = normalizedLumpSums.filter((p) => p.month === month);
+        for (const item of monthLumpSumItems) {
+          extraForMonth += item.amount;
         }
       }
 
@@ -292,6 +319,9 @@ export const calculateLoan = ({
         payment: currentPayment,
         principalPaid: currentPrincipalPaid,
         prepayment: actualPrepaymentPaid,
+        regularPrepayment: hasPrepayments ? Math.min(actualPrepaymentPaid, validMonthlyPrepayment) : 0,
+        lumpSumPrepayment: hasPrepayments ? Math.max(0, actualPrepaymentPaid - validMonthlyPrepayment) : 0,
+        lumpSumItems: monthLumpSumItems,
         interestPaid: interestForMonth,
         insuranceFee: insuranceForMonth,
         managementFee: mgmtForMonth,
@@ -365,9 +395,11 @@ export const calculateLoan = ({
       hasPrepayments,
       monthlyPrepayment: validMonthlyPrepayment,
       prepaymentStrategy,
-      hasLumpSum,
-      lumpSumAmount: validLumpSumAmount,
-      lumpSumMonth: validLumpSumMonth,
+      hasLumpSum: normalizedLumpSums.length > 0,
+      lumpSumAmount: normalizedLumpSums[0]?.amount || 0,
+      lumpSumMonth: normalizedLumpSums[0]?.month || 6,
+      lumpSumPrepayments: normalizedLumpSums,
+      totalLumpSumPrepayments: normalizedLumpSums.reduce((sum, p) => sum + p.amount, 0),
     };
   } else {
     // Sistema Alemán: Amortización Constante de Capital
@@ -381,10 +413,12 @@ export const calculateLoan = ({
       const interestForMonth = remainingBalance * monthlyRate;
 
       let extraForMonth = 0;
+      let monthLumpSumItems = [];
       if (hasPrepayments) {
         extraForMonth += validMonthlyPrepayment;
-        if (hasLumpSum && month === validLumpSumMonth) {
-          extraForMonth += validLumpSumAmount;
+        monthLumpSumItems = normalizedLumpSums.filter((p) => p.month === month);
+        for (const item of monthLumpSumItems) {
+          extraForMonth += item.amount;
         }
       }
 
@@ -428,6 +462,9 @@ export const calculateLoan = ({
         payment: currentPayment,
         principalPaid: currentPrincipalPaid,
         prepayment: actualPrepaymentPaid,
+        regularPrepayment: hasPrepayments ? Math.min(actualPrepaymentPaid, validMonthlyPrepayment) : 0,
+        lumpSumPrepayment: hasPrepayments ? Math.max(0, actualPrepaymentPaid - validMonthlyPrepayment) : 0,
+        lumpSumItems: monthLumpSumItems,
         interestPaid: interestForMonth,
         insuranceFee: insuranceForMonth,
         managementFee: mgmtForMonth,
@@ -494,9 +531,11 @@ export const calculateLoan = ({
       hasPrepayments,
       monthlyPrepayment: validMonthlyPrepayment,
       prepaymentStrategy,
-      hasLumpSum,
-      lumpSumAmount: validLumpSumAmount,
-      lumpSumMonth: validLumpSumMonth,
+      hasLumpSum: normalizedLumpSums.length > 0,
+      lumpSumAmount: normalizedLumpSums[0]?.amount || 0,
+      lumpSumMonth: normalizedLumpSums[0]?.month || 6,
+      lumpSumPrepayments: normalizedLumpSums,
+      totalLumpSumPrepayments: normalizedLumpSums.reduce((sum, p) => sum + p.amount, 0),
     };
   }
 };
